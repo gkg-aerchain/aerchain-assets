@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aerchain — Procure-to-Pay Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;width:100%;height:100%;background:#07060d;overflow:hidden;}
+#sr{position:fixed;top:0;left:0;transform-origin:0 0;}
+#cv{width:1600px;height:900px;position:relative;overflow:hidden;background:linear-gradient(156deg,hsl(258 44% 12%) 0%,hsl(265 36% 9%) 38%,hsl(250 30% 7%) 68%,hsl(242 26% 5%) 100%);font-family:'Inter',sans-serif;}
+.lb{position:absolute;left:0;right:0;}
+.lb.erp{top:74px;height:186px;background:hsl(214 55% 22%/.55);border-top:1.5px solid hsl(214 70% 55%/.5);}
+.lb.cor{top:260px;height:80px;background:rgba(255,255,255,.006);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);}
+.lb.cap{top:340px;height:310px;background:hsl(260 50% 20%/.52);}
+.lb.sapp{top:700px;height:124px;background:hsl(166 50% 16%/.52);border-top:1px solid hsl(166 60% 40%/.3);border-bottom:1px solid hsl(166 60% 40%/.3);}
+#hdr{position:absolute;top:0;left:0;right:0;height:50px;display:flex;align-items:center;gap:14px;padding:0 26px;background:rgba(0,0,0,.36);border-bottom:1px solid rgba(255,255,255,.1);z-index:20;}
+.hm{width:28px;height:28px;border-radius:7px;flex-shrink:0;background:linear-gradient(135deg,#DC5F40,#ea7550);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;color:#fff;}
+.ht{font-size:14px;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:-.01em;}
+.hs{width:1px;height:16px;background:rgba(255,255,255,.15);flex-shrink:0;}
+.hb{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.32);letter-spacing:.04em;}
+.ll{position:absolute;left:0;width:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:7.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;text-align:center;line-height:1.5;border-right:1px solid rgba(255,255,255,.07);}
+.ll.e{top:74px;height:186px;color:hsl(214 70% 62%);}
+.ll.c{top:340px;height:310px;color:hsl(260 68% 66%);}
+.ll.s{top:700px;height:124px;color:hsl(166 56% 52%);}
+.ll-dot{width:7px;height:7px;border-radius:50%;margin-bottom:6px;}
+.ll-dot.e{background:hsl(214 74% 56%);box-shadow:0 0 8px hsl(214 74% 56%/.5);}
+.ll-dot.c{background:hsl(260 68% 62%);box-shadow:0 0 8px hsl(260 68% 62%/.45);}
+.ll-dot.s{background:hsl(166 56% 48%);box-shadow:0 0 8px hsl(166 56% 48%/.5);}
+.pd{position:absolute;top:50px;bottom:74px;width:1px;background:rgba(255,255,255,.055);}
+.pd.sub{background:rgba(255,255,255,.028);}
+.ph{position:absolute;top:50px;height:24px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.28);border-bottom:1px solid rgba(255,255,255,.06);}
+#cor-tag{position:absolute;top:260px;left:82px;right:0;height:80px;display:flex;align-items:center;justify-content:flex-end;padding-right:32px;pointer-events:none;}
+.cor-pill{font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:4px 10px;background:rgba(255,255,255,.02);}
+/* All nodes: 80×68px, icon top, label below */
+.nd{position:absolute;width:80px;height:68px;box-sizing:border-box;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:7px;box-shadow:0 2px 14px rgba(0,0,0,.28);text-align:center;}
+.nd.e{background:hsl(214 22% 15%/.92);border:1px solid hsl(214 40% 38%/.58);}
+.nd.c{background:hsl(260 20% 16%/.92);border:1px solid hsl(260 40% 44%/.58);}
+.nd.s{background:hsl(166 16% 13%/.92);border:1px solid hsl(166 30% 32%/.58);}
+.ni{width:26px;height:26px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.ni svg{width:13px;height:13px;}
+.ni.e{background:hsl(214 44% 36%/.22);}
+.ni.c{background:hsl(260 44% 42%/.22);}
+.ni.s{background:hsl(166 28% 28%/.22);}
+.nt{font-size:9px;font-weight:700;line-height:1.3;white-space:normal;word-break:normal;overflow:visible;text-overflow:clip;width:100%;}
+.nt.e{color:hsl(214 62% 78%);}
+.nt.c{color:rgba(255,255,255,.92);}
+.nt.s{color:hsl(166 52% 70%);}
+.dm{position:absolute;width:54px;height:54px;transform:rotate(45deg);border-radius:5px;background:hsl(260 22% 18%/.94);border:1.5px solid hsl(260 46% 46%/.75);}
+.dml{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-align:center;line-height:1.25;color:hsl(260 72% 74%);width:54px;pointer-events:none;}
+.dmb{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;}
+.dmb.y{color:hsl(152 60% 54%);}
+.dmb.n{color:hsl(38 88% 58%);}
+#leg{position:absolute;bottom:0;left:0;right:0;height:74px;background:rgba(0,0,0,.34);border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;padding:0 30px;z-index:5;}
+.lg{flex:1;padding:0 16px;}
+.lgt{font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:8px;}
+.lgr{display:flex;gap:22px;flex-wrap:wrap;}
+.lgi{display:flex;align-items:center;gap:8px;}
+.lga{display:flex;align-items:center;gap:3px;width:38px;}
+.lgl{height:1.5px;flex:1;border-radius:1px;}
+.lgl.s{background:hsl(214 66% 54%);}
+.lgl.f{background:rgba(255,255,255,.32);}
+.lgl.no{background:repeating-linear-gradient(90deg,hsl(38 78%52%) 0,hsl(38 78%52%) 4px,transparent 4px,transparent 9px);}
+.lgah{font-size:10px;}
+.lgtx{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;color:rgba(255,255,255,.42);}
+.lgsep{width:1px;height:48px;background:rgba(255,255,255,.07);}
+.lgnr{display:flex;gap:14px;flex-wrap:wrap;}
+.lgni{display:flex;align-items:center;gap:6px;}
+.lgnd{width:10px;height:10px;border-radius:3px;}
+.lgnd.e{background:hsl(214 22% 16%);border:1px solid hsl(214 40% 38%/.7);}
+.lgnd.c{background:hsl(260 20% 17%);border:1px solid hsl(260 40% 44%/.7);}
+.lgnd.s{background:hsl(166 16% 14%);border:1px solid hsl(166 30% 32%/.7);}
+.lgnd.d{background:hsl(260 22% 18%);border:1px solid hsl(260 46% 46%/.7);transform:rotate(45deg);}
+.lgnl{font-family:'JetBrains Mono',monospace;font-size:7.5px;font-weight:600;}
+#sv{position:absolute;top:0;left:0;width:1600px;height:900px;pointer-events:none;z-index:10;overflow:visible;}
+</style>
+</head>
+<body>
+<div id="sr"><div id="cv">
+<div class="lb erp"></div><div class="lb cor"></div><div class="lb cap"></div><div class="lb sapp"></div>
+<div id="hdr">
+  <div class="hm">A</div><span class="ht">AERCHAIN</span>
+  <div class="hs"></div><span class="hb">PROCURE-TO-PAY · TRANSACTION FLOW</span>
+  <div class="hs"></div><span class="hb">ERP-AGNOSTIC · BIDIRECTIONAL SYNC · 6 PROCESS PHASES</span>
+</div>
+<div class="ll e"><div class="ll-dot e"></div>ERP<br>System</div>
+<div class="ll c"><div class="ll-dot c"></div>Aerchain<br>Platform</div>
+<div class="ll s"><div class="ll-dot s"></div>Supplier<br>Portal</div>
+<div id="cor-tag"><div class="cor-pill">Integration Corridor · Bidirectional Sync</div></div>
+<div class="pd"     style="left:280px"></div>
+<div class="pd"     style="left:470px"></div>
+<div class="pd"     style="left:714px"></div>
+<div class="pd"     style="left:906px"></div>
+<div class="pd"     style="left:1100px"></div>
+<div class="pd sub" style="left:1260px"></div>
+<div class="pd sub" style="left:1420px"></div>
+<div class="ph" style="left:82px; width:198px">① Master Data</div>
+<div class="ph" style="left:280px;width:190px">② Purchase Request</div>
+<div class="ph" style="left:470px;width:244px">③ Sourcing &amp; Award</div>
+<div class="ph" style="left:714px;width:192px">④ Purchase Order</div>
+<div class="ph" style="left:906px;width:194px">⑤ Goods Receipt</div>
+<div class="ph" style="left:1100px;width:480px">⑥ Invoice &amp; Payment</div>
+
+<!-- ERP NODES: left=cx-40, height=68, cy=133+34=167 (single row top=133), Ph1: Cat top=86 cy=120, Sup top=178 cy=212 -->
+<div class="nd e" style="left:141px;top:86px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div class="nt e">Item Catalog</div></div>
+<div class="nd e" style="left:141px;top:178px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="nt e">Supplier Directory</div></div>
+<div class="nd e" style="left:335px;top:133px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></div><div class="nt e">Purchase Requests</div></div>
+<div class="nd e" style="left:770px;top:133px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div><div class="nt e">Purchase Orders</div></div>
+<div class="nd e" style="left:963px;top:133px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"/></svg></div><div class="nt e">Goods Receipt</div></div>
+<div class="nd e" style="left:1140px;top:133px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg></div><div class="nt e">Purchase Invoice</div></div>
+<div class="nd e" style="left:1300px;top:133px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div class="nt e">Payables</div></div>
+<div class="nd e" style="left:1460px;top:133px"><div class="ni e"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(214 70% 68%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></div><div class="nt e">Payment Run</div></div>
+
+<!-- cApp NODES: upper cy=395 top=361, middle cy=487 top=453, lower cy=575 top=541 -->
+<div class="nd c" style="left:141px;top:361px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="nt c">Catalog Sync</div></div>
+<div class="nd c" style="left:141px;top:453px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="M3 4h8"/></svg></div><div class="nt c">Supplier Management</div></div>
+<div class="nd c" style="left:335px;top:453px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div><div class="nt c">Request Management</div></div>
+<div class="nd c" style="left:552px;top:361px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div><div class="nt c">Quote Comparison</div></div>
+<div class="dm" style="left:565px;top:460px"></div>
+<div class="dml" style="left:564px;top:472px">Sourcing<br>Event?</div>
+<div class="dmb y" style="left:597px;top:528px">YES ↓</div>
+<div class="dmb n" style="left:636px;top:479px">NO →</div>
+<div class="nd c" style="left:552px;top:541px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><div class="nt c">E-Sourcing Event</div></div>
+<div class="nd c" style="left:770px;top:453px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div><div class="nt c">Order Management</div></div>
+<div class="nd c" style="left:963px;top:453px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/></svg></div><div class="nt c">Receipt Processing</div></div>
+<div class="nd c" style="left:1140px;top:361px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></svg></div><div class="nt c">Invoice Matching</div></div>
+<div class="nd c" style="left:1300px;top:453px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/></svg></div><div class="nt c">Invoice Approval</div></div>
+<div class="nd c" style="left:1460px;top:541px"><div class="ni c"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(260 68% 72%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div class="nt c">Payment Processing</div></div>
+
+<!-- sApp NODES: top=728 cy=762 -->
+<div class="nd s" style="left:552px;top:728px"><div class="ni s"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(166 52% 60%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 12.5-8 8a2.119 2.119 0 1 1-3-3l8-8"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m21 11-8-8"/></svg></div><div class="nt s">RFQ &amp; Bidding</div></div>
+<div class="nd s" style="left:963px;top:728px"><div class="ni s"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(166 52% 60%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/></svg></div><div class="nt s">Delivery Confirmation</div></div>
+<div class="nd s" style="left:1140px;top:728px"><div class="ni s"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(166 52% 60%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div><div class="nt s">E-Invoice Submission</div></div>
+<div class="nd s" style="left:1460px;top:728px"><div class="ni s"><svg viewBox="0 0 24 24" fill="none" stroke="hsl(166 52% 60%)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></div><div class="nt s">Payment Status</div></div>
+
+<div id="leg">
+  <div class="lg" style="max-width:300px">
+    <div class="lgt">Flow Direction</div>
+    <div class="lgr">
+      <div class="lgi"><div class="lga"><div class="lgl s"></div><span class="lgah" style="color:hsl(214 66%54%)">▶</span></div><span class="lgtx">Sync to ERP</span></div>
+      <div class="lgi"><div class="lga"><span class="lgah" style="color:hsl(214 66%54%)">◀</span><div class="lgl s"></div></div><span class="lgtx">Confirm from ERP</span></div>
+      <div class="lgi"><div class="lga"><div class="lgl f"></div><span class="lgah" style="color:rgba(255,255,255,.3)">▶</span></div><span class="lgtx">Process flow</span></div>
+      <div class="lgi"><div class="lga"><div class="lgl no"></div><span class="lgah" style="color:hsl(38 78%52%)">▶</span></div><span class="lgtx">Skip sourcing</span></div>
+    </div>
+  </div>
+  <div class="lgsep"></div>
+  <div class="lg">
+    <div class="lgt">Systems</div>
+    <div class="lgnr">
+      <div class="lgni"><div class="lgnd e"></div><span class="lgnl" style="color:hsl(214 62%62%)">ERP System (any)</span></div>
+      <div class="lgni"><div class="lgnd c"></div><span class="lgnl" style="color:hsl(260 62%66%)">Aerchain Platform</span></div>
+      <div class="lgni"><div class="lgnd s"></div><span class="lgnl" style="color:hsl(166 52%54%)">Supplier Portal</span></div>
+      <div class="lgni"><div class="lgnd d"></div><span class="lgnl" style="color:hsl(260 62%66%)">Decision gate</span></div>
+    </div>
+  </div>
+  <div class="lgsep"></div>
+  <div class="lg" style="max-width:140px;text-align:right;flex-shrink:0">
+    <div style="font-size:38px;font-weight:800;font-family:'JetBrains Mono',monospace;color:hsl(166 52%44%);line-height:1;margin-bottom:2px">6</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(255,255,255,.2);line-height:1.6">Phases · aerchain.io</div>
+  </div>
+</div>
+
+<svg id="sv" viewBox="0 0 1600 900">
+<defs>
+  <!-- ma: orient=auto, tip at endpoint, rotates with path direction -->
+  <marker id="ma" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <path d="M0,0.5 L9,3.5 L0,6.5 Z" fill="rgba(255,255,255,.42)"/>
+  </marker>
+  <marker id="ms" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <path d="M0,0.5 L9,3.5 L0,6.5 Z" fill="hsl(214,66%,62%)"/>
+  </marker>
+  <marker id="mno" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <path d="M0,0.5 L9,3.5 L0,6.5 Z" fill="hsl(38,86%,58%)"/>
+  </marker>
+  <marker id="myd" markerWidth="7" markerHeight="10" refX="3.5" refY="9" orient="auto">
+    <path d="M0.5,0 L3.5,9 L6.5,0 Z" fill="hsl(152,58%,54%)"/>
+  </marker>
+</defs>
+
+<!--
+  ALL CONNECTION POINTS ARE EXACT SIDE MIDPOINTS:
+  Each card is 80×68. cx=left+40, cy=top+34
+  top_mid=(cx,top)  bot_mid=(cx,bot)  left_mid=(left,cy)  right_mid=(right,cy)
+
+  ERP nodes (single row top=133 bot=201 cy=167):
+    ERP_Cat  cx=181  bot=(181,154)  right=(221,120)   [stacked, top=86 bot=154 cy=120]
+    ERP_Sup  cx=181  bot=(181,246)  [stacked, top=178 bot=246 cy=212]
+    ERP_PR   cx=375  bot=(375,201)  left=(335,167)  right=(415,167)
+    ERP_PO   cx=810  left=(770,167) right=(850,167)
+    ERP_GRN  cx=1003 left=(963,167) right=(1043,167)
+    ERP_Inv  cx=1180 left=(1140,167) right=(1220,167)
+    ERP_Pay  cx=1340 left=(1300,167) right=(1380,167)
+    ERP_Pmt  cx=1500 left=(1460,167) right=(1540,167)
+
+  cApp nodes:
+    cap_Cat  cx=181  top=(181,361) right=(221,395)  [upper]
+    cap_Sup  cx=181  top=(181,453) right=(221,487)  [middle]
+    cap_Req  cx=375  top=(375,453) left=(335,487) right=(415,487)
+    cap_QC   cx=592  top=(592,361) bot=(592,429) left=(552,395) right=(632,395)
+    cap_ES   cx=592  top=(592,541) bot=(592,609) left=(552,575)
+    cap_OM   cx=810  top=(810,453) left=(770,487) right=(850,487)
+    cap_Rc   cx=1003 top=(1003,453) bot=(1003,521) left=(963,487) right=(1043,487)
+    cap_IM   cx=1180 top=(1180,361) bot=(1180,429) left=(1140,395) right=(1220,395)
+    cap_IA   cx=1340 top=(1340,453) left=(1300,487) right=(1380,487)
+    cap_Py   cx=1500 top=(1500,541) bot=(1500,609) left=(1460,575)
+
+  sApp nodes (top=728 bot=796 cy=762):
+    sap_RFQ  cx=592  top=(592,728)  right=(632,762)
+    sap_Del  cx=1003 top=(1003,728) left=(963,762)
+    sap_EI   cx=1180 top=(1180,728) left=(1140,762)
+    sap_Ps   cx=1500 top=(1500,728) left=(1460,762)
+-->
+
+<!-- ═══════════════════════════════════════════════════════
+     ERP HORIZONTAL PROCESS FLOW
+     Each arrow: right_mid of source → left_mid of destination
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- Cat.right_mid(221,120) ⟶ PR.left_mid(335,167): Bezier bridge -->
+<path fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.3"
+      d="M221,120 C278,120 278,167 335,167" marker-end="url(#ma)"/>
+
+<!-- PR.right_mid(415,167) ⟶ PO.left_mid(770,167): straight -->
+<line x1="415" y1="167" x2="770" y2="167"
+      stroke="rgba(255,255,255,.14)" stroke-width="1.3" marker-end="url(#ma)"/>
+
+<!-- PO.right_mid(850,167) ⟶ GRN.left_mid(963,167) -->
+<line x1="850" y1="167" x2="963" y2="167"
+      stroke="rgba(255,255,255,.18)" stroke-width="1.3" marker-end="url(#ma)"/>
+
+<!-- GRN.right_mid(1043,167) ⟶ Inv.left_mid(1140,167) -->
+<line x1="1043" y1="167" x2="1140" y2="167"
+      stroke="rgba(255,255,255,.18)" stroke-width="1.3" marker-end="url(#ma)"/>
+
+<!-- Inv.right_mid(1220,167) ⟶ Pay.left_mid(1300,167) -->
+<line x1="1220" y1="167" x2="1300" y2="167"
+      stroke="rgba(255,255,255,.18)" stroke-width="1.3" marker-end="url(#ma)"/>
+
+<!-- Pay.right_mid(1380,167) ⟶ Pmt.left_mid(1460,167) -->
+<line x1="1380" y1="167" x2="1460" y2="167"
+      stroke="rgba(255,255,255,.18)" stroke-width="1.3" marker-end="url(#ma)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph1 CATALOG SYNC  (routed left to clear ERP_Sup obstruction)
+     DOWN: Cat.bot_mid(181,154) → left strip → Cat_cApp.top_mid(181,361)
+     UP:   cap_Cat.top_mid(181,361) → left strip → Cat_ERP.bot_mid(181,154)
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- Catalog sync DOWN glow -->
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"
+      d="M141,120 H130 V395 H141"/>
+<!-- Catalog sync DOWN (blue, tip at cap_Cat.top_mid) -->
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4"
+      d="M141,120 H130 V395 H141" marker-end="url(#ms)"/>
+
+<!-- Catalog confirm UP glow -->
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"
+      d="M141,395 H118 V120 H141"/>
+<!-- Catalog confirm UP (blue, tip at ERP_Cat.bot_mid) -->
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4"
+      d="M141,395 H118 V120 H141" marker-end="url(#ms)"/>
+
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="88" y="270">syncs</text>
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="88" y="286">confirms</text>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph1 SUPPLIER SYNC  (routed left to clear cap_Cat obstruction)
+     DOWN: Sup.bot_mid(181,246) → left strip → cap_Sup.top_mid(181,453)
+     UP:   cap_Sup.top_mid(181,453) → left strip → Sup.bot_mid(181,246)
+     ═══════════════════════════════════════════════════════ -->
+
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"
+      d="M141,212 H106 V487 H141"/>
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4"
+      d="M141,212 H106 V487 H141" marker-end="url(#ms)"/>
+
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"
+      d="M141,487 H94 V212 H141"/>
+<path fill="none" stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4"
+      d="M141,487 H94 V212 H141" marker-end="url(#ms)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph2 SYNC — straight vertical  (x=375, clear corridor)
+     DOWN: ERP_PR.bot_mid(375,201) → cap_Req.top_mid(375,453)
+     UP:   cap_Req.top_mid(375,453) → ERP_PR.bot_mid(375,201)
+     ═══════════════════════════════════════════════════════ -->
+
+<line x1="375" y1="201" x2="375" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="375" y1="201" x2="375" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<line x1="381" y1="453" x2="381" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="381" y1="453" x2="381" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="395" y="290">routes</text>
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="395" y="306">creates</text>
+
+<!-- ═══════════════════════════════════════════════════════
+     cApp INTERNAL FLOW  (process chain, right_mid → left_mid)
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- cap_Req.right_mid(415,487) ⟶ cap_QC.left_mid(552,395): curve up -->
+<path fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"
+      d="M415,487 C484,487 484,395 552,395" marker-end="url(#ma)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph3 SOURCING DECISION
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- cap_QC.bot_mid(592,429) ⟶ Diamond vtop(592,449) -->
+<line x1="592" y1="429" x2="592" y2="449"
+      stroke="rgba(255,255,255,.25)" stroke-width="1.5" marker-end="url(#ma)"/>
+
+<!-- Diamond vbot(592,525) ⟶ cap_ES.top_mid(592,541): YES -->
+<line x1="592" y1="525" x2="592" y2="541"
+      stroke="hsl(152,58%,54%)" stroke-width="5" opacity=".15"/>
+<line x1="592" y1="525" x2="592" y2="541"
+      stroke="hsl(152,58%,54%)" stroke-width="1.7" marker-end="url(#myd)"/>
+
+<!-- Diamond vright(630,487) ⟶ cap_OM.left_mid(770,487): NO bypass (straight horizontal) -->
+<line x1="630" y1="487" x2="770" y2="487"
+      stroke="hsl(38,82%,56%)" stroke-width="5" opacity=".1" stroke-dasharray="7 8"/>
+<line x1="630" y1="487" x2="770" y2="487"
+      stroke="hsl(38,82%,56%)" stroke-width="1.7" stroke-dasharray="6 7" marker-end="url(#mno)"/>
+
+<!-- cap_ES.bot_mid(592,609) ⟶ sap_RFQ.top_mid(592,728): straight down -->
+<line x1="592" y1="609" x2="592" y2="728"
+      stroke="rgba(255,255,255,.22)" stroke-width="5" opacity=".1"/>
+<line x1="592" y1="609" x2="592" y2="728"
+      stroke="rgba(255,255,255,.28)" stroke-width="1.5" marker-end="url(#ma)"/>
+
+<!-- sap_RFQ.right_mid(632,762) ⟶ cap_QC.right_mid(632,395): quotes return (outside right edge) -->
+<path fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"
+      d="M632,762 C710,762 710,395 632,395"/>
+<path fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"
+      d="M632,762 C710,762 710,395 632,395" marker-end="url(#ma)"/>
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="600"
+      fill="rgba(255,255,255,.28)" x="714" y="590">bids ↑</text>
+
+<!-- cap_QC.right_mid(632,395) ⟶ cap_OM.left_mid(770,487): curve right-down -->
+<path fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"
+      d="M632,395 C702,395 702,487 770,487" marker-end="url(#ma)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph4 SYNC — straight vertical  (x=810)
+     ═══════════════════════════════════════════════════════ -->
+
+<line x1="810" y1="201" x2="810" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="810" y1="201" x2="810" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<line x1="816" y1="453" x2="816" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="816" y1="453" x2="816" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="830" y="290">sends PO</text>
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="830" y="306">PO no. ↑</text>
+
+<!-- cap_OM.right_mid(850,487) ⟶ cap_Rc.left_mid(963,487): straight -->
+<line x1="850" y1="487" x2="963" y2="487"
+      stroke="rgba(255,255,255,.25)" stroke-width="1.5" marker-end="url(#ma)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph5 SYNC — straight vertical  (x=1003)
+     ═══════════════════════════════════════════════════════ -->
+
+<line x1="1003" y1="201" x2="1003" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1003" y1="201" x2="1003" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<line x1="1009" y1="453" x2="1009" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1009" y1="453" x2="1009" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="1023" y="290">sends GRN</text>
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="1023" y="306">GRN no. ↑</text>
+
+<!-- sap_Del.top_mid(1003,728) ⟶ cap_Rc.bot_mid(1003,521): straight up -->
+<line x1="1003" y1="728" x2="1003" y2="521"
+      stroke="rgba(255,255,255,.22)" stroke-width="5" opacity=".1"/>
+<line x1="1003" y1="728" x2="1003" y2="521"
+      stroke="rgba(255,255,255,.28)" stroke-width="1.5" marker-end="url(#ma)"/>
+
+<!-- cap_Rc.right_mid(1043,487) ⟶ cap_IM.left_mid(1140,395): curve up-right -->
+<path fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"
+      d="M1043,487 C1092,487 1092,395 1140,395" marker-end="url(#ma)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph6a SYNC — straight vertical  (x=1180)
+     ═══════════════════════════════════════════════════════ -->
+
+<line x1="1180" y1="201" x2="1180" y2="361"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1180" y1="201" x2="1180" y2="361"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<line x1="1186" y1="361" x2="1186" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1186" y1="361" x2="1186" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="1200" y="290">books</text>
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="1200" y="306">Inv no. ↑</text>
+
+<!-- sap_EI.top_mid(1180,728) ⟶ cap_IM.bot_mid(1180,429): straight up -->
+<line x1="1180" y1="728" x2="1180" y2="429"
+      stroke="rgba(255,255,255,.22)" stroke-width="5" opacity=".1"/>
+<line x1="1180" y1="728" x2="1180" y2="429"
+      stroke="rgba(255,255,255,.28)" stroke-width="1.5" marker-end="url(#ma)"/>
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="600"
+      fill="rgba(255,255,255,.28)" x="1188" y="590">e-invoice</text>
+
+<!-- cap_IM.right_mid(1220,395) ⟶ cap_IA.left_mid(1300,487): L-shape -->
+<path fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"
+      d="M1220,395 L1260,395 L1260,487 L1300,487" marker-end="url(#ma)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph6b SYNC — straight vertical  (x=1340)
+     ═══════════════════════════════════════════════════════ -->
+
+<line x1="1340" y1="201" x2="1340" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1340" y1="201" x2="1340" y2="453"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<line x1="1346" y1="453" x2="1346" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1346" y1="453" x2="1346" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<text font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700"
+      fill="hsl(214 66% 66%)" opacity=".55" x="1360" y="300">confirms</text>
+
+<!-- cap_IA.right_mid(1380,487) ⟶ cap_Py.left_mid(1460,575): L-shape -->
+<path fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"
+      d="M1380,487 L1420,487 L1420,575 L1460,575" marker-end="url(#ma)"/>
+
+<!-- ═══════════════════════════════════════════════════════
+     Ph6c SYNC — straight vertical  (x=1500)
+     ═══════════════════════════════════════════════════════ -->
+
+<line x1="1500" y1="201" x2="1500" y2="541"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1500" y1="201" x2="1500" y2="541"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<line x1="1506" y1="541" x2="1506" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="3" opacity=".07" stroke-dasharray="4 4"/>
+<line x1="1506" y1="541" x2="1506" y2="201"
+      stroke="hsl(214,66%,58%)" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#ms)"/>
+
+<!-- cap_Py.bot_mid(1500,609) ⟶ sap_Ps.top_mid(1500,728): straight down -->
+<line x1="1500" y1="609" x2="1500" y2="728"
+      stroke="rgba(255,255,255,.22)" stroke-width="5" opacity=".1"/>
+<line x1="1500" y1="609" x2="1500" y2="728"
+      stroke="rgba(255,255,255,.28)" stroke-width="1.5" marker-end="url(#ma)"/>
+
+</svg>
+</div></div>
+<script>
+(function(){
+  function sc(){
+    var r=document.getElementById('sr'),
+        s=Math.min(window.innerWidth/1600,window.innerHeight/900),
+        tx=(window.innerWidth-1600*s)/2,
+        ty=(window.innerHeight-900*s)/2;
+    r.style.transform='translate('+tx+'px,'+ty+'px) scale('+s+')';
+  }
+  sc(); window.addEventListener('resize',sc);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aerchain SalesOS — System Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   LIGHT THEME — Aerchain Design System
+   Tokens remapped for light canvas
+═══════════════════════════════════════ */
+:root {
+  /* Canvas surfaces */
+  --canvas-a: #FFFFFF;
+  --canvas-b: #F7F8FC;
+  --canvas-c: #FFFFFF;
+  --canvas-d: #F0F1F7;
+
+  /* Brand */
+  --aerchain: #DC5F40;
+  --aerchain-soft: hsl(14 72% 55% / .10);
+
+  /* Semantic status */
+  --green: hsl(152 68% 36%);
+  --red: hsl(0 68% 44%);
+  --amber: hsl(38 92% 42%);
+
+  /* Hub accent */
+  --gp: linear-gradient(135deg, hsl(262 80% 55%), hsl(275 85% 58%));
+  --active-glow: hsl(262 80% 58% / .45);
+
+  /* Glass → clean cards on light */
+  --glass-1: rgba(0,0,0,0.020);
+  --glass-2: rgba(0,0,0,0.040);
+  --glass-3: rgba(0,0,0,0.065);
+  --glass-border: rgba(0,0,0,0.075);
+  --glass-border-h: rgba(0,0,0,0.16);
+
+  /* Text */
+  --fg:  rgba(13,14,20,0.92);
+  --fg2: rgba(13,14,20,0.62);
+  --fg3: rgba(13,14,20,0.38);
+
+  /* Radius */
+  --r: 16px;
+  --rm: 12px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; background: #F0F1F7; }
+body {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  background: linear-gradient(145deg, #F7F8FC 0%, #EDEEF6 35%, #F2F3FA 70%, #EFF0F8 100%);
+  background-attachment: scroll;
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+.mono { font-family: 'JetBrains Mono', monospace; }
+.page { max-width: 1280px; margin: 0 auto; padding: 48px 40px; }
+.section { margin-bottom: 0 !important; }
+
+/* Section headers */
+.sh { margin-bottom: 24px; }
+.sh h2 { font-size: 32px; font-weight: 300; letter-spacing: -0.025em; color: var(--fg); }
+.sh h2 b { font-weight: 800; }
+.sh p { font-size: 13px; color: var(--fg3); margin-top: 5px; }
+.sdiv { height: 1px; background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent); margin-bottom: 32px; }
+
+/* Chips */
+.chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  padding: 4px 12px; border-radius: 14px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.chip.up { background: hsl(152 68% 38% / .10); color: hsl(152 68% 34%); border: 1px solid hsl(152 68% 38% / .15); }
+.chip.hot { background: hsl(38 92% 50% / .08); color: hsl(38 82% 38%); border: 1px solid hsl(38 92% 50% / .15); }
+.chip::before { content: ''; width: 4px; height: 4px; border-radius: 50%; }
+.chip.up::before { background: hsl(152 68% 38%); }
+.chip.hot::before { background: hsl(38 92% 50%); }
+
+@keyframes flowDash { to { stroke-dashoffset: -24; } }
+@keyframes orbGlow {
+  0%, 100% { box-shadow: 0 0 40px hsl(262 80% 55% / .50), 0 0 80px hsl(262 75% 58% / .25), 0 6px 28px rgba(0,0,0,.20); }
+  50% { box-shadow: 0 0 64px hsl(262 80% 55% / .65), 0 0 120px hsl(275 85% 58% / .35), 0 6px 28px rgba(0,0,0,.20); }
+}
+@keyframes orbShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes metaPulse {
+  0%, 100% { box-shadow: 0 0 6px hsl(152 68% 42% / .4); }
+  50% { box-shadow: 0 0 14px hsl(152 68% 42% / .7); }
+}
+
+/* ══ SYSTEM ARCHITECTURE ══ */
+.arch-container {
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 20px;
+  padding: 28px 36px 0 36px;
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.09), 0 1px 6px rgba(0,0,0,0.05);
+}
+.arch-canvas { position: relative; padding-bottom: 28px; }
+.arch-svg {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+  overflow: visible;
+}
+.arch-svg path { fill: none; stroke-linecap: round; animation: flowDash 2.2s linear infinite; }
+.arch-svg circle { animation: none; }
+/* Rails — primary zone boundary, needs to be clearly visible */
+.arch-svg .sp { stroke: hsl(217 78% 48%); stroke-width: 1.6; stroke-dasharray: 5 6; opacity: .60; }
+.arch-svg .dp { stroke: hsl(152 68% 34%); stroke-width: 1.6; stroke-dasharray: 5 6; opacity: .60; }
+.arch-svg .sg { stroke: hsl(217 80% 55%); stroke-width: 10; filter: blur(6px); opacity: .16; }
+.arch-svg .dg { stroke: hsl(152 68% 40%); stroke-width: 10; filter: blur(6px); opacity: .16; }
+
+.arch-layout {
+  display: grid;
+  grid-template-columns: 270px 1fr 420px;
+  gap: 0 24px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sources — no panel fill; cards carry the color weight */
+.arch-sources {
+  display: flex; flex-direction: column; gap: 12px;
+  background: transparent;
+  border: none;
+  padding: 0 !important;
+}
+.arch-sl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: hsl(217 80% 40%);
+  margin-bottom: 8px; margin-top: 0;
+  text-align: center; padding: 4px 14px;
+  background: hsl(217 80% 92%);
+  border: 1.5px solid hsl(217 80% 52% / .35);
+  border-radius: 20px; display: inline-block;
+  align-self: center;
+  box-shadow: 0 1px 6px rgba(30,80,200,0.10);
+}
+.arch-sl::before { display: none; }
+.arch-s {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px; border-radius: 12px;
+  background: hsl(217 65% 97%);
+  border: 1.5px solid hsl(217 65% 58% / .32);
+  box-shadow: 0 3px 12px rgba(30,60,200,0.10), 0 1px 3px rgba(0,0,0,0.05);
+  transition: all .25s;
+}
+.arch-s:hover {
+  background: hsl(217 70% 96%);
+  border-color: hsl(217 70% 52% / .50);
+  box-shadow: 0 6px 20px rgba(30,60,200,0.16), 0 2px 5px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+.arch-s-i {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: #FFFFFF;
+  border: 1.5px solid hsl(217 55% 60% / .22);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(30,60,200,0.07);
+}
+.arch-s-i svg { width: 21px; height: 21px; }
+.arch-s-n { font-size: 14px; font-weight: 700; color: rgba(13,14,30,0.85); }
+.arch-s-i.notion-bg { background: #FAFAFA; border-color: rgba(0,0,0,0.10); }
+.arch-s-i img { object-fit: contain; }
+
+/* Hub */
+.arch-hub {
+  display: flex;
+  align-items: center; justify-content: center;
+  position: relative;
+  width: 260px; height: 300px;
+  justify-self: center;
+}
+.arch-zcl-below {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  color: hsl(152 65% 30%);
+  white-space: nowrap;
+  background: hsl(152 65% 95%);
+  padding: 3px 10px; border-radius: 10px;
+  border: 1px solid hsl(152 65% 36% / .25);
+}
+.arch-zcl-below svg { color: hsl(152 65% 32%); flex-shrink: 0; }
+.arch-hub-glow {
+  position: absolute; width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, hsl(262 80% 60% / .22) 0%, hsl(262 70% 58% / .10) 45%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.arch-orb {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: linear-gradient(135deg, hsl(262 80% 52%), hsl(275 85% 55%), hsl(290 70% 52%), hsl(270 80% 58%), hsl(255 75% 50%));
+  background-size: 200% 200%;
+  animation: orbGlow 3s ease-in-out infinite, orbShift 8s ease-in-out infinite;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+  box-shadow: 0 0 48px hsl(262 80% 55% / .55), 0 0 96px hsl(275 85% 58% / .30), 0 8px 32px rgba(0,0,0,.22);
+  position: relative; z-index: 3;
+  border: 2px solid rgba(255,255,255,.5);
+}
+.arch-orb svg { width: 42px; height: 42px; }
+.arch-orb-text { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: white; text-align: center; }
+
+/* Team stat badge */
+.arch-team-stat {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 600;
+  color: hsl(152 68% 34%);
+  padding: 4px 10px; border-radius: 12px;
+  background: hsl(152 40% 94%);
+  border: 1px solid hsl(152 68% 42% / .18);
+  white-space: nowrap;
+}
+.arch-team-stat svg { flex-shrink: 0; color: hsl(152 68% 36%); }
+.arch-team-stat.live { margin-left: auto; }
+.arch-team-live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: hsl(152 68% 42%);
+  box-shadow: 0 0 6px hsl(152 68% 42% / .5);
+  animation: metaPulse 2s ease-in-out infinite;
+}
+
+/* Orbital rings */
+.arch-ring {
+  position: absolute; border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.arch-ring.r1 { width: 170px; height: 170px; border: 1.5px solid hsl(262 60% 60% / .22); }
+.arch-ring.r2 { width: 220px; height: 220px; border: 1px dashed hsl(262 55% 58% / .18); }
+.arch-ring.ai  { width: 250px; height: 250px; border: 2px solid hsl(45 85% 45% / .55); }
+.arch-ring.n8n { width: 195px; height: 195px; border: 2px solid hsl(0 75% 48% / .45); }
+
+/* Floating ring labels */
+.arch-n8n-label {
+  position: absolute;
+  bottom: -10px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: hsl(0 72% 38%);
+  background: hsl(0 80% 97%);
+  padding: 3px 14px; border-radius: 10px;
+  border: 1.5px solid hsl(0 75% 48% / .35);
+  white-space: nowrap; z-index: 5;
+  display: flex; align-items: center; gap: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.arch-n8n-label img { flex-shrink: 0; }
+.arch-ai-top {
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: hsl(38 85% 32%);
+  background: hsl(45 90% 95%);
+  padding: 3px 14px; border-radius: 10px;
+  border: 1.5px solid hsl(45 85% 45% / .45);
+  white-space: nowrap; z-index: 5;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.arch-ai-top img { flex-shrink: 0; }
+.arch-ai-bot {
+  position: absolute;
+  bottom: -1px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .08em;
+  color: hsl(38 85% 32%);
+  background: hsl(45 90% 95%);
+  border: 1.5px solid hsl(45 90% 45% / .40);
+  padding: 2px 12px; border-radius: 8px;
+  white-space: nowrap; z-index: 5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.arch-ring-text {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* Team strip */
+.arch-team-strip {
+  display: flex; align-items: center;
+  gap: 20px; margin-top: 20px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #EEF0F8, #E8EAF4);
+  border-top: 1px solid rgba(0,0,0,0.09);
+  border-radius: 0 0 18px 18px;
+  margin-left: -36px; margin-right: -36px;
+}
+.arch-team-avatars { display: flex; gap: 0; }
+.arch-team-av {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #E8EAF0; border: 2px solid #FFFFFF;
+  display: flex; align-items: center; justify-content: center;
+  margin-left: -8px; position: relative; z-index: 1;
+  transition: all .2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+.arch-team-av:first-child { margin-left: 0; }
+.arch-team-av:hover { transform: translateY(-2px); z-index: 5; border-color: rgba(0,0,0,0.12); }
+.arch-team-av svg { width: 15px; height: 15px; color: rgba(0,0,0,0.45); stroke-width: 1.5; }
+/* Tinted avatars — muted pastels instead of dark hsl */
+.arch-team-av:nth-child(1) { background: hsl(262 45% 82%); }
+.arch-team-av:nth-child(2) { background: hsl(217 45% 80%); }
+.arch-team-av:nth-child(3) { background: hsl(152 40% 80%); }
+.arch-team-av:nth-child(4) { background: hsl(38 50% 80%); }
+.arch-team-av:nth-child(5) { background: linear-gradient(135deg, hsl(262 70% 58%), hsl(275 75% 62%)); border-color: hsl(262 80% 55% / .25); }
+.arch-team-info { display: flex; flex-direction: column; gap: 2px; }
+.arch-team-title { font-size: 13px; font-weight: 700; color: var(--fg); }
+.arch-team-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--fg3); letter-spacing: .04em; }
+
+/* Destination modules — no panel fill; cards carry the color weight */
+.arch-dests-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: hsl(152 75% 26%);
+  margin-bottom: 10px; margin-top: 0;
+  text-align: center; padding: 4px 14px;
+  background: hsl(152 65% 90%);
+  border: 1.5px solid hsl(152 70% 40% / .35);
+  border-radius: 20px; display: inline-block;
+  align-self: center; width: auto;
+  box-shadow: 0 1px 6px rgba(20,140,70,0.10);
+}
+.arch-dests-label::before { display: none; }
+/* No panel fill — transparent wrapper */
+#archDst {
+  background: transparent;
+  border: none;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+.arch-dests-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 10px;
+  padding-bottom: 0;
+}
+.arch-d {
+  padding: 15px 10px 12px; border-radius: 12px;
+  background: hsl(152 55% 97%);
+  border: 1.5px solid hsl(152 58% 48% / .32);
+  box-shadow: 0 3px 12px rgba(20,140,70,0.09), 0 1px 3px rgba(0,0,0,0.05);
+  transition: all .25s;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 9px;
+}
+.arch-d:hover {
+  background: hsl(152 58% 96%);
+  border-color: hsl(152 62% 42% / .50);
+  box-shadow: 0 6px 20px rgba(20,140,70,0.15), 0 2px 5px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+.arch-d-i {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: #FFFFFF;
+  border: 1.5px solid hsl(152 65% 46% / .25);
+  box-shadow: 0 1px 4px rgba(20,140,70,0.08);
+  display: flex; align-items: center; justify-content: center;
+}
+.arch-d-i svg { width: 18px; height: 18px; color: hsl(152 72% 28%); stroke-width: 1.5; }
+.arch-d-n { font-size: 11px; font-weight: 700; color: rgba(13,20,14,0.80); line-height: 1.3; }
+
+/* Logo bar */
+.logo-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
+.logo-pill {
+  background: #111827;
+  padding: 5px 12px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.14);
+}
+.logo-svg { height: 26px; width: auto; opacity: .95; display: block; }
+.logo-sep { width: 1px; height: 18px; background: rgba(0,0,0,0.14); }
+.logo-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--fg3); }
+.logo-tag span { opacity: .55; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .arch-layout { grid-template-columns: 1fr; gap: 32px; }
+  .arch-hub { min-height: 280px; }
+  .arch-dests-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .page { padding: 40px 20px; }
+  .arch-container { padding: 20px 20px 0 20px; }
+  .arch-team-strip { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+  .arch-dests-grid { grid-template-columns: repeat(2, 1fr); }
+  .sh h2 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Logo bar -->
+  <div class="logo-bar">
+    <div class="logo-pill">
+      <img class="logo-svg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTY4IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTY4IDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMTY0NTVfMTEwNDA4KSI+CjxwYXRoIGQ9Ik0zLjc5NTEgMjYuOTg5NUMzLjYxMzk2IDI3LjM5MzcgMy40MzI4MiAyNy42NjE2IDMuMjU0IDI3Ljc5NTZDMy4wNzI4NiAyNy45Mjk1IDIuODAxMTUgMjcuOTk3NyAyLjQ0MTE5IDI3Ljk5NzdIMC42Nzg1NjlDMC4yMjU3MjEgMjcuOTk3NyAwLjAwMDQ1Nzc2NCAyNy44NTIgMC4wMDA0NTc3NjQgMjcuNTYwNkMwLjAwMDQ1Nzc2NCAyNy40NDc4IDAuMDU2MTkzIDI3LjI1NzQgMC4xNjk5ODYgMjYuOTg5NUwxMC4zNjcyIDUuNjgwMjFDMTAuNzA2MyA0Ljk4Njk4IDEwLjk1NDcgNC41MzEwOSAxMS4xMTI3IDQuMzE5NTlDMTEuMjcwNiA0LjEwNTc1IDExLjQ2MzMgNCAxMS42ODg2IDRDMTEuODkzIDQgMTIuMDY3MSA0LjEwNTc1IDEyLjIxMzQgNC4zMTk1OUMxMi4zNTk3IDQuNTMzNDQgMTIuNjAzNiA0Ljk4Njk4IDEyLjk0MjYgNS42ODAyMUwyMy4yNDIgMjYuOTg5NUMyMy4zNTU4IDI3LjI1NzQgMjMuNDExNiAyNy40NTAxIDIzLjQxMTYgMjcuNTYwNkMyMy40MTE2IDI3Ljg1MiAyMy4xNzQ3IDI3Ljk5NzcgMjIuNzAwOSAyNy45OTc3SDIwLjgwMzZDMjAuNDQxMyAyNy45OTc3IDIwLjE3NjYgMjcuOTI5NSAyMC4wMDcxIDI3Ljc5NTZDMTkuODM3NSAyNy42NjE2IDE5LjY1MTggMjcuMzkxNCAxOS40NDc0IDI2Ljk4OTVMMTEuNjIxMiAxMC4yNTA5TDMuNzk1MSAyNi45ODk1WiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNNDAuNTIyMSAyNC44OTU3QzQwLjYzNTkgMjQuOTk5MSA0MC42OTE2IDI1LjE5ODkgNDAuNjkxNiAyNS40OTVWMjcuMjQzM0M0MC42OTE2IDI3LjU0MTggNDAuNjM1OSAyNy43NDE1IDQwLjUyMjEgMjcuODQyNkM0MC40MDgzIDI3Ljk0NiA0MC4yMTc5IDI3Ljk5NzcgMzkuOTQ2MiAyNy45OTc3SDI3LjEwNjJDMjYuODM0NSAyNy45OTc3IDI2LjY0NCAyNy45NDYgMjYuNTMwMiAyNy44NDI2QzI2LjQxNjUgMjcuNzM5MiAyNi4zNjA3IDI3LjUzOTQgMjYuMzYwNyAyNy4yNDMzVjQuNzU0MzNDMjYuMzYwNyA0LjQ1ODI0IDI2LjQxNjUgNC4yNTYxNCAyNi41MzAyIDQuMTU1MUMyNi42NDE3IDQuMDUxNyAyNi44MzQ1IDQgMjcuMTAzOSA0SDM5LjkxMTNDNDAuMTgzIDQgNDAuMzczNSA0LjA1MTcgNDAuNDg3MyA0LjE1NTFDNDAuNjAxMSA0LjI1ODQ5IDQwLjY1NjggNC40NTgyNCA0MC42NTY4IDQuNzU0MzNWNi41MDI2OUM0MC42NTY4IDYuODAxMTQgNDAuNjAxMSA3LjAwMDg4IDQwLjQ4NzMgNy4xMDE5M0M0MC4zNzM1IDcuMjA1MzMgNDAuMTgzIDcuMjU3MDMgMzkuOTExMyA3LjI1NzAzSDMwLjE1M0MyOS45OTUxIDcuMjU3MDMgMjkuODg4MyA3LjI4NTIzIDI5LjgzMDIgNy4zNDE2MkMyOS43NzQ1IDcuMzk4MDIgMjkuNzQ2NiA3LjQ5NjcyIDI5Ljc0NjYgNy42MzMwMlYxMy45MDc0QzI5Ljc0NjYgMTQuMDY3MiAyOS43NzQ1IDE0LjE3NTMgMjkuODMwMiAxNC4yMzRDMjkuODg2IDE0LjI5MDQgMjkuOTkyOCAxNC4zMTg2IDMwLjE1MyAxNC4zMTg2SDM4Ljc1OTVDMzkuMDMxMiAxNC4zMTg2IDM5LjIyMTYgMTQuMzcwMyAzOS4zMzU0IDE0LjQ3MzdDMzkuNDQ5MiAxNC41NzcxIDM5LjUwNDkgMTQuNzc2OSAzOS41MDQ5IDE1LjA3MjlWMTYuNzg2MUMzOS41MDQ5IDE3LjA2MSAzOS40NDkyIDE3LjI1MzcgMzkuMzM1NCAxNy4zNjg4QzM5LjIyMTYgMTcuNDg0IDM5LjAzMTIgMTcuNTQwNCAzOC43NTk1IDE3LjU0MDRIMzAuMTUzQzI5Ljk5NTEgMTcuNTQwNCAyOS44ODgzIDE3LjU2ODYgMjkuODMwMiAxNy42MjVDMjkuNzc0NSAxNy42ODE0IDI5Ljc0NjYgMTcuNzgwMSAyOS43NDY2IDE3LjkxNjRWMjQuMzYyM0MyOS43NDY2IDI0LjQ5ODYgMjkuNzc0NSAyNC41OTczIDI5LjgzMDIgMjQuNjUzN0MyOS44ODYgMjQuNzEwMSAyOS45OTI4IDI0LjczODMgMzAuMTUzIDI0LjczODNIMzkuOTQzOEM0MC4yMTU2IDI0LjczODMgNDAuNDA2IDI0Ljc5IDQwLjUxOTggMjQuODkzNEw0MC41MjIxIDI0Ljg5NTdaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik00OC43MTk4IDI3Ljg0NDlDNDguNjA2IDI3Ljk0ODMgNDguNDE1NiAyOCA0OC4xNDM5IDI4SDQ2LjI0NjZDNDUuOTc0OCAyOCA0NS43ODQ0IDI3Ljk0ODMgNDUuNjcwNiAyNy44NDQ5QzQ1LjU1NjggMjcuNzQxNSA0NS41MDExIDI3LjU0MTggNDUuNTAxMSAyNy4yNDU3VjQuNzU0MzNDNDUuNTAxMSA0LjQ1ODI0IDQ1LjU1NjggNC4yNTYxNCA0NS42NzA2IDQuMTU1MUM0NS43ODQ0IDQuMDUxNyA0NS45NzcyIDQgNDYuMjQ2NiA0SDUyLjcxODhDNTkuMTU2MiA0IDYyLjM3NDkgNi40NzkxOSA2Mi4zNzQ5IDExLjQzOTlDNjIuMzc0OSAxMy4wODQ5IDYxLjk2ODUgMTQuNDQwOCA2MS4xNTU3IDE1LjUwM0M2MC4zNDI5IDE2LjU2NTIgNTkuMjEyIDE3LjM1IDU3Ljc2NzUgMTcuODUwNkw2My41OTQxIDI2Ljk3MDdDNjMuNzc1MyAyNy4yMjIyIDYzLjg2NTkgMjcuNDM4NCA2My44NjU5IDI3LjYyMTdDNjMuODY1OSAyNy43NTggNjMuODAzMSAyNy44NTY3IDYzLjY4MDEgMjcuOTEzMUM2My41NTQ3IDI3Ljk2OTUgNjMuMzY4OSAyNy45OTc3IDYzLjEyMDQgMjcuOTk3N0g2MS4xMjA5QzYwLjczNzcgMjcuOTk3NyA2MC40NTQ0IDI3Ljk0MTMgNjAuMjczMyAyNy44MjYxQzYwLjA5MjEgMjcuNzExIDU5Ljg3ODUgMjcuNDYxOSA1OS42MyAyNy4wNzE4TDUzLjM5NjkgMTcuMDYxQzUzLjI2MjIgMTYuODc3NyA1My4xOTI2IDE2LjcxNzkgNTMuMTkyNiAxNi41ODE2QzUzLjE5MjYgMTYuMzk4MyA1My4zNjIxIDE2LjI5NDkgNTMuNzAxMSAxNi4yNzM4QzU3LjExMjYgMTUuOTA5NSA1OC44MTcyIDE0LjM2NTYgNTguODE3MiAxMS42NDQ0QzU4LjgxNzIgMTAuMDkxMSA1OC4yODA3IDguOTUzNjkgNTcuMjA3OCA4LjIzMjI1QzU2LjEzNDkgNy41MTMxNyA1NC41ODEzIDcuMTUxMjggNTIuNTQ5MyA3LjE1MTI4SDQ5LjI5NTdDNDkuMTM3OCA3LjE1MTI4IDQ5LjAzMSA3LjE3OTQ4IDQ4Ljk3MjkgNy4yMzU4OEM0OC45MTcyIDcuMjkyMjcgNDguODg5MyA3LjQwMjcyIDQ4Ljg4OTMgNy41NjI1MlYyNy4yNDFDNDguODg5MyAyNy41Mzk0IDQ4LjgzMzYgMjcuNzM5MiA0OC43MTk4IDI3Ljg0MDJWMjcuODQ0OVoiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTg0LjU5OTEgMjIuNDQ3MUM4NC44NDc2IDIyLjI0NzMgODUuMDQwNCAyMi4xNDg2IDg1LjE3NTEgMjIuMTQ4NkM4NS4yNjU2IDIyLjE0ODYgODUuMzU2MiAyMi4xODE1IDg1LjQ0NjggMjIuMjQ3M0M4NS41Mzc0IDIyLjMxMzEgODUuNjE2MyAyMi4zOTA3IDg1LjY4MzcgMjIuNDhMODYuNjY2IDIzLjgxQzg2Ljc3OTggMjMuOTQ0IDg2LjgzNTUgMjQuMDk5MSA4Ni44MzU1IDI0LjI3NTNDODYuODM1NSAyNC4zNjQ2IDg2LjgwMDcgMjQuNDU4NiA4Ni43MzMzIDI0LjU1NzNDODYuNjY2IDI0LjY1NiA4Ni41NjM4IDI0Ljc2MTggODYuNDI5MSAyNC44NzIyQzg1LjIzMDggMjUuODY4NiA4My44ODE1IDI2LjYzOTQgODIuMzgxMyAyNy4xODIyQzgwLjg3ODggMjcuNzI1MSA3OS4zMDQzIDI3Ljk5NzcgNzcuNjU1NSAyNy45OTc3Qzc1LjQ0MjMgMjcuOTk3NyA3My40MTUgMjcuNDg3NyA3MS41NzM0IDI2LjQ2NzhDNjkuNzMxOCAyNS40NDggNjguMjc1NyAyNC4wMzA5IDY3LjIwMjggMjIuMjEyMUM2Ni4xMjk5IDIwLjM5NTYgNjUuNTkzNCAxOC4zNTU4IDY1LjU5MzQgMTYuMDk1MkM2NS41OTM0IDEzLjgzNDUgNjYuMTI5OSAxMS43NTI1IDY3LjIwMjggOS45MTI0N0M2OC4yNzU3IDguMDcyNDYgNjkuNzQzNCA2LjYyNzI0IDcxLjYwODIgNS41NzQ0NkM3My40NzA3IDQuNTI2MzkgNzUuNTUzOCA0IDc3Ljg1NzUgNEM3OS40ODMxIDQgODEuMDM2NyA0LjI3NzI5IDgyLjUxNiA0LjgzMTg4QzgzLjk5NTMgNS4zODY0NyA4NS4zMTIxIDYuMTQwOCA4Ni40NjQgNy4wOTI1M0M4Ni42ODkyIDcuMjQ3NjMgODYuODAzIDcuNDE0NDcgODYuODAzIDcuNTkwNzJDODYuODAzIDcuNzQ1ODEgODYuNzM1NyA3LjkyMjA2IDg2LjU5ODYgOC4xMjE4MUw4NS42MTYzIDkuNDE4OThDODUuNDM1MiA5LjY2MzM3IDg1LjI1NCA5Ljc4NTU3IDg1LjA3NTIgOS43ODU1N0M4NC45NDA1IDkuNzg1NTcgODQuNzQ3OCA5LjY5NjI3IDg0LjQ5OTMgOS41MjAwMkM4My41Mjg2IDguNzg5MTkgODIuNDc2NiA4LjIxMzQ1IDgxLjM0NzkgNy43OTA0NkM4MC4yMTkzIDcuMzY5ODIgNzkuMDMyNiA3LjE1ODMzIDc3Ljc5MDIgNy4xNTgzM0M3Ni4xODU1IDcuMTU4MzMgNzQuNzI0NyA3LjUzNDMyIDczLjQwMzMgOC4yODg2NUM3Mi4wODE5IDkuMDQyOTggNzEuMDM2OSAxMC4wOTU4IDcwLjI2ODIgMTEuNDQ3QzY5LjQ5OTUgMTIuNzk4MiA2OS4xMTY0IDE0LjMyOCA2OS4xMTY0IDE2LjAzNDFDNjkuMTE2NCAxNy43NDAxIDY5LjQ5NDkgMTkuMTY4OSA3MC4yNTIgMjAuNTIyNUM3MS4wMDkgMjEuODczNyA3Mi4wNDcxIDIyLjkzMzUgNzMuMzY4NSAyMy42OTczQzc0LjY4OTkgMjQuNDYxIDc2LjE2NDYgMjQuODQ0IDc3Ljc5MDIgMjQuODQ0QzgwLjM0MjQgMjQuODQ0IDgyLjYxMTMgMjQuMDQ3NCA4NC41OTkxIDIyLjQ1MThWMjIuNDQ3MVoiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTEwOS40MDEgMjcuODQ0OUMxMDkuMjg4IDI3Ljk0ODMgMTA5LjA5NyAyOCAxMDguODI2IDI4SDEwNi45MjhDMTA2LjY1NyAyOCAxMDYuNDY2IDI3Ljk0ODMgMTA2LjM1MiAyNy44NDQ5QzEwNi4yMzggMjcuNzQxNSAxMDYuMTgzIDI3LjU0MTggMTA2LjE4MyAyNy4yNDU3VjE3LjY4MTRDMTA2LjE4MyAxNy41NDUxIDEwNi4xNTUgMTcuNDQ2NCAxMDYuMDk5IDE3LjM5QzEwNi4wNDMgMTcuMzMzNiAxMDUuOTM0IDE3LjMwNTQgMTA1Ljc3NiAxNy4zMDU0SDk0LjU2MkM5NC40MDQxIDE3LjMwNTQgOTQuMjk3MiAxNy4zMzM2IDk0LjIzOTIgMTcuMzlDOTQuMTgzNCAxNy40NDY0IDk0LjE1NTYgMTcuNTQ1MSA5NC4xNTU2IDE3LjY4MTRWMjcuMjQ1N0M5NC4xNTU2IDI3LjU0NDEgOTQuMDk5OCAyNy43NDM5IDkzLjk4NiAyNy44NDQ5QzkzLjg3MjIgMjcuOTQ4MyA5My42ODE4IDI4IDkzLjQxMDEgMjhIOTEuNTEyOEM5MS4yNDExIDI4IDkxLjA1MDcgMjcuOTQ4MyA5MC45MzY5IDI3Ljg0NDlDOTAuODIzMSAyNy43NDE1IDkwLjc2NzMgMjcuNTQxOCA5MC43NjczIDI3LjI0NTdWNC43NTQzM0M5MC43NjczIDQuNDU4MjQgOTAuODIzMSA0LjI1NjE0IDkwLjkzNjkgNC4xNTUxQzkxLjA0ODMgNC4wNTE3IDkxLjI0MTEgNCA5MS41MTA1IDRIOTMuNDA3OEM5My42Nzk1IDQgOTMuODcyMyA0LjA1MTcgOTMuOTgzNyA0LjE1NTFDOTQuMDk3NSA0LjI1ODQ5IDk0LjE1MzIgNC40NTgyNCA5NC4xNTMyIDQuNzU0MzNWMTMuNjY3N0M5NC4xNTMyIDEzLjgwNCA5NC4xODExIDEzLjkwNzQgOTQuMjM2OSAxMy45NzU1Qzk0LjI5MjYgMTQuMDQzNyA5NC4zOTk0IDE0LjA3ODkgOTQuNTU5NiAxNC4wNzg5SDEwNS43NzRDMTA1LjkzMiAxNC4wNzg5IDEwNi4wMzkgMTQuMDQzNyAxMDYuMDk3IDEzLjk3NTVDMTA2LjE1MyAxMy45MDc0IDEwNi4xOCAxMy44MDQgMTA2LjE4IDEzLjY2NzdWNC43NTQzM0MxMDYuMTggNC40NTgyNCAxMDYuMjM2IDQuMjU2MTQgMTA2LjM1IDQuMTU1MUMxMDYuNDY0IDQuMDUxNyAxMDYuNjU3IDQgMTA2LjkyOCA0SDEwOC44MjZDMTA5LjA5NSA0IDEwOS4yODggNC4wNTE3IDEwOS40MDEgNC4xNTUxQzEwOS41MTUgNC4yNTg0OSAxMDkuNTcxIDQuNDU4MjQgMTA5LjU3MSA0Ljc1NDMzVjI3LjI0NTdDMTA5LjU3MSAyNy41NDQxIDEwOS41MTUgMjcuNzQzOSAxMDkuNDAxIDI3Ljg0NDlaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0xNjQuMjUyIDQuMTUwNEMxNjQuMzY2IDQuMDQ5MzUgMTY0LjU1OCA0IDE2NC44MjggNEgxNjYuNzI1QzE2Ni45OTcgNCAxNjcuMTg5IDQuMDQ5MzUgMTY3LjMwMSA0LjE1MDRDMTY3LjQxNSA0LjI0OTA5IDE2Ny40NyA0LjQ0NDE0IDE2Ny40NyA0LjczMzE4VjI2LjkwNDlDMTY3LjQ3IDI3LjYzNTggMTY3LjI0NSAyOC4wMDIzIDE2Ni43OTIgMjguMDAyM0MxNjYuNjExIDI4LjAwMjMgMTY2LjQyMSAyNy45Mjk1IDE2Ni4yMTYgMjcuNzg2MkMxNjYuMDEyIDI3LjY0MjggMTY1LjczMSAyNy4zNzAyIDE2NS4zNjkgMjYuOTcwN0wxNTEuNjE0IDExLjA0OThWMjYuOTA0OUMxNTEuNjE0IDI3LjE5NCAxNTEuNTU4IDI3LjM4NjcgMTUxLjQ0NCAyNy40ODc3QzE1MS4zMyAyNy41ODY0IDE1MS4xNCAyNy42MzgxIDE1MC44NjggMjcuNjM4MUgxNDguOTcxQzE0OC42OTkgMjcuNjM4MSAxNDguNTA5IDI3LjU4ODggMTQ4LjM5NSAyNy40ODc3QzE0OC4yODEgMjcuMzg5IDE0OC4yMjYgMjcuMTk0IDE0OC4yMjYgMjYuOTA0OVY1LjA5NzQyQzE0OC4yMjYgNC43MjE0MyAxNDguMjgxIDQuNDQ0MTQgMTQ4LjM5NSA0LjI2NTU0QzE0OC41MDkgNC4wODkzIDE0OC42OSA0IDE0OC45MzkgNEMxNDkuMTIgNCAxNDkuMzEgNC4wNzI4NSAxNDkuNTE0IDQuMjE2MkMxNDkuNzE5IDQuMzU5NTQgMTQ5Ljk4OCA0LjYzMjE0IDE1MC4zMjcgNS4wMzE2M0wxNjQuMDgyIDIwLjk1MjVWNC43MzA4M0MxNjQuMDgyIDQuNDQ0MTQgMTY0LjEzOCA0LjI0OTA5IDE2NC4yNTIgNC4xNDgwNVY0LjE1MDRaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0xNDMuNzMyIDE4LjcwODNDMTQzLjcyIDE4LjY1MTkgMTQzLjcwNCAxOC40OTQ0IDE0My42OTkgMTguNDE5M0MxNDMuNzA0IDE4LjQzNTcgMTQzLjczIDE4LjY3NTQgMTQzLjczMiAxOC43MDgzWiIgZmlsbD0iI0RDNUY0MCIvPjxwYXRoIGQ9Ik0xNDEuNjEzIDExLjA4QzE0Mi42OTggMTAuOTYwMiAxNDMuNDgzIDkuOTczMiAxNDMuMzY0IDguODczNDJDMTQzLjI0NiA3Ljc3NiAxNDIuMjcgNi45ODE3MSAxNDEuMTg0IDcuMTAxNTZDMTQwLjA5OSA3LjIyMTQxIDEzOS4zMTQgOC4yMDgzOSAxMzkuNDMzIDkuMzA4MTZDMTM5LjU1MSAxMC40MDU2IDE0MC41MjYgMTEuMTk5OSAxNDEuNjEzIDExLjA4WiIgZmlsbD0iI0RDNUY0MCIvPjxwYXRoIGQ9Ik0xNDMuODU3IDIwLjYyNTRDMTQzLjk0MyAxNi4xNjk5IDE0Mi4wOTIgMTAuNzY3NCAxMzcuMjUyIDEzLjgzNjRDMTM2Ljg0NiAxMy45OTYyIDEzNi42MTQgMTMuOTM5OCAxMzYuNCAxMy42MzQzQzEzNS43ODkgMTIuNTE1OCAxMzUuMzIgMTEuMzcxMyAxMzQuNzM5IDEwLjE5NjRDMTMwLjM3MSAtMS4xNzUwMSAxMjUuMzgzIDUuMzI3MjkgMTIwLjExNCAxMi4wNTc1QzEwOC4zNDcgMjcuNDQ5NyAxMTMuODkgMzQuMjY2OSAxMzIuNDM4IDIwLjc1QzEzMy4wODYgMjAuMjg0NyAxMzQuMzg0IDE5LjMxMTggMTM0Ljg1MSAxOS4yNzE5QzEzNS4zNDMgMTkuMTkyIDEzNS41NDggMTkuNTk2MiAxMzUuOTE5IDIwLjQ0MjFDMTM2LjI3OSAyMS4zMDkzIDEzNi44NzggMjIuNTM4MyAxMzcuNDI2IDIzLjQxNDhDMTQwLjU5MiAyOS42MzA0IDE0NC4wOTggMjguMTg5OSAxNDMuODU5IDIwLjY1MTNWMjAuNjI1NEgxNDMuODU3Wk0xMjkuOTA5IDE4LjMwODRDMTI3LjU3NSAxOS43ODQyIDEyNS4zNiAyMS41OTEzIDEyMi43OTYgMjIuNjY5OUMxMjEuNjc5IDIzLjE0MjIgMTIwLjA1MSAyMi42MjA1IDExOS42NDkgMjEuNzA2NEMxMTkuMTk0IDIwLjI4OTQgMTIwLjgyMiAxOC4yMDAzIDEyMS42MjEgMTYuNzI5MkMxMjIuNTQ3IDE1LjA1MzcgMTIzLjc3NiAxMy41NjM4IDEyNC45NTMgMTIuMDQ1OEMxMjYuMDk2IDEwLjU0ODkgMTI3LjY0NyA4LjMyODE3IDEyOS43OTggOS4yOTg3QzEzMS41MjMgMTAuMjkwNCAxMzIuMjMxIDEzLjAzMjggMTMzLjIxOCAxNC42ODcxQzEzMy42NjQgMTUuNDAzOSAxMzMuNjUgMTUuOTExNCAxMzIuODcgMTYuMzQzOEMxMzEuOTI1IDE2Ljk1MjUgMTMwLjkwMSAxNy42NDU3IDEyOS45MjggMTguMjk5TDEyOS45MDkgMTguMzEwN1YxOC4zMDg0Wk0xNDIuNTU2IDIxLjI0MzVDMTQyLjUwNSAyMi4wOTY1IDE0Mi4zNDUgMjUuMzIzIDE0MS4yNyAyMy43ODYxQzE0MC4yNzEgMjEuODg3NCAxMzkuMTc1IDE5LjUyMSAxMzguMTk3IDE3LjQ5NzdDMTM3LjgxNyAxNi40NjM3IDE0MC4xOTIgMTYuMDQ1NCAxNDAuODEgMTYuMjIxNkMxNDIuNTM1IDE2Ljg2NTUgMTQyLjU5NiAxOS42MTk3IDE0Mi41NTYgMjEuMjI5NFYyMS4yNDU4VjIxLjI0MzVaIiBmaWxsPSIjREM1RjQwIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDBfMTY0NTVfMTEwNDA4Ij48cmVjdCB3aWR0aD0iMTY4IiBoZWlnaHQ9IjMyIiBmaWxsPSJ3aGl0ZSIvPjwvY2xpcFBhdGg+PC9kZWZzPjwvc3ZnPgo=" alt="Aerchain">
+    </div>
+    <div class="logo-sep"></div>
+    <div class="logo-tag">SalesOS <span>/ System Architecture</span></div>
+  </div>
+
+<!-- SECTION: ARCHITECTURE -->
+<div class="section">
+  <div class="sh"><h2>System <b>Architecture</b></h2><p>Data sources flow through the AI-augmented SalesOS hub to power 9 specialized intelligence modules</p></div>
+  <div class="sdiv"></div>
+
+  <div class="arch-container">
+    <div class="arch-canvas" id="archCanvas">
+      <svg class="arch-svg" id="archSvg"></svg>
+      <div class="arch-layout" id="archLayout">
+
+        <!-- SOURCES -->
+        <div class="arch-sources" id="archSrc" style="padding-left:28px;padding-right:4px;padding-bottom:14px;padding-top:4px">
+          <div class="arch-sl">Data Sources</div>
+          <div class="arch-s"><div class="arch-s-i"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHNoYXBlLXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiB0ZXh0LXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiBpbWFnZS1yZW5kZXJpbmc9Im9wdGltaXplUXVhbGl0eSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIHZpZXdCb3g9IjAgMCA0ODkgNTExLjgiPjxwYXRoIGZpbGw9IiNGRjdBNTkiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTM3NS4yNSAxNjguNDVWMTA3LjVjMTYuNDMtNy42OCAyNi45Ny0yNC4xNSAyNy4wOC00Mi4yOVY2My44YzAtMjUuOTUtMjEuMDUtNDYuOTktNDctNDYuOTloLTEuMzdjLTI1Ljk1IDAtNDYuOTkgMjEuMDQtNDYuOTkgNDYuOTl2MS40MWE0Ni45ODUgNDYuOTg1IDAgMDAyNy4yOSA0Mi4zdjYwLjk0Yy0yMy4xMyAzLjUzLTQ0Ljk4IDEzLjE4LTYzLjE5IDI3Ljg0TDEwMy44OCA2Ni4xNmMxLjE5LTQuMjkgMS44My04LjczIDEuODktMTMuMTd2LS4xMUMxMDUuNzcgMjMuNjggODIuMDkgMCA1Mi44OCAwIDIzLjY4IDAgMCAyMy42OCAwIDUyLjg4YzAgMjkuMTggMjMuNjQgNTIuODUgNTIuODEgNTIuODkgOS4xNy0uMDggMTguMTYtMi41OSAyNi4wNi03LjIzbDE2NC42MiAxMjguMDdhMTMzLjUwMSAxMzMuNTAxIDAgMDAtMjIuMTYgNzMuNjFjMCAyNy4zOSA4LjQ2IDU0LjE3IDI0LjE4IDc2LjU4bC01MC4wNiA1MC4wNmE0My45MjYgNDMuOTI2IDAgMDAtMTIuNDMtMS44MWMtMjMuOTYgMC00My4zOCAxOS40Mi00My4zOCA0My4zNyAwIDIzLjk2IDE5LjQyIDQzLjM4IDQzLjM4IDQzLjM4IDIzLjk1IDAgNDMuMzctMTkuNDIgNDMuMzctNDMuMzh2LS4xM2E0MS44MSA0MS44MSAwIDAwLTIuMDItMTIuNWw0OS41Mi00OS41NmExMzMuNjg3IDEzMy42ODcgMCAwMDgxLjU0IDI3Ljc4YzczLjc2IDAgMTMzLjU3LTU5LjgxIDEzMy41Ny0xMzMuNTcgMC02Ni4wNS00OC4zLTEyMi4yLTExMy42MS0xMzIuMDZsLS4xNC4wN3ptLTIwLjM5IDIwMC40Yy0zNi43OS0xLjUyLTY1Ljg1LTMxLjc5LTY1Ljg1LTY4LjYyIDAtMzUuNDMgMjYuOTctNjUuMDYgNjIuMjMtNjguMzhoMy42MmMzNS44IDIuNzMgNjMuNDYgMzIuNTggNjMuNDYgNjguNDggMCAzNS45MS0yNy42NiA2NS43Ni02My40NSA2OC40OGwtLjAxLjA0em0wIDB6Ii8+PC9zdmc+" width="28" height="28" alt="HubSpot"></div><div class="arch-s-n">HubSpot</div></div>
+          <div class="arch-s"><div class="arch-s-i"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTIyLjg4IDkyLjEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxMjIuODggOTIuMTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiNFQTQzMzU7fS5zdDF7ZmlsbDojQzUyMjFGO30uc3Qye2ZpbGw6I0ZCQkMwNDt9LnN0M3tmaWxsOiMzNEE4NTM7fS5zdDR7ZmlsbDojNDI4NUY0O308L3N0eWxlPjxnPjxwYXRoIGNsYXNzPSJzdDQiIGQ9Ik04LjM2LDkyLjEyaDE5LjU0VjQ0LjY3TDAsMjMuNzZ2NjAuMDhDMCw4OC40MiwzLjc4LDkyLjEyLDguMzYsOTIuMTJMOC4zNiw5Mi4xMnoiLz48cGF0aCBjbGFzcz0ic3QzIiBkPSJNOTQuOTcsOTIuMTJoMTkuNTRjNC42NywwLDguMzYtMy43OCw4LjM2LTguMzZ2LTYwTDk0Ljk3LDQ0LjY3VjkyLjEyTDk0Ljk3LDkyLjEyeiIvPjxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik05NC45Nyw4LjR2MzYuMjdsMjcuOTEtMjAuOTFWMTIuNThjMC0xMC4zNy0xMS44Mi0xNi4yNS0yMC4xMS0xMC4wNUw5NC45Nyw4LjRMOTQuOTcsOC40eiIvPjxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMjcuOSw0NC42NyAyNy45LDguNCA2MS40NCwzMy41NyA5NC45Nyw4LjQgOTQuOTcsNDQuNjcgNjEuNDQsNjkuNzYgMjcuOSw0NC42NyIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0wLDEyLjU4djExLjE4bDI3LjkxLDIwLjkxVjguNGwtNy44LTUuODdDMTEuODItMy42NiwwLDIuMjksMCwxMi41OEwwLDEyLjU4eiIvPjwvZz48L3N2Zz4=" width="28" height="28" alt="Gmail"></div><div class="arch-s-n">Gmail</div></div>
+          <div class="arch-s"><div class="arch-s-i notion-bg"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTYuMDE3IDQuMzEzbDU1LjMzMyAtNC4wODdjNi43OTcgLTAuNTgzIDguNTQzIC0wLjE5IDEyLjgxNyAyLjkxN2wxNy42NjMgMTIuNDQzYzIuOTEzIDIuMTQgMy44ODMgMi43MjMgMy44ODMgNS4wNTN2NjguMjQzYzAgNC4yNzcgLTEuNTUzIDYuODA3IC02Ljk5IDcuMTkzTDI0LjQ2NyA5OS45NjdjLTQuMDggMC4xOTMgLTYuMDIzIC0wLjM5IC04LjE2IC0zLjExM0wzLjMgNzkuOTRjLTIuMzMzIC0zLjExMyAtMy4zIC01LjQ0MyAtMy4zIC04LjE2N1YxMS4xMTNjMCAtMy40OTcgMS41NTMgLTYuNDEzIDYuMDE3IC02Ljh6IiBmaWxsPSIjZmZmIi8+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02MS4zNSAwLjIyN2wtNTUuMzMzIDQuMDg3QzEuNTUzIDQuNyAwIDcuNjE3IDAgMTEuMTEzdjYwLjY2YzAgMi43MjMgMC45NjcgNS4wNTMgMy4zIDguMTY3bDEzLjAwNyAxNi45MTNjMi4xMzcgMi43MjMgNC4wOCAzLjMwNyA4LjE2IDMuMTEzbDY0LjI1NyAtMy44OWM1LjQzMyAtMC4zODcgNi45OSAtMi45MTcgNi45OSAtNy4xOTNWMjAuNjRjMCAtMi4yMSAtMC44NzMgLTIuODQ3IC0zLjQ0MyAtNC43MzNMNzQuMTY3IDMuMTQzYy00LjI3MyAtMy4xMDcgLTYuMDIgLTMuNSAtMTIuODE3IC0yLjkxN3pNMjUuOTIgMTkuNTIzYy01LjI0NyAwLjM1MyAtNi40MzcgMC40MzMgLTkuNDE3IC0xLjk5TDguOTI3IDExLjUwN2MtMC43NyAtMC43OCAtMC4zODMgLTEuNzUzIDEuNTU3IC0xLjk0N2w1My4xOTMgLTMuODg3YzQuNDY3IC0wLjM5IDYuNzkzIDEuMTY3IDguNTQgMi41MjdsOS4xMjMgNi42MWMwLjM5IDAuMTk3IDEuMzYgMS4zNiAwLjE5MyAxLjM2bC01NC45MzMgMy4zMDcgLTAuNjggMC4wNDd6TTE5LjgwMyA4OC4zVjMwLjM2N2MwIC0yLjUzIDAuNzc3IC0zLjY5NyAzLjEwMyAtMy44OTNMODYgMjIuNzhjMi4xNCAtMC4xOTMgMy4xMDcgMS4xNjcgMy4xMDcgMy42OTN2NTcuNTQ3YzAgMi41MyAtMC4zOSA0LjY3IC0zLjg4MyA0Ljg2M2wtNjAuMzc3IDMuNWMtMy40OTMgMC4xOTMgLTUuMDQzIC0wLjk3IC01LjA0MyAtNC4wODN6bTU5LjYgLTU0LjgyN2MwLjM4NyAxLjc1IDAgMy41IC0xLjc1IDMuN2wtMi45MSAwLjU3N3Y0Mi43NzNjLTIuNTI3IDEuMzYgLTQuODUzIDIuMTM3IC02Ljc5NyAyLjEzNyAtMy4xMDcgMCAtMy44ODMgLTAuOTczIC02LjIxIC0zLjg4N2wtMTkuMDMgLTI5Ljk0djI4Ljk2N2w2LjAyIDEuMzYzczAgMy41IC00Ljg1NyAzLjVsLTEzLjM5IDAuNzc3Yy0wLjM5IC0wLjc4IDAgLTIuNzIzIDEuMzU3IC0zLjExbDMuNDk3IC0wLjk3di0zOC4zTDMwLjQ4IDQwLjY2N2MtMC4zOSAtMS43NSAwLjU4IC00LjI3NyAzLjMgLTQuNDczbDE0LjM2NyAtMC45NjcgMTkuOCAzMC4zMjd2LTI2LjgzbC01LjA0NyAtMC41OGMtMC4zOSAtMi4xNDMgMS4xNjMgLTMuNyAzLjEwMyAtMy44OWwxMy40IC0wLjc4eiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K" width="26" height="26" alt="Notion"></div><div class="arch-s-n">Notion</div></div>
+          <div class="arch-s"><div class="arch-s-i"><svg viewBox="0 0 24 24"><path d="M5.04 15.17a2.53 2.53 0 01-2.52 2.52A2.53 2.53 0 010 15.17a2.53 2.53 0 012.52-2.52h2.52v2.52zm1.27 0a2.53 2.53 0 012.52-2.52 2.53 2.53 0 012.52 2.52v6.31A2.53 2.53 0 018.83 24a2.53 2.53 0 01-2.52-2.52v-6.31z" fill="#E01E5A"/><path d="M8.83 5.04a2.53 2.53 0 01-2.52-2.52A2.53 2.53 0 018.83 0a2.53 2.53 0 012.52 2.52v2.52H8.83zm0 1.27a2.53 2.53 0 012.52 2.52 2.53 2.53 0 01-2.52 2.52H2.52A2.53 2.53 0 010 8.83a2.53 2.53 0 012.52-2.52h6.31z" fill="#36C5F0"/><path d="M18.96 8.83a2.53 2.53 0 012.52-2.52A2.53 2.53 0 0124 8.83a2.53 2.53 0 01-2.52 2.52h-2.52V8.83zm-1.27 0a2.53 2.53 0 01-2.52 2.52 2.53 2.53 0 01-2.52-2.52V2.52A2.53 2.53 0 0115.17 0a2.53 2.53 0 012.52 2.52v6.31z" fill="#2EB67D"/><path d="M15.17 18.96a2.53 2.53 0 012.52 2.52A2.53 2.53 0 0115.17 24a2.53 2.53 0 01-2.52-2.52v-2.52h2.52zm0-1.27a2.53 2.53 0 01-2.52-2.52 2.53 2.53 0 012.52-2.52h6.31A2.53 2.53 0 0124 15.17a2.53 2.53 0 01-2.52 2.52h-6.31z" fill="#ECB22E"/></svg></div><div class="arch-s-n">Slack</div></div>
+          <div class="arch-s"><div class="arch-s-i"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjIiPjxwYXRoIGQ9Ik01MDYgMTE2djI4MGMwIDYwLjcxMS00OS4yOSAxMTAtMTEwIDExMEgxMTZDNTUuMjg5IDUwNiA2IDQ1Ni43MTEgNiAzOTZWMTE2QzYgNTUuMjkgNTUuMjg5IDYgMTE2IDZoMjgwYzYwLjcxIDAgMTEwIDQ5LjI5IDExMCAxMTB6IiBmaWxsPSIjZjhmZjJjIi8+PHBhdGggZD0iTTI3Mi43NDMgODkuNTIzbC4wNTggMTIxLjcyNGMuMDEgMTkuMjMyLTIwLjk0NiAzMS41Ni0zOC4zNSAyMi41NjhMMTA5LjQ5IDE2OS4yN2M5LjUyNy0xNS4zMTMgMjEuNTEtMjkuMDEgMzUuNDA0LTQwLjU4bDk4LjAwOSA4OC40NTNjNS4xOSA0LjY4NSAxMy4zODQtLjM5OCAxMS4yNDUtNi45NzhMMjE2LjEzNSA5My4yOTRBMTc1LjI4NiAxNzUuMjg2IDAgMDEyNTYgODguNzI4YzUuNjUyIDAgMTEuMjM2LjI3NyAxNi43NDMuNzk1ek0yMzguODI2IDQyMi40NGwtLjA1OC0xMjEuMTA1Yy0uMDEtMTkuMjMyIDIwLjk0NS0zMS41NiAzOC4zNS0yMi41NjhsMTI1LjAwOCA2NC41NjNjLTkuNTk0IDE1LjI3Ny0yMS42MzYgMjguOTI3LTM1LjU4NiA0MC40NDJsLTk3Ljg3NS04OC4zMzNjLTUuMTktNC42ODUtMTMuMzg0LjM5OC0xMS4yNDUgNi45NzhsMzcuODcgMTE2LjQyOGExNzUuNjY5IDE3NS42NjkgMCAwMS0zOS4yOSA0LjQyN2MtNS43OTUgMC0xMS41MzItLjI4Ny0xNy4xNzQtLjgzMnpNMjk1Ljg4NSAyNDMuNzEzbDkwLjc2NS05NS44OTNhMTcxLjM1NCAxNzEuMzU0IDAgMDAtNDEuNTczLTM0LjcyMWwtNjYuMjcgMTIyLjM2MWMtOS4yMTEgMTYuOTk2IDMuNDE1IDM3LjQ1NyAyMy4xMTMgMzcuNDQ4bDEyNC41MTktLjA1NmMuNTc2LTUuNTQ1Ljg2NC0xMS4xNjQuODY0LTE2Ljg0NyAwLTEzLjIzNS0xLjU3NC0yNi4xLTQuNTQ4LTM4LjQzN2wtMTE5LjczMSAzNy4xMjRjLTYuNzM2IDIuMDg5LTExLjk0Ni01LjkwNS03LjEzOS0xMC45OHpNODUuNTA0IDIzOS43MmwxMjQuMTU0LS4wNDZjMTkuNjg5LS4wMDkgMzIuMzE1IDIwLjQ0MyAyMy4xMTQgMzcuNDQ4bC02NS45NDQgMTIxLjcyNGExNzEuMyAxNzEuMyAwIDAxLTQxLjQyLTM0LjYwMmw5MC4yODUtOTUuMzg0YzQuNzk4LTUuMDY1LS40MDMtMTMuMDU5LTcuMTQ4LTEwLjk3TDg5LjM1MiAyOTQuODQ4YTE2NC4xOTYgMTY0LjE5NiAwIDAxLTQuNjU0LTM4Ljg1M2MwLTUuNDkuMjc4LTEwLjkxNC44MDYtMTYuMjc1eiIgZmlsbC1ydWxlPSJub256ZXJvIi8+PC9zdmc+" width="28" height="28" alt="Apollo" style="border-radius:6px"></div><div class="arch-s-n">Apollo</div></div>
+          <div class="arch-s"><div class="arch-s-i"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTA4IDUwOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjIiPjxnIHRyYW5zZm9ybT0ibWF0cml4KC4yNjcxOCAwIDAgLjI2NzE4IDAgMCkiPjxjaXJjbGUgY3g9Ijk1MCIgY3k9Ijk1MCIgcj0iOTUwIiBmaWxsPSIjN2QyYWU3Ii8+PGNpcmNsZSBjeD0iOTUwIiBjeT0iOTUwIiByPSI5NTAiIGZpbGw9InVybCgjcHJlZml4X19fUmFkaWFsMSkiLz48Y2lyY2xlIGN4PSI5NTAiIGN5PSI5NTAiIHI9Ijk1MCIgZmlsbD0idXJsKCNwcmVmaXhfX19SYWRpYWwyKSIvPjxjaXJjbGUgY3g9Ijk1MCIgY3k9Ijk1MCIgcj0iOTUwIiBmaWxsPSJ1cmwoI3ByZWZpeF9fX1JhZGlhbDMpIi8+PGNpcmNsZSBjeD0iOTUwIiBjeT0iOTUwIiByPSI5NTAiIGZpbGw9InVybCgjcHJlZml4X19fUmFkaWFsNCkiLz48L2c+PHBhdGggZD0iTTQ0Ni43NDQgMjc2Ljg0NWMtLjY2NSAwLTEuMjcxLjQzLTEuNTg0IDEuMzMtNC4wMTEgMTEuNDQ2LTkuNDMgMTguMjU0LTEzLjg5MSAxOC4yNTQtMi41NjMgMC0zLjYtMi44NTYtMy42LTcuMzM2IDAtMTEuMjEgNi43MS0zNC45ODIgMTAuMDk1LTQ1LjgyLjM5Mi0xLjMxMi42NDYtMi40ODUuNjQ2LTMuNDgzIDAtMy4xNS0xLjcyMi00LjY5Ni01Ljk4Ny00LjY5Ni00LjU5OCAwLTkuNTQ3IDEuOC0xNC4zNiAxMC4yMzMtMS42NjMtNy40MzUtNi42OTEtMTAuNjgzLTEzLjcxNS0xMC42ODMtOC4xMiAwLTE1Ljk2NSA1LjIyNC0yMi40MjEgMTMuNjk2LTYuNDU2IDguNDcxLTE0LjA0OCAxMS4yNS0xOS43NiA5Ljg4IDQuMTA4LTEwLjA1NyA1LjYzNC0xNy41NyA1LjYzNC0yMy4xNDUgMC04Ljc0Ni00LjMyNC0xNC4wMjgtMTEuMzA4LTE0LjAyOC0xMC42MjQgMC0xNi43NDcgMTAuMTM0LTE2Ljc0NyAyMC43OTcgMCA4LjIzNyAzLjczNiAxNi43MDggMTEuOTU0IDIwLjgxNy02Ljg4NyAxNS41NzMtMTYuOTQzIDI5LjY2LTIwLjc1OCAyOS42Ni00LjkzIDAtNi4zNzktMjQuMTIzLTYuMTA1LTQxLjM4LjE3Ni05LjkuOTk4LTEwLjQwOC45OTgtMTMuNDAxIDAtMS43MjItMS4xMTUtMi44OTYtNS41OTUtMi44OTYtMTAuNDQ4IDAtMTMuNjc2IDguODQ0LTE0LjE2NSAxOC45OThhNTAuMDUyIDUwLjA1MiAwIDAxLTEuOCAxMS40MDZjLTQuMzYzIDE1LjU3My0xMy4zNjMgMjcuMzktMTkuMjMyIDI3LjM5LTIuNzIgMC0zLjQ2My0yLjcyLTMuNDYzLTYuMjggMC0xMS4yMSA2LjI4LTI1LjIxOSA2LjI4LTM3LjE3MyAwLTguNzg0LTMuODU0LTE0LjM0LTExLjExMi0xNC4zNC04LjU1IDAtMTkuODU4IDEwLjE3My0zMC41NiAyOS4yMjkgMy41MjEtMTQuNTk1IDQuOTctMjguNzIxLTUuNDU5LTI4LjcyMWExNC4xMTUgMTQuMTE1IDAgMDAtNi40NzYgMS42ODMgMy42ODkgMy42ODkgMCAwMC0yLjExMyAzLjU2Yy45OTggMTUuNTM1LTEyLjUyMSA1NS4zMjktMjUuMzM2IDU1LjMyOS0yLjMyOCAwLTMuNDYzLTIuNTI0LTMuNDYzLTYuNTkzIDAtMTEuMjMgNi42OTEtMzQuOTQzIDEwLjA1Ni00NS44MDEuNDMtMS40MDkuNjY2LTIuNjIyLjY2Ni0zLjY3OCAwLTIuOTc0LTEuODQtNC41LTYuMDA3LTQuNS00LjU3OCAwLTkuNTQ3IDEuNzQxLTE0LjM0IDEwLjE3NC0xLjY4My03LjQzNS02LjcxMS0xMC42ODMtMTMuNzM1LTEwLjY4My0xMS41MjMgMC0yNC4zOTcgMTIuMTktMzAuMDUxIDI4LjA3Ni03LjU3MiAyMS4yMDgtMjIuODMyIDQxLjY5Mi00My4zNzUgNDEuNjkyLTE4LjY0NSAwLTI4LjQ4Ni0xNS41MTUtMjguNDg2LTQwLjAzIDAtMzUuMzkyIDI1Ljk4Mi02NC4zMDggNDUuMjUzLTY0LjMwOCA5LjIxNSAwIDEzLjYxNyA1Ljg2OSAxMy42MTcgMTQuODY5IDAgMTAuODk3LTYuMDg1IDE1Ljk2NC02LjA4NSAyMC4xMTIgMCAxLjI3MiAxLjA1NyAyLjUyNCAzLjE1IDIuNTI0IDguMzc0IDAgMTguMjM0LTkuODQxIDE4LjIzNC0yMy4yNjIgMC0xMy40MjItMTAuODk3LTIzLjI0My0zMC4xNjgtMjMuMjQzLTMxLjg1MSAwLTYzLjg5OCAzMi4wNDctNjMuODk4IDczLjExMyAwIDMyLjY3MyAxNi4xMjEgNTIuMzc0IDQ0IDUyLjM3NCAxOS4wMTcgMCAzNS42MjgtMTQuNzkgNDQuNTg4LTMyLjA0NyAxLjAxOCAxNC4zMDIgNy41MTMgMjEuNzc2IDE3LjQxMyAyMS43NzYgOC44MDQgMCAxNS45MjUtNS4yNDMgMjEuMzY0LTE0LjQ1OCAyLjA5NCA5LjY0NSA3LjY1IDE0LjM2IDE0Ljg3IDE0LjM2IDguMjc1IDAgMTUuMjAxLTUuMjQzIDIxLjc5NC0xNC45ODYtLjA5NyA3LjY1IDEuNjQ0IDE0Ljg1IDguMjc2IDE0Ljg1IDMuMTMgMCA2Ljg2Ny0uNzI1IDcuNTMzLTMuNDY0IDYuOTg0LTI4Ljg3NyAyNC4yNC01Mi40NTMgMjkuNTIzLTUyLjQ1MyAxLjU2NSAwIDEuOTk1IDEuNTA3IDEuOTk1IDMuMjg3IDAgNy44NDYtNS41MzcgMjMuOTI4LTUuNTM3IDM0LjIgMCAxMS4wOTIgNC43MTYgMTguNDMgMTQuNDU5IDE4LjQzIDEwLjggMCAyMS43NzUtMTMuMjI3IDI5LjA5Mi0zMi41NTYgMi4yOSAxOC4wNTggNy4yNCAzMi42MzMgMTQuOTg3IDMyLjYzMyA5LjUwOCAwIDI2LjM5Mi0yMC4wMTQgMzYuNjI1LTQxLjIwMyA0LjAxLjUwOSAxMC4wMzYuMzcyIDE1LjgyNy0zLjcxNy0yLjQ2NSA2LjI0MS0zLjkxMiAxMy4wNy0zLjkxMiAxOS44OTcgMCAxOS42NjMgOS4zOSAyNS4xOCAxNy40NyAyNS4xOCA4Ljc4NSAwIDE1LjkwNy01LjI0MyAyMS4zNjUtMTQuNDU4IDEuOCA4LjMxNSA2LjM5OCAxNC4zNCAxNC44NSAxNC4zNCAxMy4yMjUgMCAyNC43MS0xMy41MTkgMjQuNzEtMjQuNjEyIDAtMi45MzQtMS4yNTItNC43MTUtMi43Mi00LjcxNXptLTI3NC41MSAxOC41NDdjLTUuMzQyIDAtNy40MzUtNS4zOC03LjQzNS0xMy40MDEgMC0xMy45MyA5LjUyOC0zNy4xOTMgMTkuNjA0LTM3LjE5MyA0LjQwMiAwIDYuMDY1IDUuMTg1IDYuMDY1IDExLjUyNCAwIDE0LjE0NS05LjA1OSAzOS4wNy0xOC4yMzUgMzkuMDd6bTE4Mi45NDgtNDEuNTc0Yy0zLjE4OS0zLjc5Ni00LjM0My04Ljk2MS00LjM0My0xMy41NTkgMC01LjY3MyAyLjA3NC0xMC40NjcgNC41NTgtMTAuNDY3IDIuNDg1IDAgMy4yNDggMi40NDYgMy4yNDggNS44NSAwIDUuNjkzLTIuMDM1IDE0LjAwOC0zLjQ2MyAxOC4xNzZ6bTQxLjQxOCA0MS41NzRjLTUuMzQgMC03LjQzNC02LjE4Mi03LjQzNC0xMy40MDEgMC0xMy40NDEgOS41MjgtMzcuMTkzIDE5LjY4Mi0zNy4xOTMgNC40MDIgMCA1Ljk2NyA1LjE0NiA1Ljk2NyAxMS41MjQgMCAxNC4xNDUtOC45MDIgMzkuMDctMTguMjE1IDM5LjA3eiIgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJub256ZXJvIi8+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJwcmVmaXhfX19SYWRpYWwxIiBjeD0iMCIgY3k9IjAiIHI9IjEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBncmFkaWVudFRyYW5zZm9ybT0ic2NhbGUoMTQ2OS40OTEpIHJvdGF0ZSgtNDkuNDE2IDEuMzcgLjMwMikiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzY0MjBmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzY0MjBmZiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9InByZWZpeF9fX1JhZGlhbDIiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIGdyYWRpZW50VHJhbnNmb3JtPSJyb3RhdGUoNTQuNzAzIDQyLjcxNyA1OTQuMTk0KSBzY2FsZSgxNjU3LjEyMikiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzAwYzRjYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwYzRjYyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9InByZWZpeF9fX1JhZGlhbDMiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Uc2UiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMTAyMyAtMTAzMCA0NzMuNzExIDQ3MC40OTEgMzY3IDE2ODQpIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM2NDIwZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2NDIwZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+PHJhZGlhbEdyYWRpZW50IGlkPSJwcmVmaXhfX19SYWRpYWw0IiBjeD0iMCIgY3k9IjAiIHI9IjEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDU5NS45OTkgMTM3MiAtMjI5OC40MSA5OTguNDMxIDc3NyAyNTYpIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMGM0Y2MiIHN0b3Atb3BhY2l0eT0iLjczIi8+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDBjNGNjIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDBjNGNjIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48L3N2Zz4=" width="28" height="28" alt="Canva" style="border-radius:6px"></div><div class="arch-s-n">Canva</div></div>
+        </div>
+
+        <!-- HUB -->
+        <div class="arch-hub" id="archHub">
+          <div class="arch-hub-glow"></div>
+          <div class="arch-ring r2"></div>
+          <div class="arch-ring ai">
+            <svg class="arch-ring-text" viewBox="0 0 250 250">
+              <circle cx="125" cy="125" r="118" fill="none" stroke="hsl(45,90%,48%)" stroke-width="2.5" stroke-dasharray="30 160" stroke-linecap="round" opacity="0.6"><animateTransform attributeName="transform" type="rotate" from="0 125 125" to="360 125 125" dur="5s" repeatCount="indefinite"/></circle>
+              <circle cx="125" cy="125" r="118" fill="none" stroke="hsl(45,90%,48%)" stroke-width="2" stroke-dasharray="20 170" stroke-linecap="round" opacity="0.4"><animateTransform attributeName="transform" type="rotate" from="120 125 125" to="480 125 125" dur="7s" repeatCount="indefinite"/></circle>
+              <circle cx="125" cy="125" r="118" fill="none" stroke="hsl(45,90%,48%)" stroke-width="1.5" stroke-dasharray="15 190" stroke-linecap="round" opacity="0.3"><animateTransform attributeName="transform" type="rotate" from="240 125 125" to="600 125 125" dur="9s" repeatCount="indefinite"/></circle>
+              <circle cx="125" cy="125" r="118" fill="none" stroke="hsl(45,90%,48%)" stroke-width="2" stroke-dasharray="10 210" stroke-linecap="round" opacity="0.28"><animateTransform attributeName="transform" type="rotate" from="60 125 125" to="-300 125 125" dur="6s" repeatCount="indefinite"/></circle>
+            </svg>
+            <div class="arch-ai-top"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHNoYXBlLXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiB0ZXh0LXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiBpbWFnZS1yZW5kZXJpbmc9Im9wdGltaXplUXVhbGl0eSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIHZpZXdCb3g9IjAgMCA1MTIgNTA5LjY0Ij48cGF0aCBmaWxsPSIjRDc3NjU1IiBkPSJNMTE1LjYxMiAwaDI4MC43NzVDNDU5Ljk3NCAwIDUxMiA1Mi4wMjYgNTEyIDExNS42MTJ2Mjc4LjQxNWMwIDYzLjU4Ny01Mi4wMjYgMTE1LjYxMi0xMTUuNjEzIDExNS42MTJIMTE1LjYxMkM1Mi4wMjYgNTA5LjYzOSAwIDQ1Ny42MTQgMCAzOTQuMDI3VjExNS42MTJDMCA1Mi4wMjYgNTIuMDI2IDAgMTE1LjYxMiAweiIvPjxwYXRoIGZpbGw9IiNGQ0YyRUUiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTE0Mi4yNyAzMTYuNjE5bDczLjY1NS00MS4zMjYgMS4yMzgtMy41ODktMS4yMzgtMS45OTYtMy41ODktLjAwMS0xMi4zMS0uNzU5LTQyLjA4NC0xLjEzOC0zNi40OTgtMS41MTYtMzUuMzYxLTEuODk2LTguODk3LTEuODk1LTguMzQtMTAuOTk1Ljg1OS01LjQ4NCA3LjQ4Mi01LjAzIDEwLjcxNy45MzUgMjMuNjgzIDEuNjE3IDM1LjUzNyAyLjQ1MiAyNS43ODIgMS41MTcgMzguMTkzIDMuOTY4aDYuMDY0bC44Ni0yLjQ1MS0yLjA3My0xLjUxNy0xLjYxOC0xLjUxNy0zNi43NzYtMjQuOTIyLTM5LjgxLTI2LjMzOC0yMC44NTItMTUuMTY2LTExLjI3My03LjY4My01LjY4Ny03LjIwNC0yLjQ1MS0xNS43MjEgMTAuMjM3LTExLjI3MyAxMy43NS45MzUgMy41MTMuOTM2IDEzLjkyOCAxMC43MTYgMjkuNzQ5IDIzLjAyNyAzOC44NDggMjguNjEyIDUuNjg3IDQuNzI3IDIuMjc1LTEuNjE3LjI3OC0xLjEzOC0yLjU1My00LjI3MS0yMS4xMy0zOC4xOTMtMjIuNTQ2LTM4Ljg0OC0xMC4wMzUtMTYuMTAxLTIuNjU0LTkuNjU1Yy0uOTM1LTMuOTY4LTEuNjE3LTcuMzA0LTEuNjE3LTExLjM3NGwxMS42NTItMTUuODIzIDYuNDQ1LTIuMDczIDE1LjU0NSAyLjA3MyA2LjU0NyA1LjY4NyA5LjY1NSAyMi4wOTIgMTUuNjQ2IDM0Ljc4IDI0LjI2NSA0Ny4yOTEgNy4xMDMgMTQuMDI4IDMuNzkxIDEyLjk5MiAxLjQxNiAzLjk2OCAyLjQ0OS0uMDAxdi0yLjI3NWwxLjk5Ny0yNi42NDEgMy42OS0zMi43MDcgMy41ODktNDIuMDg0IDEuMjM5LTExLjg1NCA1Ljg2My0xNC4yMDYgMTEuNjUyLTcuNjgzIDkuMDk5IDQuMzQ4IDcuNDgyIDEwLjcxNi0xLjAzNiA2LjkyNi00LjQ0OSAyOC45MTUtOC43MiA0NS4yOTQtNS42ODcgMzAuMzMxaDMuMzEzbDMuNzkyLTMuNzkxIDE1LjM0Mi0yMC4zNzIgMjUuNzgyLTMyLjIyNyAxMS4zNzQtMTIuNzg5IDEzLjI3LTE0LjEyOSA4LjUxNy02LjcyNCAxNi4xLS4wMDEgMTEuODU0IDE3LjYxNy01LjMwNyAxOC4xOTktMTYuNTgxIDIxLjAyOS0xMy43NSAxNy44MTktMTkuNzE2IDI2LjU0LTEyLjMwOSAyMS4yMzEgMS4xMzggMS42OTQgMi45MzItLjI3OCA0NC41MzYtOS40NzkgMjQuMDYyLTQuMzQ3IDI4LjcxNC00LjkyOCAxMi45OTIgNi4wNjYgMS40MTYgNi4xNjctNS4xMDYgMTIuNjEzLTMwLjcxIDcuNTgzLTM2LjAxOCA3LjIwNC01My42MzYgMTIuNjg5LS42NTcuNDguNzU4LjkzNSAyNC4xNjQgMi4yNzUgMTAuMzM3LjU1NmgyNS4zMDFsNDcuMTE0IDMuNTE0IDEyLjMwOSA4LjEzOSA3LjM4MSA5Ljk1OS0xLjIzOCA3LjU4My0xOC45NTcgOS42NTUtMjUuNTc5LTYuMDY2LTU5LjcwMi0xNC4yMDUtMjAuNDc0LTUuMTA2LTIuODMtLjAwMXYxLjY5NGwxNy4wNjEgMTYuNjgyIDMxLjI2NiAyOC4yMzMgMzkuMTUyIDM2LjM5NyAxLjk5NyA4Ljk5OS01LjAzIDcuMTAyLTUuMzA3LS43NTgtMzQuNDAxLTI1Ljg4My0xMy4yNy0xMS42NTEtMzAuMDUzLTI1LjMwMi0xLjk5Ni0uMDAxdjIuNjU0bDYuOTI2IDEwLjEzNiAzNi41NzQgNTQuOTc1IDEuODk1IDE2Ljg1OS0yLjY1MyA1LjQ4NS05LjQ3OSAzLjMxMS0xMC40MTQtMS44OTUtMjEuNDA4LTMwLjA1NC0yMi4wOTItMzMuODQ0LTE3LjgxOS0zMC4zMzEtMi4xNzMgMS4yMzgtMTAuNTE1IDExMy4yNjEtNC45MjkgNS43ODgtMTEuMzc0IDQuMzQ4LTkuNDc4LTcuMjA0LTUuMDMtMTEuNjUyIDUuMDMtMjMuMDI3IDYuMDY2LTMwLjA1MiA0LjkyOC0yMy44ODYgNC40NDktMjkuNjc0IDIuNjU0LTkuODU4LS4xNzctLjY1Ny0yLjE3My4yNzgtMjIuMzcgMzAuNzEtMzQuMDIxIDQ1Ljk3Ny0yNi45MTkgMjguODE1LTYuNDQ1IDIuNTUzLTExLjE3My01Ljc4OSAxLjAzNy0xMC4zMzcgNi4yNDMtOS4yIDM3LjI1Ny00Ny4zOTIgMjIuNDctMjkuMzcxIDE0LjUwOC0xNi45NjEtLjEwMS0yLjQ1MWgtLjg1OWwtOTguOTU0IDY0LjI1MS0xNy42MTggMi4yNzUtNy41ODMtNy4xMDMuOTM2LTExLjY1MiAzLjU4OS0zLjc5MSAyOS43NDktMjAuNDc0LS4xMDEuMTAyLjAyNC4xMDF6IiBmaWxsPSIjRkNGMkVFIi8+PC9zdmc+" width="16" height="16" alt="Claude" style="border-radius:4px">Claude AI Layer</div>
+          </div>
+          <div class="arch-ring n8n">
+            <svg class="arch-ring-text" viewBox="0 0 195 195">
+              <circle cx="97.5" cy="97.5" r="92" fill="none" stroke="hsl(0,75%,45%)" stroke-width="2" stroke-dasharray="20 140" stroke-linecap="round" opacity="0.5"><animateTransform attributeName="transform" type="rotate" from="0 97.5 97.5" to="360 97.5 97.5" dur="7s" repeatCount="indefinite"/></circle>
+              <circle cx="97.5" cy="97.5" r="92" fill="none" stroke="hsl(0,75%,45%)" stroke-width="1.5" stroke-dasharray="12 160" stroke-linecap="round" opacity="0.28"><animateTransform attributeName="transform" type="rotate" from="180 97.5 97.5" to="-180 97.5 97.5" dur="9s" repeatCount="indefinite"/></circle>
+            </svg>
+            <div class="arch-n8n-label"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjIiPjxwYXRoIGQ9Ik01MTIgMTc5LjJjMCAyOC4yNjctMjMuNTEgNTEuMi01Mi41MjIgNTEuMi0yNC40NDggMC00NS4wMTQtMTYuMzItNTAuODYtMzguNGgtNzMuM2MtMTIuODQzIDAtMjMuNzg3IDkuMDQ1LTI1LjkgMjEuMzk3bC0yLjE1NCAxMi42M0E1MC45MTcgNTAuOTE3IDAgMDEyOTAuMTk3IDI1NmM4Ljc5IDcuNTUyIDE1LjAyIDE4LjAwNSAxNy4wNjcgMjkuOTczbDIuMTMzIDEyLjYzYzIuMjYyIDEyLjQ1OCAxMy4yOTEgMjEuNTQ2IDI1Ljk0MiAyMS4zOTdoMjAuOGM1LjgyNC0yMi4wOCAyNi4zOS0zOC40IDUwLjg1OS0zOC40IDI5LjAxMyAwIDUyLjUgMjIuOTMzIDUyLjUgNTEuMiAwIDI4LjI2Ny0yMy41MyA1MS4yLTUyLjUgNTEuMi0yNC40NyAwLTQ1LjAxNC0xNi4zMi01MC44Ni0zOC40aC0yMC44Yy0yNS42ODUgMC00Ny41NzMtMTguMDktNTEuNzk3LTQyLjc3M2wtMi4xNTQtMTIuNjNjLTIuMjYyLTEyLjQzNy0xMy4yNy0yMS41MjUtMjUuODk5LTIxLjM5N2gtMjEuNDYxYy02LjU3IDIwLjk5Mi0yNi41ODIgMzYuMjY3LTUwLjI2MiAzNi4yNjdzLTQzLjY5LTE1LjI3NS01MC4yNC0zNi4yNjdoLTMwLjc2MmMtNi41NzEgMjAuOTkyLTI2LjU4MiAzNi4yNjctNTAuMjQgMzYuMjY3LTI5LjAxNCAwLTUyLjUyMy0yMi45MzQtNTIuNTIzLTUxLjIgMC0yOC4yNjcgMjMuNTEtNTEuMiA1Mi41MjMtNTEuMiAyNS4yMzcgMCA0Ni4zMzYgMTcuMzg2IDUxLjM3IDQwLjUzM2gyOC41MjNjNS4wMzUtMjMuMTQ3IDI2LjEzMy00MC41MzMgNTEuMzctNDAuNTMzIDI1LjI2IDAgNDYuMzM3IDE3LjM4NiA1MS4zNzEgNDAuNTMzaDIwLjMxYzEyLjgyMSAwIDIzLjc4Ni05LjA0NSAyNS44NzctMjEuMzk3bDIuMTc2LTEyLjYzYzQuMjI0LTI0LjY4MiAyNi4xMzMtNDIuNzczIDUxLjc5OC00Mi43NzNoNzMuM2M1Ljg0Ni0yMi4wOCAyNi40MTItMzguNCA1MC44Ni0zOC40QzQ4OC40OSAxMjggNTEyIDE1MC45MzMgNTEyIDE3OS4yem0tMjYuMjQgMGMwIDE0LjE0NC0xMS43NzYgMjUuNi0yNi4yODIgMjUuNi0xNC41MDcgMC0yNi4yNC0xMS40NTYtMjYuMjQtMjUuNiAwLTE0LjE0NCAxMS43MzMtMjUuNiAyNi4yNC0yNS42IDE0LjUwNiAwIDI2LjI2IDExLjQ1NiAyNi4yNiAyNS42aC4wMjJ6TTUyLjUwMSAyNzkuNDY3YzE0LjUwNyAwIDI2LjI0LTExLjQ1NiAyNi4yNC0yNS42IDAtMTQuMTQ0LTExLjczMy0yNS42LTI2LjI0LTI1LjYtMTQuNTA2IDAtMjYuMjYxIDExLjQ1Ni0yNi4yNjEgMjUuNiAwIDE0LjE0NCAxMS43MzMgMjUuNiAyNi4yNCAyNS42aC4wMjF6bTEzMS4yNjQgMGMxNC41MDcgMCAyNi4yNjItMTEuNDU2IDI2LjI2Mi0yNS42IDAtMTQuMTQ0LTExLjczNC0yNS42LTI2LjI0LTI1LjYtMTQuNTA3IDAtMjYuMjYyIDExLjQ1Ni0yNi4yNjIgMjUuNiAwIDE0LjE0NCAxMS43MzQgMjUuNiAyNi4yNCAyNS42em0yMjMuMTkgNzguOTMzYzE0LjUwNyAwIDI2LjI0LTExLjQ1NiAyNi4yNC0yNS42IDAtMTQuMTQ0LTExLjczMy0yNS42LTI2LjI0LTI1LjYtMTQuNTA3IDAtMjYuMjQgMTEuNDU2LTI2LjI0IDI1LjYgMCAxNC4xNDQgMTEuNzMzIDI1LjYgMjYuMjQgMjUuNnoiIGZpbGw9IiNlYTRiNzEiLz48L3N2Zz4=" width="14" height="14" alt="n8n" style="border-radius:3px">n8n-layer</div>
+          </div>
+          <div class="arch-ring r1"></div>
+          <div class="arch-orb"><svg width="42" height="42" viewBox="0 0 32 32" fill="none"><path d="M29 11.08c1.1-.12 1.89-1.1 1.77-2.2-.12-1.1-1.1-1.89-2.2-1.77-1.1.12-1.89 1.1-1.77 2.2.12 1.1 1.1 1.89 2.2 1.77z" fill="white"/><path d="M31.28 20.63c.09-4.46-1.78-9.86-6.68-6.79-.41.16-.65.1-.86-.2-.62-1.12-1.1-2.26-1.68-3.44C17.63-1.18 12.59 5.33 7.25 12.06-4.65 27.45.96 34.27 19.72 20.75c.66-.47 1.97-1.44 2.44-1.48.5-.08.71.33 1.08 1.17.36.87.97 2.1 1.51 2.97 3.2 6.22 6.75 4.78 6.51-2.77zM17.17 18.31c-2.36 1.48-4.58 3.28-7.17 4.36-1.13.47-2.78-.05-3.19-.97-.45-1.42 1.2-3.5 2-4.98.93-1.68 2.16-3.17 3.35-4.68 1.15-1.5 2.73-3.72 4.9-2.75 1.75.99 2.46 3.73 3.46 5.39.45.72.43 1.22-.35 1.66-.94.61-1.97 1.3-2.95 1.95zm12.79 2.93c-.05.85-.21 4.08-1.3 2.54-1-1.9-2.11-4.27-3.1-6.29-.38-1.03 2.02-1.45 2.65-1.28 1.74.65 1.8 3.4 1.76 5.01z" fill="white"/></svg><div class="arch-orb-text">SalesOS</div></div>
+          <div class="arch-zcl-below"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="13" height="13" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>Zero Context Loss</div>
+        </div>
+
+        <!-- DESTINATIONS -->
+        <div id="archDst" style="padding-left:4px;padding-right:28px;padding-bottom:14px;padding-top:4px">
+          <div class="arch-dests-label">Live SalesOS-AI Modules</div>
+          <div class="arch-dests-grid" id="archGrid">
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div><div class="arch-d-n">Pipeline Command</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></div><div class="arch-d-n">Email Intelligence</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="arch-d-n">Meeting Prep</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div><div class="arch-d-n">Living Deal Desk</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="arch-d-n">Pricing & Proposals</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 8V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v4"/><rect x="2" y="8" width="20" height="14" rx="2"/></svg></div><div class="arch-d-n">Business Cases</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="arch-d-n">Sales Governance</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="arch-d-n">RFP & InfoSec</div></div>
+            <div class="arch-d"><div class="arch-d-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div><div class="arch-d-n">Sales Bible</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-team-strip">
+      <div class="arch-team-avatars">
+        <div class="arch-team-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div class="arch-team-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div class="arch-team-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div class="arch-team-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div class="arch-team-av" style="background:linear-gradient(135deg,hsl(262 80% 52%),hsl(275 85% 55%));border-color:hsl(262 80% 55%/.3)"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L13.09 8.26L18 6l-3.5 5.5L22 9l-7.5 4L18 18l-5.5-3L14.91 22 12 16.5 9.09 22l2.41-7L6 18l3.5-5-7.5 4 7.5-2.5L6 6l4.91 2.26z"/></svg></div>
+      </div>
+      <div class="arch-team-info">
+        <div class="arch-team-title">Aerchain Sales Team</div>
+        <div class="arch-team-sub">Gaurav, Darshan, Saurav + SalesOS-AI</div>
+      </div>
+      <div class="arch-team-stat live"><div class="arch-team-live-dot"></div>All systems live</div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function drawArch() {
+  const c = document.getElementById('archCanvas');
+  const s = document.getElementById('archSvg');
+  const o = document.querySelector('.arch-orb');
+  const srcCol = document.getElementById('archSrc');
+  const hubEl = document.getElementById('archHub');
+  const dstEl = document.getElementById('archDst');
+  if (!c || !s || !o || !srcCol || !hubEl || !dstEl) return;
+
+  requestAnimationFrame(() => {
+    const cR = c.getBoundingClientRect();
+    const oR = o.getBoundingClientRect();
+    const w = cR.width, h = cR.height;
+    s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    s.style.width = w + 'px';
+    s.style.height = h + 'px';
+
+    const hx = oR.left - cR.left + oR.width / 2;
+    const hy = oR.top - cR.top + oR.height / 2;
+    const hubR = oR.width / 2;
+    let d = '';
+
+    const srcEls = document.querySelectorAll('#archSrc .arch-s');
+    const srcArr = Array.from(srcEls);
+    const srcPm = 14;
+
+    let sGridTop, sGridBot, sGridLeft, sGridRight;
+    if (srcArr.length) {
+      const firstR = srcArr[0].getBoundingClientRect();
+      const lastR = srcArr[srcArr.length - 1].getBoundingClientRect();
+      sGridTop = firstR.top - cR.top;
+      sGridBot = lastR.bottom - cR.top;
+      sGridLeft = firstR.left - cR.left;
+      sGridRight = firstR.right - cR.left;
+      srcArr.forEach(el => {
+        const r = el.getBoundingClientRect();
+        sGridLeft = Math.min(sGridLeft, r.left - cR.left);
+        sGridRight = Math.max(sGridRight, r.right - cR.left);
+      });
+    }
+
+    const sLeft = sGridLeft - srcPm;
+    const sRight = sGridRight + srcPm;
+
+    const sRailYs = [];
+    if (srcArr.length) {
+      sRailYs.push(sGridTop - 12);
+      for (let i = 0; i < srcArr.length - 1; i++) {
+        const bot = srcArr[i].getBoundingClientRect().bottom - cR.top;
+        const top = srcArr[i + 1].getBoundingClientRect().top - cR.top;
+        sRailYs.push(bot + (top - bot) / 2);
+      }
+      sRailYs.push(sGridBot + 12);
+    }
+
+    function sSeg(x1, y1, x2, y2, delay) {
+      const p = 'M' + x1 + ',' + y1 + ' L' + x2 + ',' + y2;
+      d += '<path class="sg" d="' + p + '"/>';
+      d += '<path class="sp" d="' + p + '" style="animation-delay:' + delay + 's"/>';
+    }
+    function sDot(x, y) {
+      d += '<circle cx="' + x + '" cy="' + y + '" r="3" fill="hsl(217 78% 48%)" opacity="0.65"/>';
+    }
+
+    if (sRailYs.length >= 2) {
+      sSeg(sLeft, sRailYs[0], sLeft, sRailYs[sRailYs.length - 1], 0.1);
+      sSeg(sRight, sRailYs[0], sRight, sRailYs[sRailYs.length - 1], 0.15);
+    }
+
+    sRailYs.forEach((ry, i) => {
+      sSeg(sLeft, ry, sRight, ry, 0.1 + i * 0.06);
+      sDot(sLeft, ry);
+      sDot(sRight, ry);
+    });
+
+    srcArr.forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left - cR.left + r.width / 2;
+      const ct = r.top - cR.top;
+      const cb = r.bottom - cR.top;
+      if (i < sRailYs.length) { sDot(cx, sRailYs[i]); sSeg(cx, sRailYs[i], cx, ct, 0.3 + i * 0.06); }
+      if (i + 1 < sRailYs.length) { sDot(cx, sRailYs[i + 1]); sSeg(cx, cb, cx, sRailYs[i + 1], 0.35 + i * 0.06); }
+    });
+
+    const numTrunks = sRailYs.length;
+    sRailYs.forEach((railY, ti) => {
+      const exitX = sRight;
+      const fraction = numTrunks > 1 ? ti / (numTrunks - 1) : 0.5;
+      const spread = hubR * 0.85;
+      const arriveY = hy - spread + fraction * spread * 2;
+      const dy = arriveY - hy;
+      const arriveX = hx - Math.sqrt(Math.max(1, hubR * hubR - dy * dy));
+      const cp1x = exitX + (arriveX - exitX) * 0.4;
+      const cp2x = arriveX - (arriveX - exitX) * 0.08;
+      const trunk = 'M' + exitX + ',' + railY + ' C' + cp1x + ',' + railY + ' ' + cp2x + ',' + arriveY + ' ' + arriveX + ',' + arriveY;
+      d += '<path class="sg" d="' + trunk + '"/>';
+      d += '<path class="sp" d="' + trunk + '" style="animation-delay:' + (ti * 0.12 + 0.4) + 's"/>';
+    });
+
+    const dstCards = document.querySelectorAll('#archDst .arch-d');
+    const gridEl = document.getElementById('archGrid');
+    const dstBox = gridEl.getBoundingClientRect();
+    const gridLeft = dstBox.left - cR.left;
+    const gridRight = dstBox.right - cR.left;
+    const pm = 14;
+    const leftX = gridLeft - pm;
+    const rightX = gridRight + pm;
+
+    const rows = [[], [], []];
+    dstCards.forEach((el, i) => rows[Math.floor(i / 3)].push(el));
+
+    const railYs = [];
+    if (rows[0].length) { const topCard = rows[0][0].getBoundingClientRect(); railYs.push(topCard.top - cR.top - 12); }
+    if (rows[0].length && rows[1].length) { const bot0 = rows[0][0].getBoundingClientRect().bottom - cR.top; const top1 = rows[1][0].getBoundingClientRect().top - cR.top; railYs.push(bot0 + (top1 - bot0) / 2); }
+    if (rows[1].length && rows[2].length) { const bot1 = rows[1][0].getBoundingClientRect().bottom - cR.top; const top2 = rows[2][0].getBoundingClientRect().top - cR.top; railYs.push(bot1 + (top2 - bot1) / 2); }
+    if (rows[2].length) { const botCard = rows[2][0].getBoundingClientRect(); railYs.push(botCard.bottom - cR.top + 12); }
+
+    function seg(x1, y1, x2, y2, delay) {
+      const p = 'M' + x1 + ',' + y1 + ' L' + x2 + ',' + y2;
+      d += '<path class="dg" d="' + p + '"/>';
+      d += '<path class="dp" d="' + p + '" style="animation-delay:' + delay + 's"/>';
+    }
+    function dot(x, y) {
+      d += '<circle cx="' + x + '" cy="' + y + '" r="3" fill="hsl(152 68% 34%)" opacity="0.65"/>';
+    }
+
+    if (railYs.length >= 4) { seg(leftX, railYs[0], leftX, railYs[3], 0.15); seg(rightX, railYs[0], rightX, railYs[3], 0.2); }
+    railYs.forEach((ry, i) => { seg(leftX, ry, rightX, ry, 0.15 + i * 0.08); dot(leftX, ry); dot(rightX, ry); });
+
+    [0, 1, 2].forEach((ri) => {
+      if (ri >= railYs.length) return;
+      const railY = railYs[ri];
+      const exitX = hx + hubR + 8;
+      const exitY = hy + (railY - hy) * 0.12;
+      const cp1x = exitX + (leftX - exitX) * 0.5;
+      const cp2x = leftX - (leftX - exitX) * 0.08;
+      const trunk = 'M' + exitX + ',' + exitY + ' C' + cp1x + ',' + exitY + ' ' + cp2x + ',' + railY + ' ' + leftX + ',' + railY;
+      d += '<path class="dg" d="' + trunk + '"/>';
+      d += '<path class="dp" d="' + trunk + '" style="animation-delay:' + (ri * 0.2 + 0.25) + 's"/>';
+    });
+
+    if (rows[0].length && railYs.length > 0) { rows[0].forEach((el, ci) => { const r = el.getBoundingClientRect(); const cx = r.left - cR.left + r.width / 2; dot(cx, railYs[0]); seg(cx, railYs[0], cx, r.top - cR.top, 0.4 + ci * 0.08); }); }
+    if (rows[0].length && railYs.length > 1) { rows[0].forEach((el, ci) => { const r = el.getBoundingClientRect(); const cx = r.left - cR.left + r.width / 2; dot(cx, railYs[1]); seg(cx, r.bottom - cR.top, cx, railYs[1], 0.5 + ci * 0.08); }); }
+    if (rows[1].length && railYs.length > 1) { rows[1].forEach((el, ci) => { const r = el.getBoundingClientRect(); const cx = r.left - cR.left + r.width / 2; dot(cx, railYs[1]); seg(cx, railYs[1], cx, r.top - cR.top, 0.55 + ci * 0.08); }); }
+    if (rows[1].length && railYs.length > 2) { rows[1].forEach((el, ci) => { const r = el.getBoundingClientRect(); const cx = r.left - cR.left + r.width / 2; dot(cx, railYs[2]); seg(cx, r.bottom - cR.top, cx, railYs[2], 0.6 + ci * 0.08); }); }
+    if (rows[2].length && railYs.length > 2) { rows[2].forEach((el, ci) => { const r = el.getBoundingClientRect(); const cx = r.left - cR.left + r.width / 2; dot(cx, railYs[2]); seg(cx, railYs[2], cx, r.top - cR.top, 0.65 + ci * 0.08); }); }
+    if (rows[2].length && railYs.length > 3) { rows[2].forEach((el, ci) => { const r = el.getBoundingClientRect(); const cx = r.left - cR.left + r.width / 2; dot(cx, railYs[3]); seg(cx, r.bottom - cR.top, cx, railYs[3], 0.7 + ci * 0.08); }); }
+
+    if (railYs.length >= 4) {
+      const exitX = hx + hubR + 8;
+      const exitY = hy + (railYs[3] - hy) * 0.15;
+      const cp1x = exitX + (leftX - exitX) * 0.45;
+      const cp2x = leftX - (leftX - exitX) * 0.06;
+      const blTrunk = 'M' + exitX + ',' + exitY + ' C' + cp1x + ',' + exitY + ' ' + cp2x + ',' + railYs[3] + ' ' + leftX + ',' + railYs[3];
+      d += '<path class="dg" d="' + blTrunk + '"/>';
+      d += '<path class="dp" d="' + blTrunk + '" style="animation-delay:0.85s"/>';
+      dot(leftX, railYs[3]);
+    }
+
+    s.innerHTML = d;
+  });
+}
+
+window.addEventListener('load', () => setTimeout(drawArch, 500));
+window.addEventListener('resize', drawArch);
+</script>
+</body>
+</html>
