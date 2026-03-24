@@ -1,0 +1,3998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AerChain Sales Bible v2.0 — Complete Value Delivery Flow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 20px 48px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #22d3ee;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .version-badge {
+            background: #f59e0b;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            border-radius: 16px;
+            padding: 60px 48px;
+            margin-bottom: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #64748b;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .hero-stat {
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .hero-stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #22d3ee;
+            margin-bottom: 8px;
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* Pipeline Timeline */
+        .pipeline-container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .pipeline-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 24px;
+        }
+
+        .pipeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 1200px;
+            gap: 16px;
+        }
+
+        .pipeline-node {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .pipeline-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+        }
+
+        .pipeline-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            max-width: 120px;
+            margin: 0 auto;
+        }
+
+        .pipeline-arrow {
+            font-size: 24px;
+            color: #cbd5e1;
+            flex: 0 0 40px;
+            text-align: center;
+        }
+
+        /* Section Card */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .section-duration {
+            font-size: 14px;
+            color: #64748b;
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        /* Subsection */
+        .subsection {
+            margin-bottom: 32px;
+        }
+
+        .subsection:last-child {
+            margin-bottom: 0;
+        }
+
+        .subsection-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .subsection-content {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 24px;
+        }
+
+        .column-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #22d3ee;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #22d3ee;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Collateral Grid */
+        .collateral-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .collateral-item {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .collateral-number {
+            background: #22d3ee;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .collateral-text {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        /* Box Styles */
+        .box {
+            padding: 24px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .box-what-happens {
+            background: #f0f9ff;
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .box-exit-gate {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .box-nurture {
+            background: #fce7f3;
+            border: 1px solid #fbcfe8;
+            border-left: 4px solid #ec4899;
+        }
+
+        .box-insights {
+            background: #e0e7ff;
+            border: 1px solid #c7d2fe;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .box-objection {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-left: 4px solid #ef4444;
+        }
+
+        .box-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .box-what-happens .box-title {
+            color: #1d4ed8;
+        }
+
+        .box-exit-gate .box-title {
+            color: #b45309;
+        }
+
+        .box-nurture .box-title {
+            color: #be185d;
+        }
+
+        .box-insights .box-title {
+            color: #3730a3;
+        }
+
+        .box-objection .box-title {
+            color: #b91c1c;
+        }
+
+        .box-content {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.8;
+        }
+
+        /* Decision Diamond */
+        .decision-diamond {
+            background: #10b981;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Pillar Grid */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pillar {
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .pillar-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .pillar-content {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table th {
+            background: #f1f5f9;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .data-table tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Commandments */
+        .commandments {
+            background: #0f172a;
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 40px 0;
+        }
+
+        .commandments-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .commandment {
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .commandment-number {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .commandment-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #f1f5f9;
+        }
+
+        /* Traffic Light */
+        .traffic-light {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .traffic-item {
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .traffic-item.green {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+        }
+
+        .traffic-item.yellow {
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+        }
+
+        .traffic-item.red {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+        }
+
+        .traffic-label {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .traffic-item.green .traffic-label { color: #16a34a; }
+        .traffic-item.yellow .traffic-label { color: #b45309; }
+        .traffic-item.red .traffic-label { color: #b91c1c; }
+
+        .traffic-content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .traffic-item.green .traffic-content { color: #166534; }
+        .traffic-item.yellow .traffic-content { color: #92400e; }
+        .traffic-item.red .traffic-content { color: #7f1d1d; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .collateral-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .traffic-light {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline {
+                min-width: 100%;
+            }
+
+            .section {
+                padding: 24px;
+            }
+
+            .hero {
+                padding: 32px 24px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* Step Timeline */
+        .step-timeline {
+            margin: 20px 0;
+        }
+
+        .step {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #22d3ee;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 12px;
+            top: 16px;
+            background: #22d3ee;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .step-content {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* Accordion */
+        .accordion {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            padding: 16px;
+            background: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #1e293b;
+            user-select: none;
+        }
+
+        .accordion-header:hover {
+            background: #f1f5f9;
+        }
+
+        .accordion-toggle {
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        .accordion-content {
+            padding: 16px;
+            background: white;
+            display: none;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        .accordion-item.active .accordion-header {
+            background: #eff6ff;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 32px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Sub-stage indicator */
+        .sub-stage-label {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Savings lever highlight */
+        .savings-highlight {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #86efac;
+            border-left: 4px solid #22c55e;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .savings-highlight .box-title {
+            color: #166534;
+        }
+
+        /* Messaging callout */
+        .messaging-callout {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 1px solid #d8b4fe;
+            border-left: 4px solid #a855f7;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-style: italic;
+            color: #581c87;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        /* Three column grid for specific sections */
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .three-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Aer<span>Chain</span></div>
+            <div class="header-meta">
+                <span class="version-badge">v2.0</span>
+                <span style="font-size: 14px; color: #94a3b8;">Sales Bible — Complete Value Delivery Flow</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>AerChain Sales Bible</h1>
+            <p class="hero-subtitle">From Reactive Procurement to Proactive Spend Control — Complete Value Delivery Flow: First Touch → Contract → Implementation Handover</p>
+            <div class="messaging-callout">"Remove the Grunt Layer. Keep the Brainy Layer." — The Spend Operating System for Modern Enterprises</div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">9</div>
+                    <div class="hero-stat-label">Sales Stages (Lead Gen → Handover)</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">85+</div>
+                    <div class="hero-stat-label">Collaterals Across All Stages</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">$20B+</div>
+                    <div class="hero-stat-label">Spend Managed Across 30+ Countries</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pipeline Timeline -->
+        <div class="pipeline-container">
+            <div class="pipeline-title">Sales Pipeline: 9 Stages — Lead Generation to Implementation Handover</div>
+            <div class="pipeline">
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">0</div>
+                    <div class="pipeline-label">Lead Gen</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">1</div>
+                    <div class="pipeline-label">Discovery + L1</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">2</div>
+                    <div class="pipeline-label">Deep Dive Demo</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">3</div>
+                    <div class="pipeline-label">Workshop + L2</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">4</div>
+                    <div class="pipeline-label">Spend Analysis + L3</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">5</div>
+                    <div class="pipeline-label">Custom Demo</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">6</div>
+                    <div class="pipeline-label">Post-Demo Closing</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">7</div>
+                    <div class="pipeline-label">Proposal + Contract</div>
+                </div>
+                <div class="pipeline-arrow">→</div>
+                <div class="pipeline-node">
+                    <div class="pipeline-circle">8</div>
+                    <div class="pipeline-label">Impl. Handover</div>
+                </div>
+            </div>
+        </div>
+
+<body>
+  <!-- STAGE 0: Lead Generation & Market Positioning -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">0</div>
+      <div>
+        <div class="section-title">Lead Generation & Market Positioning</div>
+        <div class="section-duration">Duration: Ongoing</div>
+      </div>
+    </div>
+
+    <!-- 5 Input Channels -->
+    <div class="subsection">
+      <div class="subsection-title">5 Input Channels</div>
+      <div class="subsection-content">
+        <div class="pillar-grid">
+          <div class="pillar">
+            <div class="pillar-title">0A: Cold Outbound</div>
+            <div class="pillar-content">
+              <strong>Target:</strong> CPOs, VP Sourcing<br>
+              <strong>Activity:</strong> Research → build L1 business case → send email snapshot<br>
+              <strong>Conversion:</strong> 5-8% response rate<br>
+              <strong>Owner:</strong> SDR team
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">0B: Inbound (Website/Content)</div>
+            <div class="pillar-content">
+              <strong>Target:</strong> Procurement leaders<br>
+              <strong>Activity:</strong> Website inquiry → qualify → route<br>
+              <strong>Conversion:</strong> 15-20% MQL to SQL<br>
+              <strong>Owner:</strong> Marketing
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">0C: Events (Conferences/CEO Dinners/Webinars)</div>
+            <div class="pillar-content">
+              <strong>Target:</strong> 100+ companies at industry events<br>
+              <strong>Activity:</strong> Pre-build custom L1 reports for ALL attendees → print as brochures → hand out at booth<br>
+              <strong>Conversion:</strong> 10-15%<br>
+              <strong>Owner:</strong> Marketing + SDR<br>
+              <strong>KEY INSIGHT:</strong> <em>"Custom L1 for each company at the event is the differentiator. Not generic brochures."</em>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">0D: Partner Referrals</div>
+            <div class="pillar-content">
+              <strong>Partners:</strong> Deloitte, Infosys, Accenture, EY<br>
+              <strong>Target:</strong> Partner's existing procurement clients<br>
+              <strong>Conversion:</strong> 25-30% (warm intro)<br>
+              <strong>Owner:</strong> Partnerships team
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">0E: Customer Referrals / Peer Network</div>
+            <div class="pillar-content">
+              <strong>Target:</strong> Prospects within existing customer's industry network<br>
+              <strong>KEY INSIGHT:</strong> <em>"Procurement is a close-knit industry. One success story unlocks 10 deals."</em><br>
+              <strong>Conversion:</strong> 30-40%<br>
+              <strong>Owner:</strong> Customer Success + Sales
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pre-Work Checklist -->
+    <div class="subsection">
+      <div class="subsection-title">Pre-Work Checklist</div>
+      <div class="subsection-content">
+        <ul class="checklist">
+          <li>Research company: Annual report, SEC filings, industry position, procurement maturity</li>
+          <li>Build L1 business case (60% accurate): Industry benchmarks, estimated spend, estimated events/year</li>
+          <li>Identify likely pain points: Based on industry vertical + company size + known systems</li>
+          <li>Stakeholder mapping: Who is CPO, CFO, CIO, procurement team leads</li>
+          <li>Competitive intel: What systems do they currently use (Ariba? Coupa? In-house?)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Collaterals -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 0 Collaterals (9 Items)</div>
+      <div class="subsection-content">
+        <div class="collateral-grid">
+          <div class="collateral-item">
+            <div class="collateral-number">1</div>
+            <div class="collateral-text">L1 Business Case (industry-specific)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">2</div>
+            <div class="collateral-text">Printed brochure (1-pager for events)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">3</div>
+            <div class="collateral-text">Email snapshot (teaser)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">4</div>
+            <div class="collateral-text">Industry benchmarking report</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">5</div>
+            <div class="collateral-text">"Sentient Procurement" whitepaper</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">6</div>
+            <div class="collateral-text">Competitive positioning 1-pager</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">7</div>
+            <div class="collateral-text">Customer case studies (Cars24, WeWork, ABInBev, Danone)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">8</div>
+            <div class="collateral-text">Security brief (SOC2 Type II, ISO27001, GDPR)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">9</div>
+            <div class="collateral-text">Co-branded partner solution briefs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exit Gate -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 0 Exit & Nurture</div>
+      <div class="subsection-content">
+        <div class="box box-exit-gate">
+          <div class="box-title">Exit Gate</div>
+          <div class="box-content">
+            <strong>"Prospect agrees to discovery call?"</strong><br><br>
+            <strong>YES</strong> → Stage 1<br>
+            <strong>NO</strong> → Nurture Track 0
+          </div>
+        </div>
+
+        <div class="box box-nurture">
+          <div class="box-title">Nurture Track 0</div>
+          <div class="box-content">
+            <strong>Activities:</strong><br>
+            • Monthly thought leadership<br>
+            • Quarterly L1 refresh<br>
+            • Event invitations<br>
+            • Partner relationship maintained<br><br>
+            <strong>Re-engage Triggers:</strong><br>
+            • Funding round<br>
+            • Leadership change<br>
+            • Fiscal year start<br><br>
+            <strong>Timeline:</strong> 6-12 months<br><br>
+            <strong>Disqualify:</strong> No response after 3 touchpoints over 12 months → archive
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 1: Discovery Call — Credibility + Business Case -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div>
+        <div class="section-title">Discovery Call — Credibility + Business Case</div>
+        <div class="section-duration">Duration: 45-60 minutes</div>
+      </div>
+    </div>
+
+    <!-- AerChain Platform at a Glance -->
+    <div class="subsection">
+      <div class="subsection-title">AerChain Platform at a Glance: 5 Core Pillars</div>
+      <div class="subsection-content">
+        <div class="pillar-grid">
+          <div class="pillar">
+            <div class="pillar-title">Orchestrator</div>
+            <div class="pillar-content">
+              Intelligent routing engine that directs every procurement request to the right channel based on policies, spend value, category, and complexity. Invisible to users, always working.
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">Co-pilot Interface</div>
+            <div class="pillar-content">
+              Aiera chat-first experience. Business users type or speak requests in natural language → system understands and routes. No forms. No menus. Pure conversation.
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">AI Agents</div>
+            <div class="pillar-content">
+              5 specialized agents (Intake, Orchestration, Sourcing, Evaluation, Negotiation) that handle extraction, validation, comparison at scale. Grunt work eliminated.
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">Knowledge Hub</div>
+            <div class="pillar-content">
+              Documents, contracts, and historical data transformed into actionable intelligence. Every transaction becomes learning. No information left behind.
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">Human Review Points</div>
+            <div class="pillar-content">
+              Strategic judgment applied where it matters most. AI assists, humans decide. Full audit trail. Complete control. Compliance by design.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 AI Agents Framework -->
+    <div class="subsection">
+      <div class="subsection-title">The 5 AI Agents Framework</div>
+      <div class="subsection-content">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Agent</th>
+              <th>Role</th>
+              <th>What It Does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Intake Agent</strong></td>
+              <td>Auto-enriches & categorizes procurement requests</td>
+              <td>Faster processing, fewer errors. Extracts vendor info, spend patterns, compliance flags automatically.</td>
+            </tr>
+            <tr>
+              <td><strong>Orchestration Agent</strong></td>
+              <td>Routes to right channel based on policy</td>
+              <td>Invisible interface, zero friction. Catalog? Framework? RFQ? Negotiation? Routed automatically.</td>
+            </tr>
+            <tr>
+              <td><strong>Sourcing Agent</strong></td>
+              <td>AI-driven supplier discovery & bid analysis</td>
+              <td>Real-time benchmarking. Vendor recommendations. Historical performance evaluated.</td>
+            </tr>
+            <tr>
+              <td><strong>Evaluation Agent</strong></td>
+              <td>AI-powered supplier assessment</td>
+              <td>Automated scoring & comparison. Reads 10 vendors in 10 formats. Normalizes everything.</td>
+            </tr>
+            <tr>
+              <td><strong>Negotiation Agent</strong></td>
+              <td>Autonomous negotiation for optimal pricing</td>
+              <td>AI-drafted strategies with human approval. Target price calculated. Starting position optimized.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Call Structure: 6 Steps -->
+    <div class="subsection">
+      <div class="subsection-title">Discovery Call Structure (6 Steps)</div>
+      <div class="subsection-content">
+        <div class="step-timeline">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-title">OPENING [0-3 min] — Choose Language Register</div>
+            <div class="step-content">
+              <strong>IF CPO/VP Sourcing:</strong><br>
+              "We were the end user. Managed procurement for 50+ enterprises. 150-200 orders/day. Every tool fails. Users can't use them. We built AerChain to be what those tools should have been."<br><br>
+              <strong>IF MD/CFO/CIO:</strong><br>
+              "Procurement is a business support function. Today it operates like a ticketing system — high volume, low value. What if we could move your team from 'processor' to 'policy owner and optimizer'?"<br><br>
+              <strong>KEY MESSAGING LINES:</strong><br>
+              "From Reactive Procurement to Proactive Spend Control"<br>
+              "Procurement is Drowning in Interrupts"<br>
+              "From Ticketing System to Policy Owner"<br>
+              "Remove the Grunt Layer. Keep the Brainy Layer."
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-title">CREDENTIAL DUMP [3-5 min]</div>
+            <div class="step-content">
+              <strong>Updated Proof Points:</strong><br>
+              • Founded by practitioners (managed procurement for 50+ enterprises)<br>
+              • $20B+ spend managed across 30+ countries, 15 industries<br>
+              • 150K+ transactions processed<br>
+              • 80+ team members<br>
+              • 5M+ cumulative transactions<br>
+              • 150K suppliers on platform<br>
+              • 95%+ user adoption<br><br>
+              <strong>Named Testimonials:</strong><br>
+              • Cars24 / Anupam Iyer: 99% adoption<br>
+              • WeWork / Suresh TH: 100% spend under management<br>
+              • ABInBev / Ronan Gaeti: 97% cycle time reduction<br><br>
+              <strong>Live Production Customers:</strong><br>
+              Reliance (300+ events/week), Unilever (negotiation agent live), Danone (9.5/10 language), AB InBev (10 countries), NSE (regulated, SOC2-cleared), Meta, Cars24, WeWork
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-title">PROBLEM DIAGNOSIS [5-15 min] — Interactive</div>
+            <div class="step-content">
+              <strong>Present L1 Business Case Findings:</strong><br>
+              "We did research on [company]. Here's what we found."<br><br>
+              <strong>Key Diagnostic Questions:</strong><br>
+              • How many sourcing events per year?<br>
+              • Average cycle time PR to PO?<br>
+              • What systems do you use today?<br>
+              • What's your biggest pain point?<br>
+              • Who initiates spend requests?<br><br>
+              <strong>Listen for:</strong> Emotion, specificity, pain intensity. Follow their lead.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-title">HIGH-LEVEL DEMO [15-30 min] — Show 5 Platform Pillars</div>
+            <div class="step-content">
+              <strong>1. Aiera Co-pilot:</strong> Business user types request → AI routes it → right process triggered<br><br>
+              <strong>2. Orchestration:</strong> "Based on YOUR policies, spend gets routed to the right channel automatically" — show 9 Intelligent Pathways<br><br>
+              <strong>3. AI Agents:</strong> "5 specialized agents handle the grunt work — intake, routing, sourcing, evaluation, negotiation"<br><br>
+              <strong>4. Knowledge Hub:</strong> "Every document, every contract, every transaction becomes intelligence"<br><br>
+              <strong>5. Human Review Points:</strong> "AI assists, you decide. Always."<br><br>
+              <strong>WOW Moments:</strong> Show live orchestration routing. Show AI reading vendor responses. Show negotiation strategy generation.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-title">VALUE DISCUSSION [30-40 min] — 4 Value Pillars</div>
+            <div class="step-content">
+              <div class="pillar-grid">
+                <div class="pillar">
+                  <div class="pillar-title">PILLAR 1: PRODUCTIVITY</div>
+                  <div class="pillar-content">
+                    <strong>Message:</strong> "80% of procurement work is grunt. We eliminate it. 4-5x more strategic work."<br>
+                    <strong>Proof:</strong> 65%+ efficiency gains across clients
+                  </div>
+                </div>
+
+                <div class="pillar">
+                  <div class="pillar-title">PILLAR 2: CYCLE TIME</div>
+                  <div class="pillar-content">
+                    <strong>Message:</strong> "Sourcing from 60 days to 25 days. PR-to-PO from 45 to 15-20 days."<br>
+                    <strong>Proof:</strong> 50%+ cycle time reduction, ABInBev 97% reduction
+                  </div>
+                </div>
+
+                <div class="pillar">
+                  <div class="pillar-title">PILLAR 3: FINANCIAL IMPACT</div>
+                  <div class="pillar-content">
+                    <strong>Message:</strong> "6-8% procurement efficiency (vs 2-3% today). $28M Year 1 savings for Global FMCG."<br>
+                    <strong>Proof:</strong> 8-month payback, 12.5x 3-year ROI
+                  </div>
+                </div>
+
+                <div class="pillar">
+                  <div class="pillar-title">PILLAR 4: FUTURE-PROOFING</div>
+                  <div class="pillar-content">
+                    <strong>Message:</strong> "AI-native. Every transaction learns. Compliance by design."<br>
+                    <strong>Proof:</strong> NSE cleared after 6-7 month security eval
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">6</div>
+            <div class="step-title">CLOSE [40-45 min] — Concrete Next Step</div>
+            <div class="step-content">
+              <strong>NEVER:</strong> "Let's see how we proceed"<br><br>
+              <strong>ALWAYS:</strong> "Based on what we discussed, I'd recommend a deep-dive demo with your sourcing team — [propose specific date within 2 weeks]."<br><br>
+              <strong>UPDATED CTA:</strong><br>
+              "We typically start with a Spend Analysis Workshop — 2-3 days, we come prepared with your L1 already done. Want to lock a date?"<br><br>
+              <strong>Get Commitment:</strong> Calendar invite sent immediately. Get IT/CIO email for parallel security track.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Composition -->
+    <div class="subsection">
+      <div class="subsection-title">Team Composition</div>
+      <div class="subsection-content">
+        <div class="two-column">
+          <div>
+            <div class="column-header">AerChain</div>
+            <div class="pillar-content">
+              • Sales lead (Harsha/Gaurav)<br>
+              • Presales engineer (demo support)<br>
+              • Marketing (L1 prep)<br>
+              <strong>Pre-call:</strong> 5 min sync. Confirm tone, confirm messaging.
+            </div>
+          </div>
+          <div>
+            <div class="column-header">Client</div>
+            <div class="pillar-content">
+              • CPO/VP Sourcing<br>
+              • CFO/Finance (if present)<br>
+              • CIO/IT (if present)<br>
+              • Procurement leads (potential champions)<br>
+              <strong>Ideal:</strong> 3-4 people. CPO must attend.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Objections Handling -->
+    <div class="subsection">
+      <div class="subsection-title">Objection Handling (Top 5)</div>
+      <div class="subsection-content">
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"How is this different from Ariba/Coupa?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Not here to replace. Tell me an area of spend that feels difficult. Try AerChain for that. We integrate."<br><br>
+              <strong>Reference Competitive Table:</strong><br>
+              • Point tools (bolt-on AI): 6-12 months to value<br>
+              • Legacy S2P (Ariba/Coupa): Rigid, 12-18 months<br>
+              • AerChain (AI-native orchestration): 8-16 weeks<br><br>
+              <strong>Close:</strong> "You're buying time-to-value. And compliance by design."
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"Can your AI really do this?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Human-in-the-loop always. AI assists, you decide. It gets better with every transaction."<br><br>
+              <strong>Show:</strong> Audit trail. Live example: Unilever's negotiation agent — AI generated strategy, human approved, negotiation happened, savings locked.<br><br>
+              <strong>Objection Behind Objection:</strong> They fear loss of control. Reassure: You own every decision. AI is your assistant.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"What does this cost?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Consumption-based, starts at $50K+. We'll calculate exactly based on your spend data in the workshop."<br><br>
+              <strong>Pricing Framework:</strong> Annual fee + transaction volume + storage. Transparent. No surprises.<br><br>
+              <strong>Value Context:</strong> "For every $1 you invest, we deliver $8-10 in savings Year 1. 8-month payback."<br><br>
+              <strong>Close:</strong> "Let's put a pencil to YOUR numbers in the workshop."
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"You're a small company, can you deliver?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Here's who's live: Reliance (India's largest conglomerate). Unilever (running negotiation agent live). NSE (regulated, cleared after 6-7 months security eval). 80+ team. $20B+ spend managed."<br><br>
+              <strong>Show References:</strong> Get peer reference call scheduled. CEO testimonial video if appropriate.<br><br>
+              <strong>Deliver Confidence:</strong> Showcase delivery playbook. Name your implementation lead. Show org chart.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"How fast can you go live?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "16-week standard implementation in 4 phases:<br>
+              • Phase 1: Discovery & Design (Wk 1-4)<br>
+              • Phase 2: Build & Configure (Wk 5-10)<br>
+              • Phase 3: Pilot & Test (Wk 11-13)<br>
+              • Phase 4: Rollout & Hypercare (Wk 14-16)"<br><br>
+              <strong>Value Timeline:</strong> "First value in Wave 1 (tail spend) within Q1. ROI visible by Month 6."<br><br>
+              <strong>Confidence:</strong> "Shows we care about delivery, not just signing."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 1 Collaterals -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 1 Collaterals (9 Items)</div>
+      <div class="subsection-content">
+        <div class="collateral-grid">
+          <div class="collateral-item">
+            <div class="collateral-number">1</div>
+            <div class="collateral-text">Discovery call agenda (1-pager)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">2</div>
+            <div class="collateral-text">L1 business case presentation (25-30 slides)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">3</div>
+            <div class="collateral-text">Origin story script (3-min repeatable, two registers)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">4</div>
+            <div class="collateral-text">Platform overview deck (5 pillars + 5 agents + 9 pathways)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">5</div>
+            <div class="collateral-text">Competitive positioning 1-pager (vs. Ariba, Coupa, point solutions)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">6</div>
+            <div class="collateral-text">Security/compliance fact sheet (SOC2 Type II, ISO27001, GDPR)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">7</div>
+            <div class="collateral-text">Pricing overview (1-pager, high-level)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">8</div>
+            <div class="collateral-text">Next-step proposal (workshop date template)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">9</div>
+            <div class="collateral-text">Recorded demo walkthrough (async option)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exit Gate -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 1 Exit & Nurture</div>
+      <div class="subsection-content">
+        <div class="box box-exit-gate">
+          <div class="box-title">Exit Gate</div>
+          <div class="box-content">
+            <strong>"Client agrees to deep-dive demo?"</strong><br><br>
+            <strong>YES</strong> → Stage 2<br>
+            <strong>NO</strong> → Nurture Track 1
+          </div>
+        </div>
+
+        <div class="box box-nurture">
+          <div class="box-title">Nurture Track 1</div>
+          <div class="box-content">
+            <strong>Activities:</strong><br>
+            • Send recorded demo<br>
+            • Monthly business case updates<br>
+            • Offer peer reference call<br>
+            • Technical deep-dive for IT<br>
+            • CFO engagement for finance<br><br>
+            <strong>Timeline:</strong> 3-6 months<br><br>
+            <strong>Disqualify:</strong> No engagement after 3 follow-ups over 6 months → archive
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 2: Deep Dive Demo — Proof of Capability -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div>
+        <div class="section-title">Deep Dive Demo — Proof of Capability</div>
+        <div class="section-duration">Duration: 60-90 minutes (can extend to 2 hours with Q&A)</div>
+      </div>
+    </div>
+
+    <!-- Demo Versions -->
+    <div class="subsection">
+      <div class="subsection-title">Demo Format Options</div>
+      <div class="subsection-content">
+        <div class="pillar-grid">
+          <div class="pillar">
+            <div class="pillar-title">30-MIN EXPRESS</div>
+            <div class="pillar-content">
+              Steps 1-6 + 12-13 only. Ideal for: Executive preview, IT review, Time-constrained stakeholders.
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">60-MIN STANDARD</div>
+            <div class="pillar-content">
+              All 16 steps. Ideal for: Full procurement team, Complete user journey walkthrough, Industry-specific flows.
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">2-HR DEEP DIVE</div>
+            <div class="pillar-content">
+              All 16 steps + configuration + use-case customization. Ideal for: High-value deals, Multiple buyer personas, Implementation preview.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 Intelligent Pathways -->
+    <div class="subsection">
+      <div class="subsection-title">The 9 Intelligent Pathways Framework</div>
+      <div class="subsection-content">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Channel</th>
+              <th>Spend %</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><strong>Catalog (Self-Service)</strong></td>
+              <td>12%</td>
+              <td>Pre-negotiated, policy-compliant items via self-service catalogs with embedded controls</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><strong>Framework Agreements (Rate Cards)</strong></td>
+              <td>10%</td>
+              <td>Pre-negotiated rate contracts for recurring services and standard purchases</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><strong>RC Invoice (Terms + Milestone)</strong></td>
+              <td>6%</td>
+              <td>Recurring invoices for subscriptions, leases, and periodic services against master contracts</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><strong>Non-PO Spend (Analysis)</strong></td>
+              <td>5%</td>
+              <td>Residual non-PO limited to true exceptions (regulatory, taxes, donations)</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><strong>Self-Service PO (PO Creation)</strong></td>
+              <td>12%</td>
+              <td>Controlled self-service requisitions for low-risk, low-value spends within defined budgets</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><strong>Autonomous Negotiation (AI-Driven)</strong></td>
+              <td>15%</td>
+              <td>AI-powered autonomous negotiation for mid-value repeatable purchases</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><strong>Autonomous Sourcing (End-to-End)</strong></td>
+              <td>15%</td>
+              <td>AI-driven automated sourcing for repetitive, rules-based spot buys with minimal human intervention</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td><strong>Tactical Sourcing (Automated + Review)</strong></td>
+              <td>15%</td>
+              <td>Mid-value, repeatable buys through guided RFQs, spot-buys, and template-driven events</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td><strong>Strategic Sourcing (Assisted)</strong></td>
+              <td>10%</td>
+              <td>High-value, complex multi-year spend through structured sourcing events and deep collaboration</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 16-Step Demo Flow -->
+    <div class="subsection">
+      <div class="subsection-title">The 16-Step Demo Flow</div>
+      <div class="subsection-content">
+        <div class="step-timeline">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-title">AIERA CO-PILOT FRONT DOOR</div>
+            <div class="step-content">
+              "Business user types or speaks: 'I need 100 units of X for Project Y'" → Aiera understands, guides through process, recommends channel<br><br>
+              <strong>WOW MOMENT:</strong> Natural language → structured procurement request. No forms. No menus.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-title">ORCHESTRATION ENGINE</div>
+            <div class="step-content">
+              "Based on YOUR policies — spend value, category, complexity, geography — system routes automatically" → Show 9 intelligent pathways with spend % allocation → Dynamic re-routing when items change<br><br>
+              <strong>WOW MOMENT:</strong> Automatic channel routing. No manual decisions. Policy enforcement invisible.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-title">RFI CREATION</div>
+            <div class="step-content">
+              Template-based, AI-assisted content generation. Vendor recommendations from historical spend<br><br>
+              <strong>WOW MOMENT:</strong> Click "AI Assist" → Aiera generates entire questionnaire section. 15 minutes instead of 2 days.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-title">VENDOR EXPERIENCE</div>
+            <div class="step-content">
+              Simple guided interface. Download to Excel → work offline → upload back<br><br>
+              <strong>WOW MOMENT:</strong> Vendor can do everything in 15 minutes, not 2 days. 99% adoption at Cars24.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-title">TECHNICAL ANALYSIS (AI-POWERED)</div>
+            <div class="step-content">
+              Aiera reads EVERYTHING vendors submitted. Company profile, strengths, weaknesses, red flags. Every response rated<br><br>
+              <strong>WOW MOMENT:</strong> "AI did in 2 minutes what takes your team 2 days"
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">6</div>
+            <div class="step-title">EMAIL DELIVERABILITY TRACKING</div>
+            <div class="step-content">
+              Sent → Delivered → Opened → Clicked tracking per vendor. Never lose track of communication. Follow-up automation.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">7</div>
+            <div class="step-title">RFP FLOW</div>
+            <div class="step-content">
+              Vendors submit in ANY format (PDF, PPT, Word, Excel)<br><br>
+              <strong>★ TOP WOW:</strong> AI NORMALIZATION — 10 vendors, 10 formats → AI reads all, normalizes pricing, gives side-by-side comparison. Impossible before. Trivial now.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">8</div>
+            <div class="step-title">EVALUATIONS</div>
+            <div class="step-content">
+              Assign evaluators to sections. Rate + shortlist. Scorecard evaluation (weighted on roadmap). Download to Excel for offline work.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">9</div>
+            <div class="step-title">RFQ CREATION</div>
+            <div class="step-content">
+              Final line item structure. 3 RFQ types available:<br>
+              • Standard (single items)<br>
+              • Grouped/Package (BOQ)<br>
+              • Variant (multiple options per item)<br><br>
+              Currency configuration. Multi-country support.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">10</div>
+            <div class="step-title">SEALED BIDS</div>
+            <div class="step-content">
+              Digitized sealed envelope. 4 triggers: Deadline, Foreclose, Post-technical-eval, Bid Opening Committee. Chinese Wall enforcement. Blind bidding.<br><br>
+              <strong>WOW MOMENT:</strong> Physical process digitized with full audit trail. Compliance locked in.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">11</div>
+            <div class="step-title">VENDOR ALTERNATIVES</div>
+            <div class="step-content">
+              Vendor suggests better option with justification. Buyer accepts/rejects in comparison view. Alternative sourcing enabled.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">12</div>
+            <div class="step-title">NEGOTIATION (AI-POWERED)</div>
+            <div class="step-content">
+              AI prepares negotiation strategy. Target price + starting price per line item. AI drafts negotiation email<br><br>
+              <strong>WOW MOMENT:</strong> "AI tells you what to aim for, based on YOUR history." Unilever: Negotiation agent live. Autonomous negotiations happening daily.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">13</div>
+            <div class="step-title">LIVE AUCTION</div>
+            <div class="step-content">
+              Real-time bidding, multiple auction formats, reserve prices, auto-extensions. Vendors bid live. Pricing moves in real-time.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">14</div>
+            <div class="step-title">SCENARIO BUILDER</div>
+            <div class="step-content">
+              Compare award scenarios instantly:<br>
+              • Lowest cost<br>
+              • Best quality<br>
+              • Split award (multi-vendor)<br>
+              Financial impact of each scenario. Risk profile. Delivery timeline.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">15</div>
+            <div class="step-title">AWARD</div>
+            <div class="step-content">
+              Mix and match across vendors. AI-generated justifications. Auto-creates PO in ERP on approval. Notification workflows. Vendor communication templates.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">16</div>
+            <div class="step-title">AUDIT TRAIL & COLLABORATION</div>
+            <div class="step-content">
+              Full logging. Internal + external chat. Thread-based conversations. Amendment versioning. Compliance-ready. SOC2 auditable. Immutable records.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Industry Adaptations -->
+    <div class="subsection">
+      <div class="subsection-title">Industry-Specific Demo Adaptations</div>
+      <div class="subsection-content">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Industry</th>
+              <th>Key Demo Steps</th>
+              <th>Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Oil & Gas</strong></td>
+              <td>Steps 9-10-12 (complex specs, sealed bids, technical drawings)</td>
+              <td>Equipment procurement, specialist vendor evaluation, long-term contracts</td>
+            </tr>
+            <tr>
+              <td><strong>FMCG</strong></td>
+              <td>Steps 2-9(variant)-12 (high volume, grouped RFQ, multi-country)</td>
+              <td>SKU management, packaging options, volume discounts, global sourcing</td>
+            </tr>
+            <tr>
+              <td><strong>Manufacturing</strong></td>
+              <td>Steps 9(grouped)-10-11 (BOQ structure, vendor alternatives)</td>
+              <td>Raw materials, component sourcing, bill of materials, quality gates</td>
+            </tr>
+            <tr>
+              <td><strong>Financial Services</strong></td>
+              <td>Steps 5-6-10-16 (compliance, sealed bids, audit trail)</td>
+              <td>Vendor compliance, regulatory requirements, controls, compliance reporting</td>
+            </tr>
+            <tr>
+              <td><strong>Tech/Services</strong></td>
+              <td>Steps 1-2-7-12 (copilot self-service, AI normalization, negotiation)</td>
+              <td>SaaS contracts, vendor flexibility, terms negotiation, quick turnaround</td>
+            </tr>
+            <tr>
+              <td><strong>Pharma/Healthcare</strong></td>
+              <td>Steps 3-8-10-16 (regulatory questionnaires, evaluations, compliance)</td>
+              <td>Vendor compliance, quality standards, traceability, regulated audit trail</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Team Composition Stage 2 -->
+    <div class="subsection">
+      <div class="subsection-title">Team Composition</div>
+      <div class="subsection-content">
+        <div class="two-column">
+          <div>
+            <div class="column-header">AerChain</div>
+            <div class="pillar-content">
+              • Presales engineer (demo driver)<br>
+              • Sales lead (value narrative, objection handling)<br>
+              • Solutions architect (deep technical, Q&A)<br>
+              <strong>Preparation:</strong> 2-hour pre-demo sync. Customize steps. Prepare backup scenarios.
+            </div>
+          </div>
+          <div>
+            <div class="column-header">Client</div>
+            <div class="pillar-content">
+              • CPO/VP Sourcing<br>
+              • Procurement leads (day-to-day users, potential champions)<br>
+              • IT/CIO (architecture, security)<br>
+              • Finance/CFO (ROI validation, optional)<br>
+              <strong>Ideal:</strong> 4-5 people. Hands-on users should attend.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Objections Stage 2 -->
+    <div class="subsection">
+      <div class="subsection-title">Objection Handling (Top 5)</div>
+      <div class="subsection-content">
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"Your UI looks information-heavy"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Expandable sections. See summary first, drill into what matters."<br><br>
+              <strong>Show:</strong> Collapse/expand demo. Information hierarchy. Context-sensitive defaults. Power users get detail. Casual users get summary.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"We need weighted scorecard evaluation"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Response-level evaluation + AI rating available today. Weighted scorecards on roadmap."<br><br>
+              <strong>Show:</strong> Current evaluation interface. Show custom weighting per section. AI can assist scoring.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"Can it handle multi-entity/multi-country?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "AB InBev — 10 countries. Danone — Mexico in Spanish, India in English."<br><br>
+              <strong>Show:</strong> Multi-entity setup. Currency handling. Language support. Local compliance rules. Master data hierarchy.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"How do vendors really adopt this?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Download to Excel, work offline, upload. Or guided web with magic links. Cars24 — 99% adoption."<br><br>
+              <strong>Show:</strong> Vendor portal. Excel download. Mobile view. Low-tech vendors still work.
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div class="accordion-toggle">+</div>
+              <div>"What about contract management?"</div>
+            </div>
+            <div class="accordion-content">
+              <strong>Response:</strong> "Award auto-triggers PO. For CLM, we integrate with Icertis. Full CLM on roadmap."<br><br>
+              <strong>Show:</strong> PO auto-generation from award. Contract template library. Icertis integration diagram.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 2 Collaterals -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 2 Collaterals (8 Items)</div>
+      <div class="subsection-content">
+        <div class="collateral-grid">
+          <div class="collateral-item">
+            <div class="collateral-number">1</div>
+            <div class="collateral-text">Industry-specific demo flow deck</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">2</div>
+            <div class="collateral-text">Demo environment access (sandbox)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">3</div>
+            <div class="collateral-text">Technical architecture diagram</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">4</div>
+            <div class="collateral-text">Competitive feature matrix</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">5</div>
+            <div class="collateral-text">Use-case specific business case (draft L2)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">6</div>
+            <div class="collateral-text">Demo video recordings (async sharing)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">7</div>
+            <div class="collateral-text">Q&A repository (20+ common questions)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">8</div>
+            <div class="collateral-text">Security/compliance fact sheet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exit Gate Stage 2 -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 2 Exit & Nurture</div>
+      <div class="subsection-content">
+        <div class="box box-exit-gate">
+          <div class="box-title">Exit Gate</div>
+          <div class="box-content">
+            <strong>"Client agrees to workshop?" + 2+ use cases identified?</strong><br><br>
+            <strong>YES + 2+ use cases</strong> → Stage 3<br>
+            <strong>YES + IT security concerns</strong> → Parallel IT/Security Track (alongside Stage 3)<br>
+            <strong>NO</strong> → Nurture Track 2
+          </div>
+        </div>
+
+        <div class="box box-insights">
+          <div class="box-title">Parallel IT/Security Track</div>
+          <div class="box-content">
+            <strong>Runs alongside Stage 2 → Stage 3</strong><br><br>
+            • SOC2 Type II documentation<br>
+            • ISO27001 certification details<br>
+            • GDPR compliance framework<br>
+            • Architecture review with CIO<br>
+            • Data residency options<br>
+            • NSE reference call<br><br>
+            <strong>Timeline:</strong> 4-8 weeks<br>
+            <strong>Critical:</strong> Can overlap with workshop. Don't delay deal for security approval.
+          </div>
+        </div>
+
+        <div class="box box-nurture">
+          <div class="box-title">Nurture Track 2</div>
+          <div class="box-content">
+            <strong>Activities:</strong><br>
+            • Technical POC proposal<br>
+            • Peer reference call (similar industry)<br>
+            • Executive business review<br>
+            • Re-engage with new features<br>
+            • Competitive threat monitor<br><br>
+            <strong>Timeline:</strong> 2-3 months<br><br>
+            <strong>Disqualify:</strong> Chose competitor → 12-month dormancy → re-engage at renewal
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 3: Workshop — Value Engineering & Scope Lock -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div>
+        <div class="section-title">Workshop — Value Engineering & Scope Lock</div>
+        <div class="section-duration">Duration: 3 days (compressible to 5-7 business days async)</div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Workshop Format</div>
+      <div class="subsection-content">
+        <div class="pillar-grid">
+          <div class="pillar">
+            <div class="pillar-title">On-Site (Preferred)</div>
+            <div class="pillar-content">
+              All participants in one room. Faster decisions. Rich conversation. Stakeholder alignment. 3-day immersive. Higher quality output.
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-title">Remote (Acceptable)</div>
+            <div class="pillar-content">
+              Virtual, timezone-aware. Requires 5-7 business days (not consecutive). More stakeholder coordination. Clear daily agenda. Pre-reads essential.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="subsection">
+      <div class="subsection-title">DAY 1: Discovery & Current State</div>
+      <div class="subsection-content">
+        <div class="box box-what-happens">
+          <div class="box-title">What Happens on Day 1</div>
+          <div class="box-content">
+
+            <h4>Activity 1: Structured Discovery Questionnaire</h4>
+            <p><strong>Format:</strong> 50 points total, 25 PRE-FILLED from Stage 0/1 research</p>
+            <p><strong>Position:</strong> "We come prepared. Please confirm these. The remaining 25, we discuss."</p>
+            <ul class="checklist">
+              <li>Organization structure and stakeholder mapping</li>
+              <li>Current procurement volume and transaction types</li>
+              <li>Spend by category and geographic distribution</li>
+              <li>System landscape and integration points</li>
+              <li>Existing processes and approval workflows</li>
+              <li>Pain points and system gaps identified</li>
+              <li>Timeline and resource availability</li>
+              <li>Success metrics and business objectives</li>
+              <li>Security, compliance, and data requirements</li>
+              <li>Executive sponsorship and budget authority</li>
+            </ul>
+
+            <h4>Activity 2: Current Process Walk</h4>
+            <p><strong>Flow:</strong> PR intake → sourcing → evaluation → negotiation → award → PO → payment</p>
+            <p><strong>Output:</strong> Map every step, handoff, bottleneck. Count: steps, hours, people, systems.</p>
+            <ul class="checklist">
+              <li>PR creation (who, how, approval chain)</li>
+              <li>Routing to procurement (SLA, waiting time)</li>
+              <li>Sourcing event creation (template, timing)</li>
+              <li>Vendor engagement (outreach, response time)</li>
+              <li>Response collection (format, tracking)</li>
+              <li>Technical analysis (tools, hours)</li>
+              <li>Evaluation (scorecards, approvers, timeline)</li>
+              <li>Negotiation (iterations, decision makers)</li>
+              <li>Award (justification, approval)</li>
+              <li>PO creation and issuance (systems, cycle time)</li>
+              <li>Post-award (contract, payment, reconciliation)</li>
+            </ul>
+
+            <h4>Activity 3: Stakeholder Interviews (30 min each)</h4>
+            <p><strong>Key Questions by Role:</strong></p>
+            <ul class="checklist">
+              <li><strong>Procurement Lead:</strong> "What's your biggest daily pain? Manual work you'd love to eliminate?"</li>
+              <li><strong>Finance/CFO:</strong> "Where do you lose money? Maverick spend? Payment delays? Contract non-compliance?"</li>
+              <li><strong>IT/CIO:</strong> "What integrations are non-negotiable? Data security requirements? System constraints?"</li>
+              <li><strong>Business Users:</strong> "How do you request spend today? What's broken in that process?"</li>
+              <li><strong>Vendor Manager (if applicable):</strong> "Vendor adoption challenges? Portal usage today?"</li>
+            </ul>
+
+            <h4>Activity 4: Pain Point Quantification</h4>
+            <p><strong>Goal:</strong> Translate pain into dollar value</p>
+            <ul class="checklist">
+              <li><strong>Cycle time:</strong> X days of processing cost → $Y in working capital, delayed decision-making</li>
+              <li><strong>Maverick spend:</strong> X% of spend unmanaged → $Y in missed negotiations, compliance risk</li>
+              <li><strong>Vendor adoption:</strong> X% of vendors use portal, Y% manual follow-up → $Z per month in labor</li>
+              <li><strong>Audit rework:</strong> X hours per quarter in compliance audits → $Y in internal cost + risk</li>
+              <li><strong>Manual data entry:</strong> X transactions × Y minutes each → $Z per year in labor</li>
+              <li><strong>System sprawl:</strong> Spreadsheets, email trails, tribal knowledge → cost of errors + knowledge loss</li>
+            </ul>
+
+            <strong>End of Day 1 Deliverable:</strong> Detailed current state documentation. Quantified pain list. Stakeholder alignment on biggest opportunities.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="subsection">
+      <div class="subsection-title">DAY 2: Value Stream Mapping & Custom Demo</div>
+      <div class="subsection-content">
+        <div class="box box-what-happens">
+          <div class="box-title">What Happens on Day 2</div>
+          <div class="box-content">
+
+            <h4>Activity 1: Value Stream Map</h4>
+            <p><strong>Build visualization:</strong> Current state (left) vs. AerChain future state (right)</p>
+            <p><strong>Current State Example:</strong> 50+ steps, 60+ days, 15+ handoffs, 8 systems, 4 approvers, 80% manual</p>
+            <p><strong>Future State Example:</strong> 15-20 steps, 20-30 days, 3 handoffs, 1 system, 1-2 approvers, 80% automated</p>
+            <p><strong>Quantified Savings:</strong></p>
+            <ul class="checklist">
+              <li>X hours/transaction → Y transactions/year → Z hours saved annually</li>
+              <li>60 days → 25 days = 35 days faster = $A working capital freed</li>
+              <li>80% manual → 20% manual = X FTE redirected to strategic work</li>
+              <li>4 systems → 1 system = data consolidation + compliance ready</li>
+            </ul>
+
+            <h4>Activity 2: Custom Demo (Their Use Cases)</h4>
+            <p><strong>Setup:</strong> Use live data (or similar anonymized data) from their company</p>
+            <p><strong>Scenarios to Demo:</strong></p>
+            <ul class="checklist">
+              <li><strong>Use Case 1:</strong> Biggest pain category (e.g., "High-volume indirect procurement")</li>
+              <li><strong>Use Case 2:</strong> Biggest dollar impact (e.g., "Strategic sourcing events")</li>
+              <li><strong>Use Case 3:</strong> Biggest efficiency gain (e.g., "Self-service catalog")</li>
+            </ul>
+            <p><strong>WOW Moments to Hit:</strong></p>
+            <ul class="checklist">
+              <li>Aiera understanding their business language</li>
+              <li>Automatic routing to their preferred channel</li>
+              <li>AI reading their vendor responses (real format chaos)</li>
+              <li>Sealed bid process with their governance</li>
+              <li>Negotiation strategy pre-filled with their benchmarks</li>
+            </ul>
+
+            <h4>Activity 3: Aiera Configuration</h4>
+            <p><strong>Show how system would handle their workflows:</strong></p>
+            <ul class="checklist">
+              <li>"Here's how YOUR marketing team requests spend" (show co-pilot understanding their language)</li>
+              <li>"Here's how YOUR ops team runs a tender" (show orchestration routing to their process)</li>
+              <li>"Here's YOUR approval chain" (show compliance by design)</li>
+              <li>"Here's YOUR category structure" (show intelligence hub indexing)</li>
+            </ul>
+
+            <h4>Activity 4: Integration Architecture Review</h4>
+            <p><strong>Diagram the ecosystem:</strong> AerChain ↔ ERP (SAP/Oracle) ↔ CLM ↔ Vendor Master ↔ Finance System</p>
+            <p><strong>Data Flow Map:</strong></p>
+            <ul class="checklist">
+              <li><strong>IN:</strong> PR from business system → AerChain intake</li>
+              <li><strong>PROCESS:</strong> Sourcing, evaluation, negotiation in AerChain</li>
+              <li><strong>OUT:</strong> Award → auto-create PO in ERP</li>
+              <li><strong>FEEDBACK:</strong> Invoice reconciliation → compliance intelligence</li>
+            </ul>
+            <p><strong>Technical Requirements Discussed:</strong></p>
+            <ul class="checklist">
+              <li>API endpoints needed</li>
+              <li>Data residency and compliance</li>
+              <li>User authentication (SAML/SSO)</li>
+              <li>Reporting and BI integration</li>
+              <li>Mobile access requirements</li>
+              <li>Audit logging and compliance</li>
+            </ul>
+
+            <strong>End of Day 2 Deliverable:</strong> Value stream map signed off. Custom demo recording for replay. Architecture diagram. Integration requirements list.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="subsection">
+      <div class="subsection-title">DAY 3: Business Case & Implementation Planning</div>
+      <div class="subsection-content">
+        <div class="box box-what-happens">
+          <div class="box-title">What Happens on Day 3</div>
+          <div class="box-content">
+
+            <h4>Activity 1: L2 Business Case Development (80% Accurate)</h4>
+            <p><strong>Structure:</strong> Executive summary → Current state pain → AerChain impact → Financial model → ROI → Implementation timeline</p>
+            <ul class="checklist">
+              <li><strong>Current State (from Day 1):</strong> Quantified pain per use case. Labor cost, working capital, risk.</li>
+              <li><strong>AerChain Impact (from Day 2):</strong> Cycle time reduction, automation percentage, labor redeployment.</li>
+              <li><strong>Financial Model:</strong> 3-year P&L. Costs (software, implementation, training, support). Benefits (labor, working capital, savings).</li>
+              <li><strong>ROI Calculation:</strong> Year 1, Year 2, Year 3. Payback period. 3-year cumulative. IRR.</li>
+              <li><strong>Sensitivities:</strong> If adoption is 80%, if cycle time saves 25% instead of 50%, if 1 FTE retained instead of 2.</li>
+              <li><strong>Risk Mitigation:</strong> Change management plan, training timeline, vendor adoption strategy.</li>
+            </ul>
+
+            <h4>Activity 2: 3 Measurable Outcomes (LOCKED)</h4>
+            <p><strong>What it is:</strong> Specific, measurable, time-bound success criteria. Both sides sign off. Not aspirational. Achievable. Trackable.</p>
+            <p><strong>Template:</strong> "By [specific date], we achieve: (1) ___, (2) ___, (3) ___"</p>
+            <p><strong>Examples:</strong></p>
+            <ul class="checklist">
+              <li>"By Month 6, we achieve 65% of tail spend (under $50K) routed through Orchestrator with 4-day cycle time"</li>
+              <li>"By Month 9, we achieve 50% automation of indirect category sourcing, reducing cycle time from 45 days to 20 days"</li>
+              <li>"By Month 12, we achieve 8% procurement efficiency (vs 2% baseline), delivering $12M net savings"</li>
+            </ul>
+            <p><strong>Why this matters:</strong> Gives implementation a clear finish line. Enables ROI tracking. Builds accountability.</p>
+
+            <h4>Activity 3: 9 Savings Levers Preview</h4>
+            <p><strong>Introduce the opportunity areas:</strong> Not all will apply to all customers. But awareness matters.</p>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Lever</th>
+                  <th>Typical Upside</th>
+                  <th>How It Works</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Demand Aggregation</strong></td>
+                  <td>4-7%</td>
+                  <td>Consolidate fragmented spend, negotiate better rates</td>
+                </tr>
+                <tr>
+                  <td><strong>Contract Compliance</strong></td>
+                  <td>3-6%</td>
+                  <td>Enforce contract terms, prevent off-contract buying</td>
+                </tr>
+                <tr>
+                  <td><strong>Category Consolidation</strong></td>
+                  <td>3-7%</td>
+                  <td>Reduce vendor count, increase leverage</td>
+                </tr>
+                <tr>
+                  <td><strong>Payment Term Compliance</strong></td>
+                  <td>0.2-0.5%</td>
+                  <td>Take available discounts, optimize payment timing</td>
+                </tr>
+                <tr>
+                  <td><strong>Purchase Price Variance</strong></td>
+                  <td>3-6%</td>
+                  <td>Reduce rogue pricing, enforce benchmarks</td>
+                </tr>
+                <tr>
+                  <td><strong>Supplier Rationalization</strong></td>
+                  <td>3-5%</td>
+                  <td>Consolidate suppliers, reduce transaction overhead</td>
+                </tr>
+                <tr>
+                  <td><strong>Supplier Payment Term Optimization</strong></td>
+                  <td>0.5-1.0%</td>
+                  <td>Negotiate better payment terms (30 → 45 → 60 days)</td>
+                </tr>
+                <tr>
+                  <td><strong>Payment Terms Rationalization</strong></td>
+                  <td>0.3-0.8%</td>
+                  <td>Optimize DPO (days payable outstanding) strategy</td>
+                </tr>
+                <tr>
+                  <td><strong>Channel Optimization</strong></td>
+                  <td>1-3%</td>
+                  <td>Route to optimal sourcing path for cost/speed/risk</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>Net Effect:</strong> 2-3% baseline today → 6-8% with AerChain orchestration</p>
+
+            <h4>Activity 4: Wave-Based Category Rollout Plan</h4>
+            <p><strong>Sequencing:</strong> Phased rollout. Quick wins early. Build momentum.</p>
+            <ul class="checklist">
+              <li><strong>Wave 1 (Q1):</strong> Tail Spend (<$50K). Quick wins. High adoption. Minimal risk. Sample: office supplies, subscriptions, miscellaneous services. Goal: Prove value. Build confidence.</li>
+              <li><strong>Wave 2 (Q2):</strong> Indirect Categories. Larger spends. Repeat transactions. Sample: IT services, marketing spend, professional services. Goal: Scale automation. Realize cycle time benefits.</li>
+              <li><strong>Wave 3 (Q3-Q4):</strong> Direct & Strategic. Complex sourcing. High dollar value. Sample: raw materials, equipment, strategic partnerships. Goal: Maximum financial impact. Full orchestration.</li>
+            </ul>
+
+            <h4>Activity 5: Implementation Overview (15-30 min presentation)</h4>
+            <p><strong>16-week phased plan. Shows we care about delivery, not just signing.</strong></p>
+            <p><strong>Phase 1: Discovery & Design (Wk 1-4)</strong></p>
+            <ul class="checklist">
+              <li>Deep technical discovery (data model, integration points, security requirements)</li>
+              <li>Process design workshops (orchestration rules, approval flows, category structure)</li>
+              <li>User stories and requirements definition</li>
+              <li>Kick-off with full team. Establish governance. Assign sponsors.</li>
+            </ul>
+            <p><strong>Phase 2: Build & Configure (Wk 5-10)</strong></p>
+            <ul class="checklist">
+              <li>System configuration (orchestrator rules, AI agent tuning, vendor portal setup)</li>
+              <li>Integration development (ERP connectors, SSO, reporting)</li>
+              <li>Data migration (vendor master, contracts, historical transactions)</li>
+              <li>Training content development (user guides, videos, job aids)</li>
+            </ul>
+            <p><strong>Phase 3: Pilot & Test (Wk 11-13)</strong></p>
+            <ul class="checklist">
+              <li>Pilot with Wave 1 categories (small subset of users, real transactions)</li>
+              <li>UAT with key stakeholders (procurement, finance, business users)</li>
+              <li>Vendor portal pilot (subset of vendors test interface)</li>
+              <li>Performance tuning and bug fixes</li>
+            </ul>
+            <p><strong>Phase 4: Rollout & Hypercare (Wk 14-16)</strong></p>
+            <ul class="checklist">
+              <li>Wave 1 full rollout (all users, all tail spend)</li>
+              <li>Intensive support (dedicated team on-site or embedded)</li>
+              <li>Daily syncs with client. Rapid issue resolution.</li>
+              <li>Wave 2 planning (parallel to Wave 1 hypercare)</li>
+            </ul>
+
+            <h4>Activity 6: Scope Document (Draft)</h4>
+            <p><strong>What's included (P0/P1):</strong></p>
+            <ul class="checklist">
+              <li>Orchestrator configuration for 9 pathways</li>
+              <li>Aiera co-pilot for natural language intake</li>
+              <li>5 AI agents (Intake, Orchestration, Sourcing, Evaluation, Negotiation)</li>
+              <li>RFI/RFP/RFQ workflow with AI support</li>
+              <li>Sealed bid and live auction capabilities</li>
+              <li>Negotiation agent for strategic sourcing</li>
+              <li>Integration with primary ERP (SAP/Oracle/NetSuite)</li>
+              <li>Vendor portal (web + Excel template download)</li>
+              <li>Basic reporting and audit trail</li>
+              <li>16-week implementation as scoped</li>
+              <li>Training for 50 power users + 500 business users</li>
+              <li>3 months of post-go-live support (Hypercare)</li>
+            </ul>
+            <p><strong>What's explicitly excluded (P2/P3):</strong></p>
+            <ul class="checklist">
+              <li>Contract Lifecycle Management (CLM) — separate system, integration available</li>
+              <li>Procure-to-Pay (P2P) full suite — focus on sourcing, PO creation only</li>
+              <li>Supply Chain Visibility — on roadmap, not in scope</li>
+              <li>Supplier Relationship Management (SRM) — future module</li>
+              <li>Advanced BI/Analytics — basic reporting included, advanced analytics future</li>
+              <li>Mobile app for vendors — web + Excel sufficient for Wave 1</li>
+              <li>Multi-language support beyond English/Spanish/Hindi</li>
+            </ul>
+            <p><strong>Client Responsibilities:</strong></p>
+            <ul class="checklist">
+              <li>Executive sponsor commitment (10 hours/month)</li>
+              <li>Business SMEs for discovery (40 hours each)</li>
+              <li>IT resources (1 FTE integration support, 2 weeks) </li>
+              <li>Test data and sample transactions</li>
+              <li>Vendor communication (we provide templates)</li>
+              <li>Training delivery to business users</li>
+              <li>Change management and adoption support</li>
+            </ul>
+
+            <strong>End of Day 3 Deliverable:</strong> Signed-off L2 business case. 3 measurable outcomes document. Detailed implementation timeline. Scope document. Wave-based rollout plan. Executive summary for board approval.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Composition Stage 3 -->
+    <div class="subsection">
+      <div class="subsection-title">Team Composition</div>
+      <div class="subsection-content">
+        <div class="two-column">
+          <div>
+            <div class="column-header">AerChain</div>
+            <div class="pillar-content">
+              • Sales leader (facilitation, executive engagement)<br>
+              • Presales engineer (custom demo, technical Q&A)<br>
+              • Solutions architect (value stream mapping, process design)<br>
+              • Delivery lead (implementation planning, timeline)<br>
+              • Business analyst (L2 business case, ROI modeling)<br>
+              <strong>Total: 5 people for 3 days</strong>
+            </div>
+          </div>
+          <div>
+            <div class="column-header">Client</div>
+            <div class="pillar-content">
+              • CPO/VP Sourcing (executive sponsor, process owner)<br>
+              • Procurement practitioners (day-to-day users, feedback)<br>
+              • Finance/CFO (ROI validation, budget authority)<br>
+              • IT/CIO (architecture sign-off, integration requirements)<br>
+              • Business user representatives (requester perspective)<br>
+              <strong>Ideal: 8-10 people for 3 days</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 3 Collaterals -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 3 Collaterals (13 Items)</div>
+      <div class="subsection-content">
+        <div class="collateral-grid">
+          <div class="collateral-item">
+            <div class="collateral-number">1</div>
+            <div class="collateral-text">Workshop agenda (3-day plan with timings)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">2</div>
+            <div class="collateral-text">Structured discovery questionnaire (pre-filled + discussion notes)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">3</div>
+            <div class="collateral-text">Current state process maps (swimlane diagrams, bottleneck analysis)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">4</div>
+            <div class="collateral-text">Value stream map (current vs. AerChain future state)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">5</div>
+            <div class="collateral-text">Custom demo flow (industry-specific scenarios, recording)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">6</div>
+            <div class="collateral-text">Orchestration design document (9 pathways, routing rules)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">7</div>
+            <div class="collateral-text">L2 business case (30-40 pages, financial model, ROI, sensitivities)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">8</div>
+            <div class="collateral-text">L2 presentation deck (20-30 slides, executive summary)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">9</div>
+            <div class="collateral-text">3 measurable outcomes document (SIGNED by both parties)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">10</div>
+            <div class="collateral-text">9 savings levers analysis (preliminary, per-category estimate)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">11</div>
+            <div class="collateral-text">Wave-based rollout plan (Wave 1/2/3 timeline, categories, dependencies)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">12</div>
+            <div class="collateral-text">Implementation plan overview (16-week, 4-phase, resources, milestones)</div>
+          </div>
+          <div class="collateral-item">
+            <div class="collateral-number">13</div>
+            <div class="collateral-text">Scope document (draft) — inclusions, exclusions, client responsibilities</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exit Gate Stage 3 -->
+    <div class="subsection">
+      <div class="subsection-title">Stage 3 Exit & Next Steps</div>
+      <div class="subsection-content">
+        <div class="box box-exit-gate">
+          <div class="box-title">Exit Gate</div>
+          <div class="box-content">
+            <strong>"L2 business case accepted?"</strong><br><br>
+            <strong>YES + Large deal ($500K+)</strong> → Stage 4 (Contract Negotiation & Closing)<br>
+            <strong>YES + Standard deal ($200K-500K)</strong> → Stage 5 or Stage 6 (varies by procurement)<br>
+            <strong>NO</strong> → Nurture Track 3
+          </div>
+        </div>
+
+        <div class="box box-nurture">
+          <div class="box-title">Nurture Track 3 (Extended Engagement)</div>
+          <div class="box-content">
+            <strong>When to use:</strong> Deal stalled. Not enough budget. No executive sponsor. No timeline clarity.<br><br>
+            <strong>Activities:</strong><br>
+            • Executive business review (CFO + CPO)<br>
+            • Reference call facilitation (peer company in same industry)<br>
+            • IT security deep-dive (CIO + security team)<br>
+            • Pricing flexibility discussion (if budget is barrier)<br>
+            • Change management seminar (for procurement team)<br><br>
+            <strong>Re-engage Triggers:</strong><br>
+            • Budget approval cycle (annual or quarterly)<br>
+            • New fiscal year planning<br>
+            • Executive change (new CPO, CFO, CIO)<br>
+            • Incident/pain event (critical vendor failure, compliance audit finding)<br><br>
+            <strong>Timeline:</strong> 1-2 months of active engagement<br><br>
+            <strong>Disqualify:</strong> No budget + no timeline + no sponsor after 2 months → park 6 months → attempt quarterly re-engagement
+          </div>
+        </div>
+
+        <div class="box box-insights">
+          <div class="box-title">Workshop Success Metrics</div>
+          <div class="box-content">
+            <strong>A successful Stage 3 workshop delivers:</strong><br><br>
+            ✓ Quantified current state with measurable pain<br>
+            ✓ Credible future state (value stream mapped)<br>
+            ✓ L2 business case with 80% accuracy (signed by CFO)<br>
+            ✓ 3 measurable outcomes (specific, measurable, time-bound)<br>
+            ✓ 16-week implementation plan with resources<br>
+            ✓ Wave-based rollout strategy with adoption plan<br>
+            ✓ Executive alignment (CPO + CFO buy-in)<br>
+            ✓ Clear next steps (contract negotiation timeline)<br><br>
+            <strong>Red Flags (deal at risk):</strong><br>
+            ✗ CFO not engaged or skeptical of ROI<br>
+            ✗ No executive sponsor with authority<br>
+            ✗ Unclear timeline or budget constraints<br>
+            ✗ IT security concerns unaddressed<br>
+            ✗ Procurement team resistant to change<br>
+            ✗ Competitive alternatives preferred<br><br>
+            <strong>Next action:</strong> If red flags present, activate Nurture Track 3. Don't force Stage 4.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">STAGE 4</span>
+    <h2 class="section-title">Spend Analysis & L3 Business Case</h2>
+    <span class="section-duration">2-4 weeks</span>
+  </div>
+
+  <div class="subsection">
+    <p><strong>Trigger:</strong> Deals $500K+ or CFO requires deeper financial validation</p>
+    <p style="color: #d32f2f; font-weight: bold;">⚠️ THIS IS A COMPLETE REWRITE. Stage 4 is repositioned as an AI-GENERATED PRODUCT, not a manual consulting exercise.</p>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Overview</h3>
+    <div class="subsection-content">
+      <p>"The L3 Business Case is AerChain's secret weapon. Unlike traditional spend analyses built manually by consultants over months, AerChain's platform auto-generates a comprehensive, client-specific business case from demo1.aerchain.io. The platform analyzes uploaded spend data and produces a complete 60-100 page report with channel mapping, savings opportunities, ROI projections, and implementation roadmap — all generated by Aiera, our AI engine."</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Process Flow</h3>
+    <div class="step-timeline">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-title">CLIENT UPLOADS SPEND DATA (1-2 years historical)</div>
+        <div class="step-content">Supported formats: Excel, CSV, ERP exports. AerChain provides upload template. Typical: 12-24 months of PO/invoice data.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-title">AIERA DATA QUALITY ASSESSMENT</div>
+        <div class="step-content">Completeness score, missing fields, duplicates identified. Data quality report shared with client automatically. "Before we analyze, we ensure the data is clean."</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">AI-POWERED CHANNEL MAPPING</div>
+        <div class="step-content">Aiera maps every transaction to one of 9 Intelligent Pathways: Catalog (12%), Framework Agreements (10%), RC Invoice (6%), Non-PO (5%), Self-Service PO (12%), Autonomous Negotiation (15%), Autonomous Sourcing (15%), Tactical Sourcing (15%), Strategic Sourcing (10%). Each channel shows: spend range, transaction count, number of categories, current state challenges.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-title">9 SAVINGS LEVERS ANALYSIS</div>
+        <div class="step-content">Aiera identifies savings opportunities across 9 cross-cutting levers. Each lever formatted as: Current State → Recommended Action → Reasoning.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-title">VALUE & ROI CALCULATION</div>
+        <div class="step-content">Auto-generated customer-specific ROI. Payback: 12-24 months. 3-Year ROI: 150-220%. 5-Year ROI: 250-400%. NPV: $80M-$150M. Plus benchmark comparisons.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">6</div>
+        <div class="step-title">AUTO-GENERATED BUSINESS CASE REPORT</div>
+        <div class="step-content">Complete 60-100 page L3 including: Discovery Workshop Summary, Current State Challenges, Channel Split, Top Categories, Savings Opportunities, Value & ROI, Implementation Roadmap, Wave-Based Rollout, RACI Matrix, Aiera Observations, Aiera Suggestions.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">9 Savings Opportunity Levers</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Lever</th>
+          <th>Savings Range</th>
+          <th>Annual Impact</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Demand Aggregation</td>
+          <td>4-7%</td>
+          <td>$20M-$35M</td>
+          <td>Consolidate fragmented demand across business units for volume leverage</td>
+        </tr>
+        <tr>
+          <td>Contract Compliance</td>
+          <td>3-6%</td>
+          <td>$10M-$25M</td>
+          <td>Reduce maverick spend, enforce contracted rates and terms</td>
+        </tr>
+        <tr>
+          <td>Category Consolidation</td>
+          <td>3-7%</td>
+          <td>Tens of millions</td>
+          <td>Rationalize categories, improve negotiation focus and governance</td>
+        </tr>
+        <tr>
+          <td>Payment Term Compliance</td>
+          <td>0.2-0.5%</td>
+          <td>$1M-$3M/yr</td>
+          <td>Capture early payment discounts, avoid late payment penalties</td>
+        </tr>
+        <tr>
+          <td>Purchase Price Variance</td>
+          <td>3-6%</td>
+          <td>$15M-$30M/yr</td>
+          <td>Reduce price dispersion across categories (IT, services, marketing)</td>
+        </tr>
+        <tr>
+          <td>Supplier Rationalization</td>
+          <td>3-5%</td>
+          <td>$10M-$20M</td>
+          <td>Reduce one-time vendors, consolidate tail spend</td>
+        </tr>
+        <tr>
+          <td>Payment Term Rationalization</td>
+          <td>0.5-1.0%</td>
+          <td>$3M-$6M</td>
+          <td>Optimize payment terms across supplier base</td>
+        </tr>
+        <tr>
+          <td>Supplier Payment Term Optimization</td>
+          <td>0.3-0.8%</td>
+          <td>$2M-$5M</td>
+          <td>Negotiate better payment windows</td>
+        </tr>
+        <tr>
+          <td>Channel Optimization</td>
+          <td>Implicit</td>
+          <td>Embedded</td>
+          <td>Right channel = right process = right cost</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="box box-insights">
+      <div class="box-title">Net Effect</div>
+      <div class="box-content">Before AerChain = 2-3% procurement efficiency → After AerChain = 6-8% procurement efficiency. The savings levers are cross-cutting — they apply across channels, not within them.</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Dual ROI Profile</h3>
+    <div class="two-column">
+      <div>
+        <div class="column-header">Generic ROI (for early conversations, Stages 1-3)</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Payback Period</td>
+              <td>8 months</td>
+            </tr>
+            <tr>
+              <td>3-Year ROI</td>
+              <td>12.5x</td>
+            </tr>
+            <tr>
+              <td>5-Year ROI</td>
+              <td>24x</td>
+            </tr>
+            <tr>
+              <td>5-Year NPV</td>
+              <td>$45.2M</td>
+            </tr>
+            <tr>
+              <td>Cycle Time Reduction</td>
+              <td>60%</td>
+            </tr>
+            <tr>
+              <td>Buyer Productivity Gain</td>
+              <td>40%</td>
+            </tr>
+            <tr>
+              <td>Compliance Rate</td>
+              <td>85%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="column-header">Customer-Specific ROI (auto-generated at Stage 4)</div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Payback Period</td>
+              <td>12-24 months</td>
+            </tr>
+            <tr>
+              <td>3-Year ROI</td>
+              <td>150-220%</td>
+            </tr>
+            <tr>
+              <td>5-Year ROI</td>
+              <td>250-400%</td>
+            </tr>
+            <tr>
+              <td>NPV</td>
+              <td>$80M-$150M</td>
+            </tr>
+            <tr>
+              <td>Net Procurement Efficiency</td>
+              <td>6-8% (vs 2-3% current)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Wave-Based Category Rollout</h3>
+    <div class="step-timeline">
+      <div class="step">
+        <div class="step-number">Wave 1</div>
+        <div class="step-title">TAIL SPEND (&lt;$50K) — Q1</div>
+        <div class="step-content">Quick wins. Low complexity categories. Prove the platform works. Build user confidence. Typical: Self-Service PO, Catalog channels.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">Wave 2</div>
+        <div class="step-title">INDIRECT CATEGORIES — Q2</div>
+        <div class="step-content">Build on Wave 1 success. Expand to mid-complexity indirect spend (IT, marketing, facilities, travel). Introduce Tactical Sourcing and Autonomous Sourcing channels.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">Wave 3</div>
+        <div class="step-title">DIRECT & STRATEGIC — Q3-Q4</div>
+        <div class="step-content">Full value. Complex categories with high spend. Strategic Sourcing events. Deep supplier collaboration. Maximum savings from Demand Aggregation and Purchase Price Variance levers.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">RACI Matrix</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Activity</th>
+          <th>AerChain</th>
+          <th>Client</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Spend Data Upload</td>
+          <td>Support</td>
+          <td>Responsible</td>
+        </tr>
+        <tr>
+          <td>Data Quality Assessment</td>
+          <td>Responsible</td>
+          <td>Informed</td>
+        </tr>
+        <tr>
+          <td>Channel Mapping</td>
+          <td>Responsible</td>
+          <td>Consulted</td>
+        </tr>
+        <tr>
+          <td>Savings Analysis</td>
+          <td>Responsible</td>
+          <td>Consulted</td>
+        </tr>
+        <tr>
+          <td>ROI Calculation</td>
+          <td>Responsible</td>
+          <td>Consulted</td>
+        </tr>
+        <tr>
+          <td>Business Case Presentation</td>
+          <td>Responsible</td>
+          <td>Accountable</td>
+        </tr>
+        <tr>
+          <td>Implementation Planning</td>
+          <td>Responsible</td>
+          <td>Accountable</td>
+        </tr>
+        <tr>
+          <td>Wave Rollout Design</td>
+          <td>Responsible</td>
+          <td>Consulted</td>
+        </tr>
+        <tr>
+          <td>Change Management</td>
+          <td>Consulted</td>
+          <td>Responsible</td>
+        </tr>
+        <tr>
+          <td>User Training</td>
+          <td>Responsible</td>
+          <td>Accountable</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Aiera Intelligence Outputs</h3>
+    <div class="box box-what-happens">
+      <div class="box-title">What Aiera Generates Automatically</div>
+      <div class="box-content">
+        <p>The L3 report includes two AI-generated intelligence sections:</p>
+        <ul class="checklist">
+          <li><strong>Aiera Observations (10 AI-generated insights)</strong> — Pattern recognition across the spend data. Examples: "Cloud spend is fragmented across 47 vendors with no framework agreement" / "Top 10 categories represent 68% of spend but only 32% of transactions"</li>
+          <li><strong>Aiera Business Case Suggestions (8 AI recommendations)</strong> — Actionable next steps. Examples: "Consolidate SaaS vendors from 47 to 12 using Framework Agreements channel" / "Implement autonomous negotiation for repeat purchases under $100K"</li>
+        </ul>
+        <p>"These AI-generated insights are what make the L3 a product, not a report. The client sees intelligence they've never seen before — generated in hours, not months."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Collaterals</h3>
+    <div class="collateral-grid">
+      <div class="collateral-item">
+        <div class="collateral-number">1</div>
+        <div class="collateral-text">Spend data upload template</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">2</div>
+        <div class="collateral-text">Data quality report (auto-generated)</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">3</div>
+        <div class="collateral-text">L3 business case (60-100 pages, auto-generated)</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">4</div>
+        <div class="collateral-text">L3 executive summary deck (25-35 slides)</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">5</div>
+        <div class="collateral-text">Channel mapping analysis</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">6</div>
+        <div class="collateral-text">9 Savings levers breakdown</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">7</div>
+        <div class="collateral-text">Dual ROI model (generic + customer-specific)</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">8</div>
+        <div class="collateral-text">Wave-based category rollout plan</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">9</div>
+        <div class="collateral-text">RACI matrix</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">10</div>
+        <div class="collateral-text">Credit consumption model</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Exit Gate</h3>
+    <div class="box box-exit-gate">
+      <div class="box-title">Stage 4 Exit Gate</div>
+      <div class="box-content">"L3 accepted by all stakeholders?" <strong>YES</strong> → Stage 5 (Customized Demo) or Stage 6 (Post-Demo Closing). Numbers questioned → Refine with client, re-present within 2 weeks.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">STAGE 5</span>
+    <h2 class="section-title">Customized Demo</h2>
+    <span class="section-duration">1-2 sessions (2-3 hours total)</span>
+  </div>
+
+  <div class="subsection">
+    <p><strong>Trigger:</strong> Complex deals where standard demo isn't sufficient, or client needs to validate exact match</p>
+  </div>
+
+  <div class="subsection">
+    <p><strong>Tagline:</strong> Truth in Selling</p>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Overview</h3>
+    <div class="subsection-content">
+      <p>"This is the 'try before you buy' moment. Unlike the Stage 2 demo which uses generic data, the Stage 5 demo uses the CLIENT'S actual data, thresholds, and configurations. The message: 'This is exactly what you will get.'"</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">What's Different from Stage 2</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Stage 2 Demo</th>
+          <th>Stage 5 Demo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sample Data</td>
+          <td>Generic sample data</td>
+          <td>THEIR actual spend data</td>
+        </tr>
+        <tr>
+          <td>Thresholds</td>
+          <td>Generic orchestration rules</td>
+          <td>THEIR policy-based routing rules</td>
+        </tr>
+        <tr>
+          <td>T&Cs</td>
+          <td>Standard terms</td>
+          <td>THEIR contract terms & conditions</td>
+        </tr>
+        <tr>
+          <td>Vendors</td>
+          <td>Sample vendor names</td>
+          <td>THEIR actual vendor names</td>
+        </tr>
+        <tr>
+          <td>Tone</td>
+          <td>"Imagine this with your data"</td>
+          <td>"This IS your data. This IS your system."</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Key Demo Elements</h3>
+    <ul class="checklist">
+      <li>Orchestration with THEIR thresholds and policy rules — 9 channels with their spend distribution</li>
+      <li>RFI/RFP/RFQ with THEIR T&Cs, categories, and vendor types</li>
+      <li>Aiera Co-pilot configured for THEIR business user personas</li>
+      <li>Historical vendor data loaded — recommendations based on THEIR spend history</li>
+      <li>Integration architecture validated — ERP connections, data flow confirmed</li>
+      <li>User roles and permissions configured — THEIR organizational structure</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Collaterals</h3>
+    <div class="collateral-grid">
+      <div class="collateral-item">
+        <div class="collateral-number">1</div>
+        <div class="collateral-text">Customized demo environment (their data loaded)</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">2</div>
+        <div class="collateral-text">Configuration specification document</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">3</div>
+        <div class="collateral-text">Integration architecture diagram (validated)</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">4</div>
+        <div class="collateral-text">UAT plan (test scenarios + success criteria)</div>
+      </div>
+      <div class="collateral-item">
+        <div class="collateral-number">5</div>
+        <div class="collateral-text">Training roadmap (by user persona)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Exit Gate</h3>
+    <div class="box box-exit-gate">
+      <div class="box-title">Stage 5 Exit Gate</div>
+      <div class="box-content">"Client confirms: 'This matches what we discussed'?" <strong>YES</strong> → Stage 6 (Post-Demo Closing Motion). GAP FOUND → Adjust scope, re-demo within 1 week.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">STAGE 6</span>
+    <h2 class="section-title">Post-Demo Closing Motion — Multi-Threaded Sales Execution</h2>
+    <span class="section-duration">Duration: 4-8 weeks</span>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Overview</h3>
+    <div class="subsection-content">
+      <p>The Post-Demo Closing Motion is where enterprise deals are won or lost. The prospect has seen the product, believes in the value, and wants to proceed — but they haven't committed. Multiple stakeholders need to be aligned, internal champions need to be armed, IT needs to clear security, references need to validate claims, and executives need to see the strategic picture. This stage is multi-threaded: 6 workstreams run in parallel, each with its own timeline and owner.</p>
+      <p><strong>THIS IS ENTIRELY NEW.</strong> This is the most critical and often longest stage in enterprise sales — the period between "they want to buy" and "they've committed to buy."</p>
+    </div>
+  </div>
+
+  <div class="box box-insights">
+    <div class="box-title">Visual Overview: 6 Parallel Threads</div>
+    <div class="box-content">
+      <p><strong>6A: Champion Enablement</strong> (Week 1-2) → <strong>6B: Multi-Stakeholder Threading</strong> (Week 1-6) → <strong>6C: IT/Security Evaluation</strong> (Week 1-8) → <strong>6D: Reference Calls</strong> (Week 2-4) → <strong>6E: Executive Alignment</strong> (Week 3-6) → <strong>6F: POC/Pilot Decision</strong> (Week 4-8, conditional)</p>
+      <p><em>These threads run in PARALLEL, not sequentially. The sales team must manage all threads simultaneously.</em></p>
+    </div>
+  </div>
+
+  <!-- 6A: Champion Enablement -->
+  <div class="subsection">
+    <h3 class="subsection-title">6A: Champion Enablement</h3>
+    <p><strong>Duration:</strong> Week 1-2 | <strong>Owner:</strong> Sales Lead</p>
+
+    <div class="subsection-content">
+      <p>The internal champion (usually CPO or VP Sourcing) must sell AerChain inside their own organization. They'll face questions from Finance, IT, CEO, and procurement team leads. They need:</p>
+
+      <h4>Champion Enablement Checklist</h4>
+      <ul class="checklist">
+        <li>Internal business case deck — NOT your sales deck. THEIR deck, in THEIR language, with THEIR numbers from L2/L3</li>
+        <li>ROI summary one-pager for CFO — "Here's the financial case in one page: $28M Year 1 savings potential, 8-month payback, 12.5x 3-year ROI"</li>
+        <li>Technical architecture summary for CIO — Integration points, security posture, data flow, deployment model</li>
+        <li>"Why Now" arguments — Cost of delay (every month without AerChain = $X in missed savings), competitive risk, fiscal year timing, budget cycle alignment</li>
+        <li>Top 10 internal objection answers — Pre-scripted responses to: "Why not Ariba?", "Can a startup handle our scale?", "What if AI makes mistakes?", etc.</li>
+        <li>Champion enablement kit — Complete sales toolkit: talking points, data sheets, competitor comparison, case studies, reference contacts</li>
+      </ul>
+    </div>
+
+    <div class="box box-insights">
+      <div class="box-title">Key Insight</div>
+      <div class="box-content">
+        <p>Your champion is your internal sales team. If they can't sell AerChain when you're NOT in the room, the deal dies. Invest in arming them.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6B: Multi-Stakeholder Threading -->
+  <div class="subsection">
+    <h3 class="subsection-title">6B: Multi-Stakeholder Threading</h3>
+    <p><strong>Duration:</strong> Week 1-6 (ongoing) | <strong>Owner:</strong> Sales Lead + Solutions Architect + Delivery Lead</p>
+
+    <div class="subsection-content">
+      <p>You cannot close an enterprise deal selling to one person. Each stakeholder needs a different conversation, different collateral, and different AerChain person leading it.</p>
+
+      <h4>Stakeholder Threads</h4>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Stakeholder</th>
+            <th>Their Concern</th>
+            <th>AerChain Lead</th>
+            <th>Key Collateral</th>
+            <th>Key Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CPO / VP Sourcing</td>
+            <td>Adoption, team impact, process change</td>
+            <td>Sales Lead</td>
+            <td>Platform demo, case studies</td>
+            <td>"Your team does 4-5x more strategic work"</td>
+          </tr>
+          <tr>
+            <td>CFO / Finance</td>
+            <td>ROI, TCO, payback, budget classification</td>
+            <td>Sales Lead + BA</td>
+            <td>L3 ROI model, financial case</td>
+            <td>"8-month payback, 12.5x 3-year ROI"</td>
+          </tr>
+          <tr>
+            <td>CIO / IT</td>
+            <td>Security, architecture, integration, data</td>
+            <td>Solutions Architect</td>
+            <td>Security brief, architecture diagram</td>
+            <td>"SOC2 Type II, NSE-cleared, 16-week integration"</td>
+          </tr>
+          <tr>
+            <td>CEO / MD</td>
+            <td>Strategic vision, competitive advantage</td>
+            <td>CEO (Harsha/Gaurav)</td>
+            <td>Executive brief, transformation narrative</td>
+            <td>"Procurement as competitive advantage"</td>
+          </tr>
+          <tr>
+            <td>Procurement Team Leads</td>
+            <td>Day-to-day usage, learning curve, adoption</td>
+            <td>Presales Engineer</td>
+            <td>User testimonials, training roadmap</td>
+            <td>"Cars24: 99% adoption. It makes your job easier."</td>
+          </tr>
+          <tr>
+            <td>Legal</td>
+            <td>MSA, DPA, liability, IP, SLAs</td>
+            <td>Sales Lead + Legal</td>
+            <td>Contract templates, compliance docs</td>
+            <td>"Standard MSA, GDPR-compliant DPA"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-insights">
+      <div class="box-title">Key Insight</div>
+      <div class="box-content">
+        <p>Multi-threading means PARALLEL conversations, not sequential. While the champion is building internal support, you're simultaneously running IT security, reference calls, and executive alignment.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6C: IT / Security Evaluation -->
+  <div class="subsection">
+    <h3 class="subsection-title">6C: IT / Security Evaluation</h3>
+    <p><strong>Duration:</strong> 4-8 weeks (often the longest thread — can block deals) | <strong>Owner:</strong> Solutions Architect</p>
+
+    <div class="subsection-content">
+      <p>This is the #1 deal blocker in enterprise sales. IT/Security teams have their own evaluation process, and it cannot be rushed. But it CAN be managed proactively.</p>
+
+      <h4>IT/Security Evaluation Checklist</h4>
+      <ul class="checklist">
+        <li>Security questionnaire responses — Often 200-500 questions. AerChain maintains pre-filled templates for major frameworks (SIG, CAIQ, custom). Typical turnaround: 1-2 weeks.</li>
+        <li>Architecture review session — Dedicated session with client's IT team. Covers: deployment model (cloud-native, multi-tenant), data flow, API architecture, scalability.</li>
+        <li>SOC2 Type II report sharing — Current Type II report. Covers: security, availability, processing integrity, confidentiality, privacy.</li>
+        <li>ISO27001 certification — Active certification documentation shared.</li>
+        <li>GDPR compliance documentation — Data processing agreement (DPA) template, data residency options, right-to-deletion procedures.</li>
+        <li>Penetration testing results — If required by client's security team. Annual pen test results available.</li>
+        <li>Data residency and encryption discussion — Where data is stored, encryption at rest and in transit, key management.</li>
+        <li>Vendor risk assessment — Respond to client's vendor risk assessment process. Reference: "NSE cleared us after 6-7 months of the most rigorous security evaluation in Indian financial services — only cloud provider approved."</li>
+      </ul>
+    </div>
+
+    <div class="box box-insights">
+      <div class="box-title">Key Insight</div>
+      <div class="box-content">
+        <p>Start IT/Security evaluation as EARLY as possible — ideally during Stage 2/3, running in parallel with the workshop. Don't wait until Stage 6. The earlier you start, the less it blocks the deal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6D: Reference Calls -->
+  <div class="subsection">
+    <h3 class="subsection-title">6D: Reference Calls</h3>
+    <p><strong>Duration:</strong> Week 2-4 | <strong>Owner:</strong> Sales Lead + Customer Success</p>
+
+    <div class="subsection-content">
+      <p>Structured reference program — not ad-hoc phone calls. Each reference call is prepared, briefed, and followed up.</p>
+
+      <h4>Reference Call Types</h4>
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="pillar-title">Peer-to-Peer (CPO to CPO)</div>
+          <div class="pillar-content">"Connect your prospect's CPO with a customer CPO. Cars24/Anupam Iyer: '99% adoption within 3 months.' WeWork/Suresh TH: '100% spend under management.'"</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Practitioner-to-Practitioner</div>
+          <div class="pillar-content">"Connect sourcing managers. Day-to-day experience, user interface, adoption journey, vendor reactions."</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">IT-to-IT</div>
+          <div class="pillar-content">"Connect CIOs or security leads. Integration experience, security evaluation findings, data migration, performance."</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">CFO-to-CFO</div>
+          <div class="pillar-content">"If budget is the blocker — connect finance leaders. Manjushree/Ayanish Sen: '4.5% savings.' ROI validation from peer."</div>
+        </div>
+      </div>
+
+      <h4>Reference Call Protocol</h4>
+      <ul class="checklist">
+        <li>Pre-brief the reference: Share context on prospect, what they care about, what questions to expect</li>
+        <li>Prepare the prospect: Set expectations — "You'll speak with [name] from [company], they've been live for X months"</li>
+        <li>Facilitate the call: AerChain team on the call but in listen mode — let the reference do the talking</li>
+        <li>Follow up: Capture feedback from prospect within 24 hours. Address any concerns raised.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6E: Executive Alignment -->
+  <div class="subsection">
+    <h3 class="subsection-title">6E: Executive Alignment</h3>
+    <p><strong>Duration:</strong> Week 3-6 (for deals $500K+ or where CEO/board sign-off required) | <strong>Owner:</strong> CEO (Harsha/Gaurav)</p>
+
+    <div class="subsection-content">
+      <p>For large deals, executive-to-executive conversation closes the strategic alignment gap.</p>
+
+      <h4>Executive Alignment Activities</h4>
+      <ul class="checklist">
+        <li>CEO-to-CEO conversation — Harsha/Gaurav with client CEO/MD. Not a sales pitch — strategic partnership discussion. "Procurement as competitive advantage in your industry."</li>
+        <li>Board presentation support — Help champion prepare board deck if board approval required. Provide: financial model, competitive landscape, implementation de-risk narrative.</li>
+        <li>Strategic partnership framing — Position AerChain not as a vendor but as a transformation partner. Joint roadmap, shared success metrics, co-innovation opportunities.</li>
+        <li>Case study deep-dive — Walk through detailed results: Global FMCG: 60% cycle time reduction, $28M Year 1 savings. Leading Pharma: 85% compliance, 40% buyer productivity. Infrastructure Major: 50% faster onboarding, 12.5x 3-year ROI.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6F: POC / Pilot Decision -->
+  <div class="subsection">
+    <h3 class="subsection-title">6F: POC / Pilot Decision</h3>
+    <p><strong>Duration:</strong> Week 4-8 (if needed) | <strong>Owner:</strong> Presales Engineer + Delivery Lead</p>
+
+    <div class="subsection-content">
+      <p>Sometimes needed to de-risk the decision, especially for risk-averse organizations or when there's no clear internal champion.</p>
+
+      <div class="box box-what-happens">
+        <div class="box-title">POC Decision Framework</div>
+        <div class="box-content">
+          <p><strong>When to recommend POC:</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>Client has no prior SaaS procurement experience</li>
+            <li>Internal champion is mid-level without executive air cover</li>
+            <li>Competitor incumbent is entrenched and needs to be displaced</li>
+            <li>Budget requires board approval and board wants proof</li>
+          </ul>
+          <p><strong>When to skip POC:</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>Strong executive sponsor</li>
+            <li>L3 business case accepted</li>
+            <li>Reference calls built confidence</li>
+            <li>Time pressure (fiscal year, competitive deal)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>POC Structure (if needed)</h4>
+      <ul class="checklist">
+        <li>Duration: 4-6 weeks with real (or sanitized) client data</li>
+        <li>Scope: 2-3 specific use cases, 1-2 channels activated</li>
+        <li>Success criteria: Defined and agreed upfront (e.g., "80%+ user adoption in pilot group", "50%+ cycle time reduction for pilot categories")</li>
+        <li>Team: Dedicated AerChain presales + delivery resource</li>
+        <li>Go/No-Go: Documented results presented to decision committee</li>
+        <li>Conversion: POC converts to production if successful — NOT throw-away. Data and configurations carry forward.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Collaterals Produced -->
+  <div class="subsection">
+    <h3 class="subsection-title">Collaterals Produced at Stage 6</h3>
+
+    <div class="subsection-content">
+      <div class="collateral-grid">
+        <div class="collateral-item">
+          <div class="collateral-number">1</div>
+          <div class="collateral-text">Champion enablement kit (internal business case deck + talking points)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">2</div>
+          <div class="collateral-text">ROI summary one-pager (for CFO)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">3</div>
+          <div class="collateral-text">Technical architecture brief (for CIO)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">4</div>
+          <div class="collateral-text">"Why Now" arguments document</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">5</div>
+          <div class="collateral-text">Internal objection handler (top 10)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">6</div>
+          <div class="collateral-text">Multi-stakeholder positioning matrix</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">7</div>
+          <div class="collateral-text">Security questionnaire responses (pre-filled)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">8</div>
+          <div class="collateral-text">Reference call scripts and prep materials</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">9</div>
+          <div class="collateral-text">Executive brief (for CEO/board)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">10</div>
+          <div class="collateral-text">POC scope document (if applicable)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">11</div>
+          <div class="collateral-text">POC results presentation (if applicable)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">12</div>
+          <div class="collateral-text">Competitive differentiation deck</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exit Gate -->
+  <div class="box box-exit-gate">
+    <div class="box-title">Exit Gate: Stage 6 → Stage 7</div>
+    <div class="box-content">
+      <p><strong>All stakeholders aligned? Champion armed? IT cleared? References validated?</strong></p>
+      <p><strong>YES</strong> → <em>Stage 7 (Commercial Proposal)</em></p>
+      <p><strong>PARTIAL</strong> — IT still in progress but business aligned → <em>Move to Stage 7 in parallel with IT (contracts can be negotiated while IT evaluates)</em></p>
+      <p><strong>NO</strong> — champion lost / executive misalignment → <em>Enter Nurture Track 6</em></p>
+    </div>
+  </div>
+
+  <!-- Nurture Track 6 -->
+  <div class="box box-nurture">
+    <div class="box-title">Nurture Track 6: Deal Stall Recovery</div>
+    <div class="box-content">
+      <p><strong>If deal stalls at Post-Demo Closing:</strong></p>
+      <ul style="margin-left: 20px;">
+        <li><strong>New champion identification</strong> — If original champion left or lost influence</li>
+        <li><strong>Executive re-engagement</strong> — CEO-to-CEO if needed</li>
+        <li><strong>New reference calls</strong> — Different industry, different use case</li>
+        <li><strong>Competitive win-back</strong> — If competitor made a move</li>
+        <li><strong>Re-engage trigger:</strong> Leadership change, budget cycle, competitor failure, new pain point</li>
+        <li><strong>Timeline:</strong> 3-6 months active pursuit</li>
+        <li><strong>Disqualify:</strong> No progress after 6 months → park for annual review</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+<body>
+
+<!-- STAGE 7: Commercial Proposal, Negotiation & Contracting -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">7</span>
+    <div>
+      <h1 class="section-title">Commercial Proposal, Negotiation & Contracting</h1>
+      <div class="section-duration">Duration: 4-8 weeks</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">Overview</h2>
+    <div class="subsection-content">
+      <p>"This stage covers the complete commercial journey from proposal delivery to contract signature. Unlike a simple 'send proposal → get sign-off' process, enterprise contracting involves multiple rounds of review, an implementation deep-dive to build delivery confidence, commercial negotiation, legal review, and internal budget approval. Each sub-stage is detailed below."</p>
+    </div>
+  </div>
+
+  <!-- 7A: Proposal Delivery & Review -->
+  <div class="subsection">
+    <h2 class="subsection-title">7A: Proposal Delivery & Review</h2>
+    <div class="subsection-content">
+      <p><strong>Duration: 1-2 weeks</strong></p>
+
+      <h3>Commercial Proposal Structure</h3>
+      <div class="step-timeline">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-title">EXECUTIVE SUMMARY</div>
+          <div class="step-content">2 pages — Value proposition recap, key outcomes promised (from 3 measurable outcomes in Stage 3), total investment overview</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-title">SCOPE</div>
+          <div class="step-content">5 pages — INCLUSIONS: P0/P1 features, modules deployed, channels activated. EXCLUSIONS: P2/P3 features, CLM, AP automation. CLIENT RESPONSIBILITIES: data, change management, user training support. RACI MATRIX included.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-title">PRICING BREAKDOWN</div>
+          <div class="step-content">3 pages — Product: Credits (consumption-based) + Named Users. Services: Implementation + Training + On-site. Additional: Custom fields, premium support. TOTAL: Year 1 / Year 2 / Year 3. ★ "Add element → Price ↑ → Timeline ↑" visible.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-title">SERVICES DETAIL</div>
+          <div class="step-content">3 pages — Rate card (per role, per day). Implementation timeline (16 weeks, 4 phases). On-site: 30 days included, then $200-400/day. Training: Procurement team (2-day), Business users (4-hour).</div>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-title">IMPLEMENTATION ROADMAP</div>
+          <div class="step-content">2 pages — Phase 1: Discovery & Design (Wk 1-4). Phase 2: Build & Configure (Wk 5-10). Phase 3: Pilot & Test (Wk 11-13). Phase 4: Rollout & Hypercare (Wk 14-16). Wave-based rollout plan included.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">6</div>
+          <div class="step-title">GOVERNANCE</div>
+          <div class="step-content">1 page — Weekly calls (first 4 weeks post-kickoff). Monthly steering committee. Escalation path defined.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">7</div>
+          <div class="step-title">SUCCESS METRICS</div>
+          <div class="step-content">1 page — 3 measurable outcomes from Stage 3. Tracking approach + cadence. Quarterly business reviews.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">8</div>
+          <div class="step-title">PAYMENT TERMS</div>
+          <div class="step-content">1 page — Annual / Quarterly / Milestone-based options.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">9</div>
+          <div class="step-title">T&Cs + MSA + DPA</div>
+          <div class="step-content">Attached as separate documents.</div>
+        </div>
+      </div>
+
+      <h3>Pricing Control Mechanism</h3>
+      <div class="box box-insights">
+        <div class="box-title">Pricing Control Mechanism</div>
+        <div class="box-content">
+          <p><strong>CRITICAL PHILOSOPHY:</strong> "Put a price to everything. 80% of asks disappear." Customer asks for custom field → '$5-10K per field, +2 weeks timeline.' Customer asks for extended on-site → '$200-400/day after Month 1.' Customer asks for additional integration → '$20-50K, +4 weeks.'</p>
+          <p><strong>CHANGE REQUEST ORDER FORM:</strong> Instant pricing + timeline impact → Customer approves/declines.</p>
+        </div>
+      </div>
+
+      <h3>"What We Explicitly Don't Do"</h3>
+      <div class="box box-objection">
+        <div class="box-title">Scope Guardrails</div>
+        <div class="box-content">
+          <p>Include this in the proposal as scope guardrails:</p>
+          <ul class="checklist">
+            <li>No blank canvas implementations — We sell a product, not custom software development</li>
+            <li>No endless bespoke workflows — Standardization enables faster value delivery</li>
+            <li>No deep edge-case re-engineering — Focus on 80% value, not 100% perfection</li>
+            <li>No document signing workflows — Roadmap item; currently integrate with DocuSign/Adobe Sign</li>
+          </ul>
+          <p>These guardrails protect BOTH sides. They ensure predictable delivery and faster time-to-value.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7B: Implementation Deep-Dive -->
+  <div class="subsection">
+    <h2 class="subsection-title">7B: Implementation Deep-Dive</h2>
+    <div class="subsection-content">
+      <p><strong>Duration: 1 session (2-3 hours)</strong></p>
+      <p><strong>Purpose:</strong> Build confidence that AerChain can deliver, not just sell.</p>
+
+      <p>This is a dedicated session focused entirely on "how will this actually work?"</p>
+
+      <h3>Content</h3>
+      <ul class="checklist">
+        <li>16-week implementation plan walkthrough — Phase by phase, milestone by milestone, dependency by dependency</li>
+        <li>Wave-based category rollout — Wave 1: Tail (<$50K) Q1. Wave 2: Indirect Q2. Wave 3: Direct & Strategic Q3-Q4</li>
+        <li>RACI matrix — Who does what. AerChain responsibilities vs. Client responsibilities. No ambiguity.</li>
+        <li>Resource commitment — AerChain: Implementation lead + Solution architect + Training specialist. Client: Project sponsor + IT resource + Change management lead + 2-3 power users.</li>
+        <li>Change management approach — "It's not a technology project, it's a change project." User adoption strategy, communication plan, training plan.</li>
+        <li>Risk mitigation — Known risks and mitigation plans. Data quality, change resistance, integration complexity, vendor adoption.</li>
+        <li>Success criteria and go-live gates — What "done" looks like for each phase. No ambiguity.</li>
+      </ul>
+
+      <h3>Key Insight</h3>
+      <div class="box box-insights">
+        <div class="box-title">Conversion Through Delivery Confidence</div>
+        <div class="box-content">
+          <p>"Include implementation in the workshop. Shows we care about delivery, not just signing." — This session converts skeptics. When the client sees a detailed 16-week plan with clear ownership, their confidence skyrockets.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7C: Negotiation Rounds -->
+  <div class="subsection">
+    <h2 class="subsection-title">7C: Negotiation Rounds</h2>
+    <div class="subsection-content">
+      <p><strong>Duration: 2-4 weeks (typically 2-4 rounds)</strong></p>
+
+      <h3>Negotiation Dimensions</h3>
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="pillar-title">SCOPE NEGOTIATION</div>
+          <div class="pillar-content">"What's in, what's out, what costs extra. Never add scope without adding price. Change Request Order Form for every addition."</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">PRICE NEGOTIATION</div>
+          <div class="pillar-content">"Credit-based pricing model. Named user pricing. Custom field pricing. NEVER discount without scope reduction. 'Every dollar removed = feature/service removed.'"</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">TERMS NEGOTIATION</div>
+          <div class="pillar-content">"Payment terms flexibility: annual → quarterly → milestone. SLA commitments: uptime guarantees, response times. Liability caps and insurance."</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">TIMELINE NEGOTIATION</div>
+          <div class="pillar-content">"Go-live date, milestone dates. Phase adjustments based on client readiness. Phased pricing if phased deployment."</div>
+        </div>
+      </div>
+
+      <h3>Negotiation Levers</h3>
+      <ul class="checklist">
+        <li>Payment terms flexibility (annual → quarterly → milestone)</li>
+        <li>Scope reduction (fewer categories, fewer users, fewer channels)</li>
+        <li>Phased pricing (Year 1 lighter, Year 2 full)</li>
+        <li>Pilot pricing (3-month pilot at reduced rate, then full license)</li>
+        <li>NEVER: Discount without scope reduction</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7D: Legal Review & Contracting -->
+  <div class="subsection">
+    <h2 class="subsection-title">7D: Legal Review & Contracting</h2>
+    <div class="subsection-content">
+      <p><strong>Duration: 2-6 weeks</strong></p>
+
+      <h3>Legal Documents</h3>
+      <ul class="checklist">
+        <li>Master Service Agreement (MSA) — Standard AerChain MSA shared. Client legal reviews and marks up. Typically 2-3 rounds of redlining. Key clauses: liability caps, indemnification, IP ownership, termination.</li>
+        <li>Data Processing Agreement (DPA) — GDPR-compliant template. Data residency, retention, right-to-deletion, breach notification.</li>
+        <li>Service Level Agreement (SLA) — Uptime commitments, response times, resolution times, escalation procedures.</li>
+        <li>Statement of Work (SOW) — Detailed scope per wave/phase. Deliverables, timeline, acceptance criteria.</li>
+        <li>Non-Disclosure Agreement (NDA) — If not already signed from earlier stages.</li>
+      </ul>
+
+      <h3>Legal Escalation</h3>
+      <div class="box box-insights">
+        <div class="box-title">Handling Legal Blockers</div>
+        <div class="box-content">
+          <p>"If legal stalls: (1) Identify the specific blocker — is it a clause or a process issue? (2) Offer compromise language from precedent deals. (3) Escalate to CEO-to-CEO or GC-to-GC if needed. (4) Set a deadline: 'We need to lock by [date] to meet your Q1 go-live target.'"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7E: Budget Approval & Internal Sign-off -->
+  <div class="subsection">
+    <h2 class="subsection-title">7E: Budget Approval & Internal Sign-off</h2>
+    <div class="subsection-content">
+      <p><strong>Duration: 1-4 weeks (depends on client's internal process)</strong></p>
+
+      <h3>Budget Approval Support</h3>
+      <ul class="checklist">
+        <li>Help champion navigate internal approval process — Provide: budget justification template, ROI summary, competitive urgency narrative</li>
+        <li>Budget committee preparation — If client has a formal budget committee: help champion prepare the presentation. Provide: financial model, 3-year TCO comparison, peer benchmarks.</li>
+        <li>Procurement process (irony noted) — Client's procurement team may have their own sourcing process for buying a procurement tool. Respond to: RFP/RFI from client's procurement, competitive evaluation matrices, reference requirements.</li>
+        <li>Board approval — If above threshold: CEO-to-CEO conversation, board deck support, strategic partnership framing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7F: Contract Signature -->
+  <div class="subsection">
+    <h2 class="subsection-title">7F: Contract Signature</h2>
+    <div class="subsection-content">
+      <p><strong>Duration: 1-2 weeks (final administrative steps)</strong></p>
+
+      <h3>Signature Checklist</h3>
+      <ul class="checklist">
+        <li>Final scope document reviewed and agreed by both parties</li>
+        <li>MSA, DPA, SLA, SOW all executed</li>
+        <li>Commercial terms confirmed (pricing, payment schedule)</li>
+        <li>Go-live date locked (within 16-week window from kickoff)</li>
+        <li>Implementation kickoff date set (typically within 2 weeks of signature)</li>
+        <li>AerChain delivery team introduced to client team</li>
+        <li>Celebration and press release discussion (if applicable)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Collaterals at Stage 7 -->
+  <div class="subsection">
+    <h2 class="subsection-title">Collaterals Produced at Stage 7</h2>
+    <div class="subsection-content">
+      <div class="collateral-grid">
+        <div class="collateral-item">
+          <div class="collateral-number">1</div>
+          <div class="collateral-text">Commercial proposal (15-25 pages)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">2</div>
+          <div class="collateral-text">Scope lock document (signed)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">3</div>
+          <div class="collateral-text">RACI matrix</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">4</div>
+          <div class="collateral-text">Governance charter</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">5</div>
+          <div class="collateral-text">16-week implementation roadmap</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">6</div>
+          <div class="collateral-text">Wave-based rollout plan</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">7</div>
+          <div class="collateral-text">Change management plan</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">8</div>
+          <div class="collateral-text">Success metrics dashboard template</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">9</div>
+          <div class="collateral-text">Master service agreement (MSA)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">10</div>
+          <div class="collateral-text">Data processing agreement (DPA)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">11</div>
+          <div class="collateral-text">Service level agreement (SLA)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">12</div>
+          <div class="collateral-text">Statement of work (SOW)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">13</div>
+          <div class="collateral-text">Pricing schedule (detailed)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">14</div>
+          <div class="collateral-text">Change request order form template</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">15</div>
+          <div class="collateral-text">Budget justification template (for client's internal use)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exit Gate Stage 7 -->
+  <div class="box box-exit-gate">
+    <div class="box-title">Exit Gate — Stage 7</div>
+    <div class="box-content">
+      <p><strong>Contract signed?</strong></p>
+      <ul>
+        <li><strong>YES</strong> → Stage 8 (Implementation Handover)</li>
+        <li><strong>LEGAL DELAYS</strong> → Weekly check-ins, escalate CEO-to-CEO if needed</li>
+        <li><strong>BUDGET REJECTED</strong> → Rework pricing, reduce scope, re-present within 2 weeks</li>
+        <li><strong>COMPETITOR WON</strong> → Capture loss reasons, park for 12 months, re-engage at renewal</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Nurture Track 7 -->
+  <div class="box box-nurture">
+    <div class="box-title">Nurture Track 7</div>
+    <div class="box-content">
+      <p><strong>If deal stalls at Commercial/Contracting:</strong></p>
+      <ul>
+        <li>↻ Executive negotiation (CEO-to-CEO for deals >$500K)</li>
+        <li>↻ Payment terms flexibility</li>
+        <li>↻ Scope reduction + re-pricing</li>
+        <li>↻ Pilot proposal (3-month proof at reduced investment)</li>
+        <li>↻ Timeline: 4-6 weeks active negotiation → hard decision</li>
+        <li>↻ Disqualify: Budget permanently rejected → park for next fiscal year</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- STAGE 8: Implementation Handover -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">8</span>
+    <div>
+      <h1 class="section-title">Implementation Handover</h1>
+      <div class="section-duration">Duration: 1-2 weeks (handover process only)</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">Overview</h2>
+    <div class="subsection-content">
+      <p>"The handover is the bridge between Sales and Delivery. This is where promises become commitments. The quality of the handover determines the quality of the implementation. 'Handover is on the GIVING person, not the receiving person.' Sales OWNS ensuring Delivery understands scope perfectly."</p>
+      <p><em>Note: Full implementation details covered in separate Implementation Bible.</em></p>
+    </div>
+  </div>
+
+  <!-- Handover Protocol -->
+  <div class="subsection">
+    <h2 class="subsection-title">Handover Protocol</h2>
+    <div class="subsection-content">
+      <div class="box box-insights">
+        <div class="box-title">Critical Handover Principle</div>
+        <div class="box-content">
+          <p>⚠️ <strong>CRITICAL:</strong> Sales OWNS the handover quality. The implementation team should NEVER have to ask 'what did we promise?' The answer should be in the handover package.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Handover Checklist -->
+  <div class="subsection">
+    <h2 class="subsection-title">Handover Checklist</h2>
+    <div class="subsection-content">
+      <ul class="checklist">
+        <li>Signed scope document reviewed together (Sales + Delivery)</li>
+        <li>3 measurable outcomes confirmed by Delivery lead</li>
+        <li>Client stakeholder map handed over (who to call, who decides, who blocks, who champions)</li>
+        <li>All workshop materials shared (discovery responses, process maps, L2/L3 business case)</li>
+        <li>L3 business case with savings levers and wave-based rollout plan</li>
+        <li>Known risks flagged (data quality concerns, change resistance signals, IT concerns, vendor adoption risks)</li>
+        <li>Client expectations set: "This is your delivery team. They own your success now."</li>
+        <li>JOINT KICKOFF: Sales + Delivery + Client together for first meeting</li>
+        <li>Sales stays involved for first 4 weeks (weekly check-ins with delivery team)</li>
+        <li>Sales transitions out after Month 1 (quarterly business reviews only)</li>
+        <li>Client communication plan agreed (who communicates what to whom)</li>
+        <li>Success metrics tracking mechanism confirmed</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 16-Week Implementation Reference -->
+  <div class="subsection">
+    <h2 class="subsection-title">16-Week Implementation Reference</h2>
+    <div class="subsection-content">
+      <p><strong>High-level overview (full details in Implementation Bible):</strong></p>
+      <div class="step-timeline">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-title">DISCOVERY & DESIGN</div>
+          <div class="step-content">Weeks 1-4 — Spend analysis validation, channel design, integration blueprint, user role mapping</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-title">BUILD & CONFIGURE</div>
+          <div class="step-content">Weeks 5-10 — Platform setup, workflow configuration, ERP integration, data migration</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-title">PILOT & TEST</div>
+          <div class="step-content">Weeks 11-13 — UAT with Wave 1 categories, user acceptance, vendor onboarding for pilot</div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-title">ROLLOUT & HYPERCARE</div>
+          <div class="step-content">Weeks 14-16 — Go-live Wave 1, on-site support, daily standups, issue resolution &lt;4 hours</div>
+        </div>
+      </div>
+
+      <div class="box box-what-happens">
+        <div class="box-title">What Happens Next</div>
+        <div class="box-content">
+          <p>Full implementation details, category-by-category rollout plans, training curricula, change management playbooks, and post-go-live expansion strategies are covered in the separate <strong>AerChain Implementation Bible</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collaterals for Handover -->
+  <div class="subsection">
+    <h2 class="subsection-title">Collaterals for Handover</h2>
+    <div class="subsection-content">
+      <div class="collateral-grid">
+        <div class="collateral-item">
+          <div class="collateral-number">1</div>
+          <div class="collateral-text">Handover package (complete documentation bundle)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">2</div>
+          <div class="collateral-text">Signed scope document</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">3</div>
+          <div class="collateral-text">Client stakeholder map</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">4</div>
+          <div class="collateral-text">Risk register</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">5</div>
+          <div class="collateral-text">Joint kickoff deck</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">6</div>
+          <div class="collateral-text">16-week implementation plan (detailed)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">7</div>
+          <div class="collateral-text">Wave-based category rollout plan</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">8</div>
+          <div class="collateral-text">Success metrics framework</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORTING SECTIONS -->
+
+<!-- Competitive Differentiation -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">★</span>
+    <div>
+      <h1 class="section-title">Competitive Differentiation</h1>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">How AerChain Wins</h2>
+    <div class="subsection-content">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Point Tools</th>
+            <th>Legacy S2P (Ariba/Coupa)</th>
+            <th>AerChain</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Orchestration Logic</td>
+            <td>Limited, manual routing</td>
+            <td>Rigid, fixed workflows</td>
+            <td>Intelligent routing across 9 channels with policy-based AI</td>
+          </tr>
+          <tr>
+            <td>AI Architecture</td>
+            <td>Bolted-on, afterthought</td>
+            <td>Basic ML, limited scope</td>
+            <td>Core DNA — 5 AI agents, Aiera co-pilot, autonomous workflows</td>
+          </tr>
+          <tr>
+            <td>Time to Value</td>
+            <td>6-12 months</td>
+            <td>12-18 months</td>
+            <td>8-16 weeks (16-week standard implementation)</td>
+          </tr>
+          <tr>
+            <td>Customization Model</td>
+            <td>Heavy consulting, months</td>
+            <td>Fixed modules, limited flex</td>
+            <td>Configuration-driven, DIY where possible</td>
+          </tr>
+          <tr>
+            <td>User Experience</td>
+            <td>Functional but complex</td>
+            <td>Complex, steep learning curve</td>
+            <td>Chat-first (Aiera), natural language, 95%+ adoption</td>
+          </tr>
+          <tr>
+            <td>Vendor Experience</td>
+            <td>Portal-heavy, low adoption</td>
+            <td>Complex portals, vendor fatigue</td>
+            <td>Excel download/upload, magic links, 15-min vendor setup</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Key Differentiator</h3>
+      <div class="box box-insights">
+        <div class="box-title">The AerChain Advantage</div>
+        <div class="box-content">
+          <p>"Others do parts. AerChain does orchestration + intelligence + experience layer — all in one platform. Point tools solve one problem. Legacy S2P creates new problems. AerChain eliminates the grunt layer entirely."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- What We Explicitly Don't Do -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">★</span>
+    <div>
+      <h1 class="section-title">"What We Explicitly Don't Do"</h1>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">Scope Guardrails — Protecting Both Sides</h2>
+    <div class="subsection-content">
+      <p>These four categories define what AerChain does NOT deliver. This clarity protects client expectations and protects our delivery timeline.</p>
+
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="pillar-title">Blank Canvas Implementations</div>
+          <div class="pillar-content">"We sell a product, not custom software development. Our configuration engine handles 95% of requirements without code."</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Endless Bespoke Workflows</div>
+          <div class="pillar-content">"Standardization enables faster value delivery. We won't build 47 custom approval chains when 5 configurable templates cover all scenarios."</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Deep Edge-Case Re-Engineering</div>
+          <div class="pillar-content">"Focus on 80% value, not 100% perfection. Edge cases that affect 2% of transactions don't justify 6 months of custom work."</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Document Signing Workflows</div>
+          <div class="pillar-content">"Roadmap item. Currently integrate with DocuSign/Adobe Sign. We won't build a contract lifecycle management product inside a procurement platform."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The 10 Commandments -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">★</span>
+    <div>
+      <h1 class="section-title">The 10 Commandments of AerChain Sales</h1>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">Our Sales Operating System</h2>
+    <div class="subsection-content">
+      <div class="commandments">
+        <div class="commandments-title">The 10 Commandments</div>
+        <div class="commandment">
+          <div class="commandment-number">1</div>
+          <div class="commandment-text">"Follow the Bible. We can make the Bible better, but don't do anything outside the Bible."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">2</div>
+          <div class="commandment-text">"What we do, what we don't do — clearly defined at every stage."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">3</div>
+          <div class="commandment-text">"Sales discusses one-tenth. Scope for going wrong is one-tenth. Implementation discusses everything. Control BOTH."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">4</div>
+          <div class="commandment-text">"Services must add up to the value story."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">5</div>
+          <div class="commandment-text">"Include implementation in the workshop. Shows we care about delivery, not just signing."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">6</div>
+          <div class="commandment-text">"Put a price to everything. 80% of asks disappear."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">7</div>
+          <div class="commandment-text">"We are a 5-star company. Give the 5-star experience."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">8</div>
+          <div class="commandment-text">"Standard pricing across all deals. No one uses their brain."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">9</div>
+          <div class="commandment-text">"Structured discovery — 50 points, 25 pre-filled. We come prepared."</div>
+        </div>
+        <div class="commandment">
+          <div class="commandment-number">10</div>
+          <div class="commandment-text">"Handover is on the giving person. Sales owns the handover quality."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P0/P1/P2 Guardrails -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">★</span>
+    <div>
+      <h1 class="section-title">P0/P1/P2 Guardrails — What to Sell, What Not to Sell</h1>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">Feature & Service Classification</h2>
+    <div class="subsection-content">
+      <div class="traffic-light">
+        <div class="traffic-item green">
+          <div class="traffic-label">GREEN (P0 — SELL)</div>
+          <div class="traffic-content">
+            <p>RFI, RFP, RFQ, Evaluations, Negotiations, Award, Aiera Co-pilot, Orchestration Engine (9 channels), Sealed Bids, Multi-language, Audit Trail, Email Tracking, AI Analysis (5 agents), Vendor Portal, Champion Enablement, Reference Program, 16-Week Implementation, Wave-Based Rollout</p>
+          </div>
+        </div>
+        <div class="traffic-item yellow">
+          <div class="traffic-label">YELLOW (P1 — MENTION, ON ROADMAP)</div>
+          <div class="traffic-content">
+            <p>Weighted Scorecards, Advanced Analytics Dashboard, Scenario Builder (advanced), Custom Workflows, Full Contract Lifecycle Management, Advanced Supplier Risk Scoring</p>
+            <p>→ <em>"On roadmap for [quarter]. Here's what we have today."</em></p>
+          </div>
+        </div>
+        <div class="traffic-item red">
+          <div class="traffic-label">RED (P2/P3 — DO NOT SELL)</div>
+          <div class="traffic-content">
+            <p>AP Automation, Advanced CLM (build, not integrate), Vendor Due Diligence integrations (D&B/EcoVadis), Figma mockups of future features, Blank canvas implementations, Bespoke workflows</p>
+            <p>→ <em>"On our long-term roadmap. Can we lock scope with P0?"</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Master Collateral Index -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">★</span>
+    <div>
+      <h1 class="section-title">Master Collateral Index — 85+ Across All Stages</h1>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">MUST-HAVE (Before Next Deal)</h2>
+    <div class="subsection-content">
+      <div class="collateral-grid">
+        <div class="collateral-item">
+          <div class="collateral-number">1</div>
+          <div class="collateral-text">L1 business case template (industry-specific)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">2</div>
+          <div class="collateral-text">Discovery call agenda + origin story script</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">3</div>
+          <div class="collateral-text">Platform overview deck (5 pillars + 5 agents + 9 pathways)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">4</div>
+          <div class="collateral-text">Structured discovery questionnaire (50-point)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">5</div>
+          <div class="collateral-text">Demo flow deck (16-step, industry variants)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">6</div>
+          <div class="collateral-text">Competitive positioning 1-pagers (vs. Ariba, vs. Coupa, vs. point solutions)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">7</div>
+          <div class="collateral-text">L2 business case template</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">8</div>
+          <div class="collateral-text">Champion enablement kit</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">9</div>
+          <div class="collateral-text">Commercial proposal template (with pricing control mechanism)</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">10</div>
+          <div class="collateral-text">Scope document template</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">11</div>
+          <div class="collateral-text">16-week implementation plan template</div>
+        </div>
+        <div class="collateral-item">
+          <div class="collateral-number">12</div>
+          <div class="collateral-text">Security/compliance fact sheet (SOC2, ISO27001, GDPR)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">HIGH PRIORITY (Within 1 Month)</h2>
+    <div class="subsection-content">
+      <ul class="checklist">
+        <li>Printed event brochure (L1 summary)</li>
+        <li>Two-language positioning deck (procurement + executive register)</li>
+        <li>Q&A repository (40+ questions with scripted answers)</li>
+        <li>Workshop agenda template (3-day)</li>
+        <li>10 industry-specific demo variations</li>
+        <li>Orchestration design template</li>
+        <li>9 savings levers template</li>
+        <li>RACI matrix template</li>
+        <li>Services rate card</li>
+        <li>Change request order form</li>
+        <li>Multi-stakeholder positioning matrix</li>
+        <li>Reference call scripts + prep materials</li>
+        <li>Success metrics dashboard template</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="subsection-title">IMPORTANT (Within 1 Quarter)</h2>
+    <div class="subsection-content">
+      <p>Items 26-50: All remaining templates, playbooks, training materials</p>
+      <p>Items 51-65: Partner enablement materials</p>
+      <p>Items 66-85: Legal templates (MSA, DPA, SLA, SOW), budget justification templates, executive briefs, POC scope templates</p>
+    </div>
+  </div>
+</div>
+
+</body>
+
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>AerChain Sales Bible v2.0 — From Reactive Procurement to Proactive Spend Control</p>
+            <p style="margin-top: 8px;">Last updated: February 2026 | Confidential — Internal Use Only</p>
+        </div>
+    </main>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const item = this.closest('.accordion-item');
+                const isActive = item.classList.contains('active');
+
+                // Close all items in same accordion
+                const accordion = this.closest('.accordion');
+                accordion.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Open clicked item (if not already active)
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
