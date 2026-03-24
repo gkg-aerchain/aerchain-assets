@@ -491,29 +491,21 @@ b, .gradient-text {
 
 ---
 
-# 6. AERCHAIN LOGO (Base64 SVG)
+# 6. AERCHAIN LOGO
 
-The actual Aerchain logo as a base64 SVG data URI. This is the WHITE version for dark themes. For light theme, apply `filter: brightness(0) saturate(100%)` or use a separate dark version.
+**REMOVED**: All base64 logo references have been removed from the codebase to prevent session hangs caused by processing the large (11,010 char) base64 string.
 
-**CRITICAL**: Use this exact string. Do not recreate the logo.
+**Use the SVG files instead**:
+- `Aerchain New Logo.svg` — Full wordmark SVG (in repo root)
+- `Aerchain New Logo-1.svg` — Alternate version
+- `Logo Short Colour.svg` — Short/icon version
 
-The full base64 string is 11,010 characters. It is saved in the file `aerchain-logo-base64.txt` in the working directory. The string starts with:
-
-```
-data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTY4IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTY4IDMyIiBmaWxsPS...
-```
-
-**Usage in HTML**:
+**Usage in HTML**: Reference the SVG file directly or use a text placeholder:
 ```html
-<img src="[FULL_BASE64_STRING]" alt="Aerchain" class="nav-logo" style="height: 22px; width: auto; opacity: .9;">
+<span style="font-family:Montserrat,sans-serif;font-size:16px;font-weight:500;color:var(--fg);opacity:.9;">AERCHAIN</span>
 ```
 
-**Light theme logo handling** (from Master App):
-```css
-.light .tl-logo { filter: brightness(100) drop-shadow(0 0 10px rgba(255,255,255,0.20)); }
-```
-
-NOTE: Since the light theme topbar is a purple gradient, the WHITE logo still works in light mode — it sits on the purple topbar, so no inversion needed.
+NOTE: Since the light theme topbar is a purple gradient, a WHITE logo still works in light mode — it sits on the purple topbar, so no inversion needed.
 
 ---
 
@@ -1096,7 +1088,7 @@ These decisions were made explicitly in conversation and are LOCKED.
 | Theme system | 2 modes (Dark + Light), NOT 3 | Explicitly dropped Purple Marble middle theme per Gaurav's instruction | Mar 24, 2026 |
 | Dark mode color sub-palettes | Yes — 8 options via data-theme dots | From Zero Hour: purple-glass, deep-ocean, rose-quartz, midnight-emerald, arctic, topaz, citrine, slate | Mar 24, 2026 |
 | Light mode sub-palettes | None — single light variant | Gaurav's explicit instruction | Mar 24, 2026 |
-| Logo | Actual Aerchain base64 SVG — no placeholders | Extracted from Master App line 830 (11,010 chars) | Mar 24, 2026 |
+| Logo | Use SVG files from repo root — base64 removed | Base64 caused session hangs; use Aerchain New Logo.svg instead | Mar 24, 2026 |
 | Typography | Montserrat + JetBrains Mono, weight ceiling 600 | From Master App frozen design system | Mar 24, 2026 |
 | Layout | Full-width scrollable (like Zero Hour), NOT 3-column grid | Sales Bible is content-rich; needs reading flow, not dashboard layout | Mar 24, 2026 |
 | Collateral tracker source | Dubai Excel (38 items, consolidated from 85+) | Harsha and Gaurav jointly decided in Dubai | Mar 24, 2026 |
@@ -1230,7 +1222,7 @@ These decisions were made explicitly in conversation and are LOCKED.
 - Print-friendly mode (optional, nice-to-have)
 
 ### Performance Targets
-- File size: aim for under 500KB (excluding base64 logo)
+- File size: aim for under 500KB (no base64 logos — use SVG files from repo)
 - First paint: instant (no framework, no build step)
 - Smooth 60fps scrolling
 - All animations via CSS (no JS animation loops)
@@ -1308,6 +1300,6 @@ All uploaded files in this session:
 
 **This document contains everything needed to build AerChain Sales Bible v3.0 in any Claude session — Claude Code, Claude Chat, or Cowork — with full fidelity.**
 
-**The logo base64 string (11,010 chars) is in a separate file: `aerchain-logo-base64.txt`**
+**Logo: Use SVG files from repo root (Aerchain New Logo.svg). Base64 embedding removed to prevent session hangs.**
 
 **Awaiting "Geronimo" to begin build.**
