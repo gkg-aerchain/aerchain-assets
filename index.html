@@ -2108,12 +2108,12 @@ section[id] { scroll-margin-top: 72px; }
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
       <span style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg3);font-weight:600;min-width:52px;">Owner</span>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('all',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">All</button>
-      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Gaurav Guha',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Gaurav Guha (17)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Gaurav Guha',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Gaurav Guha (18)</button>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Harsha Kadimisetty',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Harsha Kadimisetty (7)</button>
-      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Abhishek Kumar',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Abhishek Kumar (4)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Abhishek Kumar',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Abhishek Kumar (5)</button>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Unassigned',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Unassigned (4)</button>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Animesh Bajpai',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Animesh Bajpai (3)</button>
-      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('other',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Other (3)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('other',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Other (2)</button>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <input type="text" id="trackerSearch" placeholder="Search collaterals..." oninput="searchTracker(this.value)" style="padding:8px 14px;background:var(--glass-2);border:1px solid var(--glass-border);border-radius:10px;color:var(--fg);font-size:13px;width:280px;outline:none;">
@@ -2833,7 +2833,7 @@ function scrollToStage(id) {
 /* ═══ TRACKER FILTERS ═══ */
 var _trackerStatusFilter = 'all';
 var _trackerOwnerFilter = 'all';
-var _otherOwners = ['Himavanth Jasti', 'Gaurav Guha + Abhishek', 'Ashish Patil Balu'];
+var _otherOwners = ['Himavanth Jasti', 'Ashish Patil Balu'];
 
 function applyTrackerFilters() {
   document.querySelectorAll('#trackerTable tbody tr').forEach(row => {
@@ -2843,7 +2843,7 @@ function applyTrackerFilters() {
       if (_trackerOwnerFilter === 'other') {
         ownerMatch = _otherOwners.some(function(o) { return row.dataset.owner === o; });
       } else {
-        ownerMatch = row.dataset.owner === _trackerOwnerFilter;
+        ownerMatch = row.dataset.owner.includes(_trackerOwnerFilter);
       }
     }
     row.style.display = (statusMatch && ownerMatch) ? '' : 'none';
