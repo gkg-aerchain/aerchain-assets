@@ -1,4 +1,4 @@
-# 🏠 AerChain Sales Bible v2.0
+# 🏠 Aerchain Sales Bible v2.0
 
 > 💡 **From Reactive Procurement to Proactive Spend Control**
 > *"Remove the Grunt Layer. Keep the Brainy Layer."* — The Spend Operating System for Modern Enterprises

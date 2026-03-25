@@ -1,8 +1,8 @@
-# ⚔️ Competitive Differentiation — How AerChain Wins
+# ⚔️ Competitive Differentiation — How Aerchain Wins
 
 ---
 
-| Capability | Point Tools | Legacy S2P (Ariba/Coupa) | AerChain |
+| Capability | Point Tools | Legacy S2P (Ariba/Coupa) | Aerchain |
 |---|---|---|---|
 | **Orchestration Logic** | Limited, manual routing | Rigid, fixed workflows | Intelligent routing across 9 channels with policy-based AI |
 | **AI Architecture** | Bolted-on, afterthought | Basic ML, limited scope | Core DNA — 5 AI agents, Aiera co-pilot, autonomous workflows |
@@ -13,7 +13,7 @@
 
 ---
 
-> 💡 *"Others do parts. AerChain does orchestration + intelligence + experience layer — all in one platform. Point tools solve one problem. Legacy S2P creates new problems. AerChain eliminates the grunt layer entirely."*
+> 💡 *"Others do parts. Aerchain does orchestration + intelligence + experience layer — all in one platform. Point tools solve one problem. Legacy S2P creates new problems. Aerchain eliminates the grunt layer entirely."*
 
 ---
 

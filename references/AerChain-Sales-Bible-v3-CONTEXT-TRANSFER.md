@@ -1,4 +1,4 @@
-# AerChain Sales Bible v3.0 — Interactive Command Center
+# Aerchain Sales Bible v3.0 — Interactive Command Center
 ## COMPLETE CONTEXT TRANSFER DOCUMENT
 ### For parallel build in Claude Code / Claude Chat / Cowork
 
@@ -36,7 +36,7 @@
 # 1. PROJECT OVERVIEW & OBJECTIVES
 
 ## What This Is
-A single, self-contained HTML file (~3000-5000 lines) that serves as the **AerChain Sales Bible v3.0 — Interactive Command Center**. It unifies all sales playbook content, collateral tracking, competitive intelligence, and SalesOS module previews into one stunning interactive artifact.
+A single, self-contained HTML file (~3000-5000 lines) that serves as the **Aerchain Sales Bible v3.0 — Interactive Command Center**. It unifies all sales playbook content, collateral tracking, competitive intelligence, and SalesOS module previews into one stunning interactive artifact.
 
 ## Who It's For
 - **Primary audience**: Harsha Kadimisetty (CEO, Aerchain) — this must blow away his baseline (PDF flowchart + HTML v2 + Notion markdown)
@@ -47,7 +47,7 @@ A single, self-contained HTML file (~3000-5000 lines) that serves as the **AerCh
 Harsha created:
 1. `Sales Bible_V2.pdf` — Visual flowchart of entire pipeline Stage 0→8 with decision diamonds
 2. `aerchain_sales_bible_v2.html` (3998 lines) — Interactive HTML with accordions, pipeline viz, all 9 stages
-3. `AerChain-Sales-Bible-Notion-Package.zip` (14 markdown files) — Notion export with full stage content
+3. `Aerchain-Sales-Bible-Notion-Package.zip` (14 markdown files) — Notion export with full stage content
 
 Gaurav's v3.0 must dramatically surpass all three in ambition, design, interactivity, and completeness.
 
@@ -627,7 +627,7 @@ The Sales Bible is a **scrollable single-page application** (like the Zero Hour 
 # 8. SALES BIBLE CONTENT — ALL 9 STAGES
 
 ## Content Sources
-- **Notion markdown files** (`AerChain-Sales-Bible-Notion-Package.zip`) — cleaner Stage 1-3 structure
+- **Notion markdown files** (`Aerchain-Sales-Bible-Notion-Package.zip`) — cleaner Stage 1-3 structure
 - **HTML v2** (`aerchain_sales_bible_v2.html`) — richer Stage 4 and Stage 7 content
 - **IMPORTANT**: Merge the best of both. HTML v2 has more detail in Stage 4 (9 savings levers, dual ROI profile, RACI matrix) and Stage 7 (7A-7F sub-stages). Notion has better Stage 1-3 flow.
 
@@ -670,7 +670,7 @@ The Sales Bible is a **scrollable single-page application** (like the Zero Hour 
 ### Stage 3 — Discovery Workshop
 - Conduct Discovery Workshop (onsite/virtual)
 - Current state process maps (swimlane diagrams, bottleneck analysis)
-- Value stream map (current vs. AerChain future state)
+- Value stream map (current vs. Aerchain future state)
 - 3 measurable outcomes document (SIGNED by both parties)
 
 ### Stage 3.5 — Post-Workshop
@@ -804,7 +804,7 @@ Parsed from `Sales Bible Aerchain Collateral Tracker.xlsx` — the Dubai session
 
 | # | Step | Owner | Remarks |
 |---|---|---|---|
-| 12 | Current state process maps (swimlane diagrams, bottleneck analysis) + Value stream map (current vs. AerChain future state) + 3 measurable outcomes document (SIGNED by both parties) | Harsha Kadimisetty | — |
+| 12 | Current state process maps (swimlane diagrams, bottleneck analysis) + Value stream map (current vs. Aerchain future state) + 3 measurable outcomes document (SIGNED by both parties) | Harsha Kadimisetty | — |
 | 13 | Prepare the demo instructions of Categories, Flows etc. (industry-specific scenarios) to be included in the Customised Live Demo / POC | Harsha Kadimisetty | Custom Demo Flow Checklist |
 | 14 | Collect & Upload the Spend data into the L3 business case builder | Abhishek Kumar | — |
 | 15 | Data quality report (auto-generated) | Abhishek Kumar | — |
@@ -1127,7 +1127,7 @@ These decisions were made explicitly in conversation and are LOCKED.
 ## Source Priority (when content conflicts)
 1. **V5 Principles** (`Aerchain_V5_Principles_280226.docx`) — HIGHEST priority, overrides everything for language/philosophy
 2. **Dubai Excel Tracker** (`Sales Bible Aerchain Collateral Tracker.xlsx`) — Definitive list of what to build
-3. **Notion Markdown** (`AerChain-Sales-Bible-Notion-Package.zip`) — Best Stage 1-3 content structure
+3. **Notion Markdown** (`Aerchain-Sales-Bible-Notion-Package.zip`) — Best Stage 1-3 content structure
 4. **HTML v2** (`aerchain_sales_bible_v2.html`) — Best Stage 4 and Stage 7 detailed content
 5. **Battlecard Hub** (`aerchain-battlecard-hub.html`) — Competitive intelligence content as-is
 6. **Notion MCP pages** — Pricing structure, marketing collateral list
@@ -1146,14 +1146,14 @@ These decisions were made explicitly in conversation and are LOCKED.
 
 # 19. BUILD SPECIFICATION
 
-## File: `AerChain-Sales-Bible-v3.html`
+## File: `Aerchain-Sales-Bible-v3.html`
 
 ### Structure (proposed section order)
 
 ```
 1. HERO SECTION
    - Aerchain logo
-   - "AerChain Sales Bible v3.0"
+   - "Aerchain Sales Bible v3.0"
    - "Interactive Command Center"
    - Pipeline visualization (Stage 0→8 horizontal flow, inspired by Harsha's PDF flowchart)
    - Key stats: X stages, Y collateral items, Z% built
@@ -1287,7 +1287,7 @@ All uploaded files in this session:
 | `Aerchain_Zero_Hour_-_Keynote_Presentation (1).html` | HTML | 3074 | Parsed CSS/structure — dark theme source |
 | `aerchain_sales_bible_v2.html` | HTML | 3998 | Read — baseline to beat |
 | `Sales Bible_V2.pdf` | PDF | — | Read — Harsha's flowchart |
-| `AerChain-Sales-Bible-Notion-Package.zip` | ZIP | 14 .md files | Extracted and read |
+| `Aerchain-Sales-Bible-Notion-Package.zip` | ZIP | 14 .md files | Extracted and read |
 | `aerchain-battlecard-hub.html` | HTML | 620+ | Read — competitive intelligence |
 | `aerchain-salesos-context.md` | Markdown | — | Read — SalesOS tech context |
 | `Claude SalesOS Coding History copy.md` | Markdown | — | Read — dev history |
@@ -1306,7 +1306,7 @@ All uploaded files in this session:
 
 # END OF CONTEXT TRANSFER DOCUMENT
 
-**This document contains everything needed to build AerChain Sales Bible v3.0 in any Claude session — Claude Code, Claude Chat, or Cowork — with full fidelity.**
+**This document contains everything needed to build Aerchain Sales Bible v3.0 in any Claude session — Claude Code, Claude Chat, or Cowork — with full fidelity.**
 
 **The logo base64 string (11,010 chars) is in a separate file: `aerchain-logo-base64.txt`**
 

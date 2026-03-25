@@ -24,7 +24,7 @@
 
 ## 6A: Champion Enablement (Week 1-2)
 
-> 💡 *"Your champion is your internal sales team. If they can't sell AerChain when you're NOT in the room, the deal dies."*
+> 💡 *"Your champion is your internal sales team. If they can't sell Aerchain when you're NOT in the room, the deal dies."*
 
 ### Champion Enablement Checklist
 
@@ -41,7 +41,7 @@
 
 > 💡 *"You cannot close an enterprise deal selling to one person."*
 
-| Stakeholder | Their Concern | AerChain Lead | Key Collateral | Key Message |
+| Stakeholder | Their Concern | Aerchain Lead | Key Collateral | Key Message |
 |---|---|---|---|---|
 | **CPO / VP Sourcing** | Adoption, team impact, process change | Sales Lead | Platform demo, case studies | "Your team does 4-5x more strategic work" |
 | **CFO / Finance** | ROI, TCO, payback, budget classification | Sales + BA | L3 ROI model, financial case | "8-month payback, 12.5x 3-year ROI" |
@@ -85,7 +85,7 @@
 ### Reference Call Protocol
 1. **Pre-brief** the reference: Share context, what prospect cares about
 2. **Prepare** the prospect: Set expectations on who they'll speak with
-3. **Facilitate** the call: AerChain in listen mode — let reference do the talking
+3. **Facilitate** the call: Aerchain in listen mode — let reference do the talking
 4. **Follow up** within 24 hours: Capture feedback, address concerns
 
 ---

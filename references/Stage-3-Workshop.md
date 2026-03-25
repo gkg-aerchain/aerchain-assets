@@ -1,6 +1,6 @@
 # 🏢 Stage 3 — Workshop + L2 Business Case — Value Engineering & Scope Lock
 
-> **Duration:** 3 days (on-site preferred) | **Owner:** Full AerChain team (5 people)
+> **Duration:** 3 days (on-site preferred) | **Owner:** Full Aerchain team (5 people)
 > **Goal:** Deep discovery, value stream mapping, L2 business case, 3 measurable outcomes locked
 
 ---
@@ -41,7 +41,7 @@
 | State | Steps | Days |
 |---|---|---|
 | **Current** | 50+ steps | 60+ days |
-| **AerChain** | 15-20 steps | 20-30 days |
+| **Aerchain** | 15-20 steps | 20-30 days |
 | **Savings** | X hours/transaction × Y transactions/year | |
 
 ### Activity 2: Custom Demo (Their Use Cases)
@@ -55,9 +55,9 @@
 - *"Here's how YOUR ops team runs a tender"*
 
 ### Activity 4: Integration Architecture Review
-- AerChain ↔ ERP (SAP/Oracle)
-- AerChain ↔ CLM (if any)
-- AerChain ↔ Vendor master
+- Aerchain ↔ ERP (SAP/Oracle)
+- Aerchain ↔ CLM (if any)
+- Aerchain ↔ Vendor master
 - Data flow: IN → Process → OUT → ERP → Feedback loop
 
 ---
@@ -66,7 +66,7 @@
 
 ### Activity 1: L2 Business Case Development (80% Accurate)
 - Current state pain (quantified from Day 1)
-- AerChain impact per use case
+- Aerchain impact per use case
 - 3-year financial model with sensitivities
 - ROI calculation: Year 1, Year 2, Year 3, IRR, Payback
 
@@ -94,7 +94,7 @@
 | Payment Terms Rationalization | 0.3-0.8% |
 | Channel Optimization | 1-3% |
 
-**Net Effect:** 2-3% baseline today → **6-8% with AerChain orchestration**
+**Net Effect:** 2-3% baseline today → **6-8% with Aerchain orchestration**
 
 ### Activity 4: Wave-Based Category Rollout
 
@@ -121,7 +121,7 @@
 
 ## 👥 Team Composition
 
-| AerChain (5 people for 3 days) | Client (8-10 people) |
+| Aerchain (5 people for 3 days) | Client (8-10 people) |
 |---|---|
 | Sales leader — facilitation, exec engagement | CPO/VP Sourcing — executive sponsor |
 | Presales engineer — custom demo, technical Q&A | Procurement practitioners — process owners |
@@ -138,7 +138,7 @@
 | 1 | Workshop agenda (3-day plan) | ⬜ |
 | 2 | Structured discovery questionnaire (filled) | ⬜ |
 | 3 | Current state process maps (swimlane) | ⬜ |
-| 4 | Value stream map (current vs. AerChain) | ⬜ |
+| 4 | Value stream map (current vs. Aerchain) | ⬜ |
 | 5 | Custom demo flow (industry-specific) | ⬜ |
 | 6 | Orchestration design document (9 pathways) | ⬜ |
 | 7 | L2 business case (30-40 pages) | ⬜ |

@@ -1,4 +1,4 @@
-# 🛠️ SETUP GUIDE — AerChain Sales Bible → Notion
+# 🛠️ SETUP GUIDE — Aerchain Sales Bible → Notion
 
 > **Time needed:** ~45-60 minutes for full setup
 > **Who should do this:** Whoever manages the Notion workspace (Harsha or delegate)
@@ -7,8 +7,8 @@
 
 ## STEP 1: Create the Workspace Structure (5 min)
 
-1. In your Notion sidebar, create a **new page** called **"AerChain Sales Bible v2.0"**
-2. Give it an icon: 📖 and a cover image (use AerChain brand gradient or a procurement image)
+1. In your Notion sidebar, create a **new page** called **"Aerchain Sales Bible v2.0"**
+2. Give it an icon: 📖 and a cover image (use Aerchain brand gradient or a procurement image)
 3. Inside this page, you'll import all the markdown files below
 
 ---
@@ -154,7 +154,7 @@ For the Home page, create a **second database** for deal tracking:
 | Champion | Text | Internal champion name |
 | Next Action | Text | What needs to happen |
 | Gate Status | Select | Passed / Blocked / Nurture |
-| Owner | Person | AerChain sales lead |
+| Owner | Person | Aerchain sales lead |
 | Last Activity | Date | |
 
 Views: **Pipeline Board** (Kanban by Stage), **My Deals**, **Stalled Deals** (filter: no activity in 2+ weeks)
@@ -228,4 +228,4 @@ If you don't want people accidentally restructuring:
 
 ---
 
-*This guide is part of the AerChain Sales Bible Notion Package.*
+*This guide is part of the Aerchain Sales Bible Notion Package.*

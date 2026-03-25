@@ -1,4 +1,4 @@
-# ⭐ The 10 Commandments of AerChain Sales
+# ⭐ The 10 Commandments of Aerchain Sales
 
 > These are non-negotiable. Every team member, every deal, every stage.
 

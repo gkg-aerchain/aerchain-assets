@@ -11,7 +11,7 @@
 
 | If Audience Is... | Use This Register |
 |---|---|
-| **CPO / VP Sourcing / Procurement** | *"We were the end user. We managed procurement for 50+ enterprises. Handled 5 crores/month, 150-200 orders/day. We saw every tool fail. We built AerChain to be what those tools should have been."* |
+| **CPO / VP Sourcing / Procurement** | *"We were the end user. We managed procurement for 50+ enterprises. Handled 5 crores/month, 150-200 orders/day. We saw every tool fail. We built Aerchain to be what those tools should have been."* |
 | **MD / CFO / CIO** | *"Procurement is a business support function. Today it operates like a ticketing system — high volume, low value. What if we could move your team from 'processor' to 'policy owner and optimizer'?"* |
 | **Mixed (CPO + CFO)** | Start executive, shift to procurement when CPO engages with questions |
 
@@ -85,7 +85,7 @@ Present L1 business case findings:
 
 ## 👥 Team Composition
 
-| AerChain | Client |
+| Aerchain | Client |
 |---|---|
 | Sales lead (Harsha/Gaurav) — primary presenter | CPO / VP Sourcing — primary decision maker |
 | Presales engineer — demo support | CFO / Finance — budget authority (if present) |
@@ -98,7 +98,7 @@ Present L1 business case findings:
 
 ### "How is this different from Ariba/Coupa?"
 
-> 💬 *"Not here to replace Ariba. Tell me an area of spend that feels difficult to manage. Try AerChain for that. We integrate."*
+> 💬 *"Not here to replace Ariba. Tell me an area of spend that feels difficult to manage. Try Aerchain for that. We integrate."*
 > **Close:** "You're buying time-to-value. And compliance by design."
 
 ### "Can your AI really do this?"

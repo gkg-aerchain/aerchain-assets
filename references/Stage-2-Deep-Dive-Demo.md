@@ -107,7 +107,7 @@ Full logging. Internal + external chat. Thread-based conversations. Amendment ve
 
 ## 👥 Team Composition
 
-| AerChain | Client |
+| Aerchain | Client |
 |---|---|
 | Presales engineer — primary demo driver | CPO / VP Sourcing — decision maker |
 | Sales lead — framing, value, objections | Procurement leads — daily users, champions |

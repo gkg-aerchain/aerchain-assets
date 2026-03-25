@@ -1,6 +1,6 @@
 # Sales Bible v3.0 — Reference Files
 
-Upload all reference files for the AerChain Sales Bible v3.0 build here.
+Upload all reference files for the Aerchain Sales Bible v3.0 build here.
 
 ## Expected Files
 - HTML artifacts (battlecard hub, Zero Hour keynote, Master App, Sales Bible v2, etc.)

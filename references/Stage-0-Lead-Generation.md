@@ -44,7 +44,7 @@
 | Detail | Info |
 |---|---|
 | **Target** | Partner's existing procurement clients |
-| **Activity** | Partner identifies client need → introduces AerChain → co-sell |
+| **Activity** | Partner identifies client need → introduces Aerchain → co-sell |
 | **Collateral** | Co-branded solution brief, partner-specific positioning deck |
 | **Conversion** | 25-30% referral to discovery (warm intro) |
 | **Owner** | Partnerships team + Partner sales |
@@ -54,7 +54,7 @@
 | Detail | Info |
 |---|---|
 | **Target** | Prospects within existing customer's industry network |
-| **Activity** | Existing champion introduces AerChain to peer → reference call |
+| **Activity** | Existing champion introduces Aerchain to peer → reference call |
 | **Collateral** | Customer success story, reference call script, champion kit |
 | **Conversion** | 30-40% (highest quality leads) |
 | **Owner** | Customer Success + Sales |
