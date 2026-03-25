@@ -2097,14 +2097,27 @@ section[id] { scroll-margin-top: 72px; }
   <h2 class="section-title">Collateral <b>Tracker</b></h2>
   <p style="font-size:14px;color:var(--fg2);margin-bottom:24px;">38 items tracked across all pipeline stages. Filter by stage, owner, or status.</p>
   
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
-    <button class="chip" onclick="filterTracker(&#39;all&#39;)" style="cursor:pointer;border:none;background:var(--gp);color:white;">All (38)</button>
-    <button class="chip" onclick="filterTracker(&#39;built&#39;)" style="cursor:pointer;border:none;background:hsl(152 68% 42%/.15);color:hsl(152 68% 52%);">Built (5)</button>
-    <button class="chip" onclick="filterTracker(&#39;in-progress&#39;)" style="cursor:pointer;border:none;background:hsl(38 92% 50%/.12);color:hsl(38 92% 58%);">In Progress (8)</button>
-    <button class="chip" onclick="filterTracker(&#39;not-started&#39;)" style="cursor:pointer;border:none;background:hsl(0 68% 48%/.12);color:hsl(0 68% 58%);">Not Started (25)</button>
-  </div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">
-    <input type="text" id="trackerSearch" placeholder="Search collaterals..." oninput="searchTracker(this.value)" style="padding:8px 14px;background:var(--glass-2);border:1px solid var(--glass-border);border-radius:10px;color:var(--fg);font-size:13px;width:280px;outline:none;">
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;" id="trackerFilters">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+      <span style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg3);font-weight:600;min-width:52px;">Status</span>
+      <button class="chip filter-btn active" data-filter-type="status" onclick="filterTracker('all',this)" style="cursor:pointer;border:none;background:var(--gp);color:white;">All (38)</button>
+      <button class="chip filter-btn" data-filter-type="status" onclick="filterTracker('built',this)" style="cursor:pointer;border:none;background:hsl(152 68% 42%/.15);color:hsl(152 68% 52%);">Built (5)</button>
+      <button class="chip filter-btn" data-filter-type="status" onclick="filterTracker('in-progress',this)" style="cursor:pointer;border:none;background:hsl(38 92% 50%/.12);color:hsl(38 92% 58%);">In Progress (8)</button>
+      <button class="chip filter-btn" data-filter-type="status" onclick="filterTracker('not-started',this)" style="cursor:pointer;border:none;background:hsl(0 68% 48%/.12);color:hsl(0 68% 58%);">Not Started (25)</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+      <span style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg3);font-weight:600;min-width:52px;">Owner</span>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('all',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">All</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Gaurav Guha',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Gaurav Guha (17)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Harsha Kadimisetty',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Harsha Kadimisetty (7)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Abhishek Kumar',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Abhishek Kumar (4)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Unassigned',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Unassigned (4)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Animesh Bajpai',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Animesh Bajpai (3)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('other',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Other (3)</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <input type="text" id="trackerSearch" placeholder="Search collaterals..." oninput="searchTracker(this.value)" style="padding:8px 14px;background:var(--glass-2);border:1px solid var(--glass-border);border-radius:10px;color:var(--fg);font-size:13px;width:280px;outline:none;">
+    </div>
   </div>
   
   <div class="card" style="overflow-x:auto;">
@@ -2120,7 +2133,7 @@ section[id] { scroll-margin-top: 72px; }
         </tr>
       </thead>
       <tbody>
-        <tr class="tracker-row" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Animesh Bajpai" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">—</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">'Spend Operating System' whitepaper</td>
@@ -2128,7 +2141,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Animesh Bajpai" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">—</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Co-branded partner solution briefs</td>
@@ -2136,7 +2149,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="built" data-stage="0" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="built" data-stage="0" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">—</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Q&amp;A repository (20+ common questions)</td>
@@ -2144,7 +2157,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(152 68% 42%);">🟢 Built</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">BattleCards + FAQs + Objection Handling</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Animesh Bajpai" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">—</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Printed Brochures</td>
@@ -2152,7 +2165,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Himavanth Jasti" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">—</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Customer case studies (Cars24, WeWork, ABInBev, Danone)</td>
@@ -2160,7 +2173,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Harsha Kadimisetty" data-status="not-started" data-stage="0" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">—</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Integration Overview Doc (validated)</td>
@@ -2168,7 +2181,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="0.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="0.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">1</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Discovery call agenda (1-pager)</td>
@@ -2176,7 +2189,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="0.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Abhishek Kumar" data-status="not-started" data-stage="0.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">2</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">0.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">L1 Business Case (industry-specific)</td>
@@ -2184,7 +2197,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Print Friendly Version</td>
         </tr>
-        <tr class="tracker-row" data-status="in-progress" data-stage="1" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="in-progress" data-stage="1" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">3</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">1</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Business Case + Sales Deck + Demo Highlights + L1 Discovery Questions</td>
@@ -2192,7 +2205,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(38 92% 50%);">🟠 In Progress</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Origin story script; Platform overview deck; Next-step proposal</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="1.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="1.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">4</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">1.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Competitive positioning 1-pager</td>
@@ -2200,7 +2213,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="built" data-stage="1.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="built" data-stage="1.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">1.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Security/tech/compliance fact sheet</td>
@@ -2208,7 +2221,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(152 68% 42%);">🟢 Built</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">AI guardrails, network/tech infra map</td>
         </tr>
-        <tr class="tracker-row" data-status="built" data-stage="2" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="built" data-stage="2" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">2</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Industry-specific demo flow + standard demo deck</td>
@@ -2216,7 +2229,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(152 68% 42%);">🟢 Built</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Demo Builder</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="2" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Unassigned" data-status="not-started" data-stage="2" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">7</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">2</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Recap + Next steps alignment</td>
@@ -2224,7 +2237,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Dictate/influence timeline</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="2.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="2.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">8</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">2.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Demo video recordings + deck</td>
@@ -2232,7 +2245,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Avoma Mandate + Mail Template</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="2.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Harsha Kadimisetty" data-status="not-started" data-stage="2.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">9</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">2.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Workshop agenda</td>
@@ -2240,7 +2253,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="2.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Unassigned" data-status="not-started" data-stage="2.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">10</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">2.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Customer-specific deck &amp; questionnaire</td>
@@ -2248,7 +2261,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="3" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Harsha Kadimisetty" data-status="not-started" data-stage="3" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">11</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">3</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Discovery Workshop</td>
@@ -2256,7 +2269,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Onsite/Virtual</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Harsha Kadimisetty" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">12</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">3.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Process maps + value stream + 3 outcomes (SIGNED)</td>
@@ -2264,7 +2277,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Harsha Kadimisetty" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">13</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">3.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Custom Demo Flow Checklist</td>
@@ -2272,7 +2285,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Industry-specific scenarios</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Abhishek Kumar" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">14</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">3.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Spend data for L3 builder</td>
@@ -2280,7 +2293,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Abhishek Kumar" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">15</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">3.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Data quality report</td>
@@ -2288,7 +2301,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Auto-generated</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha + Abhishek" data-status="not-started" data-stage="3.5" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">16</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">3.5</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">L2/L3 Business Case + Pitch</td>
@@ -2296,7 +2309,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">30-40 pages, financial model, ROI</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="4" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Unassigned" data-status="not-started" data-stage="4" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">17</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">4</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Customized demo on use cases</td>
@@ -2304,7 +2317,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="4" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Unassigned" data-status="not-started" data-stage="4" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">18</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">4</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Guided/Self POC</td>
@@ -2312,7 +2325,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Only if required</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Harsha Kadimisetty" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">19</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Pricing overview + Credit Model</td>
@@ -2320,7 +2333,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Pricing Calculator</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">20</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Champion enablement kit</td>
@@ -2328,7 +2341,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Internal biz case deck + talking points</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">21</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">ROI summary one-pager (CFO)</td>
@@ -2336,7 +2349,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Budget justification template</td>
         </tr>
-        <tr class="tracker-row" data-status="built" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="built" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">22</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Technical architecture brief (CIO)</td>
@@ -2344,7 +2357,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(152 68% 42%);">🟢 Built</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">23</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Executive brief (CEO/board)</td>
@@ -2352,7 +2365,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">24</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">'Why Now' arguments document</td>
@@ -2360,7 +2373,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">FOMO</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">25</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Internal objection handler (top 10)</td>
@@ -2368,7 +2381,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">26</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Multi-stakeholder positioning matrix</td>
@@ -2376,7 +2389,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Problems + Solutions + Value + Future</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Abhishek Kumar" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">27</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Security questionnaire responses</td>
@@ -2384,7 +2397,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Pre-filled</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Harsha Kadimisetty" data-status="not-started" data-stage="6" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">28</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">6</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Reference call scripts</td>
@@ -2392,7 +2405,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;"></td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="7" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="7" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">29</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">7</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Commercial proposal + Governance + RACI + Scope lock</td>
@@ -2400,7 +2413,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Wave rollout + Implementation plan + Change mgmt</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="7" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="7" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">30</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">7</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">MSA</td>
@@ -2408,7 +2421,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">DPA, SLA, SOW, Pricing schedule, Change request form</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="8" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Gaurav Guha" data-status="not-started" data-stage="8" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">31</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">8</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Handover package</td>
@@ -2416,7 +2429,7 @@ section[id] { scroll-margin-top: 72px; }
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:hsl(0 68% 48%);">🔴 Not Started</span></td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg3);font-size:12px;">Biz Case + Proposal + Stakeholder Map + Upsell + Risks</td>
         </tr>
-        <tr class="tracker-row" data-status="not-started" data-stage="8" style="transition:opacity .2s;">
+        <tr class="tracker-row" data-owner="Ashish Patil Balu" data-status="not-started" data-stage="8" style="transition:opacity .2s;">
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;color:var(--fg3);font-size:12px;">32</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;">8</td>
           <td style="padding:10px;border-bottom:1px solid var(--glass-border);color:var(--fg);">Joint kickoff deck</td>
@@ -2824,28 +2837,37 @@ function scrollToStage(id) {
 }
 
 /* ═══ TRACKER FILTERS ═══ */
-function filterTracker(status, btn) {
-  document.querySelectorAll('#trackerFilters .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+var _trackerStatusFilter = 'all';
+var _trackerOwnerFilter = 'all';
+var _otherOwners = ['Himavanth Jasti', 'Gaurav Guha + Abhishek', 'Ashish Patil Balu'];
+
+function applyTrackerFilters() {
   document.querySelectorAll('#trackerTable tbody tr').forEach(row => {
-    if (status === 'all' || row.dataset.status === status) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
+    var statusMatch = _trackerStatusFilter === 'all' || row.dataset.status === _trackerStatusFilter;
+    var ownerMatch = true;
+    if (_trackerOwnerFilter !== 'all') {
+      if (_trackerOwnerFilter === 'other') {
+        ownerMatch = _otherOwners.some(function(o) { return row.dataset.owner === o; });
+      } else {
+        ownerMatch = row.dataset.owner === _trackerOwnerFilter;
+      }
     }
+    row.style.display = (statusMatch && ownerMatch) ? '' : 'none';
   });
 }
 
+function filterTracker(status, btn) {
+  _trackerStatusFilter = status;
+  document.querySelectorAll('#trackerFilters [data-filter-type="status"]').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  applyTrackerFilters();
+}
+
 function filterByOwner(name, btn) {
-  document.querySelectorAll('#trackerFilters .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('#trackerTable tbody tr').forEach(row => {
-    if (row.dataset.owner.includes(name)) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
-  });
+  _trackerOwnerFilter = name;
+  document.querySelectorAll('#trackerFilters [data-filter-type="owner"]').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  applyTrackerFilters();
 }
 
 /* ═══ SCROLL REVEAL ═══ */
