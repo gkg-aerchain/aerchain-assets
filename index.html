@@ -2108,12 +2108,12 @@ section[id] { scroll-margin-top: 72px; }
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
       <span style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg3);font-weight:600;min-width:52px;">Owner</span>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('all',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">All</button>
-      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Gaurav Guha',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Gaurav Guha (17)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Gaurav Guha',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Gaurav Guha (18)</button>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Harsha Kadimisetty',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Harsha Kadimisetty (7)</button>
-      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Abhishek Kumar',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Abhishek Kumar (4)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Abhishek Kumar',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Abhishek Kumar (5)</button>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Unassigned',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Unassigned (4)</button>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Animesh Bajpai',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Animesh Bajpai (3)</button>
-      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('other',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Other (3)</button>
+      <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('other',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Other (2)</button>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <input type="text" id="trackerSearch" placeholder="Search collaterals..." oninput="searchTracker(this.value)" style="padding:8px 14px;background:var(--glass-2);border:1px solid var(--glass-border);border-radius:10px;color:var(--fg);font-size:13px;width:280px;outline:none;">
@@ -2775,13 +2775,7 @@ function toggleAccordion(header) {
     body.style.maxHeight = '0px';
     if (chevron) chevron.style.transform = 'rotate(0deg)';
   } else {
-    body.style.transition = 'none';
-    body.style.maxHeight = 'none';
-    const h = body.scrollHeight;
-    body.style.maxHeight = '0px';
-    body.offsetHeight;
-    body.style.transition = 'max-height .4s ease';
-    body.style.maxHeight = h + 'px';
+    body.style.maxHeight = body.scrollHeight + 'px';
     if (chevron) chevron.style.transform = 'rotate(180deg)';
   }
 }
@@ -2839,7 +2833,7 @@ function scrollToStage(id) {
 /* ═══ TRACKER FILTERS ═══ */
 var _trackerStatusFilter = 'all';
 var _trackerOwnerFilter = 'all';
-var _otherOwners = ['Himavanth Jasti', 'Gaurav Guha + Abhishek', 'Ashish Patil Balu'];
+var _otherOwners = ['Himavanth Jasti', 'Ashish Patil Balu'];
 
 function applyTrackerFilters() {
   document.querySelectorAll('#trackerTable tbody tr').forEach(row => {
@@ -2849,7 +2843,7 @@ function applyTrackerFilters() {
       if (_trackerOwnerFilter === 'other') {
         ownerMatch = _otherOwners.some(function(o) { return row.dataset.owner === o; });
       } else {
-        ownerMatch = row.dataset.owner === _trackerOwnerFilter;
+        ownerMatch = row.dataset.owner.includes(_trackerOwnerFilter);
       }
     }
     row.style.display = (statusMatch && ownerMatch) ? '' : 'none';
@@ -3099,7 +3093,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('calcLiteVal').textContent = lite;
     document.getElementById('calcModulesVal').textContent = modules;
 
-    // ACV calculation: modules * base + users * per-user + workflow credits
+    // ACV calculation: modules <em> base + users </em> per-user + workflow credits
     const moduleBase = modules * 25000;
     const powerCost = power * 1200;
     const liteCost = lite * 300;
@@ -3107,9 +3101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const acv = moduleBase + powerCost + liteCost + creditsCost;
 
     // Savings: conservative 1% of spend Year 1, growing to 2% Year 2, 2.5% Year 3
-    const savingsY1 = spend * 1000000 * 0.01;
-    const savingsY2 = spend * 1000000 * 0.02;
-    const savingsY3 = spend * 1000000 * 0.025;
+    const savingsY1 = spend <em> 1000000 </em> 0.01;
+    const savingsY2 = spend <em> 1000000 </em> 0.02;
+    const savingsY3 = spend <em> 1000000 </em> 0.025;
     const savings3yr = savingsY1 + savingsY2 + savingsY3;
 
     const paybackMonths = (acv / savingsY1 * 12).toFixed(1);
