@@ -2115,8 +2115,9 @@ section[id] { scroll-margin-top: 72px; }
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('Animesh Bajpai',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Animesh Bajpai (3)</button>
       <button class="chip filter-btn" data-filter-type="owner" onclick="filterByOwner('other',this)" style="cursor:pointer;border:none;background:var(--glass-2);color:var(--fg2);">Other (2)</button>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
       <input type="text" id="trackerSearch" placeholder="Search collaterals..." oninput="searchTracker(this.value)" style="padding:8px 14px;background:var(--glass-2);border:1px solid var(--glass-border);border-radius:10px;color:var(--fg);font-size:13px;width:280px;outline:none;">
+      <button id="ghConnectBtn" onclick="promptGhToken()" style="cursor:pointer;border:1px solid var(--glass-border);background:var(--glass-1);border-radius:10px;color:var(--fg2);font-size:11px;padding:8px 14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> <span id="ghConnectLabel">Connect GitHub to edit links</span></button>
     </div>
   </div>
   
@@ -2905,6 +2906,52 @@ function filterByOwner(name, btn) {
 
 /* ═══ TRACKER LINKS ═══ */
 var _trackerLinksData = {};
+var _linksFileSha = null;
+var _ghRepo = 'gkg-aerchain/aerchain-assets';
+var _ghBranch = 'main';
+
+function getGhToken() {
+  return localStorage.getItem('gh-pat') || '';
+}
+
+function hasGhToken() {
+  return !!getGhToken();
+}
+
+function updateGhButton() {
+  var label = document.getElementById('ghConnectLabel');
+  var btn = document.getElementById('ghConnectBtn');
+  if (!label || !btn) return;
+  if (hasGhToken()) {
+    label.textContent = 'Connected — click to update token';
+    btn.style.borderColor = 'hsl(152 68% 42%/.4)';
+    btn.style.color = 'hsl(152 68% 52%)';
+  } else {
+    label.textContent = 'Connect GitHub to edit links';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }
+}
+
+function promptGhToken() {
+  var existing = hasGhToken();
+  var msg = existing
+    ? 'Update your GitHub token (or clear to disconnect):'
+    : 'To save links, enter a GitHub Personal Access Token with "Contents: Read and write" permission for this repo.\n\nCreate one at: github.com > Settings > Developer settings > Fine-grained tokens\n\nThis is stored in your browser only.';
+  var token = prompt(msg, existing ? '••••••••' : '');
+  if (token === null) return false;
+  token = token.trim();
+  if (token === '' || token === '••••••••') {
+    if (token === '') { localStorage.removeItem('gh-pat'); }
+    updateGhButton();
+    renderLinkCells();
+    return false;
+  }
+  localStorage.setItem('gh-pat', token);
+  updateGhButton();
+  renderLinkCells();
+  return true;
+}
 
 function fetchTrackerLinks() {
   return fetch('links.json?v=' + Date.now())
@@ -2916,18 +2963,91 @@ function fetchTrackerLinks() {
     .catch(function(e) { console.warn('Could not load links.json:', e); });
 }
 
+function saveLinksToGitHub(updatedData) {
+  var token = getGhToken();
+  if (!token) return Promise.reject('No token');
+
+  // First get the current SHA of links.json
+  return fetch('https://api.github.com/repos/' + _ghRepo + '/contents/links.json?ref=' + _ghBranch, {
+    headers: { 'Authorization': 'Bearer ' + token }
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(file) {
+    _linksFileSha = file.sha;
+    var content = btoa(unescape(encodeURIComponent(JSON.stringify(updatedData, null, 2) + '\n')));
+    return fetch('https://api.github.com/repos/' + _ghRepo + '/contents/links.json', {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'Update collateral link',
+        content: content,
+        sha: _linksFileSha,
+        branch: _ghBranch
+      })
+    });
+  })
+  .then(function(r) {
+    if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'GitHub API error'); });
+    return r.json();
+  });
+}
+
 function renderLinkCells() {
+  var canEdit = hasGhToken();
   document.querySelectorAll('.link-cell').forEach(function(cell) {
     var id = cell.dataset.rowId;
     var entry = _trackerLinksData[id];
     var url = entry ? entry.url : '';
+    var editBtn = canEdit
+      ? ' <button onclick="editTrackerLink(' + id + ')" style="background:none;border:none;cursor:pointer;color:var(--fg3);font-size:11px;padding:2px 4px;" title="Edit link">&#9998;</button>'
+      : '';
     if (url) {
       var safeUrl = url.replace(/"/g, '&quot;');
-      cell.innerHTML = '<a href="' + safeUrl + '" target="_blank" rel="noopener" style="color:var(--gp);font-size:12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="' + safeUrl + '">Open <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>';
+      cell.innerHTML = '<a href="' + safeUrl + '" target="_blank" rel="noopener" style="color:var(--gp);font-size:12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="' + safeUrl + '">Open <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>' + editBtn;
+    } else if (canEdit) {
+      cell.innerHTML = '<button onclick="editTrackerLink(' + id + ')" style="background:none;border:1px dashed var(--glass-border);border-radius:6px;cursor:pointer;color:var(--fg3);font-size:11px;padding:4px 10px;white-space:nowrap;">+ Link</button>';
     } else {
       cell.innerHTML = '<span style="color:var(--fg3);font-size:11px;">—</span>';
     }
   });
+}
+
+function editTrackerLink(rowId) {
+  if (!hasGhToken()) {
+    if (!promptGhToken()) return;
+  }
+  var entry = _trackerLinksData[rowId] || {};
+  var current = entry.url || '';
+  var url = prompt('Paste the link for: ' + (entry.item || 'Row ' + rowId), current);
+  if (url === null) return;
+  url = url.trim();
+
+  // Update local data
+  if (_trackerLinksData[rowId]) {
+    _trackerLinksData[rowId].url = url;
+  }
+  renderLinkCells();
+
+  // Show saving indicator
+  var cell = document.querySelector('.link-cell[data-row-id="' + rowId + '"]');
+  var origHtml = cell.innerHTML;
+  cell.insertAdjacentHTML('beforeend', '<span class="link-saving" style="color:var(--fg3);font-size:10px;margin-left:6px;">saving...</span>');
+
+  // Save to GitHub
+  saveLinksToGitHub(_trackerLinksData)
+    .then(function() {
+      var saving = cell.querySelector('.link-saving');
+      if (saving) { saving.textContent = 'saved!'; setTimeout(function() { saving.remove(); }, 1500); }
+    })
+    .catch(function(err) {
+      alert('Failed to save: ' + (err.message || err) + '\n\nCheck your GitHub token.');
+      // Revert
+      if (_trackerLinksData[rowId]) _trackerLinksData[rowId].url = current;
+      renderLinkCells();
+    });
 }
 
 /* ═══ SCROLL REVEAL ═══ */
@@ -3189,5 +3309,6 @@ document.addEventListener('DOMContentLoaded', () => {
   buildSearchIndex();
   window.updateDealMath();
   fetchTrackerLinks();
+  updateGhButton();
 });
 </script></body></html>
