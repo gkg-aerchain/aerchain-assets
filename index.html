@@ -2762,7 +2762,13 @@ function toggleAccordion(header) {
     body.style.maxHeight = '0px';
     if (chevron) chevron.style.transform = 'rotate(0deg)';
   } else {
-    body.style.maxHeight = body.scrollHeight + 'px';
+    body.style.transition = 'none';
+    body.style.maxHeight = 'none';
+    const h = body.scrollHeight;
+    body.style.maxHeight = '0px';
+    body.offsetHeight;
+    body.style.transition = 'max-height .4s ease';
+    body.style.maxHeight = h + 'px';
     if (chevron) chevron.style.transform = 'rotate(180deg)';
   }
 }
