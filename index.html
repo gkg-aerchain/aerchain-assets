@@ -2904,40 +2904,30 @@ function filterByOwner(name, btn) {
 }
 
 /* ═══ TRACKER LINKS ═══ */
-function getTrackerLinks() {
-  try { return JSON.parse(localStorage.getItem('tracker-links') || '{}'); } catch(e) { return {}; }
-}
+var _trackerLinksData = {};
 
-function saveTrackerLinks(links) {
-  localStorage.setItem('tracker-links', JSON.stringify(links));
+function fetchTrackerLinks() {
+  return fetch('links.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      _trackerLinksData = data;
+      renderLinkCells();
+    })
+    .catch(function(e) { console.warn('Could not load links.json:', e); });
 }
 
 function renderLinkCells() {
-  var links = getTrackerLinks();
   document.querySelectorAll('.link-cell').forEach(function(cell) {
     var id = cell.dataset.rowId;
-    var url = links[id];
+    var entry = _trackerLinksData[id];
+    var url = entry ? entry.url : '';
     if (url) {
-      cell.innerHTML = '<a href="' + url.replace(/"/g, '&quot;') + '" target="_blank" rel="noopener" style="color:var(--gp);font-size:12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="' + url.replace(/"/g, '&quot;') + '">Open <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a> <button onclick="editTrackerLink(' + id + ')" style="background:none;border:none;cursor:pointer;color:var(--fg3);font-size:11px;padding:2px 4px;" title="Edit link">&#9998;</button>';
+      var safeUrl = url.replace(/"/g, '&quot;');
+      cell.innerHTML = '<a href="' + safeUrl + '" target="_blank" rel="noopener" style="color:var(--gp);font-size:12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;" title="' + safeUrl + '">Open <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>';
     } else {
-      cell.innerHTML = '<button onclick="editTrackerLink(' + id + ')" style="background:none;border:1px dashed var(--glass-border);border-radius:6px;cursor:pointer;color:var(--fg3);font-size:11px;padding:4px 10px;white-space:nowrap;">+ Link</button>';
+      cell.innerHTML = '<span style="color:var(--fg3);font-size:11px;">—</span>';
     }
   });
-}
-
-function editTrackerLink(rowId) {
-  var links = getTrackerLinks();
-  var current = links[rowId] || '';
-  var url = prompt('Paste the link to this collateral resource:', current);
-  if (url === null) return;
-  url = url.trim();
-  if (url === '') {
-    delete links[rowId];
-  } else {
-    links[rowId] = url;
-  }
-  saveTrackerLinks(links);
-  renderLinkCells();
 }
 
 /* ═══ SCROLL REVEAL ═══ */
@@ -3198,6 +3188,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize search index and deal math on page load
   buildSearchIndex();
   window.updateDealMath();
-  renderLinkCells();
+  fetchTrackerLinks();
 });
 </script></body></html>
