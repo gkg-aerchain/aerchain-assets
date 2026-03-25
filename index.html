@@ -2905,27 +2905,68 @@ function filterByOwner(name, btn) {
 
 /* ═══ TRACKER LINKS ═══ */
 var _trackerLinksData = {};
-var _linksEndpoint = 'https://jsonblob.com/api/jsonBlob/019d22d1-fe60-7ee2-85e7-cb5d2a1b2d56';
+// Set this to your Google Apps Script Web App URL after deploying (see LINKS_BACKEND_SETUP.md)
+var _linksEndpoint = '';
 
 function fetchTrackerLinks() {
-  return fetch(_linksEndpoint)
+  // Load base data from repo file
+  var basePromise = fetch('links.json?v=' + Date.now())
     .then(function(r) { return r.json(); })
-    .then(function(data) {
-      _trackerLinksData = data;
-      renderLinkCells();
-    })
-    .catch(function(e) { console.warn('Could not load links:', e); });
+    .catch(function() { return {}; });
+
+  // Load cloud overrides if endpoint is configured
+  var cloudPromise = _linksEndpoint
+    ? fetch(_linksEndpoint)
+        .then(function(r) { return r.json(); })
+        .catch(function() { return null; })
+    : Promise.resolve(null);
+
+  return Promise.all([basePromise, cloudPromise]).then(function(results) {
+    var base = results[0];
+    var cloud = results[1];
+    // Also load localStorage overrides
+    var local = {};
+    try { local = JSON.parse(localStorage.getItem('tracker-links') || '{}'); } catch(e) {}
+
+    // Merge: base < cloud < localStorage
+    _trackerLinksData = base;
+    if (cloud) {
+      Object.keys(cloud).forEach(function(k) {
+        if (cloud[k] && cloud[k].url && _trackerLinksData[k]) {
+          _trackerLinksData[k].url = cloud[k].url;
+        }
+      });
+    }
+    Object.keys(local).forEach(function(k) {
+      if (local[k] && _trackerLinksData[k]) {
+        _trackerLinksData[k].url = local[k];
+      }
+    });
+    renderLinkCells();
+  });
 }
 
-function saveLinks() {
-  return fetch(_linksEndpoint, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(_trackerLinksData)
-  }).then(function(r) {
-    if (!r.ok) throw new Error('Save failed (' + r.status + ')');
-    return r.json();
-  });
+function saveLinks(rowId, url) {
+  // Always save to localStorage
+  var local = {};
+  try { local = JSON.parse(localStorage.getItem('tracker-links') || '{}'); } catch(e) {}
+  local[rowId] = url;
+  localStorage.setItem('tracker-links', JSON.stringify(local));
+
+  // Save to cloud if endpoint is configured
+  if (_linksEndpoint) {
+    var payload = {};
+    Object.keys(_trackerLinksData).forEach(function(k) {
+      payload[k] = { item: _trackerLinksData[k].item, url: _trackerLinksData[k].url };
+    });
+    return fetch(_linksEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      mode: 'no-cors'
+    }).then(function() { return { ok: true }; });
+  }
+  return Promise.resolve({ ok: true });
 }
 
 function renderLinkCells() {
@@ -2950,24 +2991,22 @@ function editTrackerLink(rowId) {
   if (url === null) return;
   url = url.trim();
 
-  // Update local data
+  var prev = current;
   if (_trackerLinksData[rowId]) {
     _trackerLinksData[rowId].url = url;
   }
   renderLinkCells();
 
-  // Save to cloud
   var cell = document.querySelector('.link-cell[data-row-id="' + rowId + '"]');
   cell.insertAdjacentHTML('beforeend', '<span class="link-saving" style="color:var(--fg3);font-size:10px;margin-left:6px;">saving...</span>');
 
-  saveLinks()
+  saveLinks(rowId, url)
     .then(function() {
       var saving = cell.querySelector('.link-saving');
       if (saving) { saving.textContent = 'saved!'; setTimeout(function() { saving.remove(); }, 1500); }
     })
     .catch(function(err) {
-      alert('Failed to save: ' + err.message);
-      if (_trackerLinksData[rowId]) _trackerLinksData[rowId].url = current;
+      if (_trackerLinksData[rowId]) _trackerLinksData[rowId].url = prev;
       renderLinkCells();
     });
 }
