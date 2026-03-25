@@ -3077,7 +3077,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('calcLiteVal').textContent = lite;
     document.getElementById('calcModulesVal').textContent = modules;
 
-    // ACV calculation: modules <em> base + users </em> per-user + workflow credits
+    // ACV calculation: modules * base + users * per-user + workflow credits
     const moduleBase = modules * 25000;
     const powerCost = power * 1200;
     const liteCost = lite * 300;
@@ -3085,9 +3085,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const acv = moduleBase + powerCost + liteCost + creditsCost;
 
     // Savings: conservative 1% of spend Year 1, growing to 2% Year 2, 2.5% Year 3
-    const savingsY1 = spend <em> 1000000 </em> 0.01;
-    const savingsY2 = spend <em> 1000000 </em> 0.02;
-    const savingsY3 = spend <em> 1000000 </em> 0.025;
+    const savingsY1 = spend * 1000000 * 0.01;
+    const savingsY2 = spend * 1000000 * 0.02;
+    const savingsY3 = spend * 1000000 * 0.025;
     const savings3yr = savingsY1 + savingsY2 + savingsY3;
 
     const paybackMonths = (acv / savingsY1 * 12).toFixed(1);
