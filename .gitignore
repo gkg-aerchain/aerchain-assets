@@ -1,0 +1,5 @@
+# Local-only reference artifacts for the vendor-mgmt spec.
+# The source screenshots are version-controlled on `main`; no need to
+# duplicate them (or the generated slices) onto the spec branch.
+vendor-mgmt/screenshots/*.png
+vendor-mgmt/screenshots/_slices/
