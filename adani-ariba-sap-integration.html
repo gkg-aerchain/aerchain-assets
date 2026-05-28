@@ -534,8 +534,96 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
 @media(max-width:820px){.assure{grid-template-columns:1fr 1fr}}
 </style>
 
+<style>
+/* ═══════════════ RESPONSIVE / MOBILE ═══════════════ */
+
+/* Tablet — ease the densest 3-column diagrams a little earlier */
+@media(max-width:1024px){
+  .hdr-inner{padding:0 28px}
+  .arch-frame{padding:28px 22px}
+  .diagram-grid{gap:18px}
+}
+
+/* Phone — collapse architecture diagrams to a single vertical flow */
+@media(max-width:768px){
+  body{font-size:13.5px}
+
+  /* Header */
+  .hdr{height:54px}
+  .hdr-inner{padding:0 16px}
+  .hdr-logo{height:20px}
+  .hdr-date,.hdr-div{display:none}
+  .hdr-badge{font-size:9.5px;padding:4px 8px}
+
+  /* Cover */
+  .cover{padding:46px 0 38px}
+  .cov-h1{font-size:30px;line-height:1.16}
+  .cov-sub{font-size:13.5px}
+
+  /* Section rhythm */
+  .wrap{padding:0 18px}
+  .main{padding:36px 0 60px}
+  .sec{margin-bottom:46px}
+  .sec-title{font-size:23px;line-height:1.22}
+  .sec-sub{font-size:13px;margin-bottom:22px}
+
+  /* Architecture frame */
+  .arch-frame{padding:18px 14px;border-radius:14px}
+  .arch-corner{position:static;justify-content:flex-end;margin:0 0 12px}
+
+  /* All multi-column diagram grids stack (beats the inline As-Is template) */
+  .diagram-grid{grid-template-columns:1fr !important;gap:12px}
+
+  /* Between-column connectors: horizontal arrows → clean downward marker */
+  .bidir-col{padding:1px 0;gap:6px}
+  .bidir-col svg{display:none}
+  .bidir-col::before{content:'';width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--primary)}
+
+  /* In-card connector row (landscape ↔ core) */
+  .conn-row{flex-wrap:wrap;gap:8px !important;margin:0 !important}
+  .conn-row svg{display:none}
+  .conn-row::before{content:'';width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--primary)}
+
+  /* Inner grids */
+  .module-grid{grid-template-columns:1fr}
+  .mod-block.full{grid-column:auto}
+  .llm-grid{grid-template-columns:1fr 1fr}
+  .users-strip{gap:10px;padding:12px 14px}
+  .user-pill{font-size:10.5px;padding:5px 10px}
+
+  /* Sequence steps */
+  .seq-step{grid-template-columns:38px 1fr;gap:13px;padding-bottom:14px}
+  .seq-step:not(:last-child)::before{left:18px;top:40px}
+  .seq-num{width:38px;height:38px;border-radius:11px}
+  .seq-num svg{width:17px;height:17px}
+  .seq-body{padding:13px 15px}
+  .seq-title{font-size:14px}
+
+  /* Wide tables scroll instead of overflowing */
+  .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{font-size:11.5px}
+}
+
+@media(max-width:430px){
+  .cov-h1{font-size:25px}
+  .sec-title{font-size:20px}
+  .llm-grid{grid-template-columns:1fr}
+  .assure{grid-template-columns:1fr}
+}
+</style>
+
 </head>
 <body>
+
+<!-- Shared SVG arrow markers (global, so every connector resolves its head) -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <marker id="adaR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="hsl(262 80% 55%)"/></marker>
+    <marker id="adaL" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M10 0L0 5L10 10z" fill="hsl(204 100% 36%)"/></marker>
+    <marker id="adaOr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="hsl(14 70% 55%)"/></marker>
+    <marker id="adaOl" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M10 0L0 5L10 10z" fill="hsl(14 70% 55%)"/></marker>
+  </defs>
+</svg>
 
 <!-- HEADER -->
 <header class="hdr">
@@ -636,7 +724,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
         </div>
       </div>
 
-      <div class="bidir-col"><svg width="62" height="22" viewBox="0 0 62 22" style="overflow:visible"><defs><marker id="adaR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="hsl(262 80% 55%)"/></marker><marker id="adaL" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M10 0L0 5L10 10z" fill="hsl(204 100% 36%)"/></marker></defs><path d="M2 7 L58 7" class="flow-line" stroke="hsl(262 80% 55%)" marker-end="url(#adaR)"/><path d="M58 15 L2 15" class="flow-line" stroke="hsl(204 100% 36%)" marker-start="url(#adaL)"/></svg><span class="bidir-tag">SYNC</span></div>
+      <div class="bidir-col"><svg width="62" height="22" viewBox="0 0 62 22" style="overflow:visible"><path d="M2 7 L58 7" class="flow-line" stroke="hsl(262 80% 55%)" marker-end="url(#adaR)"/><path d="M58 15 L2 15" class="flow-line" stroke="hsl(204 100% 36%)" marker-start="url(#adaL)"/></svg><span class="bidir-tag">SYNC</span></div>
 
       <div class="col-card" style="background:linear-gradient(160deg,hsl(262 30% 99%),hsl(275 25% 98%));border-color:hsl(262 50% 82%)">
         <div class="col-lbl aer">Governance · MDG</div>
@@ -709,10 +797,10 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
 
       <!-- CENTER -->
       <div style="display:flex;flex-direction:column;gap:16px;position:relative">
-        <div style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:-2px">
+        <div class="conn-row" style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:-2px">
           <svg width="92" height="22" viewBox="0 0 92 22" style="overflow:visible"><path d="M2 7 L88 7" class="flow-line" stroke="hsl(262 80% 55%)" marker-end="url(#adaR)"/><path d="M88 15 L2 15" class="flow-line" stroke="hsl(204 100% 36%)" marker-start="url(#adaL)"/></svg>
           <span class="bidir-tag" style="font-size:9px">API · REAL-TIME · WEBHOOK</span>
-          <svg width="92" height="22" viewBox="0 0 92 22" style="overflow:visible"><path d="M2 7 L88 7" class="flow-line" stroke="hsl(14 70% 55%)" marker-end="url(#adaR)"/><path d="M88 15 L2 15" class="flow-line" stroke="hsl(14 70% 55%)"/></svg>
+          <svg width="92" height="22" viewBox="0 0 92 22" style="overflow:visible"><path d="M2 7 L88 7" class="flow-line" stroke="hsl(14 70% 55%)" marker-end="url(#adaOr)"/><path d="M88 15 L2 15" class="flow-line" stroke="hsl(14 70% 55%)" marker-start="url(#adaOl)"/></svg>
         </div>
 
         <div class="core-platform">

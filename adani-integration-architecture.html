@@ -513,8 +513,95 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
 .layer.done::before{background:linear-gradient(90deg,hsl(152 68% 38%),hsl(165 60% 44%))}
 </style>
 
+<style>
+/* ═══════════════ RESPONSIVE / MOBILE ═══════════════ */
+
+/* Tablet — relax the densest grids before they crush */
+@media(max-width:1024px){
+  .hdr-inner{padding:0 28px}
+  .arch-frame{padding:28px 22px}
+  .g5,.g6,.bot-row,.logo-wall{grid-template-columns:repeat(4,1fr)}
+  .layer-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Phone — collapse architecture diagrams to a single vertical flow */
+@media(max-width:768px){
+  body{font-size:13.5px}
+
+  /* Header */
+  .hdr{height:54px}
+  .hdr-inner{padding:0 16px}
+  .hdr-logo{height:20px}
+  .hdr-date,.hdr-div{display:none}
+  .hdr-badge{font-size:9.5px;padding:4px 8px}
+
+  /* Cover */
+  .cover{padding:46px 0 38px}
+  .cov-h1{font-size:30px;line-height:1.16}
+  .cov-sub{font-size:13.5px}
+
+  /* Section rhythm */
+  .wrap{padding:0 18px}
+  .main{padding:36px 0 60px}
+  .sec{margin-bottom:46px}
+  .sec-title{font-size:23px;line-height:1.22}
+  .sec-sub{font-size:13px;margin-bottom:22px}
+
+  /* Architecture frame */
+  .arch-frame{padding:18px 14px;border-radius:14px}
+  .arch-corner{position:static;justify-content:flex-end;margin:0 0 12px}
+
+  /* Diagram + structural grids stack (beats the inline As-Is template) */
+  .diagram-grid{grid-template-columns:1fr !important;gap:12px}
+  .foundation-row,.iso-row,.sent-split,.az-pair,.aws-side,.g3,.module-grid{grid-template-columns:1fr}
+  .g2,.llm-grid,.mon-tools{grid-template-columns:1fr 1fr}
+  .g4,.stats,.layer-grid{grid-template-columns:1fr 1fr}
+  .g5,.g6,.bot-row,.logo-wall{grid-template-columns:repeat(3,1fr)}
+  .mod-block.full{grid-column:auto}
+
+  /* Between-column connectors: horizontal arrows → clean downward marker */
+  .bidir-col{padding:1px 0;gap:6px}
+  .bidir-col svg{display:none}
+  .bidir-col::before{content:'';width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--primary)}
+
+  /* In-card connector row (landscape ↔ core) */
+  .conn-row{flex-wrap:wrap;gap:8px !important;margin:0 !important}
+  .conn-row svg{display:none}
+  .conn-row::before{content:'';width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--primary)}
+
+  /* Sequence steps */
+  .seq-step{grid-template-columns:38px 1fr;gap:13px;padding-bottom:14px}
+  .seq-step:not(:last-child)::before{left:18px;top:40px}
+  .seq-num{width:38px;height:38px;border-radius:11px}
+  .seq-num svg{width:17px;height:17px}
+  .seq-body{padding:13px 15px}
+  .seq-title{font-size:14px}
+
+  /* Wide tables scroll instead of crushing */
+  .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;border-radius:12px}
+  .scrollx .tbl{min-width:580px}
+}
+
+@media(max-width:430px){
+  .cov-h1{font-size:25px}
+  .sec-title{font-size:20px}
+  .g2,.g4,.stats,.layer-grid,.llm-grid,.mon-tools{grid-template-columns:1fr}
+  .g5,.g6,.bot-row,.logo-wall{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+
 </head>
 <body>
+
+<!-- Shared SVG arrow markers (global, so every connector resolves its head) -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <marker id="adaR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="hsl(262 80% 55%)"/></marker>
+    <marker id="adaL" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M10 0L0 5L10 10z" fill="hsl(208 90% 43%)"/></marker>
+    <marker id="adaOr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="hsl(14 70% 55%)"/></marker>
+    <marker id="adaOl" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M10 0L0 5L10 10z" fill="hsl(14 70% 55%)"/></marker>
+  </defs>
+</svg>
 
 <!-- HEADER -->
 <header class="hdr">
@@ -615,7 +702,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
         </div>
       </div>
 
-      <div class="bidir-col"><svg width="56" height="22" viewBox="0 0 56 22" style="overflow:visible"><defs><marker id="adaR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="hsl(262 80% 55%)"/></marker><marker id="adaL" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M10 0L0 5L10 10z" fill="hsl(208 90% 43%)"/></marker></defs><path d="M2 7 L52 7" class="flow-line" stroke="hsl(262 80% 55%)" marker-end="url(#adaR)"/><path d="M52 15 L2 15" class="flow-line" stroke="hsl(208 90% 43%)" marker-start="url(#adaL)"/></svg><span class="bidir-tag">SYNC</span></div>
+      <div class="bidir-col"><svg width="56" height="22" viewBox="0 0 56 22" style="overflow:visible"><path d="M2 7 L52 7" class="flow-line" stroke="hsl(262 80% 55%)" marker-end="url(#adaR)"/><path d="M52 15 L2 15" class="flow-line" stroke="hsl(208 90% 43%)" marker-start="url(#adaL)"/></svg><span class="bidir-tag">SYNC</span></div>
 
       <!-- MDG -->
       <div class="col-card" style="background:linear-gradient(160deg,hsl(262 30% 99%),hsl(275 25% 98%));border-color:hsl(262 50% 82%)">
@@ -692,10 +779,10 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
 
       <!-- CENTER: Aerchain Core -->
       <div style="display:flex;flex-direction:column;gap:14px;position:relative">
-        <div style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:-2px">
+        <div class="conn-row" style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:-2px">
           <svg width="90" height="22" viewBox="0 0 90 22" style="overflow:visible"><path d="M2 7 L86 7" class="flow-line" stroke="hsl(262 80% 55%)" marker-end="url(#adaR)"/><path d="M86 15 L2 15" class="flow-line" stroke="hsl(208 90% 43%)" marker-start="url(#adaL)"/></svg>
           <span class="bidir-tag" style="font-size:9px">API · REAL-TIME · WEBHOOK</span>
-          <svg width="90" height="22" viewBox="0 0 90 22" style="overflow:visible"><path d="M2 7 L86 7" class="flow-line" stroke="hsl(14 70% 55%)" marker-end="url(#adaR)"/><path d="M86 15 L2 15" class="flow-line" stroke="hsl(14 70% 55%)"/></svg>
+          <svg width="90" height="22" viewBox="0 0 90 22" style="overflow:visible"><path d="M2 7 L86 7" class="flow-line" stroke="hsl(14 70% 55%)" marker-end="url(#adaOr)"/><path d="M86 15 L2 15" class="flow-line" stroke="hsl(14 70% 55%)" marker-start="url(#adaOl)"/></svg>
         </div>
 
         <div class="core-platform">
@@ -831,6 +918,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
   <p class="sec-sub">Every integration is set up through Aerchain's front-end configuration: choose the source system, enter credentials, map fields and test the payload — no back-end development. The table below lists the concrete touchpoints across SAP, Ariba and MDG for both use cases.</p>
   <div class="sec-div"></div>
 
+  <div class="scrollx">
   <table class="tbl">
     <thead><tr><th>Object / Event</th><th>Direction</th><th>System</th><th>Interface</th><th>Notes</th></tr></thead>
     <tbody>
@@ -845,6 +933,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
       <tr><td class="b">Vendor email</td><td>Aerchain → SMTP</td><td>Adani domain</td><td class="m">Customer-owned SMTP</td><td>Invitations/notifications sent from Adani's domain.</td></tr>
     </tbody>
   </table>
+  </div>
 
   <div class="g3" style="margin-top:18px">
     <div class="card t"><div class="card-rule"></div><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0H5a2 2 0 0 1-2-2v-4m6 6h10a2 2 0 0 0 2-2v-4"></path></svg></div><div class="card-eye">No back-end dev</div><div class="card-title">Front-end configurable</div><div class="card-desc">Source system, credentials, field mapping and payload testing are all done in the UI — reducing dependency on Adani IT for each connection.</div></div>
@@ -943,6 +1032,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
   <p class="sec-sub">Mapping the integration questions raised on the call directly to this architecture.</p>
   <div class="sec-div"></div>
 
+  <div class="scrollx">
   <table class="tbl" style="margin-bottom:24px">
     <thead><tr><th style="width:42%">Your question</th><th>Answer</th></tr></thead>
     <tbody>
@@ -952,6 +1042,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);col
       <tr><td class="b">Future state — replace Ariba, work directly with SAP?</td><td>Supported. Aerchain becomes the onboarding &amp; sourcing front end integrating <strong>directly with SAP + MDG</strong>, with no Ariba intermediary (Section 07).</td></tr>
     </tbody>
   </table>
+  </div>
 
   <div class="g3">
     <div class="agenda-card"><div class="agenda-num">01</div><div class="agenda-body"><div class="agenda-title">Integration deep-dive</div><div class="agenda-desc">A working session between Aerchain's integration team and Adani's architects (Chintan &amp; team) to walk this document and the field mapping in detail.</div></div></div>
