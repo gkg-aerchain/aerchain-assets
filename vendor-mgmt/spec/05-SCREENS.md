@@ -146,3 +146,42 @@ Routing note: vendor 360 uses `:slug` (e.g. `ent-1`); resolve `vendors` by
 - **Messages drawer** (both sides): `vendor_messages` realtime thread.
 - **Signed-URL document preview**: never expose Storage paths; always `createSignedUrl`.
 - **Status/tier/risk pill** primitives: shared, token-colored.
+
+---
+
+## ENTERPRISE / INTEGRATION SCREENS (Adani-driven; see `09`, `10`, `11`)
+
+### 6.10 Integration setup — `/settings/integrations`  **[BUILD]** (buyer_admin)
+- **Purpose:** the "Salesforce-style" front-end connector setup (no backend dev).
+- **Reads:** `integration_connections`, `integration_field_mappings`, recent `integration_sync_runs`.
+- **Writes:** create/edit connection (system_type, base_url, env, auth, credentials → **Vault**, DB stores `vault_secret_id`); **Test** → `erp-sync action:"test"`; field mappings; trigger **Pull vendor master** / **Pull GRN** → `erp-sync`.
+- **Reuse:** shadcn form/stepper/table. **Build:** wizard (Choose system → Connection → Test → Save → Field map → Payload test → Schedule).
+- **States:** connection status pill (unconfigured/connected/error); live sync-run progress (realtime on `integration_sync_runs`).
+- **Hero:** click **Test connection** → green check from a real (or mock) ERP ping; **Pull vendor master** streams a sync run that imports suppliers (e.g. SKF/Schaeffler/dealer) with live progress.
+
+### 6.11 Due-diligence panel — on Vendor 360 (Registration/Evaluation area)  **[BUILD]**
+- **Purpose:** run + track the configurable DD checklist; it's the **approval gate**.
+- **Reads:** `due_diligence_checks` (applicable to vendor risk tier), `vendor_due_diligence_items`, `dd_gate_status(vendor_id)`.
+- **Writes:** **Run due diligence** → `due-diligence` edge fn (writes items). **Human checks** (site/reference) open a **recording UI**: set pass/fail + note + **evidence upload** → `vendor_due_diligence_items` (source=human). **Waive** a check (admin) with note.
+- **Reuse:** checklist list, status chips. **Build:** run button, per-check drawer, human recording form, gate banner.
+- **States:** per-check status (pending/pass/fail/manual_review/waived); gate banner "Due diligence X/Y mandatory complete".
+- **Hero:** clicking **Run due diligence** fills OFAC/PEP/GST/D&B as **pass** in seconds; the **Approve** button unlocks only when the gate passes — `approve_vendor()` enforces it server-side.
+
+### 6.12 Vendor tagging — on Vendor 360 header + list filter  **[BUILD]**
+- **Reads:** `vendors.vendor_class/is_preferred/brand_tags/parent_oem_id`.
+- **Writes:** edit class/preferred/brands; **AI suggest** → `vendor-classify` (buyer confirms). Dealer→OEM link via `parent_oem_id`.
+- **Hero:** **AI suggest tag** proposes OEM vs dealer + brands (SKF/Schaeffler/NSK); on save it can sync to SAP MDG as the preferred/partner-role tag via `erp-sync`. List page gains an **OEM/dealer + Preferred** filter.
+
+### 6.13 Master-data dedup — `/vendors/dedupe`  **[BUILD]** (buyer_admin)
+- **Reads:** `vendor_duplicate_candidates` (open).
+- **Writes:** **Scan** → `vendor-dedupe`; per-candidate **Merge** / **Dismiss** (merge re-points children + sets one `inactive`).
+- **Hero:** "Scan for duplicates" surfaces near-identical vendors (same PAN / fuzzy name) for one-click review — the master-data-rationalization Adani asked for.
+
+### 6.14 Onboarding extras (extend §6.6)
+- **Excel/CSV upload:** the dropzone also accepts `.xlsx/.csv`; `extract-document` parses rows → maps to fields (buyer-uploaded vendor sheet path).
+- **GRN performance:** Evaluation "Operational Capability" lines can be **auto-filled from `vendor_grn_metrics`** (pulled via `erp-sync`) instead of manual scoring.
+- **Language switch:** EN / हिन्दी / ગુજરાતી toggle on portal + wizard; `vendor-assistant` replies in-language (voice-capable "Atlas").
+- **ERP badge:** once pushed, the 360 shows **"Synced to SAP — LIFNR 000100…"** from `vendor_external_refs`.
+
+### 6.15 Mobile (responsive, not separate app)
+- Supported on phone: **initiate vendor onboarding**, **approve/reject**, **monitor status**, **notifications**. Full wizard authoring stays desktop. (Matches Adani's stated mobile expectation.)

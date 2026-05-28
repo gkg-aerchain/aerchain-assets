@@ -22,13 +22,23 @@ they share one data model, so **apply the SQL first**, then wire screens.
 | 1 | `00-OVERVIEW.md` (this) | Read for architecture, tenancy, naming, AI setup. |
 | 2 | `01-SCOPE.md` | Build-order priority (P0/P1/P2). Nothing is "cut", priority = sequence. |
 | 3 | `02-DEMO-SCRIPT.md` | The north star. The app is "done" when this script runs end-to-end. |
-| 4 | `migrations/0001…0006_*.sql` | Apply as Supabase migrations (enums, tables, grants, functions, RPCs, triggers, RLS, storage, realtime). |
+| 4 | `migrations/0001…0007_*.sql` | Apply as Supabase migrations (enums, tables, grants, functions, RPCs, triggers, RLS, storage, realtime, **ERP integration + DD + tagging**). |
 | 5 | `03-RBAC.md` / `04-STATE-MACHINE.md` | Reference for the access matrix + `vendor_transition()` behaviour. |
 | 6 | `05-SCREENS.md` | Screen-by-screen wiring (reads/writes/components/states). Includes net-new vendor portal. |
 | 7 | `06-AI-RISK-DUEDILIGENCE.md` + `edge-functions/*` | Deploy edge functions; wire AI doc-extraction, MCA fetch, Web Insights, risk screening, AI assistant. |
 | 8 | `07-REALTIME-NOTIFICATIONS.md` | Realtime channels + `send-vendor-notification` edge function + in-app toasts. |
 | 9 | `migrations/0006_seed.sql` | Seed 10 vendors + users + docs + scorecards + audit so the app is populated on first load. |
 | 10 | `08-EXECUTION-AND-KILLSWITCH.md` | Hour-by-hour build plan + demo-day fallbacks. |
+| 11 | `09-ERP-INTEGRATION.md` | Front-end-configurable SAP/Ariba/MDG/Coupa/Oracle integration; bi-directional vendor-master sync; `erp-sync` edge fn. |
+| 12 | `10-ADANI-REQUIREMENTS-MAP.md` | Every Adani need (from the meeting transcripts) → feature → where built; the DD checklist; pilot plan; out-of-scope. |
+| 13 | `11-ENTERPRISE-ARCHITECTURE.md` | Performance, scale, multi-tenant, security/SOC2/GDPR, AI-native, localization (Hindi/Gujarati), mobile, BYOC. |
+
+**Why this is more than the original brief.** The product owner supplied the actual
+Adani meeting transcripts. The spec is now grounded in Adani's stated priorities —
+vendor onboarding cycle reduction (≥70%), **vendor risk analysis / due diligence as the
+wedge**, front-end-configurable SAP/Ariba/MDG integration with **bi-directional vendor-
+master sync**, OEM-vs-dealer tagging, GST/MSME + OFAC + D&B + ProcessUnity due diligence,
+GRN-sourced performance, master-data dedup, and Gujarati-language support. See `10`.
 
 ---
 

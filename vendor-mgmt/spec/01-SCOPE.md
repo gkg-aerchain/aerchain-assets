@@ -39,6 +39,16 @@ ship.
 | 28 | Dashboard KPIs (buyer portfolio analytics) | **P2** | ✅ | Counts by status/risk/tier. |
 | 29 | Saved filters / search across vendors | **P2** | ✅ | Server-side filtered queries. |
 | 30 | Bulk actions (multi-select on list) | **P2** | ✅ | Bulk remind/export. |
+| 31 | **Configurable due-diligence checklist** (30–40 checks) + approval gate | **P1** | ✅ | OFAC/D&B/Equifax/GST/MSME/PEP/ProcessUnity + AI + human; `approve_vendor` gate. |
+| 32 | **Human DD recording UI** (manual/site/reference checks) | **P1** | ✅ | `vendor_due_diligence_items` source=human + evidence upload. |
+| 33 | **Vendor tagging** (OEM/dealer/distributor, preferred, brand tags) + AI classify | **P1** | ✅ | `vendors.vendor_class/is_preferred/brand_tags`; `vendor-classify`. |
+| 34 | **Front-end-configurable ERP integration** (SAP/Ariba/MDG/Coupa/Oracle) | **P1** | ✅ | Connection wizard + `erp-sync`; creds in Vault. |
+| 35 | **Bi-directional vendor-master sync** (import + push-on-approval) | **P1** | ✅ | `erp-sync` pull/push + `vendor_external_refs`. |
+| 36 | **GRN-sourced performance** (OTD, quality) into scorecard | **P1** | ✅ | `erp-sync` grn → `vendor_grn_metrics`. |
+| 37 | **Excel/CSV/PDF upload → AI fills onboarding form** | **P1** | ✅ | `extract-document` (vision + spreadsheet). |
+| 38 | **Master-data dedup / rationalization** review | **P2** | ✅ | `vendor-dedupe` → `vendor_duplicate_candidates`. |
+| 39 | **Multilingual** UI + assistant (EN / हिन्दी / ગુજરાતી) | **P1** | ✅ | i18n + `vendor-assistant` language param. |
+| 40 | **Customer SMTP / send-from-buyer-domain** | **P2** | ✅ | per-org SMTP in `send-vendor-notification`. |
 
 **Build sequencing rule:** finish all **P0** before any P1 so the *demo script*
 (`02-DEMO-SCRIPT.md`) runs end-to-end; then P1 adds the AI/risk/DD richness that

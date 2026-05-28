@@ -85,3 +85,34 @@ persists."*
 If any AI call is slow/offline live, the **Auto-Fill Demo** button and
 `RISK_MODE=mock` produce the same on-screen result deterministically (see
 `08-EXECUTION-AND-KILLSWITCH.md`).
+
+---
+
+## Adani enterprise addendum (extra beats for the Adani audience)
+
+Adani's team cares about onboarding-cycle reduction, **vendor risk/due diligence**,
+and **SAP/Ariba integration**. Insert these beats into Acts 3–4:
+
+- **A3+ Due-diligence gate (replaces the "score and approve" beat with the real gate):**
+  On Bharat Forge's 360, open the **Due Diligence** panel → **Run due diligence**.
+  In seconds: **PAN ✓, GST active ✓, OFAC ✓, PEP ✓, D&B (5A1) ✓**; the **site
+  verification** check shows **Manual review** — Priya opens the **recording UI**,
+  marks it verified with a note + uploads the visit report. Gate flips to **"Mandatory
+  complete"** and **Approve** unlocks. Say: *"This is the vendor-risk piece — OFAC, GST,
+  D&B, sanctions, PEP, automated; physical checks captured in one place; nothing by
+  email anymore."*
+- **A3+ Vendor tagging:** show **AI suggest tag** → classifies Bharat Forge as **OEM /
+  manufacturer**; show the **OEM vs Dealer** filter on `/vendors`. Say: *"SKF vs its
+  dealer — the system tags it, and we can push that preferred/OEM tag back into your
+  MDG."*
+- **A4+ Push to SAP/Ariba (the integration money-shot):** approving the vendor triggers
+  `erp-sync` → the 360 shows **"Synced to SAP — LIFNR 0001000048"** and `/settings/
+  integrations` shows the **outbound sync run** complete. Say: *"The moment you approve,
+  the vendor lands in your SAP vendor master — front-end configured, no back-end dev."*
+- **A1±/setup Integration setup:** if asked, open `/settings/integrations` → show the
+  **Choose system → credentials → Test (green) → field map** flow and a **Pull vendor
+  master** run importing existing suppliers (SKF/Schaeffler/dealer).
+- **Gujarati moment:** flip the language toggle to **ગુજરાતી**; ask the Atlas assistant a
+  question — it replies in Gujarati (business-user adoption point).
+- **Cycle-time close:** end on the KPI — *"What takes ~90 days across SAP+Ariba+MDG+email
+  here happened in minutes, end-to-end, with the risk work done for you."*
