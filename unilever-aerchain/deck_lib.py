@@ -28,6 +28,10 @@ FONT_W = {"mont":400,"mont-med":500,"mont-light":300,"mont-semi":600,"mont-bold"
 def R(text, size, color, font="mont", bold=False, italic=False, spc=None):
     return dict(t=text, s=size, c=color, f=font, b=bold, i=italic, spc=spc)
 
+def grad(c0, c1, angle=135):
+    """Linear-gradient fill spec (CSS-style angle in degrees)."""
+    return dict(g=[c0, c1], angle=angle)
+
 class Slide:
     def __init__(self):
         self.els=[]
@@ -62,7 +66,9 @@ def slide_html(sl):
         if e['k']=="rect":
             w,h=e['w']*PXIN,e['h']*PXIN
             st=f"position:absolute;left:{x}px;top:{y}px;width:{w}px;height:{h}px;"
-            if e['fill']: st+=f"background:#{e['fill']};"
+            if isinstance(e['fill'],dict):
+                st+=f"background:linear-gradient({e['fill']['angle']}deg,#{e['fill']['g'][0]},#{e['fill']['g'][1]});"
+            elif e['fill']: st+=f"background:#{e['fill']};"
             if e['line']: st+=f"border:{e['lw']*1.333:.2f}px solid #{e['line']};"
             if e['radius']: st+=f"border-radius:{e['radius']*PXIN}px;"
             parts.append(f"<div style='{st}'></div>")
@@ -116,7 +122,14 @@ def render_pptx(slides, path):
                 if e['radius']:
                     try: shp.adjustments[0]=min(0.5, e['radius']/min(e['w'],e['h']))
                     except: pass
-                if e['fill']:
+                if isinstance(e['fill'],dict):
+                    shp.fill.gradient()
+                    stops=shp.fill.gradient_stops
+                    stops[0].position=0.0; stops[0].color.rgb=RGBColor.from_string(e['fill']['g'][0])
+                    stops[1].position=1.0; stops[1].color.rgb=RGBColor.from_string(e['fill']['g'][1])
+                    try: shp.fill.gradient_angle=(e['fill']['angle']-90)%360
+                    except Exception: pass
+                elif e['fill']:
                     shp.fill.solid(); shp.fill.fore_color.rgb=RGBColor.from_string(e['fill'])
                 else:
                     shp.fill.background()
