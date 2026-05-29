@@ -10,9 +10,14 @@ the Aerchain capability story and a business case.
 | File | What it is |
 |------|------------|
 | **`Unilever_Aerchain_OnePager.pdf`** | Vertical one-pager (executive leadership summary) in the Unilever reference style. |
-| **`Unilever_Aerchain_Infosys_Deck.pptx`** | 4-slide deck in the Aerchain design theme. |
+| **`Unilever_Aerchain_Infosys_Deck.pptx`** | 4-slide deck — **Aerchain purple** wash. |
+| **`Unilever_Aerchain_Infosys-Brand_Deck.pptx`** | Same 4-slide deck — **Infosys brand** wash (blue `#005EEF` / indigo `#1F36C7`, from the Infosys deck theme). |
 | `previews/onepager_full.png` | PNG preview of the one-pager. |
-| `previews/deck_slide_1–4.png` | PNG previews of each slide. |
+| `previews/deck_slide_1–4.png` | PNG previews — purple deck. |
+| `previews/infosys_slide_1–4.png` | PNG previews — Infosys-branded deck. |
+
+Both decks are generated from one theme-driven spec (`deck.py` → `THEMES`); run
+`python deck.py png` to rebuild both, or `python deck.py infosys png` for just one.
 
 ### Deck structure
 1. **Title** — Autonomous Agentic Sourcing for Unilever (headline stats).
