@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adani × Aerchain — Cleaned Meeting Transcript | 27 May 2026</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox='108 0 36 32' fill='%23DC5F40'%3E%3Cpath d='M143.857 20.625c.086-4.456-1.765-9.858-6.605-6.789-.406.16-.638.104-.852-.202a55 55 0 0 1-1.661-3.438c-4.368-11.371-9.356-4.869-14.625 1.861C108.347 27.45 113.89 34.267 132.438 20.75c.648-.465 1.946-1.438 2.413-1.478.492-.08.697.324 1.068 1.17.36.867.959 2.096 1.507 2.973 3.166 6.216 6.672 4.775 6.433-2.764zm-13.948-2.317c-2.334 1.476-4.549 3.283-7.113 4.362-1.117.472-2.745-.05-3.147-.964-.455-1.417 1.173-3.506 1.972-4.977a30 30 0 0 1 3.332-4.684c1.143-1.497 2.694-3.718 4.845-2.747 1.725.992 2.433 3.734 3.42 5.388.446.717.432 1.224-.348 1.657a24 24 0 0 1-2.942 1.955zm12.647 2.935c-.051.853-.211 4.08-1.286 2.543-1-1.899-2.095-4.266-3.073-6.29-.38-1.033 1.995-1.452 2.613-1.276 1.725.644 1.786 3.398 1.746 5.009z'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--aerchain:#DC5F40;--purple:hsl(262 80% 55%);--gp:linear-gradient(135deg,hsl(262 80% 55%),hsl(275 85% 58%));--gp-warm:linear-gradient(135deg,#DC5F40,#e8893f)}
+html[data-theme="light"]{--canvas:hsl(262 30% 96%);--ink:hsl(222 18% 14%);--ink-2:hsl(222 10% 36%);--ink-3:hsl(222 9% 55%);--card:rgba(255,255,255,.80);--card-solid:#fff;--border:hsl(262 22% 86%);--border-h:hsl(262 60% 60%);--shadow:0 4px 22px rgba(124,58,237,.08),0 1px 3px rgba(124,58,237,.05);--shadow-lg:0 18px 44px -10px rgba(124,58,237,.20);--code-bg:hsl(262 30% 92%)}
+html[data-theme="dark"]{--canvas:hsl(262 45% 11%);--ink:rgba(255,255,255,.94);--ink-2:rgba(255,255,255,.72);--ink-3:rgba(255,255,255,.46);--card:rgba(255,255,255,.05);--card-solid:hsl(262 35% 15%);--border:rgba(255,255,255,.10);--border-h:hsl(262 80% 62%);--shadow:0 8px 32px rgba(0,0,0,.28);--shadow-lg:0 18px 44px -8px rgba(0,0,0,.45);--code-bg:rgba(255,255,255,.06)}
+body{font-family:'Montserrat',system-ui,sans-serif;background:radial-gradient(1200px 600px at 80% -10%,hsl(262 60% 55% / .12),transparent 60%),radial-gradient(900px 500px at -10% 10%,hsl(18 80% 55% / .08),transparent 55%),var(--canvas);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:70px}
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--canvas) 82%,transparent);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:980px;margin:0 auto;padding:12px 26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700}
+.brand svg{width:26px;height:26px}
+.brand small{font-family:'JetBrains Mono',monospace;font-weight:500;color:var(--ink-3);font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.nav-links{display:flex;gap:3px;margin-left:auto;flex-wrap:wrap}
+.nav-links a{font-size:12px;color:var(--ink-2);text-decoration:none;padding:5px 9px;border-radius:8px;font-weight:500;white-space:nowrap}
+.nav-links a:hover{background:var(--card);color:var(--ink)}
+.toggle{cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--ink-2);border-radius:9px;padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.5px}
+.toggle:hover{border-color:var(--border-h);color:var(--ink)}
+.wrap{max-width:980px;margin:0 auto;padding:0 26px}
+.hero{padding:54px 0 24px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--aerchain);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--gp-warm);border-radius:2px}
+.hero h1{font-size:clamp(28px,4.5vw,44px);line-height:1.08;font-weight:700;letter-spacing:-.8px;max-width:20ch}
+.hero h1 .grad{background:var(--gp);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{font-size:16.5px;color:var(--ink-2);max-width:64ch;margin-top:18px}
+.meta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.meta{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 16px;display:flex;flex-direction:column;gap:2px;box-shadow:var(--shadow)}
+.meta .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3)}
+.meta .v{font-size:14px;font-weight:600}
+
+.editorial{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--aerchain);border-radius:12px;padding:18px 22px;margin:26px 0;box-shadow:var(--shadow)}
+.editorial .tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--aerchain);display:block;margin-bottom:8px}
+.editorial p{font-size:13.5px;color:var(--ink-2);margin:6px 0}
+
+/* LEGEND */
+.legend{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:18px 0 6px}
+@media(max-width:720px){.legend{grid-template-columns:1fr}}
+.lg{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-2)}
+.dot{width:11px;height:11px;border-radius:50%;flex:none}
+.dot.gg{background:var(--purple)} .dot.cn{background:hsl(275 60% 70%)}
+.dot.sj{background:var(--aerchain)} .dot.cs{background:hsl(38 90% 50%)}
+.dot.ct{background:hsl(220 9% 60%)} .dot.dk{background:hsl(152 60% 42%)}
+.dot.cpo{background:hsl(212 80% 52%)} .dot.atlas{background:linear-gradient(135deg,var(--purple),var(--aerchain))}
+
+/* ACTS */
+.act{margin:46px 0 8px;padding-top:30px;border-top:2px solid var(--border)}
+.act .num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:1.5px;color:var(--aerchain)}
+.act h2{font-size:clamp(20px,3vw,27px);font-weight:700;letter-spacing:-.5px;margin:4px 0 6px}
+.act .setting{font-size:13.5px;color:var(--ink-3);font-style:italic}
+
+/* TURNS */
+.turn{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid color-mix(in srgb,var(--border) 60%,transparent)}
+@media(max-width:680px){.turn{grid-template-columns:1fr;gap:3px}}
+.who{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.4px;line-height:1.5;padding-top:2px;display:flex;align-items:flex-start;gap:7px}
+.who .dot{margin-top:4px}
+.who span{display:block}
+.who .role{color:var(--ink-3);font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.6px}
+.said{font-size:15px;color:var(--ink);line-height:1.62}
+.said em.stage{color:var(--ink-3);font-style:italic;font-size:13.5px}
+.w-gg .nm{color:var(--purple)} .w-cn .nm{color:hsl(275 55% 60%)}
+.w-sj .nm{color:var(--aerchain)} .w-cs .nm{color:hsl(38 80% 42%)}
+.w-ct .nm{color:hsl(220 9% 50%)} .w-dk .nm{color:hsl(152 55% 36%)}
+.w-cpo .nm{color:hsl(212 75% 48%)}
+.w-atlas .nm{background:var(--gp);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+html[data-theme="dark"] .w-dk .nm{color:hsl(152 60% 60%)}
+html[data-theme="dark"] .w-cs .nm{color:hsl(38 90% 62%)}
+html[data-theme="dark"] .w-cpo .nm{color:hsl(212 80% 66%)}
+
+.cut{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);background:var(--code-bg);border-radius:8px;padding:9px 16px;margin:14px 0;text-align:center;letter-spacing:.3px}
+.cut::before{content:"✂  ";opacity:.6}
+
+.note{font-size:12.5px;color:var(--ink-3);font-style:italic;margin:10px 0}
+.footer{max-width:980px;margin:48px auto 0;padding:24px 26px;border-top:1px solid var(--border);color:var(--ink-3);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer a{color:var(--ink-2);text-decoration:none;font-weight:600}
+@media print{.nav{position:static}body{background:#fff}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg viewBox="108 0 36 32" fill="#DC5F40"><path d="M143.857 20.625c.086-4.456-1.765-9.858-6.605-6.789-.406.16-.638.104-.852-.202a55 55 0 0 1-1.661-3.438c-4.368-11.371-9.356-4.869-14.625 1.861C108.347 27.45 113.89 34.267 132.438 20.75c.648-.465 1.946-1.438 2.413-1.478.492-.08.697.324 1.068 1.17.36.867.959 2.096 1.507 2.973 3.166 6.216 6.672 4.775 6.433-2.764zm-13.948-2.317c-2.334 1.476-4.549 3.283-7.113 4.362-1.117.472-2.745-.05-3.147-.964-.455-1.417 1.173-3.506 1.972-4.977a30 30 0 0 1 3.332-4.684c1.143-1.497 2.694-3.718 4.845-2.747 1.725.992 2.433 3.734 3.42 5.388.446.717.432 1.224-.348 1.657a24 24 0 0 1-2.942 1.955zm12.647 2.935c-.051.853-.211 4.08-1.286 2.543-1-1.899-2.095-4.266-3.073-6.29-.38-1.033 1.995-1.452 2.613-1.276 1.725.644 1.786 3.398 1.746 5.009z'/></svg>
+      Aerchain <small>× Adani · Transcript</small>
+    </div>
+    <div class="nav-links">
+      <a href="#a1">Overview</a>
+      <a href="#a2">Catalog</a>
+      <a href="#a3">Clarification</a>
+      <a href="#a4">Autonomous</a>
+      <a href="#a5">Atlas</a>
+      <a href="#a6">Devesh</a>
+      <a href="#a7">Onboarding</a>
+      <a href="#a8">CPO</a>
+      <a href="#a9">Follow-up</a>
+    </div>
+    <button class="toggle" onclick="tt()">◐ THEME</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Cleaned &amp; Normalized Transcript · Confidential</div>
+    <h1>Adani <span class="grad">×</span> Aerchain — the full session, organized</h1>
+    <p class="sub">An edited, readable reconstruction of the ~4-hour on-site meeting and the next-day follow-up call. Hinglish has been rendered into clean English, transcription artefacts corrected, and speakers attributed by name and role. Personal, logistical and off-topic material has been removed; all business content is preserved faithfully.</p>
+    <div class="meta-row">
+      <div class="meta"><span class="k">Date</span><span class="v">27 May 2026</span></div>
+      <div class="meta"><span class="k">Venue</span><span class="v">Adani Corporate House, Ahmedabad</span></div>
+      <div class="meta"><span class="k">Sources</span><span class="v">2 session recordings + follow-up call</span></div>
+      <div class="meta"><span class="k">Companion</span><span class="v"><a href="adani-briefing.html" style="color:var(--purple)">Briefing →</a></span></div>
+    </div>
+
+    <div class="editorial">
+      <span class="tag">Editorial note</span>
+      <p>This is a <strong>curated transcript</strong>, not a verbatim one. Diarization in the raw recordings was unreliable and inconsistent across files; speakers here are assigned from the email thread, business cards and meeting context. Connectivity troubleshooting, scheduling, personal anecdotes and informal banter have been omitted and marked with a ✂ cut-marker. Wording is paraphrased for readability while preserving meaning; treat exact phrasing as indicative.</p>
+    </div>
+
+    <div class="legend">
+      <div class="lg"><span class="dot gg"></span><strong>Gaurav Guha</strong> — Aerchain, Head of Sales</div>
+      <div class="lg"><span class="dot cn"></span><strong>Chitresh Nagwann</strong> — Aerchain</div>
+      <div class="lg"><span class="dot sj"></span><strong>Sumeet Jain</strong> — Adani, convener / host</div>
+      <div class="lg"><span class="dot cs"></span><strong>Chintan Shah</strong> — Adani, SAP/MDM/Ariba architect (virtual)</div>
+      <div class="lg"><span class="dot ct"></span><strong>Catalog &amp; tech team</strong> — Adani (Gurpreet, Rukesh, Ashish &amp; others)</div>
+      <div class="lg"><span class="dot dk"></span><strong>Devesh Khandelwal</strong> — Adani, GM Procurement Platform &amp; Tech</div>
+      <div class="lg"><span class="dot cpo"></span><strong>Suresh Shinde</strong> — Adani, Group CPO</div>
+      <div class="lg"><span class="dot atlas"></span><strong>Atlas</strong> — Aerchain conversational AI agent</div>
+    </div>
+  </header>
+
+  <!-- ACT 1 -->
+  <div class="act" id="a1"><span class="num">ACT 01</span><h2>Company overview &amp; positioning</h2><p class="setting">Conference room, Adani Corporate House. Catalog &amp; tech team present in person; Chintan Shah joins virtually. Hosted by Sumeet Jain.</p></div>
+
+  <div class="cut">Arrival, Wi-Fi / guest-login and screen-sharing setup, business-card exchange and personal conversation omitted (~40 min).</div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Let me introduce myself — Gaurav Guha, I head sales at Aerchain; I've spent my whole career in procurement technology. Quick background on the company: we're about six years old, founded in 2019 by Harsha and Hema, batchmates from BITS Pilani. Most of the founding team — including the early interns — are still with us; roughly 80% retention. IndiaMart was a seed investor along with Season Two Ventures. Two-to-three months ago we closed a $13M Series A led by Pavestone, with Infosys investing directly — which is unusual, since Infosys normally builds its own. We've partnered with them on global deals like Unilever and Danone.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">On logos: CenturyPly and the National Stock Exchange of India are on full Aerchain source-to-pay. The Reliance Group is on source-to-contract, rolling out group company by group company — live in hydrocarbons, O2C and GOBP manufacturing, with retail going live next month. We've closed Meta and JD Peet's Coffee in the US, and Emirates Global Aluminium in the UAE. We're a viable alternative to Ariba, Coupa and Zycus across the full S2P footprint — spend analytics, sourcing, contracts, supplier management, P2P — but we've doubled down on Gen-AI-powered source-to-contract, what we call autonomous sourcing.</div></div>
+
+  <div class="turn w-sj"><div class="who"><span class="dot sj"></span><span><span class="nm">Sumeet Jain</span><span class="role">Adani · host</span></span></div><div class="said">If you're equivalent to Ariba sourcing — do you also have the functionality of SAP?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">No — we're not an ERP. We sit on top of SAP, exactly the way Ariba does. We can even sit on top of Ariba and SAP together. At Unilever, for instance, strategic spend stays on their Coupa and we're plugged in on top of it for autonomous sourcing. Any group that's invested in S2P can't change overnight, so phase one is usually us layered on as a specialised autonomous-sourcing solution for the tactical and tail-spend categories — high-volume, low-value spend where you still need competitive bidding but there's no human bandwidth to do it. Our negotiation agent can run a cost-reduction event across, say, 500 vendors simultaneously, fully autonomously. And we hold every certification needed for global business — SOC 1, SOC 2, GDPR.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Everything starts with a spend analysis — not to bucket categories for savings, but to determine the ideal orchestration channel for every rupee of spend. Not all spend deserves the same buying process: running strategic sourcing on C-class items wastes time; running a tail-spend process on strategic items does them no justice. We map your spend into strategic, tactical, rate-contract and so on, identify the highest-automation-potential pockets first, then let you configure each workflow as Lego blocks — human steps, AI-agent steps and module-to-module conversions. Underneath sits the "knowledge bank": every action, transaction, sourcing event, vendor submission and policy is captured and turned into reusable AI context, so the output speaks in your standard terms and conditions and respects your data-privacy requirements.</div></div>
+
+  <!-- ACT 2 -->
+  <div class="act" id="a2"><span class="num">ACT 02</span><h2>The real requirement surfaces: L2 punch-out catalogs</h2><p class="setting">Chintan Shah steers the conversation to Adani's actual immediate need.</p></div>
+
+  <div class="turn w-sj"><div class="who"><span class="dot sj"></span><span><span class="nm">Sumeet Jain</span><span class="role">Adani · host</span></span></div><div class="said">Let's go straight to the point on catalogs and the L2 punch-out level. It's interesting to see how the AI builds the architecture, but we're most interested in why you're here — take us through how your system integrates with ours at the L2 punch-out level. Chintan, please brief the Aerchain team on our expectation so we don't go around in circles.</div></div>
+
+  <div class="turn w-cs"><div class="who"><span class="dot cs"></span><span><span class="nm">Chintan Shah</span><span class="role">Adani · architect</span></span></div><div class="said">We've implemented guided buying across the group and we run buyer-managed static catalogs, with rate contracts already created with suppliers. Now we're planning L2 punch-outs, where an aggregator manages the catalogs at their end and our Ariba integrates with the aggregator's system. The user selects an item on the vendor's portal, the cart returns to Ariba, and we complete the process as a standard Ariba L2 punch-out. We want to understand how to implement an L2 punch-out with Ariba — and if you can do it, the methodology to take it forward.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Let me make sure I understand. We do have our own catalog module — hosted catalogs, vendor-hosted catalogs (the L2 punch-outs), and true punch-outs like Amazon Business. What you're describing is, say, Moglix maintaining a catalog linked to you; a user searches in Ariba Guided Buying, gets redirected to the vendor's punch-out store, adds items to the cart, and the cart total flows back into Ariba for final approval. Correct?</div></div>
+
+  <div class="turn w-cs"><div class="who"><span class="dot cs"></span><span><span class="nm">Chintan Shah</span><span class="role">Adani · architect</span></span></div><div class="said">Correct — exactly that.</div></div>
+
+  <div class="cut">Brief coffee break; the virtual catalog team steps away for ~20 minutes. On resumption Gaurav runs a quick intake demo ("I want to buy glass bottles") to show category-aware questioning while the room reconvenes — see Act 4.</div>
+
+  <!-- ACT 3 -->
+  <div class="act" id="a3"><span class="num">ACT 03</span><h2>The clarification: platform, not aggregator</h2><p class="setting">The crux of the meeting — resetting expectations honestly.</p></div>
+
+  <div class="turn w-ct"><div class="who"><span class="dot ct"></span><span><span class="nm">Catalog team</span><span class="role">Adani</span></span></div><div class="said">We're not going to replace Ariba at this stage. Can you show us how to integrate with Ariba for the L2 punch-out? That's really the question.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Then I'll be direct: we don't do that, and let me explain why. Ariba is your infrastructure and your portal. You have a few vendors — Moglix, Amazon, L&amp;T SuFin — some with web-hosted catalogs, some vendor-hosted for specific customers. Since you've chosen Ariba, what you actually want is a <em>catalog-integration service</em> to bring those vendors' hosted catalogs onto your Ariba portal. We <em>have</em> that hosting infrastructure ourselves — but we are like Ariba; we are not a service that integrates Moglix's catalog into your Ariba. We're the platform, not the aggregator.</div></div>
+
+  <div class="turn w-cs"><div class="who"><span class="dot cs"></span><span><span class="nm">Chintan Shah</span><span class="role">Adani · architect</span></span></div><div class="said">We have a very large ecosystem — 14-plus SAP instances integrated over the last year, with diverse projects and nuances. I don't want to reinvent that. The I1 / network buying is working fine for static catalogs; we just want to extend it. We're open to understanding your architecture and to services, but at this juncture we're focused on the implementation/development for the punch-out.</div></div>
+
+  <div class="turn w-sj"><div class="who"><span class="dot sj"></span><span><span class="nm">Sumeet Jain</span><span class="role">Adani · host</span></span></div><div class="said">Presently our own hosted contracts work fine. We want to move from manual to automated, and we want a partner like Amazon, IndiaMart, Moglix, Flipkart — or Aerchain — to help with tail spend. Take Amazon: today we buy Borosil at ₹1,000; with their procurement aggregation they might offer the same at ₹700, so we'd go for it. That's the kind of service we want. We don't want yet another platform to manage.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Understood — and that's the gap. We were an aggregator earlier; today we're a software company like Ariba. That's exactly why I didn't want to dive into this thread: you have Ariba and the infrastructure, and integrating an Amazon marketplace into your guided-buying page is straightforward — it isn't something you need an aggregator-platform like us for. In that scenario, we'd be the Amazon/Moglix, not the integrator of the marketplace. I want to be clear on that.</div></div>
+
+  <div class="turn w-sj"><div class="who"><span class="dot sj"></span><span><span class="nm">Sumeet Jain</span><span class="role">Adani · host</span></span></div><div class="said">No, that's fair — that's why I asked at the very start whether you're similar to SAP ERP, and you said no. We are not an ERP, you're not an ERP — understood. So there was a disconnect in what IndiaMart passed to us: we expected something like Amazon or Moglix, but you're a technology provider with a full landscape like Ariba. You have another capability — autonomous sourcing — which you'll explain. Interested team members can stay; others can step out.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Exactly. You want to solve a tail-spend problem. One solution is the aggregator mode. A second is cataloging — pushing as much spend under catalogs as possible. The third is <strong>autonomous sourcing</strong>, which is what I'd like to present: rather than going to an aggregator, our autonomous engine does much of what an aggregator would, through competitive bidding. The first two are already covered by Ariba; the third is the new alternative.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">For the record, mapping to the brief IndiaMart sent: "single-window B2B procurement with empanelled sellers, bulk discounts, nationwide rate contracts" — that's the aggregator piece. "Company-wide, department-wise spend visibility and analytics" — that's our spend insights. "Configurable compliance, approval workflows, governance" — that's the knowledge base I showed. "Invoice consolidation, flexible payment terms, ERP integration" — that's catalog and P2P. So of the five, most map to us; only the aggregator line item doesn't.</div></div>
+
+  <!-- ACT 4 -->
+  <div class="act" id="a4"><span class="num">ACT 04</span><h2>Autonomous sourcing — the live demo</h2><p class="setting">Run on a live Adani-flavoured tenant, with a real sourcing event and vendor-side bidding.</p></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Give me anything you'd want to buy — imagine you're a business user. From a vague request like "I want glass bottles," the system first checks whether an existing purchase framework can short-circuit the transaction — previously ordered items, hosted catalogs, framework agreements, punch-out sites — and pulls them into one comparative view. Then it asks category-aware clarifying questions: food-grade or pharma-grade, quantity, and so on. It summarises the requirement, auto-categorises it, estimates spend, sets a need-by date, and pre-fills a complete PR. The business user just submits — and the system executes the entire sourcing event end-to-end.</div></div>
+
+  <div class="turn w-ct"><div class="who"><span class="dot ct"></span><span><span class="nm">Adani</span><span class="role">tech team</span></span></div><div class="said">Is this written on your own portal, or on Ariba? Basically, what is the platform here?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">We're a one-to-one replacement for Ariba — but most companies can't do a big-bang S2P change, so we start with tactical and tail spend and integrate with Ariba. You have an intake workflow in Ariba; inside the Ariba workflow builder there's an API endpoint. When the workflow detects a tail-spend item, it pushes the Ariba PR to Aerchain; we execute the whole event autonomously and use the same API to update that original PR. The PR then completes its auto PR-to-PO conversion in Ariba and the loop closes. We do exactly this with Coupa, Zycus and Ariba today. Your guided buying and catalogs stay on Ariba; the high-volume, low-value tail spend routes to us.</div></div>
+
+  <div class="turn w-ct"><div class="who"><span class="dot ct"></span><span><span class="nm">Adani</span><span class="role">tech team</span></span></div><div class="said">So onboarding stays ours, and the vendors here are only our own — not Reliance's vendors?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Correct — we're not a shared network. For every customer we work off your own vendor master; your vendors bid on our portal, fully ring-fenced. That said, our AI vendor-discovery can suggest additional vendors, and because IndiaMart is our core investor, our India vendor intelligence is genuinely strong — we're working to integrate the IndiaMart vendor network into our discovery module. But to be clear: it's customer-specific, closed networks, not a giant shared pool.</div></div>
+
+  <div class="cut">Exchange on company history (started as "Supply Basics," a Moglix-style aggregator; the technology built to make that viable became the Aerchain platform) condensed.</div>
+
+  <div class="turn w-ct"><div class="who"><span class="dot ct"></span><span><span class="nm">Adani</span><span class="role">tech team</span></span></div><div class="said">Ideally, how would you sit within Adani's procurement ecosystem? Note that PRs are raised in SAP.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Then we can be the intake layer, or take the PR from SAP/Ariba, execute the sourcing, and write the award back. Let me show the full footprint — spend analytics, sourcing (strategic with humans, or fully autonomous), contract management, supplier management and P2P. On vendor management: you onboard a vendor and capture all the standard registration details, but we enrich it natively — full business overview, average lead time, on-time delivery, spend trend, price indices, every recent PO, category-wise spend, and a vendor performance evaluation. The objective parts pull straight from your GRN data; triggers can be time-based, compliance-based, or tier-change-based. Plus web insights: financial snapshot, news and media, compliance and regulatory screening, ratings, category and negotiation intelligence.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Integration is front-end configurable — pick the source system (Ariba, Coupa, S/4HANA), enter the connection name and credentials, test and save, then map the integration touchpoints between the SAP PR and our PR. No back-end development required. And on spend insights — built because customers told us they can already do reactive analysis but want market forecasting, seasonality and geopolitical risk — we give a consolidated dashboard: for steel, the relevant index and a contract-lock opportunity; for ocean freight, benchmarks from Freightos with a disruption monitor and carrier scorecards; for ENA and others, should-cost components.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said"><em class="stage">[Returning to the live event.]</em> From that "water bottles" conversation, the system has now generated the full RFP autonomously — selected vendors, drafted the SOW, payment terms and Q&amp;A — and it's an editable canvas; I can tell it "add five more questions" and it does. The vendor invitation isn't a bare "you've been invited" link — it's an AI-written summary of exactly what's needed, sent from your own SMTP and domain. Vendors bid on their side; I can even AI-pre-fill a bid to show the flow. Then the system runs the technical analysis — scoring each vendor's responses with justifications, generating a company profile, and analysing any zip attachments — and a commercial analysis that normalises each vendor's pricing format into a side-by-side view, surfacing hidden discounts and structural differences.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">For award, you define scenarios in plain English — "relationship-based," cherry-pick best-in-class, multi-supplier split — and the AI converts the free text into a parameterised configuration. People rarely use Ariba's Bid Optimizer because configuring scenarios is so hard; here you just describe it. And then autonomous negotiation: the agent can run fully autonomously or human-led. We've broken negotiation into a science — Round 1 is mutual discovery, Round 2 is benchmark pressure, Round 3 is the target push, and there's a "baffle" round. It builds a should-cost model, shows the benchmark source, sets the budget ceiling and parameter targets, and you can see its strategy and reasoning. It negotiates with as many vendors as you like, in parallel, and ends with a comparison and an award recommendation.</div></div>
+
+  <!-- ACT 5 -->
+  <div class="act" id="a5"><span class="num">ACT 05</span><h2>Atlas — the conversational AI agent</h2><p class="setting">The moment the room turned. Gaurav demonstrates a voice agent he built himself.</p></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">I want to end with something I built myself. This is Atlas, our new AI assistant. Say hello to it. <em class="stage">[Activates voice agent.]</em></div></div>
+
+  <div class="turn w-atlas"><div class="who"><span class="dot atlas"></span><span><span class="nm">Atlas</span><span class="role">AI agent</span></span></div><div class="said">Hi there — loud and clear. What can I do for you today?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Can you show me my spend dashboard?</div></div>
+
+  <div class="turn w-atlas"><div class="who"><span class="dot atlas"></span><span><span class="nm">Atlas</span><span class="role">AI agent</span></span></div><div class="said">Your spend dashboard is up now — let me know if you want me to drill into anything specific.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">I want to get janitorial services for my Ahmedabad office — can you open the intake form and fill it in for me?</div></div>
+
+  <div class="turn w-atlas"><div class="who"><span class="dot atlas"></span><span><span class="nm">Atlas</span><span class="role">AI agent</span></span></div><div class="said">The intake form for janitorial services at the Ahmedabad office is open. I've pre-filled the details — category is facilities and janitorial services, estimated spend around ₹1,90,000. We can go step by step. Shall I fill in the questionnaire and show you the final form ready to submit?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Atlas, can you speak Hindi? And Gujarati?</div></div>
+
+  <div class="turn w-atlas"><div class="who"><span class="dot atlas"></span><span><span class="nm">Atlas</span><span class="role">AI agent</span></span></div><div class="said">Yes — I can speak Hindi, and Gujarati as well.</div></div>
+
+  <div class="turn w-ct"><div class="who"><span class="dot ct"></span><span><span class="nm">Adani</span><span class="role">team</span></span></div><div class="said">That matters here — on the business side it's mostly Gujarati-speaking users. Ours is reactive; this is interactive.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Exactly. It listens, fills in details, analyses, and has full database access — ask it for your top ten vendors, your most critical suppliers, which vendors are high or low risk, and it answers. These aren't pre-canned prompts. I'm the head of sales — I had no business building this, but I've been in procurement tech my whole career, so it happens. Tuning the response delays to the right balance — responsive without interrupting — took some care. That's the level of enablement we're heading toward; it's targeted for general availability next month.</div></div>
+
+  <div class="cut">Wrap of Session 1: ServiceNow-vs-SAP aside; Adani notes Ariba Hub Supplier Management isn't reusable and that they'd built a vendor-assessment tool internally; agreement that Aerchain will revert with a detailed presentation mapping its portfolio to the brief. Internal sales debrief and personal conversation between the visit's sessions omitted.</div>
+
+  <!-- ACT 6 -->
+  <div class="act" id="a6"><span class="num">ACT 06</span><h2>Deep dive with Devesh Khandelwal</h2><p class="setting">A second, ~1-hour session — the substantive technical conversation with the GM of Procurement Platform &amp; Technology.</p></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">We're Aerchain — an AI-native spend operating system. Our DNA is a core S2P platform: everything Zycus, Ariba, Coupa, Jaggaer or GEP do functionally, upstream and downstream — sourcing, supplier management, contracts, P2P, accounts payable, invoice OCR, two- and three-way match. But we also compete in best-of-breed autonomous sourcing, the space of Fairmarkit, Keelvar and Pactum — and we're the only Indian player with both the full autonomous-sourcing landscape <em>and</em> the full S2P suite. We just closed a $13M Series A led by Pavestone with Infosys investing directly; Infosys is also an SI partner, a customer, and outsources our technology for its global-business-services projects.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">Fairmarkit, Keelvar — they're specific to certain areas, aren't they? And the Coupa–Tonkin acquisition?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Right — Keelvar is mostly negotiation, Pactum too, Zip does intake-and-orchestration, Fairmarkit does a portion. They each have fractions; we have the whole. On Tonkin — yes, Coupa acquired them very recently. Let me show the backend philosophy: everything starts with a spend analysis to determine the ideal orchestration channel for every rupee. A lot of customers keep a human in the loop for the first six months of autonomous sourcing, then move to full autonomy — that's the journey we're on with Unilever, Danone and Emirates Global Aluminium.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said"><em class="stage">[Live intake demo.]</em> Give me any item. <em class="stage">[Devesh: steel-cage bearings.]</em> Watch the relevance of the clarification questions — dimensions, quantity — so the buyer never has to loop back to the requester. It summarises, categorises, estimates spend and need-by date, and generates the RFQ in real time. This isn't a canned demo — it's a live event; vendors can actually bid.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">In our system we have OEMs and dealers — SKF, Schaeffler, NSK and their channel partners. When the agent suggests vendors, will it suggest OEMs or dealer partners? How does it differentiate?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Through a vendor tag — think "preferred vendor," OEM versus non-OEM/distributor/dealer. If that tag exists in your MDG, we use it; if it doesn't, we can help create it, or our AI can. From the unstructured conversation the system has now drafted the full RFQ — line items, Q&amp;A, SOW, commercial terms — and I can chat to refine it ("add five infosec questions"). The vendor gets an AI-written summary email, not just a notification, sent from your own SMTP and domain.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">The vendor business-overview data — that's pulled from SAP?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Yes — direct GRN-module integration. Price indices, POs, category-wise spend, and live deviation against benchmarks. We connect to live market indices in real time and also ingest subscription reports you upload into the knowledge base — for example, Reliance's O2C business uses commodity-specific reports as a benchmark source.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">On the commercial side — take this SOX financial-services audit example. Each vendor submits in their own format; the system breaks the pricing into whatever structure they used and normalises it. There's a gating option, so you can run a technical round before opening commercials. The negotiation agent then builds its strategy: a should-cost model with sources, a budget ceiling, target pricing, the negotiation style — firm, fair, collaborative or aggressive — and the round structure (R1 discovery, R2 benchmark pressure, and so on). We demonstrated this for McAfee on security software. And we have a best-in-class auction module — Meta bought us specifically for auctions; there are five-to-seven configurable formats, line-item comparison, and, as Reliance does, a central auction committee where the buyer can create an auction but not see inside it.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">Can multiple windows run at the same time, with different activities, on the same login?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Yes — we've enabled concurrent sessions. <em class="stage">[Re-runs Atlas for Devesh's team; voice agent opens and pre-fills an intake, confirms multilingual support — see Act 5.]</em> The CEO was surprised that sales built it; it's being stress-tested by the tech team now.</div></div>
+
+  <!-- ACT 7 -->
+  <div class="act" id="a7"><span class="num">ACT 07</span><h2>Vendor onboarding, due diligence, should-costing &amp; commercials</h2><p class="setting">The discussion that became the live opportunity.</p></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Let's onboard a new vendor. Every step starts with the basics, then auto-fills — the buyer sends a form to the vendor, fills it on their behalf, or uploads a vendor's Excel and the AI extracts and populates the form. We have a direct connection to the GST portal, and for DS Group, for instance, we connected the GST/MSME portal for onboarding. Tax registration, PAN, the full set — and it's fully customisable down to ten questions if you want.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">How do you ensure whether a supplier should be approved at all? We do third-party due diligence. And today, blocking and blacklisting is all done over email for existing suppliers — we're trying to streamline that.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">There's an AI due-diligence step, which can be preceded or followed by a human one — OFAC sanctions, DNB, Equifax, the financial and credit checks. Standard Chartered, for example, uses a global platform called ProcessUnity; we plug into it via API and bring the score in. If Aerchain does the diligence, we set up an agent for whatever online checks are possible, and provide a recording UI for the manual, physical checks so they enter the system too. Different customers want different checklists, so we customise from a set of 30–40 possible checks.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">And the cost per vendor due-diligence API call?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Negligible in an enterprise-license context — roughly a handful of model calls, under fifty cents, because we're just polling data, not running heavy analysis. That's my last benchmark; I'll confirm the exact figure with our AI team, but you can treat under $0.50 as reasonable.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">We also need should-cost estimates. For a large project — say I have to build something complex — I need a rate estimate. If I have to buy a conveyor belt, I need an internal estimate. And a conveyor belt is part of a material-handling system: idler rollers, plumber blocks, bearings, structures, design, supply, installation, testing, commissioning, manpower, equipment hire — all of it.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">At the product level, or even a clustered-project level, we can do that — we did customised chiller should-costing for Flipkart. For a full real-estate development the estimation becomes extremely taxing, but for a material-handling system — a 2.5-metre-wide, 5.5-kilometre conveyor with structures, given topography and soil conditions — I believe we can. Give me the use case; I'll take it as a challenge and show you what our system produces. Share a project you've already estimated and awarded — the BOQ and the final cost — and we'll have our agents work out an estimate to compare.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">On lubricants — we consume kilolitres, priced on a monthly formula referencing crude, base oil, bright stock, SN-150, SN-500 in different proportions. Can the agent pull all those prices from global indices? Today we collect rate contracts from IOC, HPCL, BPCL, Shell, Total, Exxon and reconcile them manually — it's cumbersome.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Yes — we do exactly this today for Reliance's O2C business. The system pulls live index prices and is one AI-copilot chat away from giving you, say, last month's bright stock or SN-150 price; you reconcile and present an "accept-or-accept" position. It's doable, and I can personally configure it.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">And the commercial model?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">It's based on the spend routed through the platform, the number of transactions, and the degree of AI involvement — strategic sourcing carries a higher token cost than autonomous, which is higher than tactical. User count is a minor factor, around 2–5%. Hosting is AWS Mumbai by default; we support bring-your-own-cloud — we set up a private AWS tenant for NSE — with configurable data residency. A greenfield project is three-to-four months; at Adani's scale, six-to-nine, with bulk implementation in four-to-five months alongside integrations.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">If we route, say, ₹100 crore?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">That's into enterprise-grade, unlimited-license territory — roughly $1.2M annually for the full suite, group-wide. Sourcing-only would be around $600–700k. With enterprise gating, tokens are unlimited.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">Can the platform handle our master-data management? We have big chaos at the master-data level — multiple codes for a single item.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">We have a service for it, not a product — we did this for Tata Projects, who had 1.5 million line items across their masters, which we rationalised to about 150,000. Out of the box our native AI engine gets at least 70–80% spend-matching accuracy, improving incrementally with human feedback.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">You recently deployed at Reliance — full source-to-contract. Is supplier onboarding part of it? And what's your vendor-onboarding cycle-time improvement?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Vendor onboarding is a separate module; it's live at CenturyPly, NSE and several others. Cycle times are very subjective — one case study went from three weeks to two days, but that's not a fair benchmark. What I can commit to is at least a 70% improvement on your baseline.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">One honest gap to flag: contract <em>authoring</em>. We generate a contract from a PO or an award in your template, and we hold the rate-contract and contract repository — but we don't yet do redlining / track-changes authoring. That's the one area we don't cover today. On demand consolidation: we can consolidate multiple PRs — by business unit, department, category or vendor — into a single RFQ; Reliance keeps a human in the loop for that with a buffer window before bulking, but it's automatable.</div></div>
+
+  <div class="cut">Discussion of automated vendor reminder-calling (tested, ~3–4 weeks from active) and informal/personal conversation omitted.</div>
+
+  <!-- ACT 8 -->
+  <div class="act" id="a8"><span class="num">ACT 08</span><h2>Introduction to the Group CPO</h2><p class="setting">Devesh walks Gaurav and Chitresh to the procurement office to meet Suresh Shinde.</p></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">Sir, this is the Aerchain team. We've just seen their supplier-onboarding and sourcing/auction modules — very fast. For the vendor-onboarding work we're discussing, it needs to be autonomous and AI-driven, and they have that solution.</div></div>
+
+  <div class="turn w-cpo"><div class="who"><span class="dot cpo"></span><span><span class="nm">Suresh Shinde</span><span class="role">Group CPO</span></span></div><div class="said">This is the IndiaMart company? All AI-driven, the latest technology?</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">IndiaMart was our seed investor and re-invested in our Series A a couple of months ago. The Series A was led by Pavestone, with Infosys coming in directly — about $3M of the $13M. We have full source-to-pay, but our current focus is autonomous sourcing, which is the source-to-contract piece.</div></div>
+
+  <div class="turn w-cpo"><div class="who"><span class="dot cpo"></span><span><span class="nm">Suresh Shinde</span><span class="role">Group CPO</span></span></div><div class="said">Do you have a deck? We have a discussion tomorrow with one of our group companies — there's an issue with the speed of vendor onboarding, and we want to address it. But your solution must integrate with SAP and MDG — and sit on top of all three: Ariba, MDG and SAP.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Yes, sir — 100%. It's deployed across the full Reliance landscape alongside Ariba, integrated with MDG and SAP.</div></div>
+
+  <div class="turn w-cpo"><div class="who"><span class="dot cpo"></span><span><span class="nm">Suresh Shinde</span><span class="role">Group CPO</span></span></div><div class="said">Good. We made our onboarding process stricter to manage the risk of onboarding the wrong vendor — but it's become so lengthy. Different people own different parts of it; there's no single entity dealing with the vendor and no single system for vendor coordination. The third-party due diligence is also very costly. So you'd take the data, study it, and build it into the solution — that's the best idea.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Devesh</span><span class="role">Adani · GM</span></span></div><div class="said">Sir, the TBDT due diligence we do — adverse media, financial, business and legal risk — they've integrated with a couple of external sources that cover all of that.</div></div>
+
+  <div class="turn w-cpo"><div class="who"><span class="dot cpo"></span><span><span class="nm">Suresh Shinde</span><span class="role">Group CPO</span></span></div><div class="said">Send the deck; I'll get connected virtually, review it, and understand the options with my team. This is an exciting thing you're proposing — any exciting solution, we're always interested. I won't hold you up before your flight, but let's stay in touch.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Thank you, sir — I'd have happily missed the flight for this. We'd like to start with supplier onboarding and grow from there. Once the NDA is in place, we can set up the integration in a test environment quickly. I'll connect with you directly on WhatsApp.</div></div>
+
+  <div class="cut">Departure logistics and post-meeting internal debrief on the drive to the airport omitted.</div>
+
+  <!-- ACT 9 -->
+  <div class="act" id="a9"><span class="num">ACT 09</span><h2>Appendix — follow-up call, 28 May</h2><p class="setting">A short call the next day with Adani's team (Devesh's side) on the NDA and integration document.</p></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Adani</span><span class="role">Devesh's team</span></span></div><div class="said">We've just received the signed NDA — forwarding it now. The other thing: please connect us with your integration team. We'd like a detailed discussion with them, and please share the document you mentioned.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">The integration document is being prepared today; you'll have the Ariba integration document by end of day today or, at the latest, within the first two hours tomorrow morning. I'm coordinating the meeting with our integration team in parallel — if you can share a few slots for tomorrow, I'll align my team and confirm.</div></div>
+
+  <div class="turn w-dk"><div class="who"><span class="dot dk"></span><span><span class="nm">Adani</span><span class="role">Devesh's team</span></span></div><div class="said">Our side moves fast. The team has some queries — I've explained them at a high level, but they'd like to get into the detail. Let's get the meeting done tomorrow.</div></div>
+
+  <div class="turn w-gg"><div class="who"><span class="dot gg"></span><span><span class="nm">Gaurav</span><span class="role">Aerchain</span></span></div><div class="said">Absolutely — we'll get it done tomorrow. I'll send the Ariba integration document by end of day or first thing tomorrow, share your available slots, and I'll lock the session with my team. Thank you.</div></div>
+
+  <div class="editorial">
+    <span class="tag">Status as of 28 May</span>
+    <p>NDA + GTC signed (sent by Vellala Sasanka, Devesh's team). A vendor-onboarding working session has been convened by Neetesh Jain (Teams), including Devesh, Vellala Sasanka, Subhra Biswas and Shivam Saraff. Outstanding from Aerchain: the Ariba/SAP/MDG integration architecture document, the detailed capabilities deck mapped to Adani's five-point brief, OEM-vs-dealer tagging guidance, the Infosys-GBS and McAfee case studies, and confirmation of the &lt; $0.50 due-diligence cost.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>Aerchain · Confidential. Curated and normalized from raw recordings; speaker attribution and exact wording are indicative.</span>
+  <span><a href="adani-briefing.html">← Back to the briefing</a></span>
+</div>
+
+<script>
+function tt(){var h=document.documentElement;var n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);try{localStorage.setItem('aer-theme',n)}catch(e){}}
+try{var s=localStorage.getItem('aer-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+</script>
+</body>
+</html>

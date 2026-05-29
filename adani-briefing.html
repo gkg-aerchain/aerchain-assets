@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adani Group × Aerchain — Meeting Briefing | 27 May 2026</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox='108 0 36 32' fill='%23DC5F40'%3E%3Cpath d='M143.857 20.625c.086-4.456-1.765-9.858-6.605-6.789-.406.16-.638.104-.852-.202a55 55 0 0 1-1.661-3.438c-4.368-11.371-9.356-4.869-14.625 1.861C108.347 27.45 113.89 34.267 132.438 20.75c.648-.465 1.946-1.438 2.413-1.478.492-.08.697.324 1.068 1.17.36.867.959 2.096 1.507 2.973 3.166 6.216 6.672 4.775 6.433-2.764zm-13.948-2.317c-2.334 1.476-4.549 3.283-7.113 4.362-1.117.472-2.745-.05-3.147-.964-.455-1.417 1.173-3.506 1.972-4.977a30 30 0 0 1 3.332-4.684c1.143-1.497 2.694-3.718 4.845-2.747 1.725.992 2.433 3.734 3.42 5.388.446.717.432 1.224-.348 1.657a24 24 0 0 1-2.942 1.955zm12.647 2.935c-.051.853-.211 4.08-1.286 2.543-1-1.899-2.095-4.266-3.073-6.29-.38-1.033 1.995-1.452 2.613-1.276 1.725.644 1.786 3.398 1.746 5.009z'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --aerchain:#DC5F40;
+  --purple:hsl(262 80% 55%);
+  --purple-2:hsl(275 85% 58%);
+  --gp:linear-gradient(135deg,hsl(262 80% 55%),hsl(275 85% 58%));
+  --gp-warm:linear-gradient(135deg,#DC5F40,#e8893f);
+}
+/* LIGHT (default) */
+html[data-theme="light"]{
+  --canvas:hsl(262 30% 96%);
+  --canvas-2:hsl(268 24% 93%);
+  --ink:hsl(222 18% 14%);
+  --ink-2:hsl(222 10% 38%);
+  --ink-3:hsl(222 9% 55%);
+  --card:rgba(255,255,255,.78);
+  --card-solid:#fff;
+  --border:hsl(262 22% 86%);
+  --border-h:hsl(262 60% 60%);
+  --shadow:0 4px 22px rgba(124,58,237,.08),0 1px 3px rgba(124,58,237,.05);
+  --shadow-lg:0 18px 44px -10px rgba(124,58,237,.20);
+  --code-bg:hsl(262 30% 92%);
+}
+/* DARK (purple-glass) */
+html[data-theme="dark"]{
+  --canvas:hsl(262 45% 11%);
+  --canvas-2:hsl(258 40% 9%);
+  --ink:rgba(255,255,255,.94);
+  --ink-2:rgba(255,255,255,.70);
+  --ink-3:rgba(255,255,255,.45);
+  --card:rgba(255,255,255,.045);
+  --card-solid:hsl(262 35% 15%);
+  --border:rgba(255,255,255,.09);
+  --border-h:hsl(262 80% 62%);
+  --shadow:0 8px 32px rgba(0,0,0,.28);
+  --shadow-lg:0 18px 44px -8px rgba(0,0,0,.45);
+  --code-bg:rgba(255,255,255,.06);
+}
+
+body{
+  font-family:'Montserrat',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 80% -10%,hsl(262 60% 55% / .12),transparent 60%),
+    radial-gradient(900px 500px at -10% 10%,hsl(18 80% 55% / .08),transparent 55%),
+    var(--canvas);
+  color:var(--ink);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:80px;
+}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--canvas) 82%,transparent);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{max-width:1180px;margin:0 auto;padding:12px 26px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.2px}
+.brand svg{width:26px;height:26px}
+.brand small{font-family:'JetBrains Mono',monospace;font-weight:500;color:var(--ink-3);font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav-links a{
+  font-size:12.5px;color:var(--ink-2);text-decoration:none;padding:6px 11px;border-radius:8px;
+  font-weight:500;transition:.15s;white-space:nowrap;
+}
+.nav-links a:hover{background:var(--card);color:var(--ink)}
+.toggle{
+  cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--ink-2);
+  border-radius:9px;padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+  letter-spacing:.5px;transition:.15s;
+}
+.toggle:hover{border-color:var(--border-h);color:var(--ink)}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+
+/* HERO */
+.hero{padding:60px 0 30px;position:relative}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--aerchain);margin-bottom:18px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--gp-warm);border-radius:2px}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.05;font-weight:700;letter-spacing:-1px;max-width:18ch}
+.hero h1 .grad{background:var(--gp);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{font-size:18px;color:var(--ink-2);max-width:60ch;margin-top:22px;font-weight:400}
+.meta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.meta{
+  background:var(--card);border:1px solid var(--border);border-radius:13px;padding:12px 18px;backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;gap:2px;min-width:120px;box-shadow:var(--shadow);
+}
+.meta .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3)}
+.meta .v{font-size:14.5px;font-weight:600}
+.confidential{
+  display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-size:12px;font-weight:600;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.5px;color:var(--aerchain);
+  border:1px dashed color-mix(in srgb,var(--aerchain) 55%,transparent);border-radius:8px;padding:7px 13px;
+}
+
+/* SECTIONS */
+section{padding:42px 0;border-top:1px solid var(--border)}
+section:first-of-type{border-top:none}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:24px;flex-wrap:wrap}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--aerchain)}
+h2{font-size:clamp(22px,3vw,30px);font-weight:700;letter-spacing:-.5px;line-height:1.15}
+h3{font-size:18px;font-weight:600;margin:26px 0 12px;letter-spacing:-.2px}
+h4{font-size:14px;font-weight:600;margin:16px 0 8px}
+p{margin:12px 0;color:var(--ink-2)}
+p strong,li strong{color:var(--ink);font-weight:600}
+a{color:var(--purple)}
+.lead{font-size:17px;color:var(--ink-2)}
+
+ul,ol{margin:12px 0 12px 4px;padding-left:22px}
+li{margin:7px 0;color:var(--ink-2)}
+li::marker{color:var(--aerchain)}
+
+/* CARDS / GRID */
+.grid{display:grid;gap:18px;margin:20px 0}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;
+  backdrop-filter:blur(10px);box-shadow:var(--shadow);transition:.18s;
+}
+.card:hover{border-color:var(--border-h);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card .ic{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--aerchain);margin-bottom:8px}
+.card h4{margin-top:0}
+
+/* TL;DR */
+.tldr{background:var(--gp);color:#fff;border-radius:20px;padding:30px 32px;box-shadow:var(--shadow-lg);border:none}
+.tldr h2{color:#fff;margin-bottom:6px}
+.tldr .eyebrow{color:rgba(255,255,255,.85)}
+.tldr .eyebrow::before{background:rgba(255,255,255,.6)}
+.tldr ol{margin-top:14px;padding-left:20px}
+.tldr li{color:rgba(255,255,255,.95);margin:11px 0;font-size:15.5px}
+.tldr li::marker{color:#fff;font-weight:700}
+.tldr strong{color:#fff;font-weight:700}
+
+/* TIMELINE */
+.timeline{position:relative;margin:24px 0 6px;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--purple),var(--aerchain))}
+.tl-item{position:relative;margin-bottom:26px}
+.tl-item::before{content:"";position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--canvas);border:3px solid var(--purple);box-shadow:0 0 0 3px color-mix(in srgb,var(--purple) 18%,transparent)}
+.tl-item.warm::before{border-color:var(--aerchain);box-shadow:0 0 0 3px color-mix(in srgb,var(--aerchain) 20%,transparent)}
+.tl-item .stage{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3)}
+.tl-item h4{margin:3px 0 6px;font-size:16.5px}
+.tl-item p{margin:6px 0;font-size:14.5px}
+
+/* CALLOUTS */
+.callout{border-radius:14px;padding:16px 20px;margin:16px 0;border:1px solid var(--border);position:relative;background:var(--card)}
+.callout .tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px}
+.callout p{margin:5px 0;color:var(--ink-2)}
+.c-risk{border-left:4px solid var(--aerchain);background:color-mix(in srgb,var(--aerchain) 7%,var(--card))}
+.c-risk .tag{color:var(--aerchain)}
+.c-win{border-left:4px solid hsl(152 60% 42%);background:color-mix(in srgb,hsl(152 60% 42%) 8%,var(--card))}
+.c-win .tag{color:hsl(152 55% 38%)}
+.c-info{border-left:4px solid var(--purple);background:color-mix(in srgb,var(--purple) 7%,var(--card))}
+.c-info .tag{color:var(--purple)}
+
+/* STAKEHOLDER */
+.person{display:flex;flex-direction:column;gap:2px}
+.person .nm{font-size:17px;font-weight:700;letter-spacing:-.2px}
+.person .ti{font-size:13px;color:var(--ink-2);font-weight:500}
+.person .org{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-3);margin-top:2px}
+.chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin:8px 6px 0 0}
+.chip.champ{background:color-mix(in srgb,hsl(152 60% 42%) 16%,transparent);color:hsl(152 55% 34%)}
+.chip.gate{background:color-mix(in srgb,var(--aerchain) 16%,transparent);color:var(--aerchain)}
+.chip.sponsor{background:color-mix(in srgb,var(--purple) 16%,transparent);color:var(--purple)}
+.chip.infl{background:color-mix(in srgb,hsl(38 90% 50%) 18%,transparent);color:hsl(38 80% 38%)}
+html[data-theme="dark"] .chip.champ{color:hsl(152 60% 60%)}
+html[data-theme="dark"] .chip.infl{color:hsl(38 90% 62%)}
+html[data-theme="dark"] .chip.sponsor{color:hsl(262 85% 72%)}
+.person .meta-line{font-size:12.5px;color:var(--ink-3);margin-top:10px;font-family:'JetBrains Mono',monospace}
+.person .read{font-size:13.5px;color:var(--ink-2);margin-top:10px;border-top:1px solid var(--border);padding-top:10px}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+th,td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--border)}
+th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:color-mix(in srgb,var(--purple) 6%,transparent)}
+td{color:var(--ink-2)}
+td strong{color:var(--ink)}
+tr:last-child td{border-bottom:none}
+
+/* FLOW DIAGRAM */
+.flow{display:grid;gap:16px;margin:20px 0}
+.flow-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.flow-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3);min-width:120px}
+.node{background:var(--card-solid);border:1px solid var(--border);border-radius:11px;padding:10px 15px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow);text-align:center}
+.node.ae{border-color:var(--aerchain);background:color-mix(in srgb,var(--aerchain) 10%,var(--card-solid))}
+.node.sap{border-color:var(--purple);background:color-mix(in srgb,var(--purple) 9%,var(--card-solid))}
+.node sub{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:500;letter-spacing:.5px;color:var(--ink-3);margin-top:2px}
+.arrow{color:var(--ink-3);font-weight:700;font-size:18px}
+
+code,.mono{font-family:'JetBrains Mono',monospace;font-size:.88em;background:var(--code-bg);padding:1.5px 6px;border-radius:5px}
+
+.footer{max-width:1180px;margin:50px auto 0;padding:26px;border-top:1px solid var(--border);color:var(--ink-3);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer a{color:var(--ink-2);text-decoration:none;font-weight:600}
+
+.pillbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.pillbar span{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;padding:5px 11px;border-radius:8px;background:var(--card);border:1px solid var(--border);color:var(--ink-2)}
+
+.note{font-size:12.5px;color:var(--ink-3);font-style:italic;margin-top:8px}
+@media print{.nav,.toggle{position:static}.card:hover{transform:none}body{background:#fff}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg viewBox="108 0 36 32" fill="#DC5F40"><path d="M143.857 20.625c.086-4.456-1.765-9.858-6.605-6.789-.406.16-.638.104-.852-.202a55 55 0 0 1-1.661-3.438c-4.368-11.371-9.356-4.869-14.625 1.861C108.347 27.45 113.89 34.267 132.438 20.75c.648-.465 1.946-1.438 2.413-1.478.492-.08.697.324 1.068 1.17.36.867.959 2.096 1.507 2.973 3.166 6.216 6.672 4.775 6.433-2.764zm-13.948-2.317c-2.334 1.476-4.549 3.283-7.113 4.362-1.117.472-2.745-.05-3.147-.964-.455-1.417 1.173-3.506 1.972-4.977a30 30 0 0 1 3.332-4.684c1.143-1.497 2.694-3.718 4.845-2.747 1.725.992 2.433 3.734 3.42 5.388.446.717.432 1.224-.348 1.657a24 24 0 0 1-2.942 1.955zm12.647 2.935c-.051.853-.211 4.08-1.286 2.543-1-1.899-2.095-4.266-3.073-6.29-.38-1.033 1.995-1.452 2.613-1.276 1.725.644 1.786 3.398 1.746 5.009z'/></svg>
+      Aerchain <small>× Adani · Briefing</small>
+    </div>
+    <div class="nav-links">
+      <a href="#tldr">TL;DR</a>
+      <a href="#origin">Origin</a>
+      <a href="#pivot">The Pivot</a>
+      <a href="#ladder">Escalation</a>
+      <a href="#demo">What We Showed</a>
+      <a href="#people">Stakeholders</a>
+      <a href="#onboarding">Live Opp</a>
+      <a href="#commercials">Commercials</a>
+      <a href="#risks">Risks</a>
+      <a href="#next">Next Steps</a>
+    </div>
+    <button class="toggle" onclick="tt()">◐ THEME</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">Account Briefing · Confidential — Internal</div>
+    <h1>Adani Group <span class="grad">×</span> Aerchain</h1>
+    <p class="sub">First on-site engagement at Adani Corporate House. What started as a 45-minute IndiaMart-referred catalog conversation turned into a four-hour, three-room escalation that ended in the Group CPO's office — and surfaced a live <strong>vendor-onboarding</strong> opportunity now moving on its own track.</p>
+    <div class="meta-row">
+      <div class="meta"><span class="k">Date</span><span class="v">27 May 2026</span></div>
+      <div class="meta"><span class="k">Venue</span><span class="v">Adani Corporate House, Ahmedabad</span></div>
+      <div class="meta"><span class="k">Duration</span><span class="v">~4 hours (3 sessions)</span></div>
+      <div class="meta"><span class="k">Aerchain</span><span class="v">Gaurav Guha · Chitresh Nagwann</span></div>
+      <div class="meta"><span class="k">Referral</span><span class="v">IndiaMart (Prateek Chandra)</span></div>
+    </div>
+    <div class="confidential">Prepared for Harsha Kadimisetty (Co-Founder &amp; CEO) · by Gaurav Guha (Head of Sales)</div>
+    <p class="note">Companion document: a cleaned, normalized full transcript of the session is in <a href="adani-meeting-transcript.html">adani-meeting-transcript.html</a>.</p>
+  </header>
+
+  <!-- TL;DR -->
+  <section id="tldr" style="border-top:none">
+    <div class="tldr">
+      <div class="eyebrow">The 60-Second Read</div>
+      <h2>What happened, and why it matters</h2>
+      <ol>
+        <li><strong>Wrong-fit on the headline ask, right-fit on the real problem.</strong> Adani's immediate need is an <strong>L2 punch-out / aggregator</strong> to plug into Ariba Guided Buying for tail spend. We are not that — and we said so plainly. We then reframed tail spend as having three solutions (aggregator, cataloging, <strong>autonomous sourcing</strong>) and sold the third.</li>
+        <li><strong>Atlas was the game-changer.</strong> The conversational AI agent flipped a disengaged, "just answer our catalog question" room into an enthusiastic one. It is what escalated us from the catalog team up to the GM of Procurement Platform &amp; Technology, and then to the Group CPO.</li>
+        <li><strong>We climbed three levels in one visit:</strong> Catalog team + SAP/Ariba architect → <strong>Devesh Khandelwal</strong> (GM, Procurement Platform &amp; Technology) → <strong>Suresh Shinde</strong> (Group CPO). All three are now aware of us; Devesh is the active mobilizer.</li>
+        <li><strong>The live opportunity is vendor onboarding.</strong> Adani wants to drastically cut a slow, fragmented, multi-system onboarding process and automate third-party due diligence — integrated with Ariba now, SAP/MDG alongside, and potentially SAP-direct if Ariba is ever replaced. This is moving on its own track already.</li>
+        <li><strong>It's already in motion.</strong> NDA signed; a vendor-onboarding working session is scheduled by Devesh's team; we owe a detailed capabilities deck and an Ariba/SAP/MDG integration architecture document.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ORIGIN -->
+  <section id="origin">
+    <div class="sec-head"><span class="sec-num">01</span><h2>How we got in the room</h2></div>
+    <p class="lead">This was an inbound, investor-sourced lead — not a cold pursuit. Adani went to IndiaMart looking for a B2B procurement capability; IndiaMart routed it to us as a portfolio company.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="ic">The referral chain</div>
+        <p><strong>13 May</strong> — Saurabh Juneja (Adani) emails Dinesh Agarwal at IndiaMart asking whether IndiaMart offers an enterprise/B2B procurement platform.</p>
+        <p><strong>18 May</strong> — Prateek Chandra (Chief Strategy Officer, IndiaMart) replies: IndiaMart doesn't do enterprise procurement, but a portfolio company — <strong>Aerchain</strong> — does. He loops in Harsha. Gurpreet Kaur Ruprai loops in Sumeet Jain.</p>
+        <p><strong>19–25 May</strong> — Harsha hands off to Gaurav; meeting set for 27 May, 2:00–4:00 PM at the Corporate Office in Ahmedabad.</p>
+        <p class="note">IndiaMart is both our seed investor and a Series-A re-investor — this referral carries weight and should be nurtured back through Prateek.</p>
+      </div>
+      <div class="card">
+        <div class="ic">Adani's original 5-point brief (verbatim)</div>
+        <ul>
+          <li>Single-window B2B procurement with empanelled sellers, bulk discounts, and nationwide rate contracts</li>
+          <li>Company-wide and department-wise spend visibility, analytics, and reporting</li>
+          <li>Configurable compliance controls, approval workflows, and governance mechanisms</li>
+          <li>Invoice consolidation and flexible payment terms</li>
+          <li>ERP / procurement system integration with PAN-India fulfillment, including remote and industrial locations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout c-info">
+      <span class="tag">The expectation gap that shaped the whole meeting</span>
+      <p>In Gaurav's pre-meeting framing email, we read the brief as <strong>broad indirect / source-to-pay</strong> — multi-BU spend visibility, governance, ERP integration — and pitched a live S2P walkthrough. In the room, it became clear bullet #1 was the real driver: Adani wants an <strong>aggregator / L2 punch-out</strong> for tail spend, hosted externally and surfaced inside Ariba. We planned for a platform conversation; they came for a marketplace integration. Bridging that gap — in real time — is the story of this meeting.</p>
+    </div>
+  </section>
+
+  <!-- PIVOT -->
+  <section id="pivot">
+    <div class="sec-head"><span class="sec-num">02</span><h2>The misread, and the recovery</h2></div>
+    <p class="lead">Roughly the first half of the session was spent discovering — and then honestly correcting — a mismatch between what IndiaMart's referral implied and what we actually do.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ic">What they wanted</div>
+        <p>An <strong>aggregator</strong> (Moglix / Amazon Business / L&amp;T SuFin / IndiaMart / Flipkart) to host and maintain vendor catalogs externally, integrated into Ariba Guided Buying as an <strong>L2 punch-out</strong>. User picks items on the vendor portal, cart returns to Ariba, PR/PO completes there. Goal: automate tail spend and capture market-aggregated pricing.</p>
+      </div>
+      <div class="card">
+        <div class="ic">What we had to clarify</div>
+        <p>We have hosted catalogs, vendor-hosted (L2) catalogs and true punch-outs of our own — but we are <strong>a technology platform like Ariba, not an aggregator like Moglix</strong>, and we do <strong>not</strong> sell a service to integrate third-party vendor catalogs into someone else's Ariba. Said plainly: "We are not an aggregator today."</p>
+      </div>
+      <div class="card">
+        <div class="ic">How we recovered</div>
+        <p>We reframed the tail-spend problem as having <strong>three</strong> solutions: <strong>(1)</strong> aggregator mode, <strong>(2)</strong> cataloging/rate contracts, and <strong>(3) autonomous sourcing</strong>. The first two they already understood (and Ariba already supports L2 punch-outs out of the box). We positioned #3 as the genuinely new, differentiated wedge — and pivoted the demo there.</p>
+      </div>
+    </div>
+
+    <div class="callout c-win">
+      <span class="tag">Why the honesty paid off</span>
+      <p>By refusing to oversell a catalog-integration service we don't offer, we earned credibility with a sharp, skeptical room ("they know who's throwing, who can deliver"). The catalog team's narrow ask was a dead-end for us; conceding it cleanly is exactly what opened the door to the autonomous-sourcing and vendor-onboarding conversations that actually fit.</p>
+    </div>
+  </section>
+
+  <!-- ESCALATION LADDER -->
+  <section id="ladder">
+    <div class="sec-head"><span class="sec-num">03</span><h2>The escalation ladder</h2></div>
+    <p class="lead">The room got more senior as the demo got better. This is the spine of the meeting — how a catalog Q&amp;A became a CPO introduction.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="stage">Session 1 · Conference room</span>
+        <h4>Catalog team + Chintan Shah (virtual), hosted by Sumeet Jain</h4>
+        <p>Opened with the company overview and a live S2P walkthrough. Chintan Shah — who architected Adani's SAP / MDM / Ariba landscape — joined virtually and steered straight to the L2 punch-out question. This is where the aggregator-vs-platform mismatch surfaced and was resolved.</p>
+      </div>
+      <div class="tl-item warm">
+        <span class="stage">The turn</span>
+        <h4>Autonomous sourcing demo + Atlas</h4>
+        <p>With expectations reset, we ran an end-to-end autonomous sourcing demo and then showed <strong>Atlas</strong>, the voice AI agent. The host (Sumeet) went from disengaged ("ok, catalog — see you") to "I'm mind-boggled." Internally noted as <strong>the</strong> inflection point of the meeting.</p>
+      </div>
+      <div class="tl-item">
+        <span class="stage">Serendipity</span>
+        <h4>A chance bathroom encounter</h4>
+        <p>Between sessions Gaurav ran into an ex-RSPL contact now at Adani who had <strong>independently</strong> already passed Gaurav's name to Devesh's digital team for an Ariba-replacement initiative — a second, parallel warm path into the same account.</p>
+      </div>
+      <div class="tl-item warm">
+        <span class="stage">Session 2 · ~1 hour</span>
+        <h4>Deep dive with Devesh Khandelwal (GM, Procurement Platform &amp; Technology)</h4>
+        <p>The substantive technical session: vendor onboarding, due diligence, should-costing for complex projects, SAP/Ariba/MDG integration, the negotiation agent, auctions, commercial model, and master-data rationalization. Devesh is the technical decision-maker — and he decided to take us upstairs.</p>
+      </div>
+      <div class="tl-item">
+        <span class="stage">Session 3 · CPO's office</span>
+        <h4>Introduction to Suresh Shinde (Group CPO)</h4>
+        <p>Earlier the CPO had walked past us without a glance; after the deep dive, Devesh personally walked us in. The CPO was warm and direct: called it "an exciting thing," tied it to a <strong>live internal vendor-onboarding pain</strong> (a same-week meeting with a group company on onboarding speed), asked for our deck, and offered to reconvene virtually.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO / CAPABILITY PROOF -->
+  <section id="demo">
+    <div class="sec-head"><span class="sec-num">04</span><h2>What we put on the screen</h2></div>
+    <p class="lead">Everything was shown on a live Adani-flavoured tenant, not slideware — including a real sourcing event with vendor-side bidding. The capabilities that landed:</p>
+
+    <div class="grid g2">
+      <div class="card"><h4>Autonomous sourcing, end-to-end</h4><p>From a vague intake ("I want to buy glass bottles / steel-cage bearings"), the AI asked category-aware clarifying questions, auto-built the PR and a complete RFQ (SOW, payment terms, Q&amp;A), selected vendors, launched a live event, captured bids, and even pre-filled / bid on a vendor's behalf.</p></div>
+      <div class="card"><h4>AI technical + commercial evaluation</h4><p>AI-generated vendor profiles, project-specific strengths/weaknesses/risks, scored justifications, and zip-attachment analysis. Commercial side normalizes disparate pricing formats into a side-by-side view, surfacing hidden discounts and structural differences.</p></div>
+      <div class="card"><h4>Autonomous negotiation</h4><p>A structured multi-round agent (R1 discovery → benchmark pressure → target push → "baffle" round) negotiating with many vendors in parallel, with a transparent should-cost model and cited benchmark sources. Demoed on the <strong>McAfee</strong> security-software case. Fully autonomous or human-led.</p></div>
+      <div class="card"><h4>Award optimization in natural language</h4><p>Award scenarios ("relationship-based," cherry-pick best-in-class, multi-supplier split) described in free text and converted by AI into parameterized configurations — positioned against Ariba Bid Optimizer, which "nobody uses because it's too hard to configure."</p></div>
+      <div class="card"><h4>Spend insights</h4><p>Category dashboards with live indices: a steel index with an annual-contract-lock opportunity, ocean freight benchmarked off <strong>Freightos</strong> with a disruption monitor and carrier scorecards, ENA, and lubricants priced off crude / base-oil / bright-stock / SN-150 / SN-500 formulas.</p></div>
+      <div class="card"><h4>Vendor management &amp; enrichment</h4><p>AI-enriched vendor 360 (business overview, delivery performance via direct GRN integration, price indices, web/news/compliance intelligence, sanction screening), with configurable re-evaluation triggers and OEM-vs-dealer tagging.</p></div>
+    </div>
+
+    <div class="callout c-win">
+      <span class="tag">Atlas — the differentiator that moved the room</span>
+      <p>A conversational, <strong>voice-driven</strong> agent that answered live, pulled up a spend dashboard on command, and opened &amp; pre-filled an intake form for janitorial / catering services at the Ahmedabad office (~₹1.9 lakh estimate). Crucially, it spoke <strong>Hindi and Gujarati</strong> on request — directly relevant because Adani's business users are largely Gujarati-speaking. The room's verdict: "ours is reactive; this is interactive." Atlas is what they texted each other about.</p>
+    </div>
+  </section>
+
+  <!-- STAKEHOLDERS -->
+  <section id="people">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Who's who, and how to play them</h2></div>
+    <p class="lead">Five names matter. Get the map right before the next session.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="person">
+          <span class="nm">Devesh Khandelwal</span>
+          <span class="ti">GM — Procurement Platform &amp; Technology · Group Category Procurement, Procurement Strategy &amp; Transformation</span>
+          <span class="org">Adani Infra (India) Ltd</span>
+          <div><span class="chip champ">Champion / Technical buyer</span></div>
+          <span class="meta-line">+91 98737 53119 · devesh.khandelwal@adani.com</span>
+          <p class="read"><strong>The mobilizer.</strong> Ran the one-hour deep dive, took us to the CPO, and has been calling Gaurav since. Owns the "Adani Digital Initiatives" / Ariba-replacement and vendor-onboarding agenda. Sharp on integration (SAP/Ariba/MDG) and on hard category problems (conveyor should-cost, OEM/dealer tagging). <strong>This is the relationship to win.</strong></p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="person">
+          <span class="nm">Suresh Shinde</span>
+          <span class="ti">Group Chief Procurement Officer</span>
+          <span class="org">Adani Infra (India) Ltd</span>
+          <div><span class="chip sponsor">Executive sponsor</span></div>
+          <span class="meta-line">+91 99099 54844 · suresh.shinde@adani.com</span>
+          <p class="read"><strong>The sponsor.</strong> Warm, decisive, time-pressured. Framed vendor onboarding as a live pain (a same-week meeting with a group company on onboarding speed) and insisted any solution must sit on top of Ariba + MDG + SAP. Wants our deck and a virtual follow-up. Public background (unverified): mechanical engineer, prior Adani Power / Adani Electricity Mumbai / JSW Energy. Note: group-level CPO above him appears to be Dr. Sanjay Kumar Gupta.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="person">
+          <span class="nm">Sumeet Jain</span>
+          <span class="ti">Convener / host of the session · Group Category Procurement</span>
+          <span class="org">Adani Infra (India) Ltd · Adani House, Shantigram</span>
+          <div><span class="chip gate">Gatekeeper / power broker</span></div>
+          <span class="meta-line">+91 90990 05827 · sumeet.jain@adani.com</span>
+          <p class="read"><strong>The gate.</strong> Set up and chaired the meeting; controls access and pace ("he can take it forward, he can kill it"). Initially treated us as a vendor to interrogate; Atlas won him over completely. Keep him close — he convened the room and can re-convene it.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="person">
+          <span class="nm">Chintan Shah</span>
+          <span class="ti">SAP / MDM / Ariba solution architect (joined virtually)</span>
+          <span class="org">Adani — IT / Procurement Architecture</span>
+          <div><span class="chip infl">Technical influencer / gatekeeper</span></div>
+          <span class="meta-line">chintan.shah@adani.com</span>
+          <p class="read"><strong>The architect.</strong> Designed the entire SAP/MDM/Ariba estate and drove the L2 punch-out line of questioning. Protective of the existing landscape ("14+ SAP instances integrated over a year — I don't want to reinvent this"). Any integration story must satisfy him. Win him on the API-level Ariba/SAP/MDG design.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Supporting cast (already engaged)</h3>
+    <div class="pillbar">
+      <span>Vellala Sasanka — PSTN/GCP, Devesh's team (sent NDA + GTC)</span>
+      <span>Neetesh Jain — convened the vendor-onboarding working session</span>
+      <span>Subhra Biswas · Shivam Saraff — vendor-onboarding invitees</span>
+      <span>Gurpreet Kaur Ruprai — catalog / coordination</span>
+      <span>Saurabh Juneja — originated the IndiaMart request</span>
+      <span>Sudhir Mattoo — cc on brief</span>
+      <span>Prateek Chandra — CSO, IndiaMart (referrer)</span>
+    </div>
+    <p class="note">Aerchain side in the room: Gaurav Guha (Head of Sales) and Chitresh Nagwann. Harsha, Chad, Priya, Neha were on the thread / support.</p>
+  </section>
+
+  <!-- LIVE OPPORTUNITY -->
+  <section id="onboarding">
+    <div class="sec-head"><span class="sec-num">06</span><h2>The live opportunity: vendor onboarding</h2></div>
+    <p class="lead">This is where the meeting actually converged — and where the follow-up is already moving. After the visit, on the drive to the airport, Devesh called Gaurav with pointed integration questions; his team sent the NDA the next morning.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="ic">The pain (in their words)</div>
+        <ul>
+          <li>Onboarding is <strong>slow, fragmented and multi-owner</strong> — no single entity owns the vendor; spread across SAP, Ariba and MDG.</li>
+          <li>A deliberately <strong>stricter</strong> process (to de-risk bad vendors) has made it very lengthy.</li>
+          <li>Blocking / blacklisting is still done <strong>manually over email</strong>.</li>
+          <li>Third-party due diligence (their "TBDT" process) is <strong>commercially costly</strong>.</li>
+          <li>No structured <strong>OEM-vs-dealer</strong> tagging in MDG (e.g., SKF, Schaeffler, NSK), so AI can't make policy-aligned recommendations.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="ic">What they want</div>
+        <ul>
+          <li><strong>AI-driven, much faster onboarding</strong> (CPO referenced wanting a major reduction from the current state; we positioned ≥70% improvement).</li>
+          <li>Automated due diligence — adverse media, financial, legal/business risk, sanctions — via integration with external risk sources, replacing the costly TBDT and the email-based blacklist.</li>
+          <li>Sit <strong>on top of Ariba + MDG + SAP</strong> (the CPO was explicit: "your solution should be on top of all three").</li>
+          <li>Structured vendor tagging and master-data rationalization.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout c-info">
+      <span class="tag">The integration questions Devesh asked (post-meeting call)</span>
+      <p>How does Aerchain's vendor-onboarding flow intersect with <strong>Ariba</strong> (the current front end) via API? How does that tie into the <strong>SAP vendor master</strong> and MDG? Can we start as the onboarding front end on <strong>Ariba first</strong>, with a future state of going <strong>SAP-direct</strong> if/when Ariba is replaced? These are the questions the integration architecture document must answer.</p>
+    </div>
+
+    <h3>Integration landscape, as discussed</h3>
+    <div class="flow">
+      <div class="flow-row">
+        <span class="flow-label">Today</span>
+        <div class="node sap">SAP<sub>PR / vendor master</sub></div>
+        <span class="arrow">↔</span>
+        <div class="node">Ariba<sub>onboarding front end · guided buying</sub></div>
+        <span class="arrow">↔</span>
+        <div class="node">MDG<sub>master data — no OEM/dealer tag</sub></div>
+      </div>
+      <div class="flow-row">
+        <span class="flow-label">Phase 1</span>
+        <div class="node ae">Aerchain<sub>AI onboarding + due-diligence front end</sub></div>
+        <span class="arrow">→ API →</span>
+        <div class="node">Ariba</div>
+        <span class="arrow">↔</span>
+        <div class="node sap">SAP / MDG<sub>write back to vendor master</sub></div>
+      </div>
+      <div class="flow-row">
+        <span class="flow-label">Future state</span>
+        <div class="node ae">Aerchain<sub>onboarding + sourcing</sub></div>
+        <span class="arrow">→ direct →</span>
+        <div class="node sap">SAP / MDG<sub>if Ariba is retired</sub></div>
+      </div>
+    </div>
+    <p class="note">Reference model we cited: Unilever runs strategic spend on Coupa with Aerchain layered on top for autonomous sourcing — the same "sit on top, then expand" pattern Adani would follow with Ariba. Reliance is the credibility anchor: full S2C, SAP + Ariba, deployed group-wide.</p>
+
+    <div class="callout c-win">
+      <span class="tag">Why this is the right wedge</span>
+      <p>The CPO has a same-week internal escalation on onboarding speed — a real, dated, executive-level pain with budget attention. It's a contained, high-value first use case ("start low — 2-3 categories / transactions, see how we deliver") that lands us on top of their existing stack without forcing a rip-and-replace, and sets up the broader S2P / Ariba-replacement narrative.</p>
+    </div>
+  </section>
+
+  <!-- COMMERCIALS -->
+  <section id="commercials">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Commercial signals (indicative, verbal)</h2></div>
+    <p class="lead">Numbers floated in conversation — not a proposal. Capture them so the deck and pricing stay consistent.</p>
+    <table>
+      <tr><th>Item</th><th>Signal given</th></tr>
+      <tr><td><strong>Pricing model</strong></td><td>Based on spend routed through the platform, transaction volume, and degree of AI involvement; user count is a minor (~2–5%) factor.</td></tr>
+      <tr><td><strong>Enterprise license</strong></td><td>~<strong>$1.2M / year</strong> for full suite, group-wide, unlimited, against ~₹100 Cr routed spend. S2P-only (sourcing) ~$600–700k.</td></tr>
+      <tr><td><strong>Due-diligence API cost</strong></td><td>Positioned as <strong>&lt; $0.50 per vendor</strong> check — flagged as needing confirmation from the AI team.</td></tr>
+      <tr><td><strong>Scale</strong></td><td>Adani ~30–35k headcount; ~15k likely intake users. Enterprise gating → unlimited tokens.</td></tr>
+      <tr><td><strong>Hosting</strong></td><td>AWS Mumbai default; BYOC supported (private AWS tenant precedent at NSE); data-residency configurable.</td></tr>
+      <tr><td><strong>Timeline</strong></td><td>Greenfield 3–4 months; Adani-scale enterprise 6–9 months (keep 9 in mind); bulk implementation 4–5 months alongside integrations.</td></tr>
+    </table>
+  </section>
+
+  <!-- RISKS -->
+  <section id="risks">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Risks &amp; watch-outs</h2></div>
+    <div class="grid g2">
+      <div class="callout c-risk">
+        <span class="tag">Expectation management</span>
+        <p>We are <strong>not</strong> the catalog/aggregator they originally asked IndiaMart for. The deck must explicitly map our capabilities to their 5-point brief and be honest about what we do <em>not</em> do (third-party catalog integration into their Ariba), so we don't get re-filed under "wrong fit" by the catalog team.</p>
+      </div>
+      <div class="callout c-risk">
+        <span class="tag">Claims to validate before they're in writing</span>
+        <p>Several things were positioned as available "today" that are really roadmap or stretch: automated <strong>vendor calling</strong> ("3–4 weeks"), <strong>Atlas</strong> GA ("next month"), <strong>should-cost for a full 5.5 km conveyor / project BOQ</strong> ("we believe we can"), and <strong>contract authoring / redlining</strong> (a stated <em>gap</em>). Confirm internally before committing in the deck or a pilot SOW.</p>
+      </div>
+      <div class="callout c-risk">
+        <span class="tag">Scale &amp; complexity</span>
+        <p>~500 locations, 14+ SAP instances, acknowledged "big chaos" in master data, and a protective architect. Implementation risk is real; Devesh and Chintan both stressed how hard their landscape is. Lead with a contained onboarding pilot, not a big-bang promise.</p>
+      </div>
+      <div class="callout c-risk">
+        <span class="tag">Incumbents &amp; internal builds</span>
+        <p>Deep Ariba investment plus a habit of building internally ("we built that vendor-assessment feature 6 months ago"). They will resist ripping out Ariba and will benchmark us against in-house work. Differentiate on autonomous AI + Atlas, and on speed-to-value for onboarding.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT STEPS -->
+  <section id="next">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Commitments &amp; next steps</h2></div>
+
+    <h3>What we owe Adani</h3>
+    <table>
+      <tr><th>Deliverable</th><th>Owner</th><th>Status</th></tr>
+      <tr><td>Detailed capabilities deck — org, portfolio, modules, explicitly mapped to Adani's 5-point brief</td><td>Aerchain</td><td>Outstanding</td></tr>
+      <tr><td>Ariba / SAP / MDG integration architecture document (incl. Unilever Coupa+Aerchain model)</td><td>Aerchain</td><td>To send by EOD 28 May / AM 29 May</td></tr>
+      <tr><td>Vendor master tagging guideline (OEM vs dealer) + event-template examples</td><td>Aerchain</td><td>Outstanding</td></tr>
+      <tr><td>Case studies: Infosys GBS deployment + McAfee negotiation agent</td><td>Aerchain</td><td>Outstanding</td></tr>
+      <tr><td>Tailored spend-analysis pilot on anonymized Adani data → proposed orchestrator rules</td><td>Aerchain</td><td>Outstanding</td></tr>
+      <tr><td>Should-cost challenge on a real Adani project (e.g. conveyor system) — Gaurav accepted this as a test</td><td>Aerchain</td><td>Awaiting their use case</td></tr>
+      <tr><td>Confirm &lt; $0.50 per-vendor due-diligence API cost</td><td>Aerchain (AI team)</td><td>Outstanding</td></tr>
+    </table>
+
+    <h3>What's already in motion</h3>
+    <ul>
+      <li><strong>NDA + GTC signed</strong> — sent by Vellala Sasanka (Devesh's team) on 28 May; signed copy returned same day. Test-environment integration can follow.</li>
+      <li><strong>Vendor-onboarding working session scheduled</strong> — convened by Neetesh Jain (Teams), with Devesh, Vellala Sasanka, Subhra Biswas, Shivam Saraff and Gaurav.</li>
+      <li><strong>Adani to share slots</strong> for the 29 May deep-dive on the integration document.</li>
+      <li><strong>Group CPO virtual session</strong> to follow once Suresh Shinde reviews the deck.</li>
+    </ul>
+
+    <h3>Gaurav's read</h3>
+    <div class="callout c-info">
+      <span class="tag">Recommended play</span>
+      <p>Win <strong>Devesh</strong> (champion) and keep <strong>Sumeet</strong> (gate) warm; <strong>Suresh Shinde</strong> is the sponsor to close to. Land via a <strong>vendor-onboarding pilot</strong> on 2–3 categories, sitting on top of Ariba/SAP/MDG, with automated due diligence as the headline value — then expand into autonomous sourcing for tail spend and, longer-term, the Ariba-replacement / full-S2P narrative. Everything we sell, this account can buy somewhere; the job now is sequencing and credibility, not breadth.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  <span>Aerchain · Confidential — internal account briefing. Figures and capability claims captured from a live conversation; validate before external use.</span>
+  <span><a href="adani-meeting-transcript.html">→ Full cleaned transcript</a></span>
+</div>
+
+<script>
+function tt(){
+  var h=document.documentElement;
+  var n=h.getAttribute('data-theme')==='light'?'dark':'light';
+  h.setAttribute('data-theme',n);
+  try{localStorage.setItem('aer-theme',n)}catch(e){}
+}
+try{var s=localStorage.getItem('aer-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+</script>
+</body>
+</html>
