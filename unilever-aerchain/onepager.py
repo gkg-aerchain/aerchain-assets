@@ -164,9 +164,9 @@ ul{{list-style:none}} ul li{{display:flex;align-items:flex-start;gap:12px;font-s
 
 <div class="hero">
   <div class="lock">
-    <img class="aer" src="{f('aerchain_dark.png')}">
-    <div class="div"></div>
     <img class="inf" src="{f('infosys_blue.png')}">
+    <div class="div"></div>
+    <img class="aer" src="{f('aerchain_dark.png')}">
     <div class="div"></div>
     <img class="uni" src="{f('unilever_blue.png')}">
   </div>
