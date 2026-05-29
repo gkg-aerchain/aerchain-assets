@@ -91,8 +91,8 @@ h2 .pp{{color:var(--p)}}
    background-size:46px 46px;opacity:.5}}
 .hero>*{{position:relative}}
 .lock{{display:flex;align-items:center;justify-content:center;gap:22px;margin-bottom:34px}}
-.lock img.aer{{height:40px}} .lock img.uni{{height:54px}} .lock img.inf{{height:28px}}
-.lock .div{{width:1px;height:40px;background:#cdbfe8}}
+.lock img.aer{{height:42px}} .lock img.uni{{height:58px}} .lock img.inf{{height:51px}}
+.lock .div{{width:1px;height:46px;background:#cdbfe8}}
 .htitle{{font-size:60px;font-weight:700;letter-spacing:-1.5px;color:var(--p);line-height:1.04}}
 .hsub{{font-size:19px;color:var(--ink);margin-top:14px;font-weight:500}}
 .heyebrow{{font-size:12px;color:var(--p);margin-bottom:18px;font-weight:600}}
