@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aerchain × Adani Group — Commercial Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:hsl(262 80% 55%);
+  --accent:hsl(275 85% 58%);
+  --orange:#DC5F40;
+  --success:hsl(152 68% 38%);
+  --warning:hsl(38 92% 50%);
+  --info:hsl(217 88% 58%);
+  --fg:hsl(220 15% 13%);
+  --fg2:hsl(220 9% 38%);
+  --fg3:hsl(220 9% 56%);
+  --border:hsl(225 14% 90%);
+  --border-light:hsl(225 14% 94%);
+  --muted:hsl(225 14% 96%);
+  --card:#ffffff;
+  --bg:#fafbfc;
+  --bg-grad:linear-gradient(180deg,#fafbfc 0%,#f6f4fc 100%);
+  --gp:linear-gradient(135deg,hsl(262 80% 55%),hsl(275 85% 58%));
+  --shadow-glass:0 2px 8px rgba(124,58,237,.06),0 1px 2px rgba(0,0,0,.03);
+  --shadow-elevated:0 8px 28px -4px rgba(124,58,237,.12),0 4px 12px rgba(0,0,0,.03);
+  --shadow-glow:0 0 24px hsl(262 80% 55%/.18),0 0 48px hsl(262 80% 55%/.06);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg-grad);color:var(--fg);font-size:14px;line-height:20px;letter-spacing:-.005em}
+
+@keyframes shine{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:100;height:62px;background:rgba(250,251,252,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.hdr-inner{max-width:1100px;margin:0 auto;height:100%;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
+.hdr-logo-wrap{display:flex;align-items:center;gap:14px}
+.hdr-logo{height:22px;width:auto;display:block}
+.hdr-logo-adani{height:26px;width:auto;display:block}
+.hdr-sep{width:1px;height:26px;background:var(--border);flex-shrink:0}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.hdr-date{font-size:11px;font-weight:600;color:var(--fg3);letter-spacing:.05em;text-transform:uppercase}
+.hdr-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:hsl(262 80% 55%/.07);border:1px solid hsl(262 80% 55%/.18);border-radius:8px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--primary)}
+.hdr-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:pulse 2s ease-in-out infinite}
+
+/* COVER */
+.cover{background:var(--gp);padding:72px 0 60px;position:relative;overflow:hidden}
+.cover-inner{max-width:1100px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
+.orb1{position:absolute;top:-120px;right:-100px;width:480px;height:480px;border-radius:50%;background:rgba(255,255,255,.06)}
+.orb2{position:absolute;bottom:-60px;left:5%;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04)}
+.cov-eye{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.55);margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
+.cov-eye::before{content:'';width:18px;height:1.5px;background:rgba(255,255,255,.5);border-radius:1px}
+.cov-h1{font-size:42px;font-weight:300;line-height:1.1;letter-spacing:-.025em;color:#fff;margin-bottom:14px;max-width:900px}
+.cov-h1 em{font-style:normal;font-weight:700;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.6) 35%,#fff 55%,rgba(255,255,255,.6) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 3s ease-in-out infinite}
+.cov-sub{font-size:15px;line-height:24px;color:rgba(255,255,255,.78);margin-bottom:40px;max-width:780px}
+.cov-meta{display:flex;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.18);padding-top:26px;gap:0}
+.cov-mi{display:flex;flex-direction:column;gap:4px;padding-right:28px;margin-right:28px;border-right:1px solid rgba(255,255,255,.14)}
+.cov-mi:last-child{border-right:none}
+.cm-l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.10em;color:rgba(255,255,255,.5)}
+.cm-v{font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
+
+/* WRAP */
+.wrap{max-width:1100px;margin:0 auto;padding:0 48px}
+.main{padding:60px 0 100px}
+
+/* SECTIONS */
+.sec{margin-bottom:64px}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.sec-num{width:40px;height:40px;border-radius:10px;background:var(--gp);box-shadow:var(--shadow-glow);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.sec-eye{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--fg3)}
+.sec-title{font-size:32px;font-weight:300;line-height:1.14;letter-spacing:-.02em;margin-bottom:8px}
+.sec-title em{font-style:normal;font-weight:600;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-sub{font-size:14px;line-height:22px;color:var(--fg2);max-width:820px;margin-bottom:28px}
+.sec-div{height:1px;background:linear-gradient(90deg,var(--border),transparent);margin-bottom:28px}
+
+/* WHAT THIS COVERS BOX */
+.covers-box{background:linear-gradient(135deg,hsl(262 80% 55%/.06),hsl(275 85% 58%/.04));border:1px solid hsl(262 80% 55%/.16);border-radius:14px;padding:28px 32px;margin-bottom:28px}
+.covers-box-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.covers-box-title::before{content:'';width:20px;height:2px;background:var(--gp);border-radius:1px}
+.covers-items{display:flex;flex-direction:column;gap:12px}
+.covers-item{display:flex;align-items:flex-start;gap:14px}
+.ci-num{width:28px;height:28px;border-radius:7px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px}
+.ci-body{font-size:13.5px;line-height:21px;color:var(--fg)}
+.ci-body strong{font-weight:700;color:var(--fg)}
+
+/* SCOPE CHIPS */
+.scope-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.scope-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:8px;font-size:11.5px;font-weight:600;border:1px solid}
+.sc-p{background:hsl(262 80% 55%/.08);border-color:hsl(262 80% 55%/.2);color:hsl(262 65% 40%)}
+.sc-g{background:hsl(152 68% 38%/.08);border-color:hsl(152 68% 38%/.2);color:hsl(152 55% 28%)}
+.sc-b{background:hsl(217 88% 58%/.08);border-color:hsl(217 88% 58%/.2);color:hsl(217 65% 35%)}
+.sc-o{background:hsl(14 70% 55%/.08);border-color:hsl(14 70% 55%/.2);color:hsl(14 55% 36%)}
+.sc-chip-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* MODULE CARDS */
+.module{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-glass);margin-bottom:20px}
+.module-head{padding:20px 24px;background:linear-gradient(135deg,hsl(262 80% 55%/.06),hsl(275 85% 58%/.04));border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
+.mod-num{width:34px;height:34px;border-radius:8px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.mod-title{font-size:17px;font-weight:700;color:var(--fg)}
+.mod-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:5px;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-left:auto}
+.mt-phase1{background:hsl(152 68% 38%/.10);color:hsl(152 55% 28%);border:1px solid hsl(152 68% 38%/.2)}
+.mt-future{background:hsl(38 92% 50%/.10);color:hsl(38 65% 30%);border:1px solid hsl(38 92% 50%/.2)}
+.module-body{padding:20px 24px}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* MODULE PRICING STRIP */
+.mod-price-strip{display:flex;gap:12px;padding:12px 16px;background:hsl(262 80% 55%/.04);border-top:1px solid var(--border);margin-top:16px;border-radius:0 0 12px 12px;flex-wrap:wrap}
+.mps-item{display:flex;flex-direction:column;gap:3px}
+.mps-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--fg3)}
+.mps-val{font-size:14px;font-weight:700;color:var(--primary)}
+.mps-val.future{color:hsl(38 65% 30%);font-size:12px;font-weight:600}
+.mps-div{width:1px;background:var(--border);align-self:stretch}
+
+/* FEATURES LIST */
+.feat-list{display:flex;flex-direction:column;gap:7px}
+.feat-item{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;line-height:18px;color:var(--fg2)}
+.feat-dot{width:5px;height:5px;border-radius:50%;background:var(--primary);margin-top:6px;flex-shrink:0}
+.feat-item strong{color:var(--fg);font-weight:600}
+
+/* SUB-MODULES */
+.sub-module{background:hsl(262 80% 55%/.04);border:1px solid hsl(262 80% 55%/.12);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.sm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.sm-label::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor}
+.sm-title{font-size:13.5px;font-weight:700;color:var(--fg);margin-bottom:6px}
+.sm-items{display:flex;flex-wrap:wrap;gap:5px}
+.sm-item{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:4px;background:white;border:1px solid var(--border);color:var(--fg2)}
+
+/* PRICING TABLE */
+.ptable-wrap{overflow:hidden;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow-glass)}
+.ptable{width:100%;border-collapse:collapse;font-size:12.5px}
+.ptable thead tr{background:hsl(262 80% 55%/.06);border-bottom:1px solid var(--border)}
+.ptable th{padding:11px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3)}
+.ptable th.r{text-align:right}
+.ptable td{padding:12px 16px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--fg2);line-height:18px}
+.ptable td.r{text-align:right;font-weight:600;color:var(--fg)}
+.ptable tbody tr:last-child td{border-bottom:none}
+.ptable tbody tr:nth-child(even) td{background:hsl(240 20% 98%/.6)}
+.ptable td.mod-name{font-weight:700;color:var(--fg)}
+.ptable td.note{font-size:11px;color:var(--fg3)}
+.price-usd{font-weight:700;color:var(--fg)}
+.price-future{font-size:11px;font-weight:600;color:hsl(38 65% 30%);background:hsl(38 92% 50%/.10);border:1px solid hsl(38 92% 50%/.25);padding:2px 8px;border-radius:4px;display:inline-block}
+
+/* TOTAL HERO */
+.total-hero{background:var(--gp);border-radius:16px;padding:32px 36px;margin-top:24px;position:relative;overflow:hidden}
+.th-orb{position:absolute;top:-60px;right:-40px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.06)}
+.total-hero-inner{position:relative;z-index:1}
+.th-eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.6);margin-bottom:10px}
+.th-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.th-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.6);margin-bottom:4px}
+.th-val{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1}
+.th-sub{font-size:11px;color:rgba(255,255,255,.65);margin-top:3px}
+.th-divider{width:1px;background:rgba(255,255,255,.2);align-self:stretch}
+
+/* OPTIONS */
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.option-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:28px;box-shadow:var(--shadow-glass);position:relative;overflow:hidden}
+.option-card.recommended{border-color:hsl(262 80% 55%/.4);background:hsl(262 80% 55%/.03)}
+.option-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--border)}
+.option-card.recommended::before{background:var(--gp)}
+.opt-rec-badge{position:absolute;top:14px;right:14px;background:var(--gp);color:white;font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.opt-eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--fg3);margin-bottom:6px}
+.opt-title{font-size:18px;font-weight:700;color:var(--fg);margin-bottom:4px}
+.opt-sub{font-size:12px;color:var(--fg3);line-height:17px;margin-bottom:16px}
+.opt-items{display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.opt-item{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;gap:8px}
+.opt-item-name{color:var(--fg2)}
+.opt-item-val{font-weight:700;color:var(--fg);white-space:nowrap}
+.opt-item-val.highlight{color:var(--primary);font-size:15px}
+.opt-divider{height:1px;background:var(--border);margin:4px 0}
+.opt-note{font-size:11px;color:var(--fg3);margin-top:12px;line-height:16px}
+
+/* ESCALATION NOTE */
+.escalation-box{background:hsl(217 88% 58%/.06);border:1px solid hsl(217 88% 58%/.18);border-left:3px solid var(--info);border-radius:10px;padding:14px 18px;font-size:12.5px;line-height:20px;color:var(--fg);margin-top:16px}
+.escalation-box strong{font-weight:700}
+
+/* TIMELINE */
+.gantt{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-glass)}
+.g-hdr{display:grid;grid-template-columns:200px repeat(6,1fr);background:hsl(262 80% 55%/.06);border-bottom:1px solid var(--border)}
+.g-hdr-cell{padding:10px 12px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--fg3);border-right:1px solid var(--border-light)}
+.g-hdr-cell:last-child{border-right:none}
+.g-row{display:grid;grid-template-columns:200px repeat(6,1fr);border-bottom:1px solid var(--border-light);align-items:center;min-height:44px}
+.g-row:last-child{border-bottom:none}
+.g-rl{padding:10px 14px;font-size:12px;font-weight:600;color:var(--fg);border-right:1px solid var(--border-light)}
+.g-cell{padding:8px 6px;border-right:1px solid var(--border-light)}
+.g-cell:last-child{border-right:none}
+.g-bar{border-radius:4px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:white}
+.gb-purple{background:var(--gp)}
+.gb-blue{background:linear-gradient(90deg,var(--info),hsl(228 82% 62%))}
+.gb-green{background:linear-gradient(90deg,var(--success),hsl(165 60% 44%))}
+.gb-amber{background:linear-gradient(90deg,var(--warning),hsl(25 95% 53%))}
+.g-span2{grid-column:span 2}
+.g-span3{grid-column:span 3}
+.g-span4{grid-column:span 4}
+
+/* TERMS */
+.terms-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.term-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:var(--shadow-glass)}
+.tc-eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);margin-bottom:6px}
+.tc-title{font-size:13.5px;font-weight:700;color:var(--fg);margin-bottom:6px}
+.tc-body{font-size:12px;line-height:18px;color:var(--fg2)}
+
+/* CALLOUT */
+.callout{background:hsl(262 80% 55%/.04);border:1px solid hsl(262 80% 55%/.16);border-left:4px solid var(--primary);border-radius:10px;padding:16px 20px;font-size:13.5px;line-height:21px;color:var(--fg);margin:16px 0}
+.callout.amber{background:hsl(38 92% 50%/.05);border-color:hsl(38 92% 50%/.18);border-left-color:var(--warning)}
+.callout.future{background:hsl(38 92% 50%/.06);border:1px solid hsl(38 92% 50%/.22);border-left:4px solid var(--warning);border-radius:10px;padding:16px 20px;font-size:13.5px;line-height:21px;color:var(--fg);margin:0}
+.callout strong{font-weight:700}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px 0 50px;border-top:1px solid var(--border);margin-top:40px}
+.footer-logo{height:18px;width:auto;display:block;margin:0 auto 6px;opacity:.55}
+.footer-note{font-size:11px;color:var(--fg3)}
+
+/* GRID UTILS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* PHASE BADGE */
+.phase-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.ph1{background:hsl(152 68% 38%/.1);color:hsl(152 55% 26%);border:1px solid hsl(152 68% 38%/.2)}
+.ph2{background:hsl(38 92% 50%/.1);color:hsl(38 65% 28%);border:1px solid hsl(38 92% 50%/.2)}
+
+/* YEAR COMPARISON TABLE */
+.yr-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:20px}
+.yr-table thead tr{background:hsl(262 80% 55%/.06)}
+.yr-table th{padding:10px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--fg3);border-bottom:1px solid var(--border)}
+.yr-table th.r{text-align:right}
+.yr-table td{padding:12px 16px;border-bottom:1px solid var(--border-light);color:var(--fg2)}
+.yr-table td.r{text-align:right;font-weight:600;color:var(--fg)}
+.yr-table td.strong{font-weight:700;color:var(--fg)}
+.yr-table tbody tr:last-child td{border-bottom:none}
+
+@media(max-width:768px){
+  .hdr-inner,.wrap,.cover-inner{padding:0 20px}
+  .cov-h1{font-size:28px}
+  .options-grid,.module-grid,.terms-grid,.th-grid,.g2,.g3{grid-template-columns:1fr}
+  .gantt{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-logo-wrap">
+      <svg class="hdr-logo" viewBox="0 0 168 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#hdr-clip)"><path d="M3.7951 26.9895C3.61396 27.3937 3.43282 27.6616 3.254 27.7956C3.07286 27.9295 2.80115 27.9977 2.44119 27.9977H0.678569C0.225721 27.9977 0.000457764 27.852 0.000457764 27.5606C0.000457764 27.4478 0.056193 27.2574 0.169986 26.9895L10.3672 5.68021C10.7063 4.98698 10.9547 4.53109 11.1127 4.31959C11.2706 4.10575 11.4633 4 11.6886 4C11.893 4 12.0671 4.10575 12.2134 4.31959C12.3597 4.53344 12.6036 4.98698 12.9426 5.68021L23.242 26.9895C23.3558 27.2574 23.4116 27.4501 23.4116 27.5606C23.4116 27.852 23.1747 27.9977 22.7009 27.9977H20.8036C20.4413 27.9977 20.1766 27.9295 20.0071 27.7956C19.8375 27.6616 19.6518 27.3914 19.4474 26.9895L11.6212 10.2509L3.7951 26.9895Z" fill="#111111"/><path d="M40.5221 24.8957C40.6359 24.9991 40.6916 25.1989 40.6916 25.495V27.2433C40.6916 27.5418 40.6359 27.7415 40.5221 27.8426C40.4083 27.946 40.2179 27.9977 39.9462 27.9977H27.1062C26.8345 27.9977 26.644 27.946 26.5302 27.8426C26.4165 27.7392 26.3607 27.5394 26.3607 27.2433V4.75433C26.3607 4.45824 26.4165 4.25614 26.5302 4.1551C26.6417 4.0517 26.8345 4 27.1039 4H39.9113C40.183 4 40.3735 4.0517 40.4873 4.1551C40.6011 4.25849 40.6568 4.45824 40.6568 4.75433V6.50269C40.6568 6.80114 40.6011 7.00088 40.4873 7.10193C40.3735 7.20533 40.183 7.25703 39.9113 7.25703H30.153C29.9951 7.25703 29.8883 7.28523 29.8302 7.34162C29.7745 7.39802 29.7466 7.49672 29.7466 7.63302V13.9074C29.7466 14.0672 29.7745 14.1753 29.8302 14.234C29.886 14.2904 29.9928 14.3186 30.153 14.3186H38.7595C39.0312 14.3186 39.2216 14.3703 39.3354 14.4737C39.4492 14.5771 39.5049 14.7769 39.5049 15.0729V16.7861C39.5049 17.061 39.4492 17.2537 39.3354 17.3688C39.2216 17.484 39.0312 17.5404 38.7595 17.5404H30.153C29.9951 17.5404 29.8883 17.5686 29.8302 17.625C29.7745 17.6814 29.7466 17.7801 29.7466 17.9164V24.3623C29.7466 24.4986 29.7745 24.5973 29.8302 24.6537C29.886 24.7101 29.9928 24.7383 30.153 24.7383H39.9438C40.2156 24.7383 40.406 24.79 40.5198 24.8934L40.5221 24.8957Z" fill="#111111"/><path d="M48.7198 27.8449C48.606 27.9483 48.4156 28 48.1439 28H46.2466C45.9748 28 45.7844 27.9483 45.6706 27.8449C45.5568 27.7415 45.5011 27.5418 45.5011 27.2457V4.75433C45.5011 4.45824 45.5568 4.25614 45.6706 4.1551C45.7844 4.0517 45.9772 4 46.2466 4H52.7188C59.1562 4 62.3749 6.47919 62.3749 11.4399C62.3749 13.0849 61.9685 14.4408 61.1557 15.503C60.3429 16.5652 59.212 17.35 57.7675 17.8506L63.5941 26.9707C63.7753 27.2222 63.8659 27.4384 63.8659 27.6217C63.8659 27.758 63.8031 27.8567 63.6801 27.9131C63.5547 27.9695 63.3689 27.9977 63.1204 27.9977H61.1209C60.7377 27.9977 60.4544 27.9413 60.2733 27.8261C60.0921 27.711 59.8785 27.4619 59.63 27.0718L53.3969 17.061C53.2622 16.8777 53.1926 16.7179 53.1926 16.5816C53.1926 16.3983 53.3621 16.2949 53.7011 16.2738C57.1126 15.9095 58.8172 14.3656 58.8172 11.6444C58.8172 10.0911 58.2807 8.95369 57.2078 8.23225C56.1349 7.51317 54.5813 7.15128 52.5493 7.15128H49.2957C49.1378 7.15128 49.031 7.17948 48.9729 7.23588C48.9172 7.29227 48.8893 7.40272 48.8893 7.56252V27.241C48.8893 27.5394 48.8336 27.7392 48.7198 27.8402V27.8449Z" fill="#111111"/><path d="M84.5991 22.4471C84.8476 22.2473 85.0404 22.1486 85.1751 22.1486C85.2656 22.1486 85.3562 22.1815 85.4468 22.2473C85.5374 22.3131 85.6163 22.3907 85.6837 22.48L86.666 23.81C86.7798 23.944 86.8355 24.0991 86.8355 24.2753C86.8355 24.3646 86.8007 24.4586 86.7333 24.5573C86.666 24.656 86.5638 24.7618 86.4291 24.8722C85.2308 25.8686 83.8815 26.6394 82.3813 27.1822C80.8788 27.7251 79.3043 27.9977 77.6555 27.9977C75.4423 27.9977 73.415 27.4877 71.5734 26.4678C69.7318 25.448 68.2757 24.0309 67.2028 22.2121C66.1299 20.3956 65.5934 18.3558 65.5934 16.0952C65.5934 13.8345 66.1299 11.7525 67.2028 9.91247C68.2757 8.07246 69.7434 6.62724 71.6082 5.57446C73.4707 4.52639 75.5538 4 77.8575 4C79.4831 4 81.0367 4.27729 82.516 4.83188C83.9953 5.38647 85.3121 6.1408 86.464 7.09253C86.6892 7.24763 86.803 7.41447 86.803 7.59072C86.803 7.74581 86.7357 7.92206 86.5986 8.12181L85.6163 9.41898C85.4352 9.66337 85.254 9.78557 85.0752 9.78557C84.9405 9.78557 84.7478 9.69627 84.4993 9.52002C83.5286 8.78919 82.4766 8.21345 81.3479 7.79046C80.2193 7.36982 79.0326 7.15833 77.7902 7.15833C76.1855 7.15833 74.7247 7.53432 73.4033 8.28865C72.0819 9.04298 71.0369 10.0958 70.2682 11.447C69.4995 12.7982 69.1164 14.328 69.1164 16.0341C69.1164 17.7401 69.4949 19.1689 70.252 20.5225C71.009 21.8737 72.0471 22.9335 73.3685 23.6973C74.6899 24.461 76.1646 24.844 77.7902 24.844C80.3424 24.844 82.6113 24.0474 84.5991 22.4518V22.4471Z" fill="#111111"/><path d="M109.401 27.8449C109.288 27.9483 109.097 28 108.826 28H106.928C106.657 28 106.466 27.9483 106.352 27.8449C106.238 27.7415 106.183 27.5418 106.183 27.2457V17.6814C106.183 17.5451 106.155 17.4464 106.099 17.39C106.043 17.3336 105.934 17.3054 105.776 17.3054H94.562C94.4041 17.3054 94.2972 17.3336 94.2392 17.39C94.1834 17.4464 94.1556 17.5451 94.1556 17.6814V27.2457C94.1556 27.5441 94.0998 27.7439 93.986 27.8449C93.8722 27.9483 93.6818 28 93.4101 28H91.5128C91.2411 28 91.0507 27.9483 90.9369 27.8449C90.8231 27.7415 90.7673 27.5418 90.7673 27.2457V4.75433C90.7673 4.45824 90.8231 4.25614 90.9369 4.1551C91.0483 4.0517 91.2411 4 91.5105 4H93.4078C93.6795 4 93.8723 4.0517 93.9837 4.1551C94.0975 4.25849 94.1532 4.45824 94.1532 4.75433V13.6677C94.1532 13.804 94.1811 13.9074 94.2369 13.9755C94.2926 14.0437 94.3994 14.0789 94.5596 14.0789H105.774C105.932 14.0789 106.039 14.0437 106.097 13.9755C106.153 13.9074 106.18 13.804 106.18 13.6677V4.75433C106.18 4.45824 106.236 4.25614 106.35 4.1551C106.464 4.0517 106.657 4 106.928 4H108.826C109.095 4 109.288 4.0517 109.401 4.1551C109.515 4.25849 109.571 4.45824 109.571 4.75433V27.2457C109.571 27.5441 109.515 27.7439 109.401 27.8449Z" fill="#111111"/><path d="M164.252 4.1504C164.366 4.04935 164.558 4 164.828 4H166.725C166.997 4 167.189 4.04935 167.301 4.1504C167.415 4.24909 167.47 4.44414 167.47 4.73318V26.9049C167.47 27.6358 167.245 28.0023 166.792 28.0023C166.611 28.0023 166.421 27.9295 166.216 27.7862C166.012 27.6428 165.731 27.3702 165.369 26.9707L151.614 11.0498V26.9049C151.614 27.194 151.558 27.3867 151.444 27.4877C151.33 27.5864 151.14 27.6381 150.868 27.6381H148.971C148.699 27.6381 148.509 27.5888 148.395 27.4877C148.281 27.389 148.226 27.194 148.226 26.9049V5.09742C148.226 4.72143 148.281 4.44414 148.395 4.26554C148.509 4.0893 148.69 4 148.939 4C149.12 4 149.31 4.07285 149.514 4.2162C149.719 4.35954 149.988 4.63214 150.327 5.03163L164.082 20.9525V4.73083C164.082 4.44414 164.138 4.24909 164.252 4.14805V4.1504Z" fill="#111111"/><path d="M143.732 18.7083C143.72 18.6519 143.704 18.4944 143.699 18.4193C143.704 18.4357 143.73 18.6754 143.732 18.7083Z" fill="#DC5F40"/><path d="M141.613 11.08C142.698 10.9602 143.483 9.9732 143.364 8.87342C143.246 7.776 142.27 6.98171 141.184 7.10156C140.099 7.22141 139.314 8.20839 139.433 9.30816C139.551 10.4056 140.526 11.1999 141.613 11.08Z" fill="#DC5F40"/><path d="M143.857 20.6254C143.943 16.1699 142.092 10.7674 137.252 13.8364C136.846 13.9962 136.614 13.9398 136.4 13.6343C135.789 12.5158 135.32 11.3713 134.739 10.1964C130.371 -1.17501 125.383 5.32729 120.114 12.0575C108.347 27.4497 113.89 34.2669 132.438 20.75C133.086 20.2847 134.384 19.3118 134.851 19.2719C135.343 19.192 135.548 19.5962 135.919 20.4421C136.279 21.3093 136.878 22.5383 137.426 23.4148C140.592 29.6304 144.098 28.1899 143.859 20.6513V20.6254H143.857ZM129.909 18.3084C127.575 19.7842 125.36 21.5913 122.796 22.6699C121.679 23.1422 120.051 22.6205 119.649 21.7064C119.194 20.2894 120.822 18.2003 121.621 16.7292C122.547 15.0537 123.776 13.5638 124.953 12.0458C126.096 10.5489 127.647 8.32817 129.798 9.2987C131.523 10.2904 132.231 13.0328 133.218 14.6871C133.664 15.4039 133.65 15.9114 132.87 16.3438C131.925 16.9525 130.901 17.6457 129.928 18.299L129.909 18.3107V18.3084ZM142.556 21.2435C142.505 22.0965 142.345 25.323 141.27 23.7861C140.271 21.8874 139.175 19.521 138.197 17.4977C137.817 16.4637 140.192 16.0454 140.81 16.2216C142.535 16.8655 142.596 19.6197 142.556 21.2294V21.2458V21.2435Z" fill="#DC5F40"/></g><defs><clipPath id="hdr-clip"><rect width="168" height="32" fill="white"/></clipPath></defs></svg>
+      <div class="hdr-sep"></div>
+      <svg class="hdr-logo-adani" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="adani-hdr-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3A6EBF"/><stop offset="40%" stop-color="#5B4DB5"/><stop offset="70%" stop-color="#8B3DAF"/><stop offset="100%" stop-color="#C0287A"/></linearGradient></defs><text x="8" y="54" font-family="'Arial Rounded MT Bold','Nunito','Varela Round',Arial,sans-serif" font-weight="800" font-size="52" letter-spacing="-1" fill="url(#adani-hdr-g)">adani</text></svg>
+    </div>
+    <div class="hdr-right">
+      <span class="hdr-date">June 2026</span>
+      <span class="hdr-badge"><span class="hdr-dot"></span> Strictly Confidential</span>
+    </div>
+  </div>
+</header>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="cover-inner">
+    <div class="cov-eye">Technical &amp; Commercial Proposal · June 2026</div>
+    <h1 class="cov-h1">An Agentic Procurement Layer<br>for <em>Adani Group</em></h1>
+    <p class="cov-sub">An AI-native sourcing, vendor-onboarding and spend-intelligence layer that sits on top of your Ariba, MDG and SAP estate — phased by module, priced in USD, structured for a 3-year enterprise commitment.</p>
+    <div class="cov-meta">
+      <div class="cov-mi"><span class="cm-l">Prepared for</span><span class="cm-v">AIIL / Adani Group</span></div>
+      <div class="cov-mi"><span class="cm-l">Prepared by</span><span class="cm-v">Aerchain</span></div>
+      <div class="cov-mi"><span class="cm-l">Date</span><span class="cm-v">June 2026</span></div>
+      <div class="cov-mi"><span class="cm-l">Validity</span><span class="cm-v">30 days from date</span></div>
+      <div class="cov-mi"><span class="cm-l">Phase 1 Scope</span><span class="cm-v">Modules 1–3</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<main class="main">
+
+<!-- SECTION 1: WHAT THIS PROPOSAL COVERS -->
+<section class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">01</div>
+    <span class="sec-eye">Scope &amp; Coverage</span>
+  </div>
+  <h2 class="sec-title">What This <em>Proposal Covers</em></h2>
+  <p class="sec-sub">This commercial structure maps directly to Adani's prioritised procurement transformation agenda — vendor onboarding as the initial wedge, agentic sourcing as the strategic layer, with enterprise integration as the connective tissue.</p>
+  <div class="sec-div"></div>
+
+  <div class="covers-box">
+    <div class="covers-box-title">Proposal Coverage — Two Core Commitments</div>
+    <div class="covers-items">
+      <div class="covers-item">
+        <div class="ci-num">1</div>
+        <div class="ci-body"><strong>Platform Subscription (SaaS)</strong> covering Modules 1–3: Vendor Onboarding &amp; Management, Intake &amp; Orchestration, and Sourcing &amp; Negotiation. A single group-wide enterprise licence — unlimited users, all 24 business units, price-locked for 3 years.</div>
+      </div>
+      <div class="covers-item">
+        <div class="ci-num">2</div>
+        <div class="ci-body"><strong>Implementation &amp; Integration Services</strong> to deploy all three modules within the agreed project timeline. Includes configuration, SAP S/4HANA / Ariba / MDG integration, UAT development, change management, training, and 90-day post-go-live hypercare. Milestone-linked payments — no upfront exposure beyond 20% of contract value.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scope-bar">
+    <span class="scope-chip sc-p"><span class="sc-chip-dot"></span> Module 1 — Vendor Onboarding &amp; Management</span>
+    <span class="scope-chip sc-p"><span class="sc-chip-dot"></span> Module 2 — Intake &amp; Orchestration</span>
+    <span class="scope-chip sc-p"><span class="sc-chip-dot"></span> Module 3 — Sourcing &amp; Negotiation</span>
+    <span class="scope-chip sc-b"><span class="sc-chip-dot"></span> Enterprise Integration Program (SAP / Ariba / MDG)</span>
+    <span class="scope-chip sc-o"><span class="sc-chip-dot"></span> Module 4 — P2P Automation — Future Scope</span>
+  </div>
+
+  <div class="callout"><strong>Phase 1 landing scope (per scoping discussions):</strong> Vendor onboarding with AI-assisted due diligence as the wedge + autonomous sourcing for tactical and tail spend + strategic sourcing orchestration over existing Ariba/SAP/MDG estate. Integration is a dedicated program line — not bundled into platform fees.</div>
+</section>
+
+<!-- SECTION 2: MODULE BREAKDOWN -->
+<section class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">02</div>
+    <span class="sec-eye">Module Structure</span>
+  </div>
+  <h2 class="sec-title"><em>Module-by-Module</em> Scope &amp; Capabilities</h2>
+  <p class="sec-sub">Each module is independently licensable. Phase 1 covers Modules 1–3. Module 4 (P2P Automation) is scoped as a committed future expansion lane — no pricing in this proposal; separate terms at activation.</p>
+  <div class="sec-div"></div>
+
+  <!-- MODULE 1 -->
+  <div class="module">
+    <div class="module-head">
+      <div class="mod-num">1</div>
+      <div>
+        <div class="mod-title">Vendor Onboarding &amp; Management</div>
+        <div style="font-size:11px;color:var(--fg3);margin-top:2px">Includes Vendor Risk &amp; TPDD · Vendor 360 · Performance Management</div>
+      </div>
+      <span class="mod-tag mt-phase1">&#10003; Phase 1</span>
+    </div>
+    <div class="module-body">
+      <div class="module-grid">
+        <div>
+          <div class="sub-module">
+            <div class="sm-label">Onboarding &amp; Registration</div>
+            <div class="sm-title">AI-assisted vendor onboarding portal</div>
+            <div class="sm-items">
+              <span class="sm-item">Buyer-initiated &amp; self-registration</span>
+              <span class="sm-item">AI doc extraction</span>
+              <span class="sm-item">GST/MSME portal matching</span>
+              <span class="sm-item">Configurable questionnaire</span>
+              <span class="sm-item">Re-certification workflows</span>
+              <span class="sm-item">&#8805;70% cycle-time improvement</span>
+            </div>
+          </div>
+          <div class="sub-module">
+            <div class="sm-label">Vendor Risk &amp; TPDD — Bundled</div>
+            <div class="sm-title">AI due diligence + risk scoring engine</div>
+            <div class="sm-items">
+              <span class="sm-item">Sanctions &amp; adverse media</span>
+              <span class="sm-item">Financial &amp; legal risk</span>
+              <span class="sm-item">Per-BU risk appetite config</span>
+              <span class="sm-item">API integration to existing TPDD partners (Moody's / D&amp;B)</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="sub-module">
+            <div class="sm-label">Supplier Management</div>
+            <div class="sm-title">Vendor 360 · Segmentation · AVL</div>
+            <div class="sm-items">
+              <span class="sm-item">Digital AVL (real-time)</span>
+              <span class="sm-item">Strategic / Essential / Transactional segmentation</span>
+              <span class="sm-item">Block / unblock workflows</span>
+              <span class="sm-item">Blacklist propagation to Ariba/MDG</span>
+              <span class="sm-item">Supplier satisfaction survey</span>
+            </div>
+          </div>
+          <div class="sub-module">
+            <div class="sm-label">Performance &amp; CAPA</div>
+            <div class="sm-title">VPE scorecards · CAPA lifecycle</div>
+            <div class="sm-items">
+              <span class="sm-item">GRN/SES-driven quantitative scoring</span>
+              <span class="sm-item">CAPA co-creation &amp; tracking</span>
+              <span class="sm-item">Auto-triggered evaluations</span>
+              <span class="sm-item">Sourcing block on poor score</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mod-price-strip">
+        <div class="mps-item"><div class="mps-label">Platform Fee (SaaS / yr)</div><div class="mps-val">$190,000</div></div>
+        <div class="mps-div"></div>
+        <div class="mps-item"><div class="mps-label">Implementation (one-time)</div><div class="mps-val">$150,000</div></div>
+        <div class="mps-div"></div>
+        <div class="mps-item"><div class="mps-label">Phase</div><div class="mps-val" style="font-size:12px;font-weight:600;color:hsl(152 55% 28%)">Phase 1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="module">
+    <div class="module-head">
+      <div class="mod-num">2</div>
+      <div>
+        <div class="mod-title">Intake &amp; Orchestration</div>
+        <div style="font-size:11px;color:var(--fg3);margin-top:2px">Enterprise-wide request capture · AI classification · Policy-based routing · PR-to-PO tracker</div>
+      </div>
+      <span class="mod-tag mt-phase1">&#10003; Phase 1</span>
+    </div>
+    <div class="module-body">
+      <div class="module-grid">
+        <div>
+          <div class="sub-module">
+            <div class="sm-label">Request Capture &amp; Classification</div>
+            <div class="sm-title">Enterprise co-pilot for 15,000 business users</div>
+            <div class="sm-items">
+              <span class="sm-item">Sourcing, contract, onboarding &amp; invoice requests</span>
+              <span class="sm-item">AI auto-classification</span>
+              <span class="sm-item">Zero procurement training for requesters</span>
+              <span class="sm-item">Policy-based routing</span>
+              <span class="sm-item">PR-to-PO tracker</span>
+            </div>
+          </div>
+          <div class="sub-module">
+            <div class="sm-label">Orchestration &amp; Governance</div>
+            <div class="sm-title">Multi-BU workflow engine</div>
+            <div class="sm-items">
+              <span class="sm-item">RBAC &amp; dimension-based scoping</span>
+              <span class="sm-item">Separate authentication for shared-service entities</span>
+              <span class="sm-item">DoA routing &amp; NFA linkage</span>
+              <span class="sm-item">Hard &amp; soft guardrails per category / BU</span>
+              <span class="sm-item">Immutable audit ledger on every agent decision</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="sub-module">
+            <div class="sm-label">Spend Insights Layer</div>
+            <div class="sm-title">Live market intelligence &amp; analytics</div>
+            <div class="sm-items">
+              <span class="sm-item">Category dashboards with live market indices</span>
+              <span class="sm-item">Steel with contract-lock signals</span>
+              <span class="sm-item">Ocean freight benchmarked with disruption monitor</span>
+              <span class="sm-item">Lubricants priced off crude / base-oil formulas</span>
+              <span class="sm-item">Geopolitical supply-risk analysis</span>
+            </div>
+          </div>
+          <div class="sub-module">
+            <div class="sm-label">Atlas Copilot</div>
+            <div class="sm-title">Conversational procurement assistant</div>
+            <div class="sm-items">
+              <span class="sm-item">Natural-language intake</span>
+              <span class="sm-item">Guided buying via conversational interface</span>
+              <span class="sm-item">Spend analytics via natural language query</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mod-price-strip">
+        <div class="mps-item"><div class="mps-label">Platform Fee (SaaS / yr)</div><div class="mps-val">$332,500</div></div>
+        <div class="mps-div"></div>
+        <div class="mps-item"><div class="mps-label">Implementation (one-time)</div><div class="mps-val">$262,500</div></div>
+        <div class="mps-div"></div>
+        <div class="mps-item"><div class="mps-label">Phase</div><div class="mps-val" style="font-size:12px;font-weight:600;color:hsl(152 55% 28%)">Phase 1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="module">
+    <div class="module-head">
+      <div class="mod-num">3</div>
+      <div>
+        <div class="mod-title">Sourcing &amp; Negotiation</div>
+        <div style="font-size:11px;color:var(--fg3);margin-top:2px">Strategic Sourcing (S2C) · Autonomous Sourcing · e-Auction Orchestration · NFA · Enterprise Integration</div>
+      </div>
+      <span class="mod-tag mt-phase1">&#10003; Phase 1</span>
+    </div>
+    <div class="module-body">
+      <div class="module-grid">
+        <div>
+          <div class="sub-module">
+            <div class="sm-label">Strategic Sourcing (S2C)</div>
+            <div class="sm-title">RFx · Two-envelope · TBER · NFA</div>
+            <div class="sm-items">
+              <span class="sm-item">RFI / RFP / RFQ engine</span>
+              <span class="sm-item">Two-envelope sealed bidding</span>
+              <span class="sm-item">AI Technical Bid Evaluation (TBER)</span>
+              <span class="sm-item">Commercial Comparative Statement</span>
+              <span class="sm-item">e-Auction amenability framework</span>
+              <span class="sm-item">NFA preparation &amp; DoA routing</span>
+              <span class="sm-item">Multi-BU / MoU NFA linkage</span>
+            </div>
+          </div>
+          <div class="sub-module">
+            <div class="sm-label">Enterprise Integration Program</div>
+            <div class="sm-title">SAP S/4HANA · Ariba · MDG · BTP · ServiceNow</div>
+            <div class="sm-items">
+              <span class="sm-item">PR / PO / WBS / Cost Centre</span>
+              <span class="sm-item">Budget check &amp; GRN/SES feed</span>
+              <span class="sm-item">Multi-instance (14&#8594;18 SAP instances)</span>
+              <span class="sm-item">Ariba sourcing project sync</span>
+              <span class="sm-item">MDG supplier master &amp; block/unblock propagation</span>
+              <span class="sm-item">NFA finalisation / e-sign (BTP)</span>
+              <span class="sm-item">ServiceNow ticket handoffs · CLM contract handoff</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="sub-module">
+            <div class="sm-label">Autonomous Sourcing (Agentic)</div>
+            <div class="sm-title">AI-run tactical &amp; tail spend events</div>
+            <div class="sm-items">
+              <span class="sm-item">Vague intake &#8594; full RFQ auto-built</span>
+              <span class="sm-item">AI vendor selection</span>
+              <span class="sm-item">Multi-round negotiation agent</span>
+              <span class="sm-item">Should-cost with live indices</span>
+              <span class="sm-item">Award write-back to Ariba/SAP</span>
+              <span class="sm-item">Configurable autonomy per category</span>
+              <span class="sm-item">Human-in-the-loop &#8594; touchless over time</span>
+            </div>
+          </div>
+          <div class="sub-module">
+            <div class="sm-label">Negotiation &amp; Award</div>
+            <div class="sm-title">Multi-round autonomous negotiation</div>
+            <div class="sm-items">
+              <span class="sm-item">Discovery &#8594; benchmark pressure &#8594; target push</span>
+              <span class="sm-item">Transparent should-cost model</span>
+              <span class="sm-item">Natural-language award scenarios</span>
+              <span class="sm-item">PO written back to Ariba &amp; SAP S/4HANA via API</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mod-price-strip">
+        <div class="mps-item"><div class="mps-label">Platform Fee (SaaS / yr)</div><div class="mps-val">$427,500</div></div>
+        <div class="mps-div"></div>
+        <div class="mps-item"><div class="mps-label">Implementation (one-time)</div><div class="mps-val">$337,500</div></div>
+        <div class="mps-div"></div>
+        <div class="mps-item"><div class="mps-label">Phase</div><div class="mps-val" style="font-size:12px;font-weight:600;color:hsl(152 55% 28%)">Phase 1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 4 — FUTURE SCOPE -->
+  <div class="module">
+    <div class="module-head">
+      <div class="mod-num" style="background:linear-gradient(135deg,hsl(38 80% 55%),hsl(25 95% 53%))">4</div>
+      <div>
+        <div class="mod-title">P2P Automation</div>
+        <div style="font-size:11px;color:var(--fg3);margin-top:2px">PR-to-PO · Invoice OCR · 2/3-way match · AP automation</div>
+      </div>
+      <span class="mod-tag mt-future">Future Scope — Separate Terms</span>
+    </div>
+    <div class="module-body">
+      <div class="callout future"><strong>Future Scope — Separate Terms.</strong> P2P Automation is held as a committed expansion lane. Per scoping discussions, the initial focus is upstream procurement (Modules 1–3). Aerchain carries full P2P + AP capability (OCR, 2/3-way match, dispute management, payment release). Pricing to be agreed at activation — no dollar amounts are committed in this proposal for Module 4.</div>
+      <div class="g2" style="gap:10px;margin-top:14px">
+        <div class="sub-module">
+          <div class="sm-label">Purchase-to-Pay</div>
+          <div class="sm-items" style="margin-top:6px">
+            <span class="sm-item">PO lifecycle &amp; acknowledgment</span>
+            <span class="sm-item">GRN confirmation</span>
+            <span class="sm-item">3-way match</span>
+            <span class="sm-item">Dispute management</span>
+          </div>
+        </div>
+        <div class="sub-module">
+          <div class="sm-label">AP / Invoice Automation</div>
+          <div class="sm-items" style="margin-top:6px">
+            <span class="sm-item">Invoice OCR &amp; extraction</span>
+            <span class="sm-item">2-way / 3-way match</span>
+            <span class="sm-item">Exception handling</span>
+            <span class="sm-item">Payment release workflow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: COMMERCIAL OPTIONS -->
+<section class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">03</div>
+    <span class="sec-eye">Pricing Options</span>
+  </div>
+  <h2 class="sec-title">Two <em>Commercial Structures</em></h2>
+  <p class="sec-sub">All pricing is in USD. Option A is the recommended enterprise bundle — a single flat commercial covering all three modules, price-locked for 3 years. Option B is a module-by-module structure at a 20% premium on platform fees.</p>
+  <div class="sec-div"></div>
+
+  <div class="options-grid">
+    <!-- OPTION A -->
+    <div class="option-card recommended">
+      <span class="opt-rec-badge">Recommended</span>
+      <div class="opt-eye">Option A</div>
+      <div class="opt-title">Enterprise Bundle</div>
+      <div class="opt-sub">Full Modules 1–3 as a single enterprise commitment. Unlimited users, all 24 BUs. Price fixed for 3 years — no annual increase until Year 4.</div>
+      <div class="opt-items">
+        <div class="opt-item">
+          <span class="opt-item-name">Platform Subscription (SaaS)</span>
+          <span class="opt-item-val">$950,000 / yr</span>
+        </div>
+        <div class="opt-item">
+          <span class="opt-item-name">Implementation &amp; Integration (one-time)</span>
+          <span class="opt-item-val">$750,000</span>
+        </div>
+        <div class="opt-divider"></div>
+        <div class="opt-item">
+          <span class="opt-item-name" style="font-weight:700;color:var(--fg)">Year 1 Total</span>
+          <span class="opt-item-val highlight">$1,700,000</span>
+        </div>
+        <div class="opt-item">
+          <span class="opt-item-name">Year 2 (Platform only)</span>
+          <span class="opt-item-val">$950,000</span>
+        </div>
+        <div class="opt-item">
+          <span class="opt-item-name">Year 3 (Platform only)</span>
+          <span class="opt-item-val">$950,000</span>
+        </div>
+        <div class="opt-divider"></div>
+        <div class="opt-item">
+          <span class="opt-item-name" style="font-weight:700;color:var(--fg)">3-Year Total</span>
+          <span class="opt-item-val highlight">$3,600,000</span>
+        </div>
+      </div>
+      <div class="opt-note">Price fixed at $950,000/yr for Years 1–3. From Year 4: 10% escalation per year.</div>
+    </div>
+
+    <!-- OPTION B -->
+    <div class="option-card">
+      <div class="opt-eye">Option B</div>
+      <div class="opt-title">Module-by-Module</div>
+      <div class="opt-sub">Each module licensed independently at a 20% premium on platform fees. Same implementation cost. Flexibility to activate modules at different times.</div>
+      <div class="opt-items">
+        <div class="opt-item">
+          <span class="opt-item-name">Platform Subscription (SaaS)</span>
+          <span class="opt-item-val">$1,140,000 / yr</span>
+        </div>
+        <div class="opt-item">
+          <span class="opt-item-name">Implementation &amp; Integration (one-time)</span>
+          <span class="opt-item-val">$750,000</span>
+        </div>
+        <div class="opt-divider"></div>
+        <div class="opt-item">
+          <span class="opt-item-name" style="font-weight:700;color:var(--fg)">Year 1 Total</span>
+          <span class="opt-item-val" style="font-size:15px;font-weight:700;color:var(--fg)">$1,890,000</span>
+        </div>
+        <div class="opt-item">
+          <span class="opt-item-name">Year 2 (Platform only)</span>
+          <span class="opt-item-val">$1,140,000</span>
+        </div>
+        <div class="opt-item">
+          <span class="opt-item-name">Year 3 (Platform only)</span>
+          <span class="opt-item-val">$1,140,000</span>
+        </div>
+        <div class="opt-divider"></div>
+        <div class="opt-item">
+          <span class="opt-item-name" style="font-weight:700;color:var(--fg)">3-Year Total</span>
+          <span class="opt-item-val" style="font-size:15px;font-weight:700;color:var(--fg)">$4,170,000</span>
+        </div>
+      </div>
+      <div class="opt-note">Option B = $950K platform × 1.20 = $1,140,000/yr. No price lock — subject to standard 10% per year from Year 2.</div>
+    </div>
+  </div>
+
+  <div class="escalation-box"><strong>Year 4+ Escalation (Option A only):</strong> The enterprise bundle price of $950,000/year is fixed for Years 1, 2, and 3 with zero escalation. Beginning Year 4, the platform fee increases by 10% per annum on the prevailing rate. This provides full cost certainty across the initial 3-year term.</div>
+</section>
+
+<!-- SECTION 4: MODULE-LEVEL PRICE TABLE -->
+<section class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">04</div>
+    <span class="sec-eye">Module Pricing Detail</span>
+  </div>
+  <h2 class="sec-title"><em>Module-by-Module</em> Investment Breakdown</h2>
+  <p class="sec-sub">Full transparency on what each module costs. Platform fees are annual SaaS. Implementation is one-time. Figures reflect the Option A enterprise bundle allocation (2:3.5:4.5 ratio across Modules 1–3).</p>
+  <div class="sec-div"></div>
+
+  <div class="ptable-wrap">
+    <table class="ptable">
+      <thead>
+        <tr>
+          <th style="width:240px">Module</th>
+          <th>Capability Highlights</th>
+          <th class="r">Platform Fee (SaaS / yr)</th>
+          <th class="r">Implementation (one-time)</th>
+          <th class="r">Phase</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mod-name">Module 1<br><span style="font-size:11px;font-weight:500;color:var(--fg2)">Vendor Onboarding &amp; Management</span></td>
+          <td class="note">AI-assisted registration portal · GST/MSME validation · Vendor Risk &amp; TPDD (bundled) · Vendor 360 · AVL · Segmentation · Block/unblock · Blacklist propagation · CAPA lifecycle · VPE scorecards</td>
+          <td class="r"><span class="price-usd">$190,000</span></td>
+          <td class="r"><span class="price-usd">$150,000</span></td>
+          <td><span class="phase-badge ph1">Phase 1</span></td>
+        </tr>
+        <tr>
+          <td class="mod-name">Module 2<br><span style="font-size:11px;font-weight:500;color:var(--fg2)">Intake &amp; Orchestration</span></td>
+          <td class="note">Enterprise co-pilot for 15,000 users · AI auto-classification · Policy-based routing · PR-to-PO tracker · Multi-BU orchestration · DoA routing · Spend insights with live market indices · Atlas conversational agent</td>
+          <td class="r"><span class="price-usd">$332,500</span></td>
+          <td class="r"><span class="price-usd">$262,500</span></td>
+          <td><span class="phase-badge ph1">Phase 1</span></td>
+        </tr>
+        <tr>
+          <td class="mod-name">Module 3<br><span style="font-size:11px;font-weight:500;color:var(--fg2)">Sourcing &amp; Negotiation</span></td>
+          <td class="note">Strategic Sourcing: RFx, two-envelope, TBER, NFA, e-Auction · Autonomous Sourcing: AI-run events, multi-round negotiation, should-cost · Award write-back to Ariba/SAP · Enterprise Integration: SAP S/4HANA (14&#8594;18 instances), Ariba, MDG, BTP, ServiceNow, CLM</td>
+          <td class="r"><span class="price-usd">$427,500</span></td>
+          <td class="r"><span class="price-usd">$337,500</span></td>
+          <td><span class="phase-badge ph1">Phase 1</span></td>
+        </tr>
+        <tr>
+          <td class="mod-name">Module 4<br><span style="font-size:11px;font-weight:500;color:var(--fg2)">P2P Automation</span></td>
+          <td class="note">PO lifecycle · GRN confirmation · 3-way match · Invoice OCR · 2/3-way match · Exception handling · Dispute management · Payment release workflows</td>
+          <td class="r"><span class="price-future">Future Scope</span></td>
+          <td class="r"><span class="price-future">Future Scope</span></td>
+          <td><span class="phase-badge ph2">Future</span></td>
+        </tr>
+        <tr style="background:hsl(262 80% 55%/.04)">
+          <td class="mod-name" style="color:var(--primary)">Phase 1 Total<br><span style="font-size:11px;font-weight:500;color:var(--fg2)">Modules 1 + 2 + 3</span></td>
+          <td class="note">Year 1 = Platform + Implementation. Years 2–3 = Platform only (price-locked under Option A).</td>
+          <td class="r"><span style="font-weight:800;color:var(--primary);font-size:15px">$950,000</span></td>
+          <td class="r"><span style="font-weight:800;color:var(--primary);font-size:15px">$750,000</span></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TOTAL HERO -->
+  <div class="total-hero">
+    <div class="th-orb"></div>
+    <div class="total-hero-inner">
+      <div class="th-eye">Option A — Enterprise Bundle · Year 1 Investment Summary</div>
+      <div class="th-grid">
+        <div>
+          <div class="th-label">Platform Subscription (SaaS)</div>
+          <div class="th-val">$950,000</div>
+          <div class="th-sub">Annual · Modules 1–3 · Unlimited users</div>
+        </div>
+        <div class="th-divider"></div>
+        <div>
+          <div class="th-label">Implementation &amp; Integration</div>
+          <div class="th-val">$750,000</div>
+          <div class="th-sub">One-time · Milestone-linked</div>
+        </div>
+        <div class="th-divider"></div>
+        <div>
+          <div class="th-label">Year 1 Total Investment</div>
+          <div class="th-val">$1,700,000</div>
+          <div class="th-sub">Fixed 3 years · 10% escalation from Year 4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:20px"><strong>Implementation note:</strong> 90-day post-go-live hypercare included in Year 1 for all Phase 1 modules. Change management, UAT scenario development, and user enablement materials are in-scope. Payments are milestone-linked — detailed milestone schedule available on request. No upfront payment exceeding 20% of contract value.</div>
+</section>
+
+<!-- SECTION 5: IMPLEMENTATION TIMELINE -->
+<section class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">05</div>
+    <span class="sec-eye">Delivery Timeline</span>
+  </div>
+  <h2 class="sec-title">Phase 1 <em>Implementation Plan</em></h2>
+  <p class="sec-sub">Wave 1 lands on 2–4 SAP instances and Ariba. Full estate rollout in Wave 2–3 as integration confidence is established. Recommendation: begin with a contained Vendor Onboarding pilot on the highest-pain business unit, then expand to intake orchestration and autonomous sourcing.</p>
+  <div class="sec-div"></div>
+
+  <div class="gantt">
+    <div class="g-hdr">
+      <div class="g-hdr-cell">Workstream</div>
+      <div class="g-hdr-cell">M1</div>
+      <div class="g-hdr-cell">M2</div>
+      <div class="g-hdr-cell">M3</div>
+      <div class="g-hdr-cell">M4</div>
+      <div class="g-hdr-cell">M5</div>
+      <div class="g-hdr-cell">M6+</div>
+    </div>
+    <div class="g-row">
+      <div class="g-rl">Project Kick-off &amp; Discovery</div>
+      <div class="g-cell"><div class="g-bar gb-purple">Start</div></div>
+      <div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div>
+    </div>
+    <div class="g-row">
+      <div class="g-rl">Integration Wave 1 (2–4 instances)</div>
+      <div class="g-cell"></div>
+      <div class="g-cell g-span3"><div class="g-bar gb-blue">SAP + Ariba + MDG Integration</div></div>
+      <div class="g-cell"></div><div class="g-cell"></div>
+    </div>
+    <div class="g-row">
+      <div class="g-rl">Vendor Onboarding Go-Live</div>
+      <div class="g-cell"></div><div class="g-cell"></div>
+      <div class="g-cell g-span2"><div class="g-bar gb-purple">Module 1 — VM &amp; Onboarding</div></div>
+      <div class="g-cell"></div><div class="g-cell"></div>
+    </div>
+    <div class="g-row">
+      <div class="g-rl">Intake &amp; Orchestration Go-Live</div>
+      <div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div>
+      <div class="g-cell g-span2"><div class="g-bar gb-blue">Module 2 — Intake &amp; Co-pilot</div></div>
+      <div class="g-cell"></div>
+    </div>
+    <div class="g-row">
+      <div class="g-rl">Sourcing &amp; Negotiation Go-Live</div>
+      <div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div>
+      <div class="g-cell g-span2"><div class="g-bar gb-green">Module 3 — S2C + Autonomous</div></div>
+    </div>
+    <div class="g-row">
+      <div class="g-rl">Hypercare &amp; Stabilisation</div>
+      <div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div>
+      <div class="g-cell"><div class="g-bar gb-amber">90 days</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: COMMERCIAL TERMS -->
+<section class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">06</div>
+    <span class="sec-eye">Commercial Terms</span>
+  </div>
+  <h2 class="sec-title">Terms &amp; <em>Commercial Conditions</em></h2>
+  <div class="sec-div"></div>
+
+  <div class="terms-grid">
+    <div class="term-card">
+      <div class="tc-eye">Payment Structure</div>
+      <div class="tc-title">Deliverable-Linked Milestones</div>
+      <div class="tc-body">All payments are linked to defined project milestones — not time-based. Detailed milestone schedule provided at SOW execution. No upfront payment exceeding 20% of contract value.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Billing</div>
+      <div class="tc-title">Annual, from Kick-Off Date</div>
+      <div class="tc-body">Annual subscription billed in advance from project kick-off. Implementation billed in milestone tranches. Subscription tenure commences from kick-off date. Net 30 payment terms.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Engagement Scope</div>
+      <div class="tc-title">Design, Configure &amp; Implement</div>
+      <div class="tc-body">Full implementation scope: design, configuration, integration, UAT scenario development, change management &amp; training, and 90-day post-go-live hypercare. No third-party outsourcing — all resources on Aerchain direct payroll.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Price Lock</div>
+      <div class="tc-title">3 Years Fixed, 10% Escalation Year 4+</div>
+      <div class="tc-body">Option A platform fee of $950,000/yr is fixed for the 3-year term with zero escalation. From Year 4, a 10% per annum escalation applies on the prevailing rate. No mid-term renegotiation.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Integration Warranty</div>
+      <div class="tc-title">12-Month Integration SLA</div>
+      <div class="tc-body">All integration connectors (SAP / Ariba / MDG) carry a 12-month warranty from go-live. Certified SAP connectors in use — no custom code on Adani's systems. Front-end configurable, no back-end dev required.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">P2P Expansion Lane</div>
+      <div class="tc-title">Module 4 — Future Scope</div>
+      <div class="tc-body">P2P Automation is a committed future expansion lane with separate commercial terms agreed at activation. No pricing committed in this proposal. Aerchain carries full P2P + AP capability ready to deploy.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Add-On Services</div>
+      <div class="tc-title">Rate-Carded Add-Ons</div>
+      <div class="tc-body">Per-additional-SAP-instance onboarding beyond Wave 1: $45K/instance. Extended hypercare: $28K/month. Additional training sessions: $5K/session. Change requests charged at T&amp;M rate card via signed Change Order.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Validity</div>
+      <div class="tc-title">30 Days from Date of Proposal</div>
+      <div class="tc-body">This commercial structure is valid for 30 days. Aerchain reserves the right to revise pricing after expiry, particularly on integration scope given SAP instance count trajectory (14&#8594;18).</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Confidentiality</div>
+      <div class="tc-title">Strictly Confidential — NDA Active</div>
+      <div class="tc-body">NDA and GTC are signed. This document is for internal circulation within AIIL / Adani Group procurement leadership only. Not to be shared with third parties without Aerchain's prior written consent.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: VALUE & NEXT STEPS -->
+<section class="sec">
+  <div class="sec-hd">
+    <div class="sec-num">07</div>
+    <span class="sec-eye">Value &amp; Next Steps</span>
+  </div>
+  <h2 class="sec-title">The <em>Economics &amp; Path Forward</em></h2>
+  <div class="sec-div"></div>
+
+  <div class="g2" style="margin-bottom:24px">
+    <div class="term-card">
+      <div class="tc-eye">Addressable Value</div>
+      <div class="tc-title">~$5B Tactical + Tail Spend</div>
+      <div class="tc-body">Phase 1 wedge of the $20B+ Ariba spine. A 2–3% efficiency gain is $100–150M/year — against a roughly $950K annual fee. A 1% improvement across the full $20B is $200M.</div>
+    </div>
+    <div class="term-card">
+      <div class="tc-eye">Vendor Onboarding</div>
+      <div class="tc-title">&#8805;70% faster cycle time</div>
+      <div class="tc-body">Committed improvement on current baseline — collapsing a slow, multi-owner, multi-system process into a single governed flow with AI extraction and validation.</div>
+    </div>
+  </div>
+
+  <div class="callout"><strong>Agreed next steps:</strong> Live demonstration on Adani data — within two weeks of scoping confirmation. Integration architecture document (Ariba / SAP / MDG layered model) available immediately. Should-cost challenge — share a real awarded project (BOQ + final cost) and Aerchain will return an AI-generated estimate for comparison. Phase 1 deployment commences within Wave 1 window of signature.</div>
+</section>
+
+</main>
+</div>
+
+<!-- FOOTER -->
+<div class="wrap">
+  <footer class="footer">
+    <div style="margin-bottom:8px">
+      <svg class="footer-logo" viewBox="0 0 168 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#ft-clip)"><path d="M3.7951 26.9895C3.61396 27.3937 3.43282 27.6616 3.254 27.7956C3.07286 27.9295 2.80115 27.9977 2.44119 27.9977H0.678569C0.225721 27.9977 0.000457764 27.852 0.000457764 27.5606C0.000457764 27.4478 0.056193 27.2574 0.169986 26.9895L10.3672 5.68021C10.7063 4.98698 10.9547 4.53109 11.1127 4.31959C11.2706 4.10575 11.4633 4 11.6886 4C11.893 4 12.0671 4.10575 12.2134 4.31959C12.3597 4.53344 12.6036 4.98698 12.9426 5.68021L23.242 26.9895C23.3558 27.2574 23.4116 27.4501 23.4116 27.5606C23.4116 27.852 23.1747 27.9977 22.7009 27.9977H20.8036C20.4413 27.9977 20.1766 27.9295 20.0071 27.7956C19.8375 27.6616 19.6518 27.3914 19.4474 26.9895L11.6212 10.2509L3.7951 26.9895Z" fill="#111111"/><path d="M40.5221 24.8957C40.6359 24.9991 40.6916 25.1989 40.6916 25.495V27.2433C40.6916 27.5418 40.6359 27.7415 40.5221 27.8426C40.4083 27.946 40.2179 27.9977 39.9462 27.9977H27.1062C26.8345 27.9977 26.644 27.946 26.5302 27.8426C26.4165 27.7392 26.3607 27.5394 26.3607 27.2433V4.75433C26.3607 4.45824 26.4165 4.25614 26.5302 4.1551C26.6417 4.0517 26.8345 4 27.1039 4H39.9113C40.183 4 40.3735 4.0517 40.4873 4.1551C40.6011 4.25849 40.6568 4.45824 40.6568 4.75433V6.50269C40.6568 6.80114 40.6011 7.00088 40.4873 7.10193C40.3735 7.20533 40.183 7.25703 39.9113 7.25703H30.153C29.9951 7.25703 29.8883 7.28523 29.8302 7.34162C29.7745 7.39802 29.7466 7.49672 29.7466 7.63302V13.9074C29.7466 14.0672 29.7745 14.1753 29.8302 14.234C29.886 14.2904 29.9928 14.3186 30.153 14.3186H38.7595C39.0312 14.3186 39.2216 14.3703 39.3354 14.4737C39.4492 14.5771 39.5049 14.7769 39.5049 15.0729V16.7861C39.5049 17.061 39.4492 17.2537 39.3354 17.3688C39.2216 17.484 39.0312 17.5404 38.7595 17.5404H30.153C29.9951 17.5404 29.8883 17.5686 29.8302 17.625C29.7745 17.6814 29.7466 17.7801 29.7466 17.9164V24.3623C29.7466 24.4986 29.7745 24.5973 29.8302 24.6537C29.886 24.7101 29.9928 24.7383 30.153 24.7383H39.9438C40.2156 24.7383 40.406 24.79 40.5198 24.8934L40.5221 24.8957Z" fill="#111111"/><path d="M48.7198 27.8449C48.606 27.9483 48.4156 28 48.1439 28H46.2466C45.9748 28 45.7844 27.9483 45.6706 27.8449C45.5568 27.7415 45.5011 27.5418 45.5011 27.2457V4.75433C45.5011 4.45824 45.5568 4.25614 45.6706 4.1551C45.7844 4.0517 45.9772 4 46.2466 4H52.7188C59.1562 4 62.3749 6.47919 62.3749 11.4399C62.3749 13.0849 61.9685 14.4408 61.1557 15.503C60.3429 16.5652 59.212 17.35 57.7675 17.8506L63.5941 26.9707C63.7753 27.2222 63.8659 27.4384 63.8659 27.6217C63.8659 27.758 63.8031 27.8567 63.6801 27.9131C63.5547 27.9695 63.3689 27.9977 63.1204 27.9977H61.1209C60.7377 27.9977 60.4544 27.9413 60.2733 27.8261C60.0921 27.711 59.8785 27.4619 59.63 27.0718L53.3969 17.061C53.2622 16.8777 53.1926 16.7179 53.1926 16.5816C53.1926 16.3983 53.3621 16.2949 53.7011 16.2738C57.1126 15.9095 58.8172 14.3656 58.8172 11.6444C58.8172 10.0911 58.2807 8.95369 57.2078 8.23225C56.1349 7.51317 54.5813 7.15128 52.5493 7.15128H49.2957C49.1378 7.15128 49.031 7.17948 48.9729 7.23588C48.9172 7.29227 48.8893 7.40272 48.8893 7.56252V27.241C48.8893 27.5394 48.8336 27.7392 48.7198 27.8402V27.8449Z" fill="#111111"/><path d="M84.5991 22.4471C84.8476 22.2473 85.0404 22.1486 85.1751 22.1486C85.2656 22.1486 85.3562 22.1815 85.4468 22.2473C85.5374 22.3131 85.6163 22.3907 85.6837 22.48L86.666 23.81C86.7798 23.944 86.8355 24.0991 86.8355 24.2753C86.8355 24.3646 86.8007 24.4586 86.7333 24.5573C86.666 24.656 86.5638 24.7618 86.4291 24.8722C85.2308 25.8686 83.8815 26.6394 82.3813 27.1822C80.8788 27.7251 79.3043 27.9977 77.6555 27.9977C75.4423 27.9977 73.415 27.4877 71.5734 26.4678C69.7318 25.448 68.2757 24.0309 67.2028 22.2121C66.1299 20.3956 65.5934 18.3558 65.5934 16.0952C65.5934 13.8345 66.1299 11.7525 67.2028 9.91247C68.2757 8.07246 69.7434 6.62724 71.6082 5.57446C73.4707 4.52639 75.5538 4 77.8575 4C79.4831 4 81.0367 4.27729 82.516 4.83188C83.9953 5.38647 85.3121 6.1408 86.464 7.09253C86.6892 7.24763 86.803 7.41447 86.803 7.59072C86.803 7.74581 86.7357 7.92206 86.5986 8.12181L85.6163 9.41898C85.4352 9.66337 85.254 9.78557 85.0752 9.78557C84.9405 9.78557 84.7478 9.69627 84.4993 9.52002C83.5286 8.78919 82.4766 8.21345 81.3479 7.79046C80.2193 7.36982 79.0326 7.15833 77.7902 7.15833C76.1855 7.15833 74.7247 7.53432 73.4033 8.28865C72.0819 9.04298 71.0369 10.0958 70.2682 11.447C69.4995 12.7982 69.1164 14.328 69.1164 16.0341C69.1164 17.7401 69.4949 19.1689 70.252 20.5225C71.009 21.8737 72.0471 22.9335 73.3685 23.6973C74.6899 24.461 76.1646 24.844 77.7902 24.844C80.3424 24.844 82.6113 24.0474 84.5991 22.4518V22.4471Z" fill="#111111"/><path d="M109.401 27.8449C109.288 27.9483 109.097 28 108.826 28H106.928C106.657 28 106.466 27.9483 106.352 27.8449C106.238 27.7415 106.183 27.5418 106.183 27.2457V17.6814C106.183 17.5451 106.155 17.4464 106.099 17.39C106.043 17.3336 105.934 17.3054 105.776 17.3054H94.562C94.4041 17.3054 94.2972 17.3336 94.2392 17.39C94.1834 17.4464 94.1556 17.5451 94.1556 17.6814V27.2457C94.1556 27.5441 94.0998 27.7439 93.986 27.8449C93.8722 27.9483 93.6818 28 93.4101 28H91.5128C91.2411 28 91.0507 27.9483 90.9369 27.8449C90.8231 27.7415 90.7673 27.5418 90.7673 27.2457V4.75433C90.7673 4.45824 90.8231 4.25614 90.9369 4.1551C91.0483 4.0517 91.2411 4 91.5105 4H93.4078C93.6795 4 93.8723 4.0517 93.9837 4.1551C94.0975 4.25849 94.1532 4.45824 94.1532 4.75433V13.6677C94.1532 13.804 94.1811 13.9074 94.2369 13.9755C94.2926 14.0437 94.3994 14.0789 94.5596 14.0789H105.774C105.932 14.0789 106.039 14.0437 106.097 13.9755C106.153 13.9074 106.18 13.804 106.18 13.6677V4.75433C106.18 4.45824 106.236 4.25614 106.35 4.1551C106.464 4.0517 106.657 4 106.928 4H108.826C109.095 4 109.288 4.0517 109.401 4.1551C109.515 4.25849 109.571 4.45824 109.571 4.75433V27.2457C109.571 27.5441 109.515 27.7439 109.401 27.8449Z" fill="#111111"/><path d="M164.252 4.1504C164.366 4.04935 164.558 4 164.828 4H166.725C166.997 4 167.189 4.04935 167.301 4.1504C167.415 4.24909 167.47 4.44414 167.47 4.73318V26.9049C167.47 27.6358 167.245 28.0023 166.792 28.0023C166.611 28.0023 166.421 27.9295 166.216 27.7862C166.012 27.6428 165.731 27.3702 165.369 26.9707L151.614 11.0498V26.9049C151.614 27.194 151.558 27.3867 151.444 27.4877C151.33 27.5864 151.14 27.6381 150.868 27.6381H148.971C148.699 27.6381 148.509 27.5888 148.395 27.4877C148.281 27.389 148.226 27.194 148.226 26.9049V5.09742C148.226 4.72143 148.281 4.44414 148.395 4.26554C148.509 4.0893 148.69 4 148.939 4C149.12 4 149.31 4.07285 149.514 4.2162C149.719 4.35954 149.988 4.63214 150.327 5.03163L164.082 20.9525V4.73083C164.082 4.44414 164.138 4.24909 164.252 4.14805V4.1504Z" fill="#111111"/><path d="M143.732 18.7083C143.72 18.6519 143.704 18.4944 143.699 18.4193C143.704 18.4357 143.73 18.6754 143.732 18.7083Z" fill="#DC5F40"/><path d="M141.613 11.08C142.698 10.9602 143.483 9.9732 143.364 8.87342C143.246 7.776 142.27 6.98171 141.184 7.10156C140.099 7.22141 139.314 8.20839 139.433 9.30816C139.551 10.4056 140.526 11.1999 141.613 11.08Z" fill="#DC5F40"/><path d="M143.857 20.6254C143.943 16.1699 142.092 10.7674 137.252 13.8364C136.846 13.9962 136.614 13.9398 136.4 13.6343C135.789 12.5158 135.32 11.3713 134.739 10.1964C130.371 -1.17501 125.383 5.32729 120.114 12.0575C108.347 27.4497 113.89 34.2669 132.438 20.75C133.086 20.2847 134.384 19.3118 134.851 19.2719C135.343 19.192 135.548 19.5962 135.919 20.4421C136.279 21.3093 136.878 22.5383 137.426 23.4148C140.592 29.6304 144.098 28.1899 143.859 20.6513V20.6254H143.857ZM129.909 18.3084C127.575 19.7842 125.36 21.5913 122.796 22.6699C121.679 23.1422 120.051 22.6205 119.649 21.7064C119.194 20.2894 120.822 18.2003 121.621 16.7292C122.547 15.0537 123.776 13.5638 124.953 12.0458C126.096 10.5489 127.647 8.32817 129.798 9.2987C131.523 10.2904 132.231 13.0328 133.218 14.6871C133.664 15.4039 133.65 15.9114 132.87 16.3438C131.925 16.9525 130.901 17.6457 129.928 18.299L129.909 18.3107V18.3084ZM142.556 21.2435C142.505 22.0965 142.345 25.323 141.27 23.7861C140.271 21.8874 139.175 19.521 138.197 17.4977C137.817 16.4637 140.192 16.0454 140.81 16.2216C142.535 16.8655 142.596 19.6197 142.556 21.2294V21.2458V21.2435Z" fill="#DC5F40"/></g><defs><clipPath id="ft-clip"><rect width="168" height="32" fill="white"/></clipPath></defs></svg>
+    </div>
+    <div class="footer-note">An Agentic Procurement Platform &middot; aerchain.io &middot; Confidential &amp; Proprietary &middot; June 2026 &middot; All pricing in USD</div>
+  </footer>
+</div>
+
+</body>
+</html>

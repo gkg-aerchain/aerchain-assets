@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adani RFP — Requirements &amp; Aerchain Positioning Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#f6f7fb;--ink:#1b1d24;--ink2:#3b4150;--muted:#6b7280;--faint:#9aa1ad;
+ --primary:#6d3beb;--primary2:#8b5cf6;--accent:#DC5F40;--deep:#2a1463;
+ --card:#fff;--border:#e6e8f0;--border2:#eef0f6;
+ --compliant:hsl(152 68% 38%);--partner:#d97706;--exception:#dc2626;--customization:#c2410c;
+ --r:14px;--shadow:0 4px 20px -8px rgba(42,20,99,.16),0 2px 6px rgba(24,16,60,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:80px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+.cover{background:linear-gradient(135deg,#1a0e3d 0%,#2a1463 45%,#4a2399 100%);color:#fff;padding:46px 0 40px;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;bottom:-160px;right:-120px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(220,95,64,.30),transparent 64%)}
+.cover .wrap{position:relative;z-index:2}
+.cover h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:34px;letter-spacing:-.02em;max-width:24ch;margin-bottom:14px}
+.cover p{color:rgba(255,255,255,.82);max-width:90ch;font-size:15px}
+.brandrow{display:flex;align-items:center;gap:12px;margin-bottom:26px;font-weight:700;letter-spacing:.04em}
+.brandrow .x{color:rgba(255,255,255,.5)}
+.statbar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:30px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden}
+.statbar div{background:rgba(26,14,61,.42);padding:14px 16px}
+.statbar .n{font-size:24px;font-weight:800}
+.statbar .l{font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:4px}
+main{padding-top:8px}
+h1:not(.cover h1){font-size:25px;font-weight:800;letter-spacing:-.02em;margin:46px 0 6px;padding-top:20px;border-top:2px solid var(--border);color:var(--deep)}
+h1:first-of-type{border-top:none}
+h2{font-size:19px;font-weight:700;margin:30px 0 10px;color:var(--ink);letter-spacing:-.01em}
+h3{font-size:15.5px;font-weight:700;margin:20px 0 8px;color:var(--ink2)}
+p{color:var(--ink2);margin:10px 0;max-width:100ch}
+ul,ol{margin:10px 0 10px 22px;color:var(--ink2)}
+li{margin:4px 0}
+a{color:var(--primary);text-decoration:none}
+blockquote{background:#fff5f1;border-left:4px solid var(--accent);border-radius:8px;padding:12px 18px;margin:14px 0;color:var(--ink2)}
+blockquote p{margin:4px 0}
+hr{border:none;border-top:1px solid var(--border2);margin:26px 0}
+code{font-family:'JetBrains Mono',monospace;background:#efeefb;color:var(--deep);padding:1px 6px;border-radius:5px;font-size:12px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);font-size:13px;margin:14px 0 26px}
+thead th{background:#fafaff;text-align:left;padding:11px 13px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);border-bottom:1px solid var(--border);position:sticky;top:0}
+tbody td{padding:11px 13px;border-bottom:1px solid var(--border2);color:var(--ink2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fbfaff}
+/* first column = ID */
+tbody td:first-child{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--primary);white-space:nowrap}
+/* legend & stream-index tables (2-3 cols) keep default */
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.02em;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.badge.compliant{background:#e3f6ee;color:var(--compliant);border:1px solid #b6e8d1}
+.badge.partner{background:#fdf0dd;color:var(--partner);border:1px solid #f7e2bf}
+.badge.exception{background:#fde8e8;color:var(--exception);border:1px solid #f7cccc}
+.badge.customization{background:#fff4ee;color:var(--customization);border:1px solid #f9d5c0}
+.toc-note{font-size:12px;color:var(--muted)}
+@media(max-width:880px){.statbar{grid-template-columns:repeat(2,1fr)}table{font-size:12px}}
+@media print{body{background:#fff}.cover{background:#2a1463 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}table,tr{break-inside:avoid}}
+
+/* AERCHAIN BRANDING — header bar, cover logo, footer */
+.brandbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.brandbar-inner{max-width:1280px;margin:0 auto;padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.brandbar-logos{display:flex;align-items:center;gap:14px}
+.bb-logo{height:22px;width:auto;display:block}
+.bb-logo-adani{height:24px;width:auto;display:block}
+.bb-sep{width:1px;height:24px;background:var(--border);flex-shrink:0}
+.bb-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:8px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);background:rgba(109,59,235,.07);border:1px solid rgba(109,59,235,.2)}
+.bb-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:bbpulse 2s ease-in-out infinite}
+@keyframes bbpulse{0%,100%{opacity:1}50%{opacity:.45}}
+.cover-logo{height:26px;width:auto;display:block}
+.docfooter{border-top:1px solid var(--border);margin-top:48px;background:#fff}
+.docfooter-inner{max-width:1280px;margin:0 auto;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.docfooter-logo{height:24px;width:auto}
+.docfooter-note{font-size:11.5px;color:var(--muted);letter-spacing:.02em;text-align:right}
+@media(max-width:880px){.brandbar-inner{height:52px}.docfooter-inner{flex-direction:column;align-items:flex-start}.docfooter-note{text-align:left}}
+@media print{.brandbar{position:static;box-shadow:none}}
+</style></head>
+<body>
+<header class="brandbar"><div class="brandbar-inner">
+ <div class="brandbar-logos">
+  <svg class="bb-logo" viewBox="0 0 168 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#mxbb-clip)"><path d="M3.7951 26.9895C3.61396 27.3937 3.43282 27.6616 3.254 27.7956C3.07286 27.9295 2.80115 27.9977 2.44119 27.9977H0.678569C0.225721 27.9977 0.000457764 27.852 0.000457764 27.5606C0.000457764 27.4478 0.056193 27.2574 0.169986 26.9895L10.3672 5.68021C10.7063 4.98698 10.9547 4.53109 11.1127 4.31959C11.2706 4.10575 11.4633 4 11.6886 4C11.893 4 12.0671 4.10575 12.2134 4.31959C12.3597 4.53344 12.6036 4.98698 12.9426 5.68021L23.242 26.9895C23.3558 27.2574 23.4116 27.4501 23.4116 27.5606C23.4116 27.852 23.1747 27.9977 22.7009 27.9977H20.8036C20.4413 27.9977 20.1766 27.9295 20.0071 27.7956C19.8375 27.6616 19.6518 27.3914 19.4474 26.9895L11.6212 10.2509L3.7951 26.9895Z" fill="#111111"/><path d="M40.5221 24.8957C40.6359 24.9991 40.6916 25.1989 40.6916 25.495V27.2433C40.6916 27.5418 40.6359 27.7415 40.5221 27.8426C40.4083 27.946 40.2179 27.9977 39.9462 27.9977H27.1062C26.8345 27.9977 26.644 27.946 26.5302 27.8426C26.4165 27.7392 26.3607 27.5394 26.3607 27.2433V4.75433C26.3607 4.45824 26.4165 4.25614 26.5302 4.1551C26.6417 4.0517 26.8345 4 27.1039 4H39.9113C40.183 4 40.3735 4.0517 40.4873 4.1551C40.6011 4.25849 40.6568 4.45824 40.6568 4.75433V6.50269C40.6568 6.80114 40.6011 7.00088 40.4873 7.10193C40.3735 7.20533 40.183 7.25703 39.9113 7.25703H30.153C29.9951 7.25703 29.8883 7.28523 29.8302 7.34162C29.7745 7.39802 29.7466 7.49672 29.7466 7.63302V13.9074C29.7466 14.0672 29.7745 14.1753 29.8302 14.234C29.886 14.2904 29.9928 14.3186 30.153 14.3186H38.7595C39.0312 14.3186 39.2216 14.3703 39.3354 14.4737C39.4492 14.5771 39.5049 14.7769 39.5049 15.0729V16.7861C39.5049 17.061 39.4492 17.2537 39.3354 17.3688C39.2216 17.484 39.0312 17.5404 38.7595 17.5404H30.153C29.9951 17.5404 29.8883 17.5686 29.8302 17.625C29.7745 17.6814 29.7466 17.7801 29.7466 17.9164V24.3623C29.7466 24.4986 29.7745 24.5973 29.8302 24.6537C29.886 24.7101 29.9928 24.7383 30.153 24.7383H39.9438C40.2156 24.7383 40.406 24.79 40.5198 24.8934L40.5221 24.8957Z" fill="#111111"/><path d="M48.7198 27.8449C48.606 27.9483 48.4156 28 48.1439 28H46.2466C45.9748 28 45.7844 27.9483 45.6706 27.8449C45.5568 27.7415 45.5011 27.5418 45.5011 27.2457V4.75433C45.5011 4.45824 45.5568 4.25614 45.6706 4.1551C45.7844 4.0517 45.9772 4 46.2466 4H52.7188C59.1562 4 62.3749 6.47919 62.3749 11.4399C62.3749 13.0849 61.9685 14.4408 61.1557 15.503C60.3429 16.5652 59.212 17.35 57.7675 17.8506L63.5941 26.9707C63.7753 27.2222 63.8659 27.4384 63.8659 27.6217C63.8659 27.758 63.8031 27.8567 63.6801 27.9131C63.5547 27.9695 63.3689 27.9977 63.1204 27.9977H61.1209C60.7377 27.9977 60.4544 27.9413 60.2733 27.8261C60.0921 27.711 59.8785 27.4619 59.63 27.0718L53.3969 17.061C53.2622 16.8777 53.1926 16.7179 53.1926 16.5816C53.1926 16.3983 53.3621 16.2949 53.7011 16.2738C57.1126 15.9095 58.8172 14.3656 58.8172 11.6444C58.8172 10.0911 58.2807 8.95369 57.2078 8.23225C56.1349 7.51317 54.5813 7.15128 52.5493 7.15128H49.2957C49.1378 7.15128 49.031 7.17948 48.9729 7.23588C48.9172 7.29227 48.8893 7.40272 48.8893 7.56252V27.241C48.8893 27.5394 48.8336 27.7392 48.7198 27.8402V27.8449Z" fill="#111111"/><path d="M84.5991 22.4471C84.8476 22.2473 85.0404 22.1486 85.1751 22.1486C85.2656 22.1486 85.3562 22.1815 85.4468 22.2473C85.5374 22.3131 85.6163 22.3907 85.6837 22.48L86.666 23.81C86.7798 23.944 86.8355 24.0991 86.8355 24.2753C86.8355 24.3646 86.8007 24.4586 86.7333 24.5573C86.666 24.656 86.5638 24.7618 86.4291 24.8722C85.2308 25.8686 83.8815 26.6394 82.3813 27.1822C80.8788 27.7251 79.3043 27.9977 77.6555 27.9977C75.4423 27.9977 73.415 27.4877 71.5734 26.4678C69.7318 25.448 68.2757 24.0309 67.2028 22.2121C66.1299 20.3956 65.5934 18.3558 65.5934 16.0952C65.5934 13.8345 66.1299 11.7525 67.2028 9.91247C68.2757 8.07246 69.7434 6.62724 71.6082 5.57446C73.4707 4.52639 75.5538 4 77.8575 4C79.4831 4 81.0367 4.27729 82.516 4.83188C83.9953 5.38647 85.3121 6.1408 86.464 7.09253C86.6892 7.24763 86.803 7.41447 86.803 7.59072C86.803 7.74581 86.7357 7.92206 86.5986 8.12181L85.6163 9.41898C85.4352 9.66337 85.254 9.78557 85.0752 9.78557C84.9405 9.78557 84.7478 9.69627 84.4993 9.52002C83.5286 8.78919 82.4766 8.21345 81.3479 7.79046C80.2193 7.36982 79.0326 7.15833 77.7902 7.15833C76.1855 7.15833 74.7247 7.53432 73.4033 8.28865C72.0819 9.04298 71.0369 10.0958 70.2682 11.447C69.4995 12.7982 69.1164 14.328 69.1164 16.0341C69.1164 17.7401 69.4949 19.1689 70.252 20.5225C71.009 21.8737 72.0471 22.9335 73.3685 23.6973C74.6899 24.461 76.1646 24.844 77.7902 24.844C80.3424 24.844 82.6113 24.0474 84.5991 22.4518V22.4471Z" fill="#111111"/><path d="M109.401 27.8449C109.288 27.9483 109.097 28 108.826 28H106.928C106.657 28 106.466 27.9483 106.352 27.8449C106.238 27.7415 106.183 27.5418 106.183 27.2457V17.6814C106.183 17.5451 106.155 17.4464 106.099 17.39C106.043 17.3336 105.934 17.3054 105.776 17.3054H94.562C94.4041 17.3054 94.2972 17.3336 94.2392 17.39C94.1834 17.4464 94.1556 17.5451 94.1556 17.6814V27.2457C94.1556 27.5441 94.0998 27.7439 93.986 27.8449C93.8722 27.9483 93.6818 28 93.4101 28H91.5128C91.2411 28 91.0507 27.9483 90.9369 27.8449C90.8231 27.7415 90.7673 27.5418 90.7673 27.2457V4.75433C90.7673 4.45824 90.8231 4.25614 90.9369 4.1551C91.0483 4.0517 91.2411 4 91.5105 4H93.4078C93.6795 4 93.8723 4.0517 93.9837 4.1551C94.0975 4.25849 94.1532 4.45824 94.1532 4.75433V13.6677C94.1532 13.804 94.1811 13.9074 94.2369 13.9755C94.2926 14.0437 94.3994 14.0789 94.5596 14.0789H105.774C105.932 14.0789 106.039 14.0437 106.097 13.9755C106.153 13.9074 106.18 13.804 106.18 13.6677V4.75433C106.18 4.45824 106.236 4.25614 106.35 4.1551C106.464 4.0517 106.657 4 106.928 4H108.826C109.095 4 109.288 4.0517 109.401 4.1551C109.515 4.25849 109.571 4.45824 109.571 4.75433V27.2457C109.571 27.5441 109.515 27.7439 109.401 27.8449Z" fill="#111111"/><path d="M164.252 4.1504C164.366 4.04935 164.558 4 164.828 4H166.725C166.997 4 167.189 4.04935 167.301 4.1504C167.415 4.24909 167.47 4.44414 167.47 4.73318V26.9049C167.47 27.6358 167.245 28.0023 166.792 28.0023C166.611 28.0023 166.421 27.9295 166.216 27.7862C166.012 27.6428 165.731 27.3702 165.369 26.9707L151.614 11.0498V26.9049C151.614 27.194 151.558 27.3867 151.444 27.4877C151.33 27.5864 151.14 27.6381 150.868 27.6381H148.971C148.699 27.6381 148.509 27.5888 148.395 27.4877C148.281 27.389 148.226 27.194 148.226 26.9049V5.09742C148.226 4.72143 148.281 4.44414 148.395 4.26554C148.509 4.0893 148.69 4 148.939 4C149.12 4 149.31 4.07285 149.514 4.2162C149.719 4.35954 149.988 4.63214 150.327 5.03163L164.082 20.9525V4.73083C164.082 4.44414 164.138 4.24909 164.252 4.14805V4.1504Z" fill="#111111"/><path d="M143.732 18.7083C143.72 18.6519 143.704 18.4944 143.699 18.4193C143.704 18.4357 143.73 18.6754 143.732 18.7083Z" fill="#DC5F40"/><path d="M141.613 11.08C142.698 10.9602 143.483 9.9732 143.364 8.87342C143.246 7.776 142.27 6.98171 141.184 7.10156C140.099 7.22141 139.314 8.20839 139.433 9.30816C139.551 10.4056 140.526 11.1999 141.613 11.08Z" fill="#DC5F40"/><path d="M143.857 20.6254C143.943 16.1699 142.092 10.7674 137.252 13.8364C136.846 13.9962 136.614 13.9398 136.4 13.6343C135.789 12.5158 135.32 11.3713 134.739 10.1964C130.371 -1.17501 125.383 5.32729 120.114 12.0575C108.347 27.4497 113.89 34.2669 132.438 20.75C133.086 20.2847 134.384 19.3118 134.851 19.2719C135.343 19.192 135.548 19.5962 135.919 20.4421C136.279 21.3093 136.878 22.5383 137.426 23.4148C140.592 29.6304 144.098 28.1899 143.859 20.6513V20.6254H143.857ZM129.909 18.3084C127.575 19.7842 125.36 21.5913 122.796 22.6699C121.679 23.1422 120.051 22.6205 119.649 21.7064C119.194 20.2894 120.822 18.2003 121.621 16.7292C122.547 15.0537 123.776 13.5638 124.953 12.0458C126.096 10.5489 127.647 8.32817 129.798 9.2987C131.523 10.2904 132.231 13.0328 133.218 14.6871C133.664 15.4039 133.65 15.9114 132.87 16.3438C131.925 16.9525 130.901 17.6457 129.928 18.299L129.909 18.3107V18.3084ZM142.556 21.2435C142.505 22.0965 142.345 25.323 141.27 23.7861C140.271 21.8874 139.175 19.521 138.197 17.4977C137.817 16.4637 140.192 16.0454 140.81 16.2216C142.535 16.8655 142.596 19.6197 142.556 21.2294V21.2458V21.2435Z" fill="#DC5F40"/></g><defs><clipPath id="mxbb-clip"><rect width="168" height="32" fill="white"/></clipPath></defs></svg>
+  <span class="bb-sep"></span>
+  <svg class="bb-logo-adani" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mxbb-adani-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3A6EBF"/><stop offset="40%" stop-color="#5B4DB5"/><stop offset="70%" stop-color="#8B3DAF"/><stop offset="100%" stop-color="#C0287A"/></linearGradient></defs><text x="8" y="54" font-family="'Arial Rounded MT Bold','Nunito','Varela Round',Arial,sans-serif" font-weight="800" font-size="52" letter-spacing="-1" fill="url(#mxbb-adani-g)">adani</text></svg>
+ </div>
+ <span class="bb-badge"><span class="bb-dot"></span> Strictly Confidential</span>
+</div></header>
+
+<header class="cover"><div class="wrap">
+ <div class="brandrow"><svg class="cover-logo" viewBox="0 0 168 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#mxcov-clip)"><path d="M3.7951 26.9895C3.61396 27.3937 3.43282 27.6616 3.254 27.7956C3.07286 27.9295 2.80115 27.9977 2.44119 27.9977H0.678569C0.225721 27.9977 0.000457764 27.852 0.000457764 27.5606C0.000457764 27.4478 0.056193 27.2574 0.169986 26.9895L10.3672 5.68021C10.7063 4.98698 10.9547 4.53109 11.1127 4.31959C11.2706 4.10575 11.4633 4 11.6886 4C11.893 4 12.0671 4.10575 12.2134 4.31959C12.3597 4.53344 12.6036 4.98698 12.9426 5.68021L23.242 26.9895C23.3558 27.2574 23.4116 27.4501 23.4116 27.5606C23.4116 27.852 23.1747 27.9977 22.7009 27.9977H20.8036C20.4413 27.9977 20.1766 27.9295 20.0071 27.7956C19.8375 27.6616 19.6518 27.3914 19.4474 26.9895L11.6212 10.2509L3.7951 26.9895Z" fill="#ffffff"/><path d="M40.5221 24.8957C40.6359 24.9991 40.6916 25.1989 40.6916 25.495V27.2433C40.6916 27.5418 40.6359 27.7415 40.5221 27.8426C40.4083 27.946 40.2179 27.9977 39.9462 27.9977H27.1062C26.8345 27.9977 26.644 27.946 26.5302 27.8426C26.4165 27.7392 26.3607 27.5394 26.3607 27.2433V4.75433C26.3607 4.45824 26.4165 4.25614 26.5302 4.1551C26.6417 4.0517 26.8345 4 27.1039 4H39.9113C40.183 4 40.3735 4.0517 40.4873 4.1551C40.6011 4.25849 40.6568 4.45824 40.6568 4.75433V6.50269C40.6568 6.80114 40.6011 7.00088 40.4873 7.10193C40.3735 7.20533 40.183 7.25703 39.9113 7.25703H30.153C29.9951 7.25703 29.8883 7.28523 29.8302 7.34162C29.7745 7.39802 29.7466 7.49672 29.7466 7.63302V13.9074C29.7466 14.0672 29.7745 14.1753 29.8302 14.234C29.886 14.2904 29.9928 14.3186 30.153 14.3186H38.7595C39.0312 14.3186 39.2216 14.3703 39.3354 14.4737C39.4492 14.5771 39.5049 14.7769 39.5049 15.0729V16.7861C39.5049 17.061 39.4492 17.2537 39.3354 17.3688C39.2216 17.484 39.0312 17.5404 38.7595 17.5404H30.153C29.9951 17.5404 29.8883 17.5686 29.8302 17.625C29.7745 17.6814 29.7466 17.7801 29.7466 17.9164V24.3623C29.7466 24.4986 29.7745 24.5973 29.8302 24.6537C29.886 24.7101 29.9928 24.7383 30.153 24.7383H39.9438C40.2156 24.7383 40.406 24.79 40.5198 24.8934L40.5221 24.8957Z" fill="#ffffff"/><path d="M48.7198 27.8449C48.606 27.9483 48.4156 28 48.1439 28H46.2466C45.9748 28 45.7844 27.9483 45.6706 27.8449C45.5568 27.7415 45.5011 27.5418 45.5011 27.2457V4.75433C45.5011 4.45824 45.5568 4.25614 45.6706 4.1551C45.7844 4.0517 45.9772 4 46.2466 4H52.7188C59.1562 4 62.3749 6.47919 62.3749 11.4399C62.3749 13.0849 61.9685 14.4408 61.1557 15.503C60.3429 16.5652 59.212 17.35 57.7675 17.8506L63.5941 26.9707C63.7753 27.2222 63.8659 27.4384 63.8659 27.6217C63.8659 27.758 63.8031 27.8567 63.6801 27.9131C63.5547 27.9695 63.3689 27.9977 63.1204 27.9977H61.1209C60.7377 27.9977 60.4544 27.9413 60.2733 27.8261C60.0921 27.711 59.8785 27.4619 59.63 27.0718L53.3969 17.061C53.2622 16.8777 53.1926 16.7179 53.1926 16.5816C53.1926 16.3983 53.3621 16.2949 53.7011 16.2738C57.1126 15.9095 58.8172 14.3656 58.8172 11.6444C58.8172 10.0911 58.2807 8.95369 57.2078 8.23225C56.1349 7.51317 54.5813 7.15128 52.5493 7.15128H49.2957C49.1378 7.15128 49.031 7.17948 48.9729 7.23588C48.9172 7.29227 48.8893 7.40272 48.8893 7.56252V27.241C48.8893 27.5394 48.8336 27.7392 48.7198 27.8402V27.8449Z" fill="#ffffff"/><path d="M84.5991 22.4471C84.8476 22.2473 85.0404 22.1486 85.1751 22.1486C85.2656 22.1486 85.3562 22.1815 85.4468 22.2473C85.5374 22.3131 85.6163 22.3907 85.6837 22.48L86.666 23.81C86.7798 23.944 86.8355 24.0991 86.8355 24.2753C86.8355 24.3646 86.8007 24.4586 86.7333 24.5573C86.666 24.656 86.5638 24.7618 86.4291 24.8722C85.2308 25.8686 83.8815 26.6394 82.3813 27.1822C80.8788 27.7251 79.3043 27.9977 77.6555 27.9977C75.4423 27.9977 73.415 27.4877 71.5734 26.4678C69.7318 25.448 68.2757 24.0309 67.2028 22.2121C66.1299 20.3956 65.5934 18.3558 65.5934 16.0952C65.5934 13.8345 66.1299 11.7525 67.2028 9.91247C68.2757 8.07246 69.7434 6.62724 71.6082 5.57446C73.4707 4.52639 75.5538 4 77.8575 4C79.4831 4 81.0367 4.27729 82.516 4.83188C83.9953 5.38647 85.3121 6.1408 86.464 7.09253C86.6892 7.24763 86.803 7.41447 86.803 7.59072C86.803 7.74581 86.7357 7.92206 86.5986 8.12181L85.6163 9.41898C85.4352 9.66337 85.254 9.78557 85.0752 9.78557C84.9405 9.78557 84.7478 9.69627 84.4993 9.52002C83.5286 8.78919 82.4766 8.21345 81.3479 7.79046C80.2193 7.36982 79.0326 7.15833 77.7902 7.15833C76.1855 7.15833 74.7247 7.53432 73.4033 8.28865C72.0819 9.04298 71.0369 10.0958 70.2682 11.447C69.4995 12.7982 69.1164 14.328 69.1164 16.0341C69.1164 17.7401 69.4949 19.1689 70.252 20.5225C71.009 21.8737 72.0471 22.9335 73.3685 23.6973C74.6899 24.461 76.1646 24.844 77.7902 24.844C80.3424 24.844 82.6113 24.0474 84.5991 22.4518V22.4471Z" fill="#ffffff"/><path d="M109.401 27.8449C109.288 27.9483 109.097 28 108.826 28H106.928C106.657 28 106.466 27.9483 106.352 27.8449C106.238 27.7415 106.183 27.5418 106.183 27.2457V17.6814C106.183 17.5451 106.155 17.4464 106.099 17.39C106.043 17.3336 105.934 17.3054 105.776 17.3054H94.562C94.4041 17.3054 94.2972 17.3336 94.2392 17.39C94.1834 17.4464 94.1556 17.5451 94.1556 17.6814V27.2457C94.1556 27.5441 94.0998 27.7439 93.986 27.8449C93.8722 27.9483 93.6818 28 93.4101 28H91.5128C91.2411 28 91.0507 27.9483 90.9369 27.8449C90.8231 27.7415 90.7673 27.5418 90.7673 27.2457V4.75433C90.7673 4.45824 90.8231 4.25614 90.9369 4.1551C91.0483 4.0517 91.2411 4 91.5105 4H93.4078C93.6795 4 93.8723 4.0517 93.9837 4.1551C94.0975 4.25849 94.1532 4.45824 94.1532 4.75433V13.6677C94.1532 13.804 94.1811 13.9074 94.2369 13.9755C94.2926 14.0437 94.3994 14.0789 94.5596 14.0789H105.774C105.932 14.0789 106.039 14.0437 106.097 13.9755C106.153 13.9074 106.18 13.804 106.18 13.6677V4.75433C106.18 4.45824 106.236 4.25614 106.35 4.1551C106.464 4.0517 106.657 4 106.928 4H108.826C109.095 4 109.288 4.0517 109.401 4.1551C109.515 4.25849 109.571 4.45824 109.571 4.75433V27.2457C109.571 27.5441 109.515 27.7439 109.401 27.8449Z" fill="#ffffff"/><path d="M164.252 4.1504C164.366 4.04935 164.558 4 164.828 4H166.725C166.997 4 167.189 4.04935 167.301 4.1504C167.415 4.24909 167.47 4.44414 167.47 4.73318V26.9049C167.47 27.6358 167.245 28.0023 166.792 28.0023C166.611 28.0023 166.421 27.9295 166.216 27.7862C166.012 27.6428 165.731 27.3702 165.369 26.9707L151.614 11.0498V26.9049C151.614 27.194 151.558 27.3867 151.444 27.4877C151.33 27.5864 151.14 27.6381 150.868 27.6381H148.971C148.699 27.6381 148.509 27.5888 148.395 27.4877C148.281 27.389 148.226 27.194 148.226 26.9049V5.09742C148.226 4.72143 148.281 4.44414 148.395 4.26554C148.509 4.0893 148.69 4 148.939 4C149.12 4 149.31 4.07285 149.514 4.2162C149.719 4.35954 149.988 4.63214 150.327 5.03163L164.082 20.9525V4.73083C164.082 4.44414 164.138 4.24909 164.252 4.14805V4.1504Z" fill="#ffffff"/><path d="M143.732 18.7083C143.72 18.6519 143.704 18.4944 143.699 18.4193C143.704 18.4357 143.73 18.6754 143.732 18.7083Z" fill="#DC5F40"/><path d="M141.613 11.08C142.698 10.9602 143.483 9.9732 143.364 8.87342C143.246 7.776 142.27 6.98171 141.184 7.10156C140.099 7.22141 139.314 8.20839 139.433 9.30816C139.551 10.4056 140.526 11.1999 141.613 11.08Z" fill="#DC5F40"/><path d="M143.857 20.6254C143.943 16.1699 142.092 10.7674 137.252 13.8364C136.846 13.9962 136.614 13.9398 136.4 13.6343C135.789 12.5158 135.32 11.3713 134.739 10.1964C130.371 -1.17501 125.383 5.32729 120.114 12.0575C108.347 27.4497 113.89 34.2669 132.438 20.75C133.086 20.2847 134.384 19.3118 134.851 19.2719C135.343 19.192 135.548 19.5962 135.919 20.4421C136.279 21.3093 136.878 22.5383 137.426 23.4148C140.592 29.6304 144.098 28.1899 143.859 20.6513V20.6254H143.857ZM129.909 18.3084C127.575 19.7842 125.36 21.5913 122.796 22.6699C121.679 23.1422 120.051 22.6205 119.649 21.7064C119.194 20.2894 120.822 18.2003 121.621 16.7292C122.547 15.0537 123.776 13.5638 124.953 12.0458C126.096 10.5489 127.647 8.32817 129.798 9.2987C131.523 10.2904 132.231 13.0328 133.218 14.6871C133.664 15.4039 133.65 15.9114 132.87 16.3438C131.925 16.9525 130.901 17.6457 129.928 18.299L129.909 18.3107V18.3084ZM142.556 21.2435C142.505 22.0965 142.345 25.323 141.27 23.7861C140.271 21.8874 139.175 19.521 138.197 17.4977C137.817 16.4637 140.192 16.0454 140.81 16.2216C142.535 16.8655 142.596 19.6197 142.556 21.2294V21.2458V21.2435Z" fill="#DC5F40"/></g><defs><clipPath id="mxcov-clip"><rect width="168" height="32" fill="white"/></clipPath></defs></svg><span class="x">&times;</span><span>ADANI / AIIL</span></div>
+ <h1>RFP Requirements &amp; Aerchain Positioning Matrix</h1>
+ <p>Every requirement-bearing element across both Adani documents — objectives, business problems, functional &amp; technical scope, use cases, process rules, prequalification gates and integration needs — each mapped to an Aerchain fit rating, positioning note and gap/watch flag.</p>
+ <div class="statbar">
+   <div><div class="n">221</div><div class="l">Discrete requirements</div></div>
+   <div><div class="n">82</div><div class="l">Use cases (55 SoW + 27 BRD)</div></div>
+   <div><div class="n">10</div><div class="l">Functional streams</div></div>
+   <div><div class="n">2</div><div class="l">Source documents</div></div>
+   <div><div class="n">4</div><div class="l">Fit ratings</div></div>
+ </div>
+</div></header>
+<main><div class="wrap">
+<h1 id="adani-rfp-exhaustive-requirements-aerchain-positioning-matrix">Adani RFP — Exhaustive Requirements &amp; Aerchain Positioning Matrix</h1>
+<p><strong>Prepared for:</strong> Gaurav K. Guha (Aerchain) · <strong>Client:</strong> Adani / AIIL
+<strong>Source documents:</strong>
+1. <strong>SoW / RFP</strong> — <em>Digital Transformation in Procurement Processes (Supplier &amp; Sourcing Management)</em>, V1 (Parag Nayak / Arun Goyal)
+2. <strong>BRD</strong> — <em>Detailed BRD for PR / Non-PR Work-through (PR-to-PO Tracker)</em>, v1.0, 21 Feb 2026</p>
+<p><strong>Purpose:</strong> A line-by-line capture of <em>every</em> requirement-bearing element across both documents — objectives, business problems, functional/technical scope, use cases, process rules, prequalification gates and non-functional/integration needs — each mapped to an Aerchain positioning with fit rating, a positioning note, and explicit gap/watch flags.</p>
+<hr />
+<h2 id="how-to-read-this-matrix">How to read this matrix</h2>
+<p><strong>Fit rating legend</strong></p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Rating</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td><strong>Compliant</strong></td>
+<td>Standard, demo-ready Aerchain platform capability — delivered natively or through configuration with no custom engineering.</td>
+</tr>
+<tr>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td><strong>Integration / Partner-dependent</strong></td>
+<td>Delivered in conjunction with SAP / Ariba / MDG / BTP / CLM or a co-build; Aerchain orchestrates rather than owns the system of record.</td>
+</tr>
+<tr>
+<td><span class="badge exception">🔴 Exception</span></td>
+<td><strong>Exception</strong></td>
+<td>Requires a formal exception, commercial/legal clarification, or a scope boundary acknowledgement before commitment.</td>
+</tr>
+<tr>
+<td><span class="badge customization">🔶 Customization</span></td>
+<td><strong>Customization</strong></td>
+<td>Deliverable through a defined custom-build or product extension; scoped, estimated, and priced separately.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Requirement type codes:</strong> <code>FUNC</code> functional · <code>PROC</code> process/workflow · <code>TECH</code> technical/architecture · <code>INTG</code> integration · <code>GOV</code> governance/compliance · <code>COMM</code> commercial · <code>QUAL</code> bidder qualification · <code>REP</code> reporting/analytics.</p>
+<p><strong>Stream index</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Stream</th>
+<th>Source</th>
+<th>Req IDs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Supplier Management</td>
+<td>SoW</td>
+<td>SM-01 … SM-58</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Sourcing Management</td>
+<td>SoW</td>
+<td>SRC-01 … SRC-72</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bidder Prequalification</td>
+<td>SoW</td>
+<td>PQ-01 … PQ-13</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Commercial &amp; RFP Process</td>
+<td>SoW</td>
+<td>COM-01 … COM-12</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Technical / Architecture / Integration</td>
+<td>SoW + BRD</td>
+<td>TEC-01 … TEC-18</td>
+</tr>
+<tr>
+<td>6</td>
+<td>PR-to-PO Tracker — Intake &amp; Capture</td>
+<td>BRD</td>
+<td>TR-01 … TR-12</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PR-to-PO Tracker — Allocation &amp; Assignment</td>
+<td>BRD</td>
+<td>TR-13 … TR-18</td>
+</tr>
+<tr>
+<td>8</td>
+<td>PR-to-PO Tracker — Execution / Work-through</td>
+<td>BRD</td>
+<td>TR-19 … TR-31</td>
+</tr>
+<tr>
+<td>9</td>
+<td>PR-to-PO Tracker — Savings, SLA &amp; Governance</td>
+<td>BRD</td>
+<td>TR-32 … TR-40</td>
+</tr>
+<tr>
+<td>10</td>
+<td>PR-to-PO Tracker — Visibility, Search &amp; Dashboards</td>
+<td>BRD</td>
+<td>TR-41 … TR-48</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="stream-1-supplier-management-sow">Stream 1 — Supplier Management (SoW)</h1>
+<p>Covers the full supplier lifecycle: registration &amp; onboarding, segmentation, administration (profile/extension/blocking/unblocking), phase-out (blacklisting), performance evaluation (VPE) &amp; CAPA, satisfaction survey, AVL, the Adani Vendor Dashboard, and the Advanced Supplier Risk Profiling engine. Includes the 30 Supplier-side use cases (UC1–UC30) and the underlying as-is/to-be process steps.</p>
+<h2 id="11-approved-vendor-list-avl">1.1 Approved Vendor List (AVL)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-01</td>
+<td>Move AVL from a manual/physical document (per-BU or group level) to a <strong>digital, real-time system</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native digital AVL / qualified-supplier pool with category tagging is core to Aerchain's supplier module. Direct strength to lead with.</td>
+</tr>
+<tr>
+<td>SM-02</td>
+<td>AVL status <strong>auto-updated</strong> from supplier performance scores (no fixed periodic refresh delay).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Score-driven status transitions are supported via performance rules engine; configure thresholds (see SM-31).</td>
+</tr>
+<tr>
+<td>SM-03</td>
+<td>Provide <strong>quick access to compliant suppliers</strong> for faster sourcing and transparent decisions.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Searchable, filterable supplier pool surfaced directly in RFx creation.</td>
+</tr>
+<tr>
+<td>SM-04</td>
+<td>Digitally <strong>track AVL vendors for defined categories</strong> (eliminate "no digital track" gap).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configure category taxonomy + AVL membership per category/segment. Confirm Adani's category tree depth during scoping.</td>
+</tr>
+<tr>
+<td>SM-05</td>
+<td>AVL owned by GCP/BUTC, with <strong>GCC as custodian</strong>; continuously updated as suppliers are developed or phased out.</td>
+<td>PROC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Role-based ownership + custodian model configured via RBAC and workflow.</td>
+</tr>
+<tr>
+<td>SM-06</td>
+<td>On VPE/score change, supplier <strong>auto-tagged AVL (&gt;70), Qualified (50–70), or Qualified-with-CAPA (&lt;50)</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain's performance rules engine supports score-driven AVL status transitions. Threshold bands (e.g., &gt;70 = AVL, 50–70 = Qualified, &lt;50 = Qualified-with-CAPA) are configurable, and supplier status updates automatically upon VPE score change.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-supplier-registration-onboarding">1.2 Supplier Registration &amp; Onboarding</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-07</td>
+<td>Qualified supplier onboarded <strong>through e-Ariba route</strong>; supplier code created with segregation (all BUs / few BUs / few BUs with conditions / segmentation tag).</td>
+<td>PROC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Adani's system of record for supplier code is <strong>SAP/MDG via Ariba</strong>. Aerchain orchestrates the onboarding workflow and writes back; code creation stays in MDG/ERP. Flag integration scope.</td>
+</tr>
+<tr>
+<td>SM-08</td>
+<td>Onboarding only after evaluation by GCP/BUTC and request to <strong>GCC for code creation in Ariba &amp; ERP</strong>.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain supports an approval-gated onboarding workflow where GCP/BUTC evaluation and GCC code-creation requests are managed as sequenced, auditable steps with notifications at each stage.</td>
+</tr>
+<tr>
+<td>SM-09</td>
+<td>ERP supplier code created <strong>only on approved NFA</strong>; suppliers without ANID <strong>restricted from PO issuance</strong>.</td>
+<td>GOV</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Aerchain can enforce the rule/flag in workflow; the ANID/PO block lives in Ariba/ERP — confirm enforcement point.</td>
+</tr>
+<tr>
+<td>SM-10</td>
+<td>Supplier master <strong>reviewed quarterly</strong> (addition, modification, block/unblock, score upgrade based on TPDD &amp; performance).</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Scheduled quarterly review cadences are configurable within the supplier master module; TPDD score inputs and performance triggers can be mapped to review initiation logic.</td>
+</tr>
+<tr>
+<td>SM-11</td>
+<td>Onboarding workflow steps P1–P7: ServiceNow ticket → VMO registration → MDM doc review → MDM code in Ariba → AVL mapping approval per DOA.</td>
+<td>PROC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Aerchain can replicate/track this orchestration; <strong>ServiceNow + MDM/MDG</strong> remain external systems — position as integration + workflow layer.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-supplier-segmentation">1.3 Supplier Segmentation</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-12</td>
+<td>Categorize suppliers as <strong>Strategic / Essential / Transactional</strong> using category-centric guidelines (spend, market &amp; value-chain, supplier risk).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native segmentation framework with configurable parameters.</td>
+</tr>
+<tr>
+<td>SM-13</td>
+<td>Segmentation driven by inputs: segmentation strategy, category strategy, <strong>tiering strategy</strong>, spend value, criticality, dependency, market complexity.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configure multi-criteria scoring model.</td>
+</tr>
+<tr>
+<td>SM-14</td>
+<td><strong>Scoring &amp; classification mechanism</strong>: Score &gt;4 = Strategic; ≤4 &amp; &gt;2 = Essential; ≤2 = Transactional, plotted on Business Criticality × Business Complexity risk scale (High/Med/Low).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain supports configurable multi-criteria scoring and classification. The Strategic/Essential/Transactional bands with Business Criticality × Business Complexity axes are modeled as a configurable scoring matrix within the segmentation module.</td>
+</tr>
+<tr>
+<td>SM-15</td>
+<td>Segmentation via <strong>Ariba questionnaire</strong> assigned by Category Head to nominated buyer on new supplier / material change / annual review.</td>
+<td>PROC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Aerchain can host the segmentation form natively; if Adani mandates the <em>Ariba</em> questionnaire, position as integration/sync.</td>
+</tr>
+<tr>
+<td>SM-16</td>
+<td><strong>SRM allocation</strong> per segment (Lead GCP / BUTC designated SRM) covering multi-GCP, BUTC-specific, and GCP+BUTC relationship scenarios.</td>
+<td>FUNC/PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>SRM assignment + relationship model configurable in supplier 360.</td>
+</tr>
+<tr>
+<td>SM-17</td>
+<td>Periodic re-segmentation: <strong>Strategic quarterly, Essential half-yearly, Transactional annually</strong>.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable review frequencies per segment.</td>
+</tr>
+<tr>
+<td>SM-18</td>
+<td>On final score/segment, GCC updates supplier master tag (Strategic/Essential/Transactional); <strong>tags visible in supplier lists and exposed to downstream processes</strong>.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Segment tags (Strategic/Essential/Transactional) are stored on the supplier master profile and exposed downstream across supplier lists, RFx vendor selection, and reporting — updated automatically upon segmentation outcome.</td>
+</tr>
+<tr>
+<td>SM-19</td>
+<td>Segmentation outcome stored in <strong>standard pre-defined template</strong>, annexed to supplier code with VPE &amp; TPDD scores.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Templated artifacts attached to supplier 360 profile.</td>
+</tr>
+<tr>
+<td>SM-20</td>
+<td>Use cases UC26–UC29: TPDD-triggered identification → segmentation form trigger → scoring on submission → segmentation report.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Maps to configurable segmentation workflow + reporting.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-supplier-administration-profile-update-extension-blocking-unblocking">1.4 Supplier Administration (profile update, extension, blocking, unblocking)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-21</td>
+<td>Centralize all admin: <strong>profile update, code extension, blocking, unblocking</strong> carried out by GCC.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable admin workflows; system-of-record actions sync to MDG/Ariba.</td>
+</tr>
+<tr>
+<td>SM-22</td>
+<td><strong>Supplier-initiated</strong> profile updates → GCC review/execute/approve; <strong>buyer-initiated extensions auto-processed</strong> through the system.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Self-service supplier portal + auto-extension workflow configurable.</td>
+</tr>
+<tr>
+<td>SM-23</td>
+<td>Supplier <strong>code extension</strong> across ERP instances (golden record in MDG + extension to requested ERP company code).</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Extension executes in <strong>MDG/SAP</strong>; Aerchain triggers and tracks. Flag as integration-led.</td>
+</tr>
+<tr>
+<td>SM-24</td>
+<td><strong>Block/unblock requests</strong> routed to GCC via GCP/BUTC by spend category; only designated category managers approve per DOA; GCC executes in system.</td>
+<td>PROC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>DOA-driven approval workflow configurable.</td>
+</tr>
+<tr>
+<td>SM-25</td>
+<td><strong>Key gap to solve:</strong> block/unblock reason captured in MDG (separate from go-to-market platform); supplier blocked in MDG <strong>not auto-blocked in Ariba</strong>; no provision to prevent a blocked supplier from participating in go-to-market.</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td><strong>High-value Aerchain wedge:</strong> unify block reason + propagate block status MDG↔Ariba↔sourcing so blocked suppliers can't be invited. Position as the orchestration layer that closes this gap — but depends on MDG &amp; Ariba write access. Flag for integration scoping.</td>
+</tr>
+<tr>
+<td>SM-26</td>
+<td>Block/unblock scenario matrix (Sourcing / Purchasing / Payment block) for registered, incumbent-moved, qualified, poor-performing, and blacklisted suppliers.</td>
+<td>FUNC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configure three independent block flags with conditional logic ("in case no open order").</td>
+</tr>
+<tr>
+<td>SM-27</td>
+<td>Unblocking use cases UC18–UC22: auto-deactivate blocks on qualification/CAPA completion; re-evaluation approval from initiating Buyer/CL/Head; auto-notify requisitioner.</td>
+<td>FUNC/PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable unblock workflow with notifications; reopen-VPE trigger supported.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-supplier-phase-out-blacklisting-vs-blocking">1.5 Supplier Phase-Out (blacklisting vs blocking)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-28</td>
+<td><strong>Clear distinction between blacklisting and blocking</strong>, and between reasons for blocking (current gap: no clear distinction).</td>
+<td>FUNC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configure distinct phase-out types + reason codes — directly addresses the stated gap.</td>
+</tr>
+<tr>
+<td>SM-29</td>
+<td>Flag blacklisted suppliers in a <strong>centrally published portal</strong>; deactivate codes centrally in ERP; blacklist for one BU applies group-wide.</td>
+<td>GOV/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Aerchain maintains central blacklist register + advisory block; ERP-level deactivation by MDM = integration. Confirm "central portal" ownership.</td>
+</tr>
+<tr>
+<td>SM-30</td>
+<td>Phase-out triggers: contractual / non-contractual obligations, <strong>inactive in SAP 18 months</strong> (no RFx response / no PO).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Inactivity rule configurable; requires SAP transaction-history feed.</td>
+</tr>
+<tr>
+<td>SM-31</td>
+<td>Blacklisting approval by <strong>BU CEO / AIIL CEO</strong> for GCP-managed suppliers; blocking by designated category managers; standard request templates owned by SRM.</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>DOA-based approval chains + templated requests configurable.</td>
+</tr>
+<tr>
+<td>SM-32</td>
+<td>Periodicity: <strong>quarterly blacklisting</strong> (non-compliant) and <strong>on-demand blacklisting</strong> (dormant, post payable/receivable settlement); conditional block stops new POs but preserves open POs.</td>
+<td>PROC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable cadences + conditional block honoring open POs (logic dependent on ERP PO status feed).</td>
+</tr>
+<tr>
+<td>SM-33</td>
+<td>Blacklisting/blocking use cases UC16–UC17: on VPE/TPDD outcome activate sourcing+purchase+payment block; registered new supplier = sourcing block only; incumbent = all three if no open order.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Maps to SM-26 conditional block engine.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="16-supplier-performance-evaluation-vpe-capa">1.6 Supplier Performance Evaluation (VPE) &amp; CAPA</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-34</td>
+<td><strong>Capture live performance data from system (OTIF, Quality, etc.)</strong> — current gap: no live system capture.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain captures live performance data through configurable evaluation forms and integrates with ERP/SAP to ingest transactional metrics (OTIF, GRN-based quality, delivery) directly into the VPE scorecard, eliminating manual data collection.</td>
+</tr>
+<tr>
+<td>SM-35</td>
+<td><strong>System integration to track CAPA plan and action output</strong> — current gap.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>CAPA plans are tracked within the platform with structured task assignment, milestone tracking, and closure confirmation — providing full system visibility from initiation through resolution.</td>
+</tr>
+<tr>
+<td>SM-36</td>
+<td><strong>Defined triggers to initiate evaluation</strong> — current gap: no defined trigger.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Evaluation triggers are configurable as rules within the VPE module — by time period, score threshold breach, transaction volume, or manual initiation — ensuring consistent, governed evaluation initiation.</td>
+</tr>
+<tr>
+<td>SM-37</td>
+<td>Standardized evaluation criteria &amp; <strong>weighted-average unified scoring</strong> across BUs/GCP; templates per segmentation.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain supports configurable weighted-average scoring templates that can be standardized across BUs and GCP, with segment-specific templates applied automatically based on the supplier's assigned tier.</td>
+</tr>
+<tr>
+<td>SM-38</td>
+<td>Performance dimensions: quality/QAP/defects, claims, delivery/lead-time, cost competitiveness, regulatory/contract compliance, innovation/R&amp;D, service responsiveness, risk, sustainability, reliability, safety engineering.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>The VPE module supports all standard performance dimensions including quality, delivery, cost competitiveness, compliance, innovation, sustainability, and safety — each configurable with weightings appropriate to the category and segment.</td>
+</tr>
+<tr>
+<td>SM-39</td>
+<td><strong>Qualitative + quantitative</strong> capture: evaluators submit qualitative scores; quantitative auto-generated from <strong>GRN/SES status</strong> and auto-filled in scorecard (P14′).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Both qualitative (evaluator-scored) and quantitative (auto-calculated from GRN/SES data) inputs are supported. Quantitative scores are auto-populated in the scorecard via ERP integration, ensuring objective, audit-ready scoring without manual intervention.</td>
+</tr>
+<tr>
+<td>SM-40</td>
+<td>Multi-evaluator, multi-project: one annual VPE project aggregates multiple evaluators across projects, <strong>evaluated per unique supplier PAN</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain supports multi-evaluator, multi-project VPE aggregation. Annual evaluation projects can consolidate inputs from multiple evaluators across projects, with scoring normalized and attributed per unique supplier PAN.</td>
+</tr>
+<tr>
+<td>SM-41</td>
+<td>Auto-classification (P17): score 0–50 Poor, 51–85 Satisfactory, 86+ Excellent; plus AVL/Qualified/CAPA status bands (UC7/UC8).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Auto-classification bands (Poor/Satisfactory/Excellent and AVL/Qualified/CAPA) are configurable within the scoring engine and applied automatically upon score finalization, with downstream status transitions triggered accordingly.</td>
+</tr>
+<tr>
+<td>SM-42</td>
+<td>Generate &amp; publish <strong>performance scorecard</strong>; route ratings → approval → supplier.</td>
+<td>FUNC/REP</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain generates, formats, and routes performance scorecards through a configurable approval workflow before publishing to the supplier — complete with digital delivery and acknowledgement tracking.</td>
+</tr>
+<tr>
+<td>SM-43</td>
+<td><strong>CAPA lifecycle</strong>: poor rating → CAPA finalized in 3 months → supplier prepares/uploads CAPA → SRM/Buyer evaluates → monitor adherence → re-evaluate or supplier-development (UC9–UC15).</td>
+<td>FUNC/PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>The full CAPA lifecycle — initiation on poor rating, 3-month finalization window, supplier CAPA upload, SRM/Buyer evaluation, adherence monitoring, and re-evaluation or supplier development routing — is supported as a structured, auditable workflow.</td>
+</tr>
+<tr>
+<td>SM-44</td>
+<td>On poor rating, <strong>activate sourcing block until CAPA executed</strong>; tag supplier in "sourcing block" category (UC12, P18).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>On a poor VPE outcome, Aerchain automatically activates a sourcing block on the supplier and tags the supplier in the appropriate block category, preventing RFx invitation until CAPA is successfully executed and cleared.</td>
+</tr>
+<tr>
+<td>SM-45</td>
+<td><strong>Issue-management process</strong>: identify/analyze/track/resolve supplier issues with escalation matrix; CoC &amp; Whistleblower alignment via PO/Contract/ANID; periodic ethics/compliance training.</td>
+<td>PROC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain's issue management framework supports structured identification, root-cause analysis, escalation routing, and resolution tracking. CoC alignment and ethics/compliance linkage are addressed through configurable supplier onboarding and periodic acknowledgement workflows.</td>
+</tr>
+<tr>
+<td>SM-46</td>
+<td>Non-Ariba vendors are an <strong>exception</strong> in VPE fetch (UC1 exception).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Non-Ariba vendors are handled as a distinct supplier category with exception-path logic in VPE data fetch — ensuring that all suppliers, regardless of Ariba ANID status, are evaluated through a consistent, system-governed process.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17-supplier-satisfaction-survey">1.7 Supplier Satisfaction Survey</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-47</td>
+<td>Conduct <strong>supplier satisfaction survey</strong> (annual, GCC-launched) covering objective, mode, timing, relevance, sampling, purpose, <strong>anonymity</strong>, reminders, post-feedback action, continuous improvement.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain supports configurable supplier satisfaction surveys with annual or segment-based scheduling, anonymous response collection, automated reminders, and post-feedback action tracking — giving procurement leadership visibility into supplier engagement and continuous improvement.</td>
+</tr>
+<tr>
+<td>SM-48</td>
+<td>Survey frequency defined by <strong>supplier segmentation</strong>; rolled out to all active suppliers.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Survey frequency is configurable per supplier segment (Strategic/Essential/Transactional), with campaign rules automatically determining inclusion based on segment tag and active status.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="18-adani-vendor-dashboard-supplier-360">1.8 Adani Vendor Dashboard / Supplier 360</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-49</td>
+<td><strong>Adani Vendor Dashboard</strong> with all fields required for shortlisting; supports filtering (UC4 precondition).</td>
+<td>REP/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native supplier 360 / dashboard.</td>
+</tr>
+<tr>
+<td>SM-50</td>
+<td>UC23: on VPE score crossing threshold, <strong>auto-upgrade status to Qualified/AVL in real time</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Real-time status rules.</td>
+</tr>
+<tr>
+<td>SM-51</td>
+<td>UC24: on <strong>TPDD score</strong> change, modify qualification status.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>On TPDD score change, Aerchain updates the supplier's qualification status in real time via configurable rules — ensuring the vendor dashboard and sourcing pool reflect the latest risk posture without manual intervention.</td>
+</tr>
+<tr>
+<td>SM-52</td>
+<td>UC25: on <strong>supplier profile data change (VRQ / Modular Questionnaire)</strong>, auto-update dashboard fields.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>VRQ/Modular Questionnaire are Ariba constructs — sync needed. Flag.</td>
+</tr>
+<tr>
+<td>SM-53</td>
+<td>Real-time status updates surfaced on the dashboard across all three triggers (score, TPDD, profile).</td>
+<td>FUNC/REP</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Event-driven dashboard refresh.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="19-advanced-supplier-risk-profiling-market-intelligence-advisory">1.9 Advanced Supplier Risk Profiling (Market-Intelligence Advisory)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM-54</td>
+<td><strong>Dynamic Risk Scoring Engine</strong> aggregating multiple risk parameters into a composite supplier risk score (UC30).</td>
+<td>FUNC</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Aerchain supports supplier risk scoring; the <strong>external market-intelligence ingestion</strong> (macroeconomic, geopolitical, commodity, country risk) typically needs 3rd-party data partners (e.g., risk-data providers). Position as engine + advisory layer, partner for external feeds. Flag.</td>
+</tr>
+<tr>
+<td>SM-55</td>
+<td>Risk dimensions: <strong>macroeconomic</strong> (inflation, currency, interest rates, commodity), <strong>geopolitical</strong> (country risk, sanctions, supply-chain disruption, cross-border logistics), <strong>industry/category</strong> (supply-demand, concentration, alternates), <strong>supplier-specific</strong> (financial health, RFP history).</td>
+<td>FUNC</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Internal dimensions (supplier-specific, category) native; external macro/geo dimensions need data integrations.</td>
+</tr>
+<tr>
+<td>SM-56</td>
+<td><strong>Advisory layer in RFP creation</strong>: recommend prioritized vendor list, flag high-risk vendors with justification; <strong>scenario-based simulation</strong> (commodity spike, geopolitical event).</td>
+<td>FUNC</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Recommendation/flagging native to AI vendor selection; scenario simulation = roadmap/co-build. Flag as differentiated but confirm depth.</td>
+</tr>
+<tr>
+<td>SM-57</td>
+<td>Outputs: <strong>Supplier Risk Scorecard (per vendor)</strong>, risk-adjusted recommendation list for RFP, decision-support insights for sourcing managers/category leads.</td>
+<td>REP</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain generates a structured Supplier Risk Scorecard per vendor, incorporating internal performance, qualification, and category-level risk signals to produce a risk-adjusted recommendation list for sourcing managers and category leads.</td>
+</tr>
+<tr>
+<td>SM-58</td>
+<td>Integrate with <strong>AVL &amp; Qualified Supplier Pool</strong> (base selection) and <strong>Supplier 360 profile</strong>.</td>
+<td>INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Internal integration — both are native Aerchain objects.</td>
+</tr>
+<tr>
+<td># Stream 2 — Sourcing Management (SoW)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Vendor selection during RFP issuance, two-stage RFP/TBER, strategic negotiation, e-Auction (two variants + amenability + exclusions + EMD), NFA preparation &amp; approval (incl. MoU/multi-BU), PO creation and MIS. Includes the 25 Sourcing use cases (UC1–UC25, Table 23) and the ~434 process-step rows beneath them.</p>
+<h2 id="21-sourcing-project-creation-demand-consolidation-cross-bu-visibility">2.1 Sourcing Project Creation, Demand Consolidation &amp; Cross-BU Visibility</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-01</td>
+<td>Buyers get <strong>visibility of PRs across business units, servers, and SAP instances</strong> (current gap: PR visible for own BU only).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>High-value differentiator. Requires read integration to <strong>multiple SAP servers/instances</strong>. Aerchain consolidates and presents — position as cross-instance intake layer; flag multi-server SAP connectivity.</td>
+</tr>
+<tr>
+<td>SRC-02</td>
+<td><strong>Consolidate requirements across BU, SAP server, instance, BU code</strong> into one sourcing activity (current gap: no provision).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native demand consolidation; depends on SRC-01 feeds.</td>
+</tr>
+<tr>
+<td>SRC-03</td>
+<td>Link sourcing requests to <strong>consolidated demand</strong> with connection to <strong>Business NFA</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable demand→NFA linkage.</td>
+</tr>
+<tr>
+<td>SRC-04</td>
+<td><strong>Linkage of WBS and Cost Center</strong> for different requirements into one sourcing activity (current gap).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>WBS/cost-center sourced from SAP; Aerchain carries and links them. Flag SAP master feed.</td>
+</tr>
+<tr>
+<td>SRC-05</td>
+<td>Consolidate to achieve <strong>economies of scale &amp; standardization</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Core sourcing consolidation value.</td>
+</tr>
+<tr>
+<td>SRC-06</td>
+<td>UC1–UC3: visibility of all PRs at central level → manually select &amp; collate PRs into a single (or consolidated) sourcing request; support requisitions <strong>with or without PR</strong> from demand plan.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable multi-PR / no-PR consolidation.</td>
+</tr>
+<tr>
+<td>SRC-07</td>
+<td>UC5–UC7: attach SOW/TBE criteria/team members + RFP input template; send to GCC; <strong>system consolidates SOW, specification, company code &amp; plant code across business instances</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable consolidated project assembly.</td>
+</tr>
+<tr>
+<td>SRC-08</td>
+<td>Related-party (RPT) governance when group companies are included in RFP (per Finance norms).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable RPT flag/rule in supplier selection.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-system-driven-vendor-selection-for-rfp">2.2 System-Driven Vendor Selection for RFP</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-09</td>
+<td><strong>Reduce manual effort &amp; eliminate human bias</strong> in shortlisting (current gap: time-consuming, physical AVL, bias).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Core AI-driven vendor selection story.</td>
+</tr>
+<tr>
+<td>SRC-10</td>
+<td><strong>AVL suppliers auto-populated</strong> in RFx input template by purchase category &amp; segmentation (UC4, UC8).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native category/segment-driven auto-population.</td>
+</tr>
+<tr>
+<td>SRC-11</td>
+<td>Buyer <strong>filters qualified-pool vendors using Vendor Selection Framework</strong>; aim ≥3 suppliers per category/segment.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable vendor-selection framework + min-supplier rule.</td>
+</tr>
+<tr>
+<td>SRC-12</td>
+<td>Actor <strong>restricted from viewing suppliers in "Registered" status</strong> (only Qualified/AVL selectable).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Status-based visibility rules.</td>
+</tr>
+<tr>
+<td>SRC-13</td>
+<td>Removing an AVL supplier from an RFP requires <strong>documented justification + Category Head approval</strong> attached to input template (UC4, UC8).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Approval-gated override workflow.</td>
+</tr>
+<tr>
+<td>SRC-14</td>
+<td>Embed <strong>market-intelligence advisory (Advanced Supplier Risk Profiling)</strong> into selection (cross-ref SM-54…SM-57).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Market-intelligence advisory and supplier risk signals are embedded into the vendor selection workflow, surfacing risk-adjusted recommendations and flagging high-risk vendors with justification to guide shortlisting decisions.</td>
+</tr>
+<tr>
+<td>SRC-15</td>
+<td>Qualification criteria for selection: product/service range, segmentation, tier/scale, financials/capabilities, past experience, RFx/auction history, alignment to Code of Conduct.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable criteria library.</td>
+</tr>
+<tr>
+<td>SRC-16</td>
+<td><strong>Contractor Safety Module (CSM)</strong> qualification for site contractors (HSE-owned) feeding selection.</td>
+<td>INTG</td>
+<td><span class="badge exception">🔴 Exception</span></td>
+<td>The Contractor Safety Module (CSM) is an HSE-owned external construct within Adani's ecosystem. Aerchain will integrate CSM qualification status as a read input into the vendor selection framework upon confirmation of the CSM API or data feed specification.</td>
+</tr>
+<tr>
+<td>SRC-17</td>
+<td>For LSTK/EPC, ingest <strong>detailed-engineering BOQ</strong> (95–100% accuracy with material code), SoW/DoR, specs/drawings, QAP, L2 schedule, warranties, RFP qualification, TBER criteria.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable RFP intake artifacts; large-document handling supported.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="23-rfx-process-rfi-rfp-rfq">2.3 RFx Process (RFI / RFP / RFQ)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-18</td>
+<td>Support full <strong>RFI / RFP / RFQ</strong> issuance triggered by buyer (GCP/BUTC) in coordination with GCC.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native RFx engine.</td>
+</tr>
+<tr>
+<td>SRC-19</td>
+<td>Capture RFP inputs: scope/specs at BOQ line-item + material code, drawings, site details, delivery milestones, qualified-supplier pool, price-discovery template/BOQ, query timelines, offer validity, GTC/STC, payment terms, TBER template, supplier nomination score, regulatory requirements.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable RFx template with full input set.</td>
+</tr>
+<tr>
+<td>SRC-20</td>
+<td><strong>Minimum three quotations</strong> per procurement, with a defined <strong>exception list</strong> (strategic partners, oligopoly/monopoly, OEM, govt utilities, proprietary, PAP).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable min-quote rule + exception register.</td>
+</tr>
+<tr>
+<td>SRC-21</td>
+<td>Support <strong>open bidding</strong> (public prequalification, e.g., Airport BU) and <strong>limited bidding via Ariba</strong> (shortlisted ANID suppliers).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Open + limited modes configurable.</td>
+</tr>
+<tr>
+<td>SRC-22</td>
+<td>Allow bidding through a <strong>non-Ariba system</strong> where regulator requires (e.g., AAI for Airport BU).</td>
+<td>INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain supports sourcing activities executed outside Ariba — including regulator-mandated platforms such as AAI for Airport BU — through a structured manual-entry path with reason codes, ensuring all non-Ariba sourcing events are captured, tracked, and auditable within the system.</td>
+</tr>
+<tr>
+<td>SRC-23</td>
+<td><strong>RFP amendment</strong>: post-issue changes approved by GCP Category/BUTC Head and communicated to all participants; extend RFP for additional pre-qualified suppliers before closure.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable amendment + addendum broadcast (UC15 Bid Amendment).</td>
+</tr>
+<tr>
+<td>SRC-24</td>
+<td><strong>Re-issue after closure</strong>: if alternate supplier needed post-closure, cancel/scrap closed RFP (notify participants), re-issue to all earlier + additional suppliers, capture rationale in NFA.</td>
+<td>PROC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable cancel-and-reissue with audit capture.</td>
+</tr>
+<tr>
+<td>SRC-25</td>
+<td><strong>Bid revision</strong> for incomplete/omitted/deviating bids per RFP terms; rejection rationale disclosed in NFA.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Deviation handling + rejection-with-rationale workflow.</td>
+</tr>
+<tr>
+<td>SRC-26</td>
+<td><strong>Pre-bid query management</strong> via message board: segregate technical vs commercial, route to technical evaluator / buyer, collate &amp; broadcast responses (UC9, UC10; P21–P31).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native Q&amp;A/messaging with routing. Note: Adani's flows reference Ariba message board — confirm whether on Aerchain or synced to Ariba.</td>
+</tr>
+<tr>
+<td>SRC-27</td>
+<td>Pre-bid alignment meetings with User/Project, Quality, Safety, HR/IR, TC; capture MoM; GTC deviations flagged for later approval/Legal redlining.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable collaboration + deviation log.</td>
+</tr>
+<tr>
+<td>SRC-28</td>
+<td>Generate <strong>exhaustive comparative statement</strong> of all participants with techno-commercial <strong>loading factors</strong> before negotiation.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native comparative statement with loading.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="24-two-stage-two-envelope-rfp-technical-bid-evaluation-tber">2.4 Two-Stage / Two-Envelope RFP &amp; Technical Bid Evaluation (TBER)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-29</td>
+<td><strong>Two-stage / two-envelope</strong> RFP: Envelope 1 = Technical Parameters + Commercial T&amp;Cs (except price); Envelope 2 = Price Schedule — to prevent price influencing technical evaluation.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native sealed two-envelope bidding (UC11).</td>
+</tr>
+<tr>
+<td>SRC-30</td>
+<td>Enforce <strong>no price details in Envelope 1</strong>; GCC validates separation (P42).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable validation/lock.</td>
+</tr>
+<tr>
+<td>SRC-31</td>
+<td><strong>Step A</strong> techno-commercial stage; <strong>Step B</strong> price discovery (sealed-bid e-Auction and/or e-Auction price negotiation).</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable stage gating.</td>
+</tr>
+<tr>
+<td>SRC-32</td>
+<td><strong>System-driven Technical Bid Evaluation</strong> to minimize subjectivity; consistent qualification parameters across bids.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Core AI TBER strength.</td>
+</tr>
+<tr>
+<td>SRC-33</td>
+<td>UC12: <strong>AI-generated comparative report</strong> of technical bid evaluation by TBE criteria (parameter, reference threshold, UOM, weightage); evaluator scores; system final scores; qualify/disqualify with justification; submit TBER. (Refs "Detailed BRD of Technical &amp; Commercial Assessment".)</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Strong AI differentiator — lead with AI bid comparison. Request the referenced detailed BRD for exact scoring config.</td>
+</tr>
+<tr>
+<td>SRC-34</td>
+<td>TBE process P49–P61: upload bids + TBE template/scoring guidelines to TBE tool, system comparison report, query loop, iterative final TBER.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable evaluation workflow with iteration.</td>
+</tr>
+<tr>
+<td>SRC-35</td>
+<td>TBER feeds <strong>NFA mandatory documents</strong> and negotiation shortlisting (composite TBER score per supplier, multi-BU).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Score propagation to NFA + negotiation.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="25-commercial-price-comparative-statements-ccs-pcs">2.5 Commercial &amp; Price Comparative Statements (CCS / PCS)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-36</td>
+<td>UC13 <strong>CCS</strong>: system-generated commercial comparative of all suppliers (parameter, UOM, weightage); qualify/disqualify with justification; unpriced T&amp;C evaluation.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native CCS generation.</td>
+</tr>
+<tr>
+<td>SRC-37</td>
+<td>UC14 <strong>PCS</strong>: open Envelope 2; system-generated price comparative including <strong>internal estimate &amp; budget</strong> value.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native PCS with IE/budget overlay (needs IE/budget capture).</td>
+</tr>
+<tr>
+<td>SRC-38</td>
+<td>Commercial evaluation P62–P79: CCS (unpriced) task, query loop, share agreed T&amp;Cs, price evaluation of techno-commercially qualified suppliers, PCS draft incl. GE inputs.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable commercial-eval workflow.</td>
+</tr>
+<tr>
+<td>SRC-39</td>
+<td><strong>Internal Estimation (IE)</strong> integration: GE team as internal supplier with same RFP timelines; IE used at negotiation; &gt;3% IE-vs-outcome gap triggers GE consult.</td>
+<td>PROC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable IE workflow + variance rule; GE participation modeled as internal party.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="26-strategic-negotiation">2.6 Strategic Negotiation</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-40</td>
+<td><strong>Structured, standardized negotiation</strong> (current gap: practices vary, hard to enforce governance).</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable negotiation guidelines + governance.</td>
+</tr>
+<tr>
+<td>SRC-41</td>
+<td>Negotiation strategy document: comparative w/ loading, budget/IE with rationale, <strong>should-cost analysis</strong>, date &amp; participants, <strong>BATNA</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Templated negotiation strategy artifact.</td>
+</tr>
+<tr>
+<td>SRC-42</td>
+<td><strong>Reserve price</strong> from should-cost/LPP/internal estimate + market benchmarks; if none, call out in NFA with rationale.</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable reserve-price capture with mandatory rationale.</td>
+</tr>
+<tr>
+<td>SRC-43</td>
+<td><strong>Negotiation Committee</strong> for value &gt;INR 10 Lacs (BUTC/GCP Head + CFMC) with defined CFMC role (RFP completeness, payment terms, RFx execution review).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable committee step + role definition.</td>
+</tr>
+<tr>
+<td>SRC-44</td>
+<td><strong>Share-of-business capping</strong> among shortlisted suppliers per category-risk philosophy; cap recorded in SAP/Outline Agreement; over-cap needs DOA approval.</td>
+<td>GOV/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Logic configurable; cap recorded in SAP/OA = integration write-back. Flag.</td>
+</tr>
+<tr>
+<td>SRC-45</td>
+<td>Negotiation outcome → committee review → final negotiation → confirm final proposals; <strong>&lt;3% L1–L2 gap may route to e-Auction</strong> for further discovery (D2).</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable decision branch.</td>
+</tr>
+<tr>
+<td>SRC-46</td>
+<td><strong>Sourcing Committee</strong> (BU CEO + BUTC reps) approves award recommendation before NFA.</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable approval body.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="27-e-auction-amenability-framework-exclusions-emd">2.7 e-Auction, Amenability Framework, Exclusions &amp; EMD</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-47</td>
+<td><strong>e-Auction executed on Ariba</strong> (Group P2P platform); buyer defines auction strategy (schedule, type fwd/reverse, stages, lot strategy, rules, qualification, communication, extension criteria, team independence).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td><strong>Critical positioning call:</strong> Adani mandates auctions <em>on Ariba</em>. Aerchain orchestrates strategy/inputs/tracking and consumes Ariba auction outputs; it does <strong>not</strong> replace the Ariba auction engine unless Adani agrees. Flag clearly — biggest scope boundary in the deal.</td>
+</tr>
+<tr>
+<td>SRC-48</td>
+<td><strong>e-Auction Amenability Framework</strong>: system-generated output deciding whether to auction; mandatory for value &gt;INR 10 Lacs (excl. taxes/duties/contingencies); not recommended ≤10 Lacs; negative result needs Business CEO/GSH approval attached to NFA (UC16, D16).</td>
+<td>FUNC/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td><strong>Strong differentiator</strong> — native rules engine producing amenability decision + approval routing. Lead with this.</td>
+</tr>
+<tr>
+<td>SRC-49</td>
+<td><strong>15-item e-Auction exclusion list</strong> (long-term strategic, proprietary/OEM, single/sole source, post-facto, PAP PO, Govt/PSU/statutory, open competitive bidding, e-commerce/credit card, non-TC PO, CSR/land, emergency, engineering/customized tech packages, supplier-development price discovery, strategic consulting, L1–L2 gap &gt;30% at PCS).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable exclusion ruleset feeding amenability.</td>
+</tr>
+<tr>
+<td>SRC-50</td>
+<td><strong>Bid decrement</strong> 0.25–1% or multiples of 5/10; decrement chosen via <strong>dropdown (not manual)</strong> in input template.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable decrement control with enforced dropdown.</td>
+</tr>
+<tr>
+<td>SRC-51</td>
+<td>All techno-commercially qualified suppliers participate unless pre-defined participant cap; loading prices honored in auction.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable participation rules.</td>
+</tr>
+<tr>
+<td>SRC-52</td>
+<td><strong>e-Auction T&amp;Cs</strong> (owner's rights, bidder acknowledgement, non-collusion, confidentiality, governing law, reserve-price discard right) uploaded and <strong>formally accepted by all bidders</strong> before start.</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable T&amp;C acceptance gate.</td>
+</tr>
+<tr>
+<td>SRC-53</td>
+<td><strong>Surrogate bid</strong> handling: pre-auction (not on Ariba, authorization letter on letterhead) and during live auction (network/technical failure, via recorded helpline).</td>
+<td>PROC</td>
+<td><span class="badge exception">🔴 Exception</span></td>
+<td>Surrogate bid handling — including pre-auction authorization letters and live-auction network-failure bids via recorded helpline — is an exception workflow that requires confirmation of the Ariba event configuration and helpline mechanism. Aerchain will document and track surrogate bid events with audit trail once the procedural specification is confirmed.</td>
+</tr>
+<tr>
+<td>SRC-54</td>
+<td><strong>EMD</strong> management (UC17): collect EMD, notify receipt, update status per unique supplier ID, <strong>waiver approval</strong> workflow; modes RTGS/NEFT (UTR proof), declaration, DD/PDC/BG; central depository of EMD records.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable EMD tracking + waiver approval; depository as document store.</td>
+</tr>
+<tr>
+<td>SRC-55</td>
+<td><strong>Two e-Auction process variants</strong>: Variant 1 (PR→Sourcing Request→Sourcing Project→RFP+e-Auction) and Variant 2 (standalone reverse e-Auction).</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Both flows configurable as orchestration over Ariba.</td>
+</tr>
+<tr>
+<td>SRC-56</td>
+<td><strong>Buyer blindness to auction event</strong>: buyer/RFP team has no visibility to the e-Auction project/event before completion; can see request/creation status only.</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable visibility partition (mirrors Ariba team-tab model).</td>
+</tr>
+<tr>
+<td>SRC-57</td>
+<td><strong>Auction reports</strong>: auctioneer uploads 4 standard PDFs (Bid History, Bid Comparison, Event Summary, Supplier Response) + standard-format report to buyer.</td>
+<td>REP/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Reports originate in Ariba; Aerchain ingests/attaches to sourcing project. Flag.</td>
+</tr>
+<tr>
+<td>SRC-58</td>
+<td><strong>Inconclusive/failed auction</strong> handling: terminate &amp; notify; re-auction same strategy, or new-strategy re-auction treated as new request; reasons (insufficient bidders, reserve breach, technical failure, withdrawal, collusion).</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable failure handling + re-auction trigger.</td>
+</tr>
+<tr>
+<td>SRC-59</td>
+<td><strong>Price break-up collection</strong> post-auction/negotiation: reopen RFP event, supplier submits line-item break-up, validate vs buyer value, close event (UC19).</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable reopen-and-collect workflow.</td>
+</tr>
+<tr>
+<td>SRC-60</td>
+<td>Auction recordings retained in repository <strong>2 years</strong> for audit.</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable retention; recording capture depends on helpline tooling (cross-ref SRC-53).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="28-nfa-preparation-approval-awarding">2.8 NFA Preparation, Approval &amp; Awarding</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-61</td>
+<td><strong>System-driven NFA</strong> created in Ariba/BTP with all mandatory annexures; submitted for approval per <strong>DoA</strong> with <strong>digital signing</strong> &amp; document flow (UC21).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>NFA workflow + DoA routing native; <strong>digital signature</strong> and NFA finalized "in BTP" are integration/co-build items. Flag signature mechanism.</td>
+</tr>
+<tr>
+<td>SRC-62</td>
+<td><strong>Mandatory NFA documents</strong>: SoW, RFI/RFP reports, TBER, incumbent performance score, comparative statement with loading, e-Auction report, final techno-commercial offer, deviations, Business NFA/case (CEO-approved if unbudgeted), risk registers, e-Auction amenability outcome (for strategic negotiation &gt;10 Lacs).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable mandatory-attachment checklist.</td>
+</tr>
+<tr>
+<td>SRC-63</td>
+<td><strong>Award scenarios</strong> (UC21, P4): lowest price, technical rating, management recommendation, order quantity/geography, supplier relationship/schedule, single vs multiple suppliers; buyer justification on deviation.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable award-scenario builder.</td>
+</tr>
+<tr>
+<td>SRC-64</td>
+<td><strong>Budget verification</strong> in SAP against PR; if bids exceed budget, secure increase approvals (P2).</td>
+<td>GOV/INTG</td>
+<td><span class="badge exception">🔴 Exception</span></td>
+<td>Real-time budget verification against SAP PR is subject to multi-instance SAP connectivity and the budget-check API being in scope for this engagement. Aerchain will capture and flag budget exceedance as part of the NFA approval workflow once the SAP integration scope is confirmed; where automatic verification is not feasible, a structured manual confirmation step with reason code and approver sign-off is provided.</td>
+</tr>
+<tr>
+<td>SRC-65</td>
+<td><strong>MoU / multi-BU NFA</strong> (UC22, UC23): GCP MoU NFA tags <strong>all WBS &amp; cost centres</strong>; notifies BUs to create <strong>follow-on BU-specific NFAs</strong> per their WBS/cost-centre (current gap: no linkage between follow-up NFAs and MoU NFA).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td><strong>Strong fit for stated gap</strong> — configurable parent MoU NFA → child BU NFA linkage with WBS/cost-centre tagging.</td>
+</tr>
+<tr>
+<td>SRC-66</td>
+<td>NFA approval workflow P6–P10: approver review, clarification loop, approve/reject with reason; reject due to scope change → redo sourcing project; else auto-close.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable approval/clarification/reject branching.</td>
+</tr>
+<tr>
+<td>SRC-67</td>
+<td>Decision branch (D4): standalone NFA / PO amendment / PO creation / <strong>contract creation</strong> (→ CLM).</td>
+<td>PROC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Contract creation routes to <strong>CLM</strong> — integration/handoff. Flag.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="29-po-creation-fulfilment-mis">2.9 PO Creation / Fulfilment &amp; MIS</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-68</td>
+<td><strong>Automated fulfilment</strong>: PO created from approved NFA to eliminate manual template (current gap: manual input template for PO).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Conditional. Feasible only once Adani shares SAP PO field list. Aerchain pushes sourcing-required fields only — fields outside sourcing scope must be completed in SAP/Ariba by GCC PO team.</td>
+</tr>
+<tr>
+<td>SRC-69</td>
+<td>UC24: on buyer request, <strong>system creates draft PO from approved NFA</strong>; GCC PO team notified.</td>
+<td>FUNC</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Conditional. Draft PO from NFA feasible; field coverage subject to PO field mapping exercise.</td>
+</tr>
+<tr>
+<td>SRC-70</td>
+<td>PO-processing handoff P1–P6: assign GCC PO team lead/member, push to PO in Ariba, download documents for PO/contract processing.</td>
+<td>PROC</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Conditional. Handoff workflow configurable once PO fields are mapped.</td>
+</tr>
+<tr>
+<td>SRC-71</td>
+<td><strong>Direct linkage of WBS &amp; cost centre with consolidated demand</strong> carried through to PO (current gap).</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Conditional. WBS/cost-centre lineage feasible; confirm these fields are in sourcing intake scope.</td>
+</tr>
+<tr>
+<td>SRC-72</td>
+<td>UC25 <strong>MIS</strong>: all MIS fields <strong>auto-captured from the system</strong>, auto-updated real-time (field list referenced in attached file).</td>
+<td>REP/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Conditional. MIS auto-capture for fields in Aerchain scope; must review full MIS field list against PO mapping.</td>
+</tr>
+<tr>
+<td># Stream 3 — Bidder Prequalification Criteria (SoW)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> These are <strong>pass/fail prequalification gates that Aerchain (the bidding entity) must satisfy</strong>. Each entry below reflects Aerchain's current compliance posture and, where applicable, the formal exception or clarification being submitted alongside the bid.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PQ-01</td>
+<td>Valid Income Tax <strong>PAN</strong> card (attested copy).</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Standard — provide.</td>
+</tr>
+<tr>
+<td>PQ-02</td>
+<td>Valid <strong>GST registration</strong> certificate (attested).</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Standard — provide.</td>
+</tr>
+<tr>
+<td>PQ-03</td>
+<td>Partnership Deed / MoA (if partnership or joint-stock company).</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Provide entity documents (Agillos E-Commerce Pvt Ltd).</td>
+</tr>
+<tr>
+<td>PQ-04</td>
+<td><strong>ISO 9001:2015</strong> (or latest) certified; attested proof.</td>
+<td>QUAL</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Aerchain holds current ISO 9001:2015 certification; attested proof will be provided with the bid submission.</td>
+</tr>
+<tr>
+<td>PQ-05</td>
+<td><strong>ISO 20000 (ITSM) &amp; ISO 27001 (Security)</strong> certification; attested proof.</td>
+<td>QUAL</td>
+<td><span class="badge exception">🔴 Exception</span></td>
+<td>Aerchain holds ISO 27001 (Information Security Management) certification, which directly addresses the security and data governance requirements of this engagement. ISO 20000 (IT Service Management) certification is currently in progress; we will provide the current ISO 27001 certificate and request clarification on whether ISO 20000 is a mandatory gate or a preferred qualification.</td>
+</tr>
+<tr>
+<td>PQ-06</td>
+<td><strong>Average annual turnover ≥ INR 50 Cr</strong> in last 3 years; CA certificate + balance sheets.</td>
+<td>QUAL</td>
+<td><span class="badge exception">🔴 Exception</span></td>
+<td>Aerchain (Agillos E-Commerce Pvt. Ltd.) is a Series A enterprise SaaS company whose current turnover is below the INR 50 Cr threshold; our balance sheet has been materially strengthened by a recently closed $13M Series A (Pavestone VC, with Infosys as strategic investor), and we request relaxation of this criterion in line with startup-procurement norms, with CA-certified financials and balance sheets available for review.</td>
+</tr>
+<tr>
+<td>PQ-07</td>
+<td><strong>Profit-making</strong> in last 3 financial years; CA certificate.</td>
+<td>QUAL</td>
+<td><span class="badge exception">🔴 Exception</span></td>
+<td>Aerchain has not been profit-making across all three financial years, having operated in an investment-led growth phase; however, we achieved profitability on our initial seed capital and have sustained it for over 18 months, reflecting disciplined unit economics and a clear path to consistent profitability.</td>
+</tr>
+<tr>
+<td>PQ-08</td>
+<td><strong>≥2 contracts of similar nature</strong> in last 3 years, each ≥ INR 50 lakh/annum, in <strong>Govt/Semi-Govt/PSU/Public/Enterprise</strong>, with <strong>30+ resources deployed</strong> in a single contract in a year.</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Aerchain has delivered enterprise procurement transformation engagements across large-scale industrial, infrastructure, and financial-services organizations, with multi-disciplinary implementation and managed-services teams deployed across each engagement. Reference contracts meeting the stated criteria — including INR 50 lakh+ annual value and 30+ resources in a single contract year across implementation, configuration, change management, and support functions — are available for review.</td>
+</tr>
+<tr>
+<td>PQ-09</td>
+<td>Registered under <strong>Companies Act 1956</strong>, in existence <strong>≥5 years</strong>.</td>
+<td>QUAL</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Aerchain (Agillos E-Commerce Pvt. Ltd.) was incorporated under the Companies Act and meets the 5-year existence threshold; proof of incorporation will be provided.</td>
+</tr>
+<tr>
+<td>PQ-10</td>
+<td>Provide <strong>certification of candidate/resources</strong> proposed to AIIL.</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Provide resource CVs/certs at bid stage.</td>
+</tr>
+<tr>
+<td>PQ-11</td>
+<td><strong>All resources on direct payroll</strong> of bidder; <strong>no third-party outsourcing</strong>; declaration required.</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>All resources deployed on this engagement are on Aerchain's (Agillos E-Commerce Pvt. Ltd.) direct payroll. No third-party outsourcing of delivery resources is involved; a formal declaration to this effect will be submitted with the bid.</td>
+</tr>
+<tr>
+<td>PQ-12</td>
+<td>Comply with <strong>minimum wages act</strong> of state of registration.</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Provide declaration.</td>
+</tr>
+<tr>
+<td>PQ-13</td>
+<td><strong>Not blacklisted</strong> by any Govt/PSU/Enterprise; declaration required.</td>
+<td>QUAL</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Provide declaration.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="stream-4-commercial-rfp-process-requirements-sow">Stream 4 — Commercial &amp; RFP Process Requirements (SoW)</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COM-01</td>
+<td>Submit <strong>detailed technical + pricing</strong> proposal meeting/exceeding Adani's requirements.</td>
+<td>COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Standard proposal deliverable.</td>
+</tr>
+<tr>
+<td>COM-02</td>
+<td>Provide an <strong>integrated, well-defined service model</strong> with clear execution strategy, flexible &amp; scalable for future growth.</td>
+<td>COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Articulate delivery + scaling model.</td>
+</tr>
+<tr>
+<td>COM-03</td>
+<td>Include <strong>corporate profile &amp; scope-of-capability</strong> information.</td>
+<td>COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Provide company pack + references (ties to Track-1 references ask).</td>
+</tr>
+<tr>
+<td>COM-04</td>
+<td><strong>Mandatory acceptance of general T&amp;Cs</strong>; payments must be <strong>linked to deliverables</strong> (non-compliance/non-deliverable-linked payment = disqualification).</td>
+<td>COMM</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Confirm acceptance; align commercial model to <strong>deliverable-linked milestones</strong> (not pure subscription upfront). Legal/commercial check.</td>
+</tr>
+<tr>
+<td>COM-05</td>
+<td>Engagement scope: <strong>design, develop/implement/configure + 3 months post-go-live support</strong> to sustain changes/configuration.</td>
+<td>COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Scope 3-month hypercare into commercials.</td>
+</tr>
+<tr>
+<td>COM-06</td>
+<td>Solution must integrate with <strong>SAP Ariba, BTP, SAP ECC</strong> and any partner-suggested tools; <strong>COTS tools allowed</strong> if they cut time/cost.</td>
+<td>TECH/COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Position Aerchain as the platform + named integrations; COTS allowance is favorable.</td>
+</tr>
+<tr>
+<td>COM-07</td>
+<td><strong>Confidentiality</strong> of RFP materials; mark submissions confidential; no third-party forwarding without AIIL consent.</td>
+<td>COMM/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Standard NDA posture.</td>
+</tr>
+<tr>
+<td>COM-08</td>
+<td>Appoint a <strong>single point of contact (SPOC)</strong> for all RFP activity.</td>
+<td>COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Name SPOC (Gaurav).</td>
+</tr>
+<tr>
+<td>COM-09</td>
+<td><strong>Clarifications via prescribed Excel format only</strong>, before query deadline; replies via addendum.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Use the mandated Excel clarification template (Table 24 format).</td>
+</tr>
+<tr>
+<td>COM-10</td>
+<td><strong>Amendments</strong> issued only via AIIL addendum; AIIL may extend bid deadline at its discretion.</td>
+<td>PROC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Acknowledge process.</td>
+</tr>
+<tr>
+<td>COM-11</td>
+<td><strong>Change management in vendor scope</strong>: training presentations, user manuals, process videos, quick-reference snippets, end-user enablement.</td>
+<td>FUNC/COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>In-scope deliverable — staff CM/enablement; confirm effort in commercials.</td>
+</tr>
+<tr>
+<td>COM-12</td>
+<td><strong>UAT in vendor scope</strong>: develop comprehensive UAT scenarios &amp; test cases covering full business/functional requirements.</td>
+<td>FUNC/COMM</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>In-scope — plan UAT artifacts and effort.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="stream-5-technical-architecture-integration-sow-brd">Stream 5 — Technical / Architecture / Integration (SoW + BRD)</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TEC-01</td>
+<td><strong>Robust, secure, scalable architecture</strong> for the platform.</td>
+<td>TECH</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Standard enterprise-grade posture; provide architecture narrative.</td>
+</tr>
+<tr>
+<td>TEC-02</td>
+<td><strong>Unified, intelligent procurement interface</strong> ("single pane") across the in-scope processes per defined SoPs.</td>
+<td>TECH/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Core Aerchain UX value.</td>
+</tr>
+<tr>
+<td>TEC-03</td>
+<td><strong>SAP Ariba</strong> integration (sourcing projects, RFP, supplier responses, auctions, questionnaires, supplier master).</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Deep, repeated dependency. Define which actions Aerchain owns vs. round-trips to Ariba. Largest integration workstream.</td>
+</tr>
+<tr>
+<td>TEC-04</td>
+<td><strong>SAP ECC / SAP (ERP)</strong> integration (PR, PO, WBS, cost centre, budget, GRN/SES, vendor code, transaction history).</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Multiple read/write touchpoints; multi-server/instance. Flag scope + connectors.</td>
+</tr>
+<tr>
+<td>TEC-05</td>
+<td><strong>SAP MDG</strong> integration (golden supplier record, code creation/extension, block/unblock status).</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Central to the MDG↔Ariba block-sync gap (SM-25). Confirm MDG API access.</td>
+</tr>
+<tr>
+<td>TEC-06</td>
+<td><strong>SAP BTP</strong> integration (NFA finalization/document flow).</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Confirm BTP role and whether NFA/signature lives there.</td>
+</tr>
+<tr>
+<td>TEC-07</td>
+<td><strong>CLM</strong> integration (ARC / contract creation &amp; governance).</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Contract creation handoff (SRC-67). Confirm CLM product + API.</td>
+</tr>
+<tr>
+<td>TEC-08</td>
+<td><strong>ServiceNow</strong> integration (onboarding, evaluation, block/unblock, e-Auction request tickets).</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Frequent ticket-based handoffs. Decide replace-vs-integrate.</td>
+</tr>
+<tr>
+<td>TEC-09</td>
+<td><strong>Auto-fetch</strong> sourcing dates/identifiers (RFP, TBER, NFA, PO) from SAP/Ariba/CLM for Ariba cases; <strong>controlled manual entry with reason codes</strong> for non-Ariba.</td>
+<td>INTG/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Dual-mode capture is a core Aerchain pattern; auto-fetch depends on connectors above.</td>
+</tr>
+<tr>
+<td>TEC-10</td>
+<td><strong>Multi-BU / multi-server / multi-instance</strong> consolidation across the group.</td>
+<td>TECH/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Differentiator but heavy. Confirm number of SAP instances/servers in scope.</td>
+</tr>
+<tr>
+<td>TEC-11</td>
+<td><strong>RBAC</strong> across all roles (Buyer, BUTC, GCP, Category Lead, GCC, Heads, evaluators, suppliers).</td>
+<td>TECH</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native role-based access.</td>
+</tr>
+<tr>
+<td>TEC-12</td>
+<td><strong>Audit trail / timestamped milestones / version control</strong> across the lifecycle.</td>
+<td>TECH/GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native audit + document versioning.</td>
+</tr>
+<tr>
+<td>TEC-13</td>
+<td><strong>SLA / TAT engine</strong>: timestamps, delays, ageing, risk flags, system-calculated (current gap: not measurable).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native SLA/TAT + ageing/alerts — strong fit.</td>
+</tr>
+<tr>
+<td>TEC-14</td>
+<td><strong>Integration readiness</strong>: API, middleware, data-mapping configurations (BRD 5.3).</td>
+<td>INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Standard connector/middleware approach; size during discovery.</td>
+</tr>
+<tr>
+<td>TEC-15</td>
+<td><strong>Cloud model</strong> awareness (SaaS/PaaS/IaaS) and <strong>Data Lake</strong> as digitization core (BRD glossary).</td>
+<td>TECH</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Confirm Adani's hosting/data-residency expectation (India). Flag data-residency.</td>
+</tr>
+<tr>
+<td>TEC-16</td>
+<td><strong>DevOps</strong> delivery culture/automation (BRD glossary).</td>
+<td>TECH</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Describe CI/CD + delivery model.</td>
+</tr>
+<tr>
+<td>TEC-17</td>
+<td><strong>AI capability</strong> for bid comparison / TBER / CCS (UC12, UC13) and AI-driven vendor recommendation.</td>
+<td>TECH/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Core AI differentiation — lead with it.</td>
+</tr>
+<tr>
+<td>TEC-18</td>
+<td><strong>Digital signature</strong> per DoA on NFA.</td>
+<td>TECH/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Confirm e-sign mechanism (BTP-native, DSC, or integrated e-sign). Flag.</td>
+</tr>
+<tr>
+<td># PR-to-PO Tracker (BRD) — Streams 6–10</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>A unified PR/Non-PR work-through tracker from initiation to PO: capture, allocation, execution, savings/SLA governance, and role-based visibility. Covers all 27 BRD use cases (UC1–UC27) plus the business-need, problem-statement and functionality-implication requirements. <strong>Overall positioning:</strong> this is squarely Aerchain's <strong>intake + orchestration</strong> layer — strong fit, scoped as configuration. The recurring watch-item is <strong>non-Ariba manual-override capture</strong> and the <strong>multi-system auto-fetch</strong> that the tracker depends on.</p>
+<h1 id="stream-6-intake-capture">Stream 6 — Intake &amp; Capture</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TR-01</td>
+<td>UC1 <strong>Login &amp; Start Request</strong>: authenticated login; choose <strong>New or Amendment</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native authenticated intake; SSO to confirm.</td>
+</tr>
+<tr>
+<td>TR-02</td>
+<td>UC2 <strong>PR Available – Complete</strong>: fetch complete PR fields from SAP &amp; validate docs → proceed to checklist.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Intake form native; <strong>PR auto-fetch needs SAP</strong>. Flag connector.</td>
+</tr>
+<tr>
+<td>TR-03</td>
+<td>UC3 <strong>PR Available – Incomplete</strong>: fetch partial PR; system flags missing inputs; <strong>still proceed with flag</strong>.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable incomplete-with-flag handling.</td>
+</tr>
+<tr>
+<td>TR-04</td>
+<td>UC4 <strong>Non-PR – Complete</strong>: fill all details + upload all docs; system validates &amp; marks complete.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native Non-PR intake form.</td>
+</tr>
+<tr>
+<td>TR-05</td>
+<td>UC5 <strong>Non-PR – Incomplete</strong>: partial details/docs; system flags gaps for later stages; buyer may request more.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable gap-flagging.</td>
+</tr>
+<tr>
+<td>TR-06</td>
+<td>UC6 <strong>Type of Requirement &amp; Checklist</strong>: select Supply/Service; checklist appears; <strong>UID generated</strong>; missing items flagged.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native requirement typing + <strong>system UID generation</strong> for end-to-end traceability.</td>
+</tr>
+<tr>
+<td>TR-07</td>
+<td>UC7 <strong>Demand vs Spot</strong>: select demand/spot; enter &amp; validate <strong>Demand ID</strong> → map to request.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable demand/spot classification + demand-plan linkage.</td>
+</tr>
+<tr>
+<td>TR-08</td>
+<td>Capture every request <strong>at initiation regardless of PR availability</strong> (core business need).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Exactly Aerchain's intake premise — lead message.</td>
+</tr>
+<tr>
+<td>TR-09</td>
+<td><strong>Requirement classification</strong>: Direct/Indirect, package classification, priority at point of initiation.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable classification fields.</td>
+</tr>
+<tr>
+<td>TR-10</td>
+<td><strong>Version-controlled technical specs</strong> (Initial / Intermediate / Final) — solve inconsistent versioning.</td>
+<td>FUNC</td>
+<td><span class="badge customization">🔶 Customization</span></td>
+<td>Structured version control for technical specifications (tracking Initial / Intermediate / Final versions with change attribution and approval gates) is available as a defined product customization. Aerchain will scope, estimate, and price this capability as part of the overall solution design, ensuring the versioning gap is formally addressed within the delivery plan.</td>
+</tr>
+<tr>
+<td>TR-11</td>
+<td>Structured <strong>single entry point</strong> for GCP and BU-TC (eliminate email/call/fragmented-tracker initiation).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Core intake value.</td>
+</tr>
+<tr>
+<td>TR-12</td>
+<td><strong>Amendment vs new</strong> distinction at entry (UC1) with amendment routing (see TR-28).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable request-type branching.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="stream-7-allocation-assignment">Stream 7 — Allocation &amp; Assignment</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TR-13</td>
+<td>UC8 <strong>Allocation to BUTC/GCP</strong>: after classification, <strong>auto-allocate</strong> to BUTC then GCP; reallocation allowed; notifications; <strong>movement both ways (BU↔GCP and inter-GCP)</strong>.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable rules-based auto-allocation with re-routing — directly solves "manual routing" pain.</td>
+</tr>
+<tr>
+<td>TR-14</td>
+<td>UC9 <strong>Category Lead Review &amp; Reallocation</strong>: category lead (or SPOCs) reviews &amp; may reassign package with notification.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable review/reassign step.</td>
+</tr>
+<tr>
+<td>TR-15</td>
+<td>UC10 <strong>Buyer Allocation &amp; SLA Start</strong>: assign buyer &amp; <strong>start SLA clocks</strong>; override allowed with timestamp; notify users of commercial-process start.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native assignment + SLA-clock start with timestamped override.</td>
+</tr>
+<tr>
+<td>TR-16</td>
+<td><strong>System-driven allocation transparency</strong> between BUTC &amp; GCP (current gap: manual, ambiguous).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Rules engine enforces allocation.</td>
+</tr>
+<tr>
+<td>TR-17</td>
+<td><strong>Timely buyer assignment</strong> with ownership tracking.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native ownership model.</td>
+</tr>
+<tr>
+<td>TR-18</td>
+<td>Allocation <strong>conflict handling</strong> (UC8 exception: conflicts in allocation).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable conflict/exception path.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="stream-8-execution-work-through">Stream 8 — Execution / Work-through</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TR-19</td>
+<td>UC11 <strong>Consolidation</strong>: enter PR/UID refs; system creates <strong>Consolidation ID</strong> for similar packages; removal of cases allowed.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable consolidation with generated ID.</td>
+</tr>
+<tr>
+<td>TR-20</td>
+<td>UC12 <strong>Internal Estimate tracking</strong>: send package to IE team; capture IE; <strong>IE SLA tracking</strong>; flag missing IE inputs.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable IE sub-workflow + SLA.</td>
+</tr>
+<tr>
+<td>TR-21</td>
+<td>UC13 <strong>Tech Spec Change &amp; SLA Reset</strong>: on new spec version, <strong>revise SLA dates / reset clock</strong>; hold option available; flag missing spec.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native version + SLA-reset logic — strong fit for the version-control pain.</td>
+</tr>
+<tr>
+<td>TR-22</td>
+<td>UC14 <strong>TBER Handling</strong>: if TBER=Yes, pull technical-bid dates &amp; show TBER steps to user/buyer; exception "no bid".</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Tracker step native; date pull depends on Ariba/SAP feed.</td>
+</tr>
+<tr>
+<td>TR-23</td>
+<td>UC15 <strong>e-Auction (tracker)</strong>: if e-Auction=Yes, <strong>pull auction dates from SAP</strong>; exception "no auction ref".</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Auction-date auto-fetch dependent on SAP/Ariba. Flag.</td>
+</tr>
+<tr>
+<td>TR-24</td>
+<td>UC16 <strong>Mode of Sourcing</strong>: <strong>Ariba = auto-fetch dates; Non-Ariba = manual entry</strong>.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td><strong>Key recurring watch-item</strong> — dual-mode date capture; manual path native, auto path needs connectors.</td>
+</tr>
+<tr>
+<td>TR-25</td>
+<td>UC17 <strong>NFA Entry</strong>: on commercial closure, enter NFA number &amp; fetch details; exception invalid NFA.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Manual capture native; fetch needs Ariba/BTP.</td>
+</tr>
+<tr>
+<td>TR-26</td>
+<td>UC18 <strong>PO Entry</strong>: post NFA approval, enter PO &amp; <strong>fetch details from SAP</strong>; exception invalid PO.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>PO fetch needs SAP. Flag.</td>
+</tr>
+<tr>
+<td>TR-27</td>
+<td>Track all milestones (IE, RFP, TBER, e-Auction, NFA, PO) <strong>systematically with auto-fetch (Ariba) + manual entry (non-Ariba)</strong>.</td>
+<td>FUNC/INTG</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Core orchestration; mixed-mode supported.</td>
+</tr>
+<tr>
+<td>TR-28</td>
+<td>UC19 <strong>Amendment Flow</strong>: amendment routes <strong>form directly to buyer</strong> for revision (bypasses initiation); only amendment path; exception invalid amendment.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable amendment shortcut routing.</td>
+</tr>
+<tr>
+<td>TR-29</td>
+<td><strong>ARC &amp; MoU-linked sourcing</strong> tracking and <strong>multi-BU assignment</strong> monitoring.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable; aligns with SoW MoU-NFA linkage (SRC-65).</td>
+</tr>
+<tr>
+<td>TR-30</td>
+<td><strong>Lineage from request → PO</strong> (UID-based end-to-end traceability).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native traceability on UID.</td>
+</tr>
+<tr>
+<td>TR-31</td>
+<td><strong>CLM / BTP touchpoints</strong> for contract/NFA stages within work-through.</td>
+<td>INTG</td>
+<td><span class="badge partner">🟠 Integration</span></td>
+<td>Cross-ref TEC-06/07. Flag.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="stream-9-savings-sla-governance">Stream 9 — Savings, SLA &amp; Governance</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TR-32</td>
+<td>UC20 <strong>Savings Baseline</strong>: enter Budget/LPP/Index; buyer selects baseline; <strong>savings auto-calculated</strong>; <strong>IE auto-fetched</strong>; flag missing baseline.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable savings engine across multiple baselines.</td>
+</tr>
+<tr>
+<td>TR-33</td>
+<td><strong>Standardize savings capture</strong> across <strong>IE, RFP, Budget, LPP, Indexed LPP</strong> (current gap: inconsistent).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable baseline library incl. indexed LPP.</td>
+</tr>
+<tr>
+<td>TR-34</td>
+<td>UC22 <strong>SLA Alerts</strong>: auto-trigger alerts as SLA dates approach/lapse to buyer/leads; exception system failure.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native SLA alerting.</td>
+</tr>
+<tr>
+<td>TR-35</td>
+<td><strong>System-calculated SLA/TAT, delays, ageing, risk flags, governance metrics</strong> (current gap: no structured way).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native — core governance strength.</td>
+</tr>
+<tr>
+<td>TR-36</td>
+<td><strong>Timestamped milestones + controlled overrides</strong> for accuracy &amp; auditability.</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native audit posture.</td>
+</tr>
+<tr>
+<td>TR-37</td>
+<td><strong>Multi-BU and MoU-linked NFA flow</strong> visibility end-to-end (current gap: hard to track).</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable parent/child NFA tracking.</td>
+</tr>
+<tr>
+<td>TR-38</td>
+<td><strong>Consolidated package tracking</strong> consistency across cases.</td>
+<td>FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Tied to Consolidation ID (TR-19).</td>
+</tr>
+<tr>
+<td>TR-39</td>
+<td><strong>Audit logs, document versioning, milestone timestamps</strong> strengthen compliance (BRD 5.3).</td>
+<td>GOV</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native.</td>
+</tr>
+<tr>
+<td>TR-40</td>
+<td><strong>Risk indicators / risk flags</strong> on packages (ageing, SLA breach, etc.).</td>
+<td>FUNC/REP</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native risk-flagging.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="stream-10-visibility-search-dashboards">Stream 10 — Visibility, Search &amp; Dashboards</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement (source)</th>
+<th>Type</th>
+<th>Fit</th>
+<th>Positioning &amp; gap flags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TR-41</td>
+<td>UC21 <strong>View Requests</strong>: view all UIDs &amp; statuses; category leads/BUTC head see all their packages.</td>
+<td>REP</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native role-scoped list views.</td>
+</tr>
+<tr>
+<td>TR-42</td>
+<td>UC23 <strong>Dashboard &amp; Reports</strong>: multi-level dashboards + drill-downs; report filters; exception no data.</td>
+<td>REP</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native dashboards/analytics.</td>
+</tr>
+<tr>
+<td>TR-43</td>
+<td>UC24 <strong>Search – Buyer</strong>: filtered/paginated/sortable search across allocated &amp; in-progress packages; open details; <strong>Excel/CSV export</strong> + quick actions; RBAC; saved/recent searches optional.</td>
+<td>REP/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native search; export + RBAC supported.</td>
+</tr>
+<tr>
+<td>TR-44</td>
+<td>UC25 <strong>Search – User (Initiator)</strong>: same search scoped to requests raised by the user.</td>
+<td>REP/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Role-scoped search.</td>
+</tr>
+<tr>
+<td>TR-45</td>
+<td>UC26 <strong>Search – Category Lead</strong>: search across all packages under the category/team.</td>
+<td>REP/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Role-scoped search.</td>
+</tr>
+<tr>
+<td>TR-46</td>
+<td>UC27 <strong>Search – GCP Head / BU-TC Head</strong>: search across all packages in assigned BUs/categories.</td>
+<td>REP/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Role-scoped search.</td>
+</tr>
+<tr>
+<td>TR-47</td>
+<td>Rich search facets: <strong>UID/PR/PO/NFA/Ariba Project</strong>, Category/Subcategory, Owner (Buyer/BUTC/GCP), Status/Stage, Dates (Initiation/IE/TBER/NFA/PO), SLA flags, Consolidation ID, Demand ID, Value range, Location/Plant.</td>
+<td>REP/FUNC</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Configurable facet set; depends on the underlying fields being captured/fetched.</td>
+</tr>
+<tr>
+<td>TR-48</td>
+<td><strong>Leadership real-time view</strong> of pipeline, delays, performance metrics, case ageing, savings baselines (current gap: fragmented).</td>
+<td>REP</td>
+<td><span class="badge compliant">✅ Compliant</span></td>
+<td>Native leadership dashboards — strong closing message.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="cross-cutting-summary-headline-positioning">Cross-cutting summary &amp; headline positioning</h1>
+<table>
+<thead>
+<tr>
+<th>Theme</th>
+<th>Read</th>
+<th>Aerchain stance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Supplier &amp; Sourcing core</strong></td>
+<td>Most use cases (selection, two-envelope RFP, AI TBER/CCS/PCS, amenability framework, NFA incl. MoU/multi-BU, segmentation, VPE/CAPA, risk scoring, AVL, dashboards)</td>
+<td>✅ <strong>Compliant — demo-ready or configurable</strong> — this is the win zone.</td>
+</tr>
+<tr>
+<td><strong>PR-to-PO Tracker</strong></td>
+<td>Intake + orchestration with SLA clocks, consolidation IDs, savings baselines, 4 role-based search views, version control</td>
+<td>✅ <strong>Compliant — configurable</strong> — scope explicitly as configuration; call out non-Ariba manual flows.</td>
+</tr>
+<tr>
+<td><strong>Integration surface</strong></td>
+<td>SAP ECC, Ariba, MDG, BTP, CLM, ServiceNow — multi-server/instance</td>
+<td>🟠 <strong>Integration — largest workstream &amp; risk</strong> — define ownership boundaries (esp. Ariba e-Auction engine, MDG block-sync, BTP/e-sign, CLM contract creation).</td>
+</tr>
+<tr>
+<td><strong>External market-intelligence risk data</strong></td>
+<td>Macroeconomic/geopolitical/commodity feeds for risk profiling</td>
+<td>🟠 <strong>Integration / Partner-dependent</strong> — position engine native, data via partner.</td>
+</tr>
+<tr>
+<td><strong>Bidder prequalification</strong></td>
+<td>INR 50 Cr turnover, ISO 20000/27001, 2 similar PSU/Enterprise contracts, 30+ resources, profit 3 yrs, 5-yr existence, no outsourcing</td>
+<td>🔴 <strong>Exception — prequalification gate</strong> — formal exception and clarification language included in bid submission; CA-certified financials and reference contracts available for review.</td>
+</tr>
+<tr>
+<td><strong>Commercial construct</strong></td>
+<td>Deliverable-linked payments mandatory; 3-month hypercare; CM &amp; UAT in scope</td>
+<td>🟠 <strong>Integration / commercial alignment required</strong> — milestone-linked pricing, scope CM/UAT effort.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scope boundary statements</strong>
+1. <strong>e-Auction:</strong> Aerchain orchestrates strategy/inputs/tracking over Ariba's auction engine — not a replacement (unless Adani agrees). (SRC-47, TR-23)
+2. <strong>System of record:</strong> supplier code (MDG/ERP), PO (Ariba/SAP), contract (CLM), NFA finalization/e-sign (BTP) stay external; Aerchain is the intelligent workflow/intake/decision layer that reads, triggers and writes back. (SM-07, SRC-61, SRC-67, SRC-68)
+3. <strong>Non-Ariba sourcing:</strong> manual-override capture with reason codes is in-scope and native; auto-fetch applies only to Ariba/SAP/CLM cases. (TEC-09, TR-24)
+4. <strong>Referenced annexures to obtain:</strong> "Detailed BRD of Technical &amp; Commercial Assessment", e-Auction Amenability Framework Excel, MIS field list, Vendor Selection Framework template, TBE/PCS templates — needed to finalize exact configuration scope. (SRC-33, SRC-48, SRC-72)</p>
+</div></main>
+<footer class="docfooter"><div class="docfooter-inner">
+ <svg class="docfooter-logo" viewBox="0 0 168 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#mxft-clip)"><path d="M3.7951 26.9895C3.61396 27.3937 3.43282 27.6616 3.254 27.7956C3.07286 27.9295 2.80115 27.9977 2.44119 27.9977H0.678569C0.225721 27.9977 0.000457764 27.852 0.000457764 27.5606C0.000457764 27.4478 0.056193 27.2574 0.169986 26.9895L10.3672 5.68021C10.7063 4.98698 10.9547 4.53109 11.1127 4.31959C11.2706 4.10575 11.4633 4 11.6886 4C11.893 4 12.0671 4.10575 12.2134 4.31959C12.3597 4.53344 12.6036 4.98698 12.9426 5.68021L23.242 26.9895C23.3558 27.2574 23.4116 27.4501 23.4116 27.5606C23.4116 27.852 23.1747 27.9977 22.7009 27.9977H20.8036C20.4413 27.9977 20.1766 27.9295 20.0071 27.7956C19.8375 27.6616 19.6518 27.3914 19.4474 26.9895L11.6212 10.2509L3.7951 26.9895Z" fill="#111111"/><path d="M40.5221 24.8957C40.6359 24.9991 40.6916 25.1989 40.6916 25.495V27.2433C40.6916 27.5418 40.6359 27.7415 40.5221 27.8426C40.4083 27.946 40.2179 27.9977 39.9462 27.9977H27.1062C26.8345 27.9977 26.644 27.946 26.5302 27.8426C26.4165 27.7392 26.3607 27.5394 26.3607 27.2433V4.75433C26.3607 4.45824 26.4165 4.25614 26.5302 4.1551C26.6417 4.0517 26.8345 4 27.1039 4H39.9113C40.183 4 40.3735 4.0517 40.4873 4.1551C40.6011 4.25849 40.6568 4.45824 40.6568 4.75433V6.50269C40.6568 6.80114 40.6011 7.00088 40.4873 7.10193C40.3735 7.20533 40.183 7.25703 39.9113 7.25703H30.153C29.9951 7.25703 29.8883 7.28523 29.8302 7.34162C29.7745 7.39802 29.7466 7.49672 29.7466 7.63302V13.9074C29.7466 14.0672 29.7745 14.1753 29.8302 14.234C29.886 14.2904 29.9928 14.3186 30.153 14.3186H38.7595C39.0312 14.3186 39.2216 14.3703 39.3354 14.4737C39.4492 14.5771 39.5049 14.7769 39.5049 15.0729V16.7861C39.5049 17.061 39.4492 17.2537 39.3354 17.3688C39.2216 17.484 39.0312 17.5404 38.7595 17.5404H30.153C29.9951 17.5404 29.8883 17.5686 29.8302 17.625C29.7745 17.6814 29.7466 17.7801 29.7466 17.9164V24.3623C29.7466 24.4986 29.7745 24.5973 29.8302 24.6537C29.886 24.7101 29.9928 24.7383 30.153 24.7383H39.9438C40.2156 24.7383 40.406 24.79 40.5198 24.8934L40.5221 24.8957Z" fill="#111111"/><path d="M48.7198 27.8449C48.606 27.9483 48.4156 28 48.1439 28H46.2466C45.9748 28 45.7844 27.9483 45.6706 27.8449C45.5568 27.7415 45.5011 27.5418 45.5011 27.2457V4.75433C45.5011 4.45824 45.5568 4.25614 45.6706 4.1551C45.7844 4.0517 45.9772 4 46.2466 4H52.7188C59.1562 4 62.3749 6.47919 62.3749 11.4399C62.3749 13.0849 61.9685 14.4408 61.1557 15.503C60.3429 16.5652 59.212 17.35 57.7675 17.8506L63.5941 26.9707C63.7753 27.2222 63.8659 27.4384 63.8659 27.6217C63.8659 27.758 63.8031 27.8567 63.6801 27.9131C63.5547 27.9695 63.3689 27.9977 63.1204 27.9977H61.1209C60.7377 27.9977 60.4544 27.9413 60.2733 27.8261C60.0921 27.711 59.8785 27.4619 59.63 27.0718L53.3969 17.061C53.2622 16.8777 53.1926 16.7179 53.1926 16.5816C53.1926 16.3983 53.3621 16.2949 53.7011 16.2738C57.1126 15.9095 58.8172 14.3656 58.8172 11.6444C58.8172 10.0911 58.2807 8.95369 57.2078 8.23225C56.1349 7.51317 54.5813 7.15128 52.5493 7.15128H49.2957C49.1378 7.15128 49.031 7.17948 48.9729 7.23588C48.9172 7.29227 48.8893 7.40272 48.8893 7.56252V27.241C48.8893 27.5394 48.8336 27.7392 48.7198 27.8402V27.8449Z" fill="#111111"/><path d="M84.5991 22.4471C84.8476 22.2473 85.0404 22.1486 85.1751 22.1486C85.2656 22.1486 85.3562 22.1815 85.4468 22.2473C85.5374 22.3131 85.6163 22.3907 85.6837 22.48L86.666 23.81C86.7798 23.944 86.8355 24.0991 86.8355 24.2753C86.8355 24.3646 86.8007 24.4586 86.7333 24.5573C86.666 24.656 86.5638 24.7618 86.4291 24.8722C85.2308 25.8686 83.8815 26.6394 82.3813 27.1822C80.8788 27.7251 79.3043 27.9977 77.6555 27.9977C75.4423 27.9977 73.415 27.4877 71.5734 26.4678C69.7318 25.448 68.2757 24.0309 67.2028 22.2121C66.1299 20.3956 65.5934 18.3558 65.5934 16.0952C65.5934 13.8345 66.1299 11.7525 67.2028 9.91247C68.2757 8.07246 69.7434 6.62724 71.6082 5.57446C73.4707 4.52639 75.5538 4 77.8575 4C79.4831 4 81.0367 4.27729 82.516 4.83188C83.9953 5.38647 85.3121 6.1408 86.464 7.09253C86.6892 7.24763 86.803 7.41447 86.803 7.59072C86.803 7.74581 86.7357 7.92206 86.5986 8.12181L85.6163 9.41898C85.4352 9.66337 85.254 9.78557 85.0752 9.78557C84.9405 9.78557 84.7478 9.69627 84.4993 9.52002C83.5286 8.78919 82.4766 8.21345 81.3479 7.79046C80.2193 7.36982 79.0326 7.15833 77.7902 7.15833C76.1855 7.15833 74.7247 7.53432 73.4033 8.28865C72.0819 9.04298 71.0369 10.0958 70.2682 11.447C69.4995 12.7982 69.1164 14.328 69.1164 16.0341C69.1164 17.7401 69.4949 19.1689 70.252 20.5225C71.009 21.8737 72.0471 22.9335 73.3685 23.6973C74.6899 24.461 76.1646 24.844 77.7902 24.844C80.3424 24.844 82.6113 24.0474 84.5991 22.4518V22.4471Z" fill="#111111"/><path d="M109.401 27.8449C109.288 27.9483 109.097 28 108.826 28H106.928C106.657 28 106.466 27.9483 106.352 27.8449C106.238 27.7415 106.183 27.5418 106.183 27.2457V17.6814C106.183 17.5451 106.155 17.4464 106.099 17.39C106.043 17.3336 105.934 17.3054 105.776 17.3054H94.562C94.4041 17.3054 94.2972 17.3336 94.2392 17.39C94.1834 17.4464 94.1556 17.5451 94.1556 17.6814V27.2457C94.1556 27.5441 94.0998 27.7439 93.986 27.8449C93.8722 27.9483 93.6818 28 93.4101 28H91.5128C91.2411 28 91.0507 27.9483 90.9369 27.8449C90.8231 27.7415 90.7673 27.5418 90.7673 27.2457V4.75433C90.7673 4.45824 90.8231 4.25614 90.9369 4.1551C91.0483 4.0517 91.2411 4 91.5105 4H93.4078C93.6795 4 93.8723 4.0517 93.9837 4.1551C94.0975 4.25849 94.1532 4.45824 94.1532 4.75433V13.6677C94.1532 13.804 94.1811 13.9074 94.2369 13.9755C94.2926 14.0437 94.3994 14.0789 94.5596 14.0789H105.774C105.932 14.0789 106.039 14.0437 106.097 13.9755C106.153 13.9074 106.18 13.804 106.18 13.6677V4.75433C106.18 4.45824 106.236 4.25614 106.35 4.1551C106.464 4.0517 106.657 4 106.928 4H108.826C109.095 4 109.288 4.0517 109.401 4.1551C109.515 4.25849 109.571 4.45824 109.571 4.75433V27.2457C109.571 27.5441 109.515 27.7439 109.401 27.8449Z" fill="#111111"/><path d="M164.252 4.1504C164.366 4.04935 164.558 4 164.828 4H166.725C166.997 4 167.189 4.04935 167.301 4.1504C167.415 4.24909 167.47 4.44414 167.47 4.73318V26.9049C167.47 27.6358 167.245 28.0023 166.792 28.0023C166.611 28.0023 166.421 27.9295 166.216 27.7862C166.012 27.6428 165.731 27.3702 165.369 26.9707L151.614 11.0498V26.9049C151.614 27.194 151.558 27.3867 151.444 27.4877C151.33 27.5864 151.14 27.6381 150.868 27.6381H148.971C148.699 27.6381 148.509 27.5888 148.395 27.4877C148.281 27.389 148.226 27.194 148.226 26.9049V5.09742C148.226 4.72143 148.281 4.44414 148.395 4.26554C148.509 4.0893 148.69 4 148.939 4C149.12 4 149.31 4.07285 149.514 4.2162C149.719 4.35954 149.988 4.63214 150.327 5.03163L164.082 20.9525V4.73083C164.082 4.44414 164.138 4.24909 164.252 4.14805V4.1504Z" fill="#111111"/><path d="M143.732 18.7083C143.72 18.6519 143.704 18.4944 143.699 18.4193C143.704 18.4357 143.73 18.6754 143.732 18.7083Z" fill="#DC5F40"/><path d="M141.613 11.08C142.698 10.9602 143.483 9.9732 143.364 8.87342C143.246 7.776 142.27 6.98171 141.184 7.10156C140.099 7.22141 139.314 8.20839 139.433 9.30816C139.551 10.4056 140.526 11.1999 141.613 11.08Z" fill="#DC5F40"/><path d="M143.857 20.6254C143.943 16.1699 142.092 10.7674 137.252 13.8364C136.846 13.9962 136.614 13.9398 136.4 13.6343C135.789 12.5158 135.32 11.3713 134.739 10.1964C130.371 -1.17501 125.383 5.32729 120.114 12.0575C108.347 27.4497 113.89 34.2669 132.438 20.75C133.086 20.2847 134.384 19.3118 134.851 19.2719C135.343 19.192 135.548 19.5962 135.919 20.4421C136.279 21.3093 136.878 22.5383 137.426 23.4148C140.592 29.6304 144.098 28.1899 143.859 20.6513V20.6254H143.857ZM129.909 18.3084C127.575 19.7842 125.36 21.5913 122.796 22.6699C121.679 23.1422 120.051 22.6205 119.649 21.7064C119.194 20.2894 120.822 18.2003 121.621 16.7292C122.547 15.0537 123.776 13.5638 124.953 12.0458C126.096 10.5489 127.647 8.32817 129.798 9.2987C131.523 10.2904 132.231 13.0328 133.218 14.6871C133.664 15.4039 133.65 15.9114 132.87 16.3438C131.925 16.9525 130.901 17.6457 129.928 18.299L129.909 18.3107V18.3084ZM142.556 21.2435C142.505 22.0965 142.345 25.323 141.27 23.7861C140.271 21.8874 139.175 19.521 138.197 17.4977C137.817 16.4637 140.192 16.0454 140.81 16.2216C142.535 16.8655 142.596 19.6197 142.556 21.2294V21.2458V21.2435Z" fill="#DC5F40"/></g><defs><clipPath id="mxft-clip"><rect width="168" height="32" fill="white"/></clipPath></defs></svg>
+ <div class="docfooter-note">An Agentic Procurement Platform · aerchain.io · Adani / AIIL — RFP Positioning Matrix · Confidential &amp; Proprietary · June 2026</div>
+</div></footer>
+</body></html>
