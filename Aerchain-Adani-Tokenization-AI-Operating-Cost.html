@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Aerchain &times; Adani Group &mdash; Tokenization &amp; AI Operating-Cost Estimate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --background:#fafbfc; --foreground:hsl(220 15% 13%);
@@ -75,7 +75,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--background);
 /* STAT CARDS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
 .stat{background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;height:120px;box-shadow:var(--shadow-glass);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:box-shadow 200ms,transform 200ms;animation:scaleIn 300ms cubic-bezier(.4,0,.2,1) both}
-.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
 .stat.cp::before{background:var(--gradient-primary)}
 .stat.cp{box-shadow:var(--shadow-glass),0 0 16px hsl(262 80% 55% / .06)}
 .stat.cw::before{background:linear-gradient(135deg,hsl(217 88% 58%),hsl(200 85% 52%))}
@@ -104,8 +104,8 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--background);
 strong.hl{font-weight:600;color:var(--foreground)}
 
 /* GRIDS */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;margin-bottom:20px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
 
 /* KV TABLE */
 .kvt{width:100%;border-collapse:collapse;font-size:14px}
@@ -156,10 +156,10 @@ strong.hl{font-weight:600;color:var(--foreground)}
 .ph-tv{font-size:30px;font-weight:500;letter-spacing:-.02em}
 
 /* SEPARATOR */
-.sep{border:none;border-top:1px solid var(--border);margin:56px 0}
+.sep{border:none;border-top:1px solid var(--border);margin:56px auto;max-width:calc(1360px - 96px)}
 
 /* FOOTER */
-.footer{text-align:center;padding:40px 48px 48px;font-size:11px;line-height:18px;color:var(--muted-foreground)}
+.footer{text-align:center;padding:40px 48px 48px;max-width:1360px;margin:0 auto;font-size:11px;line-height:18px;color:var(--muted-foreground)}
 .footer-logo{height:24px;margin-bottom:16px;opacity:.70}
 
 /* PIPELINE */
@@ -306,7 +306,7 @@ strong.hl{font-weight:600;color:var(--foreground)}
 <style>
 .sec-sub{font-size:14px;line-height:1.6;color:var(--muted-foreground);max-width:90ch;margin-bottom:20px}
 .muted{color:var(--muted-foreground)}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
 @media(max-width:1023px){.g4{grid-template-columns:1fr 1fr}}
 @media(max-width:767px){.g4{grid-template-columns:1fr}}
 .card-accent{position:relative;overflow:hidden}
@@ -353,6 +353,7 @@ strong.hl{font-weight:600;color:var(--foreground)}
 .stat.cm::before{background:linear-gradient(135deg,hsl(0 78% 58%),hsl(350 75% 55%))}
 .sv.w{color:hsl(38 82% 42%)}
 h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kvt-wrap{background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2px 20px;box-shadow:var(--shadow-glass)}
 </style>
 
 </head>
@@ -376,8 +377,8 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
     <div class="cov-meta">
       <div class="cov-mi"><span class="cm-l">Annual volume modelled</span><span class="cm-v">~300,000 cycles / year</span></div>
       <div class="cov-mi"><span class="cm-l">Distinct AI agents</span><span class="cm-v">36 across intake &rarr; pay</span></div>
-      <div class="cov-mi"><span class="cm-l">Estimated AI cost</span><span class="cm-v">~$804K / year &middot; ~$67K / month</span></div>
-      <div class="cov-mi"><span class="cm-l">Blended per cycle</span><span class="cm-v">~$2.68 / procurement cycle</span></div>
+      <div class="cov-mi"><span class="cm-l">Estimated AI cost</span><span class="cm-v">~$402K / year &middot; ~$33.5K / month</span></div>
+      <div class="cov-mi"><span class="cm-l">Blended per cycle</span><span class="cm-v">~$1.34 / procurement cycle</span></div>
     </div>
     <div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.62)">
       <div>Prepared for <b style="color:#fff;font-weight:600">Adani Group</b> &mdash; IT &amp; Procurement &middot; companion to the Aerchain &times; Adani Commercial Proposal</div>
@@ -404,7 +405,7 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
     <div class="card card-accent cg"><div class="card-lbl">Scope of the cycle</div><div class="card-t">Intake &rarr; award &rarr; pay</div><div class="card-x">The full autonomous spine: intake capture, RFx drafting, offer extraction, negotiation, evaluation, award &mdash; <b>and</b> the downstream invoice extraction &amp; match, plus the always-on assistant agents.</div></div>
   </div>
   <div class="callout co-a">
-    <div class="callout-ttl">&#9201; A transparency note that holds for this whole document</div>
+    <div class="callout-ttl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v4.8l3 1.8"></path></svg>A transparency note that holds for this whole document</div>
     These figures are based on <b>current AI pricing</b>. AI processing costs have trended <i>down</i> meaningfully year over year, but they can change in either direction, and the agent mix evolves as the product matures. Treat this as a directional planning model that we will re-baseline against live usage &mdash; not a fixed price.
   </div>
 </section>
@@ -412,7 +413,7 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
 <section class="sec">
   <div class="sec-hd"><div class="sec-num">2</div><h2 class="sec-title">Every AI Agent <em>in the Loop</em></h2></div>
   <p class="sec-sub">A comprehensive map of the agents that run across a procurement cycle &mdash; 36 named agents, grouped by stage. Aerchain runs a <b>combination of AI engines</b>, routed per task across three tiers, so each job uses exactly the capability it needs and no more.</p>
-  <div class="g3" style="margin-bottom:10px">
+  <div class="g3">
     <div class="card card-accent cp"><div class="card-lbl"><span class="eng deep">Deep</span></div><div class="card-t">Frontier reasoning</div><div class="card-x">Reserved for the highest-stakes work &mdash; per-vendor technical &amp; commercial scoring, award scenarios, negotiation strategy. Used only where it changes the outcome.</div></div>
     <div class="card card-accent cb"><div class="card-lbl"><span class="eng bal">Balanced</span></div><div class="card-t">The everyday workhorse</div><div class="card-x">Drafting, extraction and evaluation across most of the cycle &mdash; the best blend of quality and efficiency.</div></div>
     <div class="card card-accent ct"><div class="card-lbl"><span class="eng fast">Fast</span></div><div class="card-t">High-throughput</div><div class="card-x">Lightweight engines for classification, ranking, routing and high-volume extraction &mdash; instant and economical.</div></div>
@@ -465,16 +466,16 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
   <table class="dt cost">
     <thead><tr><th>Stage cluster</th><th class="num"><span class="tier-pill tail">Tail</span></th><th class="num"><span class="tier-pill std">Standard</span></th><th class="num"><span class="tier-pill tac">Tactical</span></th><th class="num"><span class="tier-pill cx">Complex</span></th></tr></thead>
     <tbody>
-      <tr><td class="stage">Intake &mdash; capture, route &amp; consolidate</td><td class="num">$0.04</td><td class="num">$0.08</td><td class="num">$0.12</td><td class="num">$0.20</td></tr>
-      <tr><td class="stage">RFx generation</td><td class="num">$0.10</td><td class="num">$0.22</td><td class="num">$0.58</td><td class="num">$1.06</td></tr>
-      <tr><td class="stage">Offer extraction (email / PDF / Excel)</td><td class="num">$0.04</td><td class="num">$0.12</td><td class="num">$0.24</td><td class="num">$0.60</td></tr>
-      <tr><td class="stage">Sourcing &amp; vendor follow-up</td><td class="num">$0.02</td><td class="num">$0.04</td><td class="num">$0.06</td><td class="num">$0.12</td></tr>
-      <tr><td class="stage">Negotiation (playbook + target + rounds)</td><td class="num">$0.20</td><td class="num">$1.22</td><td class="num">$1.26</td><td class="num">$2.04</td></tr>
-      <tr><td class="stage">Evaluation &amp; analysis (technical + commercial)</td><td class="num">$0.12</td><td class="num">$0.36</td><td class="num">$0.60</td><td class="num">$5.20</td></tr>
-      <tr><td class="stage">Award (scenarios + recommendation)</td><td class="num">$0.14</td><td class="num">$0.48</td><td class="num">$0.90</td><td class="num">$1.70</td></tr>
-      <tr><td class="stage">Invoice extraction &amp; matching</td><td class="num">$0.08</td><td class="num">$0.16</td><td class="num">$0.24</td><td class="num">$0.50</td></tr>
-      <tr><td class="stage">Always-on assistants (help + analyst)</td><td class="num">$0.20</td><td class="num">$0.36</td><td class="num">$0.56</td><td class="num">$0.84</td></tr>
-      <tr class="total"><td>Total per cycle</td><td class="num">$0.94</td><td class="num">$3.04</td><td class="num">$4.56</td><td class="num">$12.26</td></tr>
+      <tr><td class="stage">Intake &mdash; capture, route &amp; consolidate</td><td class="num">$0.02</td><td class="num">$0.04</td><td class="num">$0.06</td><td class="num">$0.10</td></tr>
+      <tr><td class="stage">RFx generation</td><td class="num">$0.05</td><td class="num">$0.11</td><td class="num">$0.29</td><td class="num">$0.53</td></tr>
+      <tr><td class="stage">Offer extraction (email / PDF / Excel)</td><td class="num">$0.02</td><td class="num">$0.06</td><td class="num">$0.12</td><td class="num">$0.30</td></tr>
+      <tr><td class="stage">Sourcing &amp; vendor follow-up</td><td class="num">$0.01</td><td class="num">$0.02</td><td class="num">$0.03</td><td class="num">$0.06</td></tr>
+      <tr><td class="stage">Negotiation (playbook + target + rounds)</td><td class="num">$0.10</td><td class="num">$0.61</td><td class="num">$0.63</td><td class="num">$1.02</td></tr>
+      <tr><td class="stage">Evaluation &amp; analysis (technical + commercial)</td><td class="num">$0.06</td><td class="num">$0.18</td><td class="num">$0.30</td><td class="num">$2.60</td></tr>
+      <tr><td class="stage">Award (scenarios + recommendation)</td><td class="num">$0.07</td><td class="num">$0.24</td><td class="num">$0.45</td><td class="num">$0.85</td></tr>
+      <tr><td class="stage">Invoice extraction &amp; matching</td><td class="num">$0.04</td><td class="num">$0.08</td><td class="num">$0.12</td><td class="num">$0.25</td></tr>
+      <tr><td class="stage">Always-on assistants (help + analyst)</td><td class="num">$0.10</td><td class="num">$0.18</td><td class="num">$0.28</td><td class="num">$0.42</td></tr>
+      <tr class="total"><td>Total per cycle</td><td class="num">$0.47</td><td class="num">$1.52</td><td class="num">$2.28</td><td class="num">$6.13</td></tr>
     </tbody>
   </table>
   <div class="callout co-p" style="margin-top:16px">
@@ -489,11 +490,11 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
   <table class="dt cost">
     <thead><tr><th>Tier</th><th class="num">Share of volume</th><th class="num">Cycles / year</th><th class="num">Cost / cycle</th><th class="num">Annual AI cost</th></tr></thead>
     <tbody>
-      <tr><td><span class="tier-pill tail">Tail</span></td><td class="num">50%</td><td class="num">150,000</td><td class="num">$0.94</td><td class="num">$141,000</td></tr>
-      <tr><td><span class="tier-pill std">Standard</span></td><td class="num">30%</td><td class="num">90,000</td><td class="num">$3.04</td><td class="num">$273,600</td></tr>
-      <tr><td><span class="tier-pill tac">Tactical</span></td><td class="num">15%</td><td class="num">45,000</td><td class="num">$4.56</td><td class="num">$205,200</td></tr>
-      <tr><td><span class="tier-pill cx">Complex</span></td><td class="num">5%</td><td class="num">15,000</td><td class="num">$12.26</td><td class="num">$183,900</td></tr>
-      <tr class="total"><td>Total</td><td class="num">100%</td><td class="num">300,000</td><td class="num">$2.68</td><td class="num">$803,700</td></tr>
+      <tr><td><span class="tier-pill tail">Tail</span></td><td class="num">50%</td><td class="num">150,000</td><td class="num">$0.47</td><td class="num">$70,500</td></tr>
+      <tr><td><span class="tier-pill std">Standard</span></td><td class="num">30%</td><td class="num">90,000</td><td class="num">$1.52</td><td class="num">$136,800</td></tr>
+      <tr><td><span class="tier-pill tac">Tactical</span></td><td class="num">15%</td><td class="num">45,000</td><td class="num">$2.28</td><td class="num">$102,600</td></tr>
+      <tr><td><span class="tier-pill cx">Complex</span></td><td class="num">5%</td><td class="num">15,000</td><td class="num">$6.13</td><td class="num">$91,950</td></tr>
+      <tr class="total"><td>Total</td><td class="num">100%</td><td class="num">300,000</td><td class="num">$1.34</td><td class="num">$401,850</td></tr>
     </tbody>
   </table>
 </section>
@@ -502,14 +503,14 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
   <div class="sec-hd"><div class="sec-num">6</div><h2 class="sec-title">The <em>Headline Numbers</em></h2></div>
   <p class="sec-sub">The estimated AI operating cost to run the full autonomous spine for a ~300,000-cycle-a-year group &mdash; the internal fixed cost that underpins the platform subscription.</p>
   <div class="stats">
-    <div class="stat cp"><div class="stat-lbl">Estimated annual AI cost</div><div class="sv p">~$804K</div><div class="stat-hint">all agents &middot; intake &rarr; pay &middot; 300K cycles</div></div>
-    <div class="stat cs"><div class="stat-lbl">Per month</div><div class="sv s">~$67K</div><div class="stat-hint">&asymp; $66,975 / month</div></div>
-    <div class="stat ca"><div class="stat-lbl">Blended per cycle</div><div class="sv a">$2.68</div><div class="stat-hint">across the full tier mix</div></div>
-    <div class="stat cm"><div class="stat-lbl">Cheapest &rarr; costliest cycle</div><div class="sv w">$0.94&ndash;$12.26</div><div class="stat-hint">tail &rarr; complex</div></div>
+    <div class="stat cp"><div class="stat-lbl">Estimated annual AI cost</div><div class="sv p">~$402K</div><div class="stat-hint">all agents &middot; intake &rarr; pay &middot; 300K cycles</div></div>
+    <div class="stat cs"><div class="stat-lbl">Per month</div><div class="sv s">~$33.5K</div><div class="stat-hint">&asymp; $33,488 / month</div></div>
+    <div class="stat ca"><div class="stat-lbl">Blended per cycle</div><div class="sv a">$1.34</div><div class="stat-hint">across the full tier mix</div></div>
+    <div class="stat cm"><div class="stat-lbl">Cheapest &rarr; costliest cycle</div><div class="sv w">$0.47&ndash;$6.13</div><div class="stat-hint">tail &rarr; complex</div></div>
   </div>
   <div class="callout co-g">
-    <div class="callout-ttl">&#10003; What this buys</div>
-    ~$804K of AI a year runs <b>300,000 complete sourcing-to-pay cycles</b> end to end &mdash; every intake captured, every RFx drafted, every offer extracted, every bid scored, every award recommended, every invoice matched, with an always-on assistant on every screen. That is roughly <b>$2.68 of AI per cycle</b> &mdash; a small fraction of the buyer-hours each cycle replaces.
+    <div class="callout-ttl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><polyline points="20 6 9 17 4 12"></polyline></svg>What this buys</div>
+    ~$402K of AI a year runs <b>300,000 complete sourcing-to-pay cycles</b> end to end &mdash; every intake captured, every RFx drafted, every offer extracted, every bid scored, every award recommended, every invoice matched, with an always-on assistant on every screen. That is roughly <b>$1.34 of AI per cycle</b> &mdash; a small fraction of the buyer-hours each cycle replaces.
   </div>
 </section>
 
@@ -518,14 +519,14 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
   <div class="cap-grid col2">
     <div class="cap-item"><div class="cap-ck violet">&#9670;</div><div><div class="cap-title">Complexity, not volume</div><div class="cap-desc">The 20% of cycles that are tactical or complex drive ~48% of the bill. The 50% that are tail drive ~18%. Cost concentrates where the value is.</div></div></div>
     <div class="cap-item"><div class="cap-ck info">&#9670;</div><div><div class="cap-title">Evaluation is the single biggest line</div><div class="cap-desc">Per-vendor technical + commercial scoring on complex deals is the largest single cost &mdash; and the hardest work to do well.</div></div></div>
-    <div class="cap-item"><div class="cap-ck">&#9670;</div><div><div class="cap-title">The mix is the master dial</div><div class="cap-desc">Shift complex from 5% to 7% and the annual cost moves ~$36K. The single best way to tighten this estimate is to measure the real tier distribution.</div></div></div>
+    <div class="cap-item"><div class="cap-ck">&#9670;</div><div><div class="cap-title">The mix is the master dial</div><div class="cap-desc">Every 1 point of volume shifted from the tail into complex adds ~$17K a year &mdash; a 2-point shift, ~$34K. The single best way to tighten this estimate is to measure the real tier distribution.</div></div></div>
     <div class="cap-item"><div class="cap-ck warn">&#9670;</div><div><div class="cap-title">Costs trend down, levers exist</div><div class="cap-desc">Batching the heavy evaluation work and routing simpler tasks to the fast tier keeps the cost efficient &mdash; before any provider price drops.</div></div></div>
   </div>
 </section>
 
 <section class="sec">
   <div class="sec-hd"><div class="sec-num">8</div><h2 class="sec-title">Assumptions &amp; <em>How This Changes Over Time</em></h2></div>
-  <table class="kvt">
+  <div class="kvt-wrap"><table class="kvt">
     <tr><td>Pricing basis</td><td>Current AI pricing. Heavy reasoning on the Deep tier; everyday drafting &amp; evaluation on Balanced; high-volume extraction &amp; ranking on Fast. Subject to change &mdash; historically downward.</td></tr>
     <tr><td>Scope</td><td>AI processing only. Excludes platform subscription, hosting, database, search, and storage.</td></tr>
     <tr><td>Volume</td><td>300,000 procurement cycles / year, group-wide.</td></tr>
@@ -536,10 +537,10 @@ h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-prim
     <tr><td>Commercial treatment</td><td>Carried as Aerchain&rsquo;s <b>internal fixed cost</b> within the platform subscription &mdash; not billed to Adani per token or per cycle. The customer platform price is <b>fixed for the 3-year term regardless of movement in this internal cost</b> (which historically trends down).</td></tr>
     <tr><td>Refinement</td><td>We recommend instrumenting one live cycle per tier to replace estimates with measured numbers as the deployment beds in.</td></tr>
     <tr><td>Status</td><td>Directional planning model &mdash; not a contractual quote.</td></tr>
-  </table>
+  </table></div>
   <div class="callout co-b" style="margin-top:16px">
     <div class="callout-ttl">The single message</div>
-    Running Aerchain&rsquo;s full autonomous, intake-to-pay agent stack across <b>~300,000 cycles a year costs roughly $804K in AI</b> at today&rsquo;s pricing &mdash; about <b>$2.68 per cycle</b>. The number is dominated by the small share of complex, high-value deals, it falls as AI pricing falls, and we will re-baseline it against live usage. Adani pays a fixed platform subscription; this AI cost is carried internally by Aerchain.
+    Running Aerchain&rsquo;s full autonomous, intake-to-pay agent stack across <b>~300,000 cycles a year costs roughly $402K in AI</b> at today&rsquo;s pricing &mdash; about <b>$1.34 per cycle</b>. The number is dominated by the small share of complex, high-value deals, it falls as AI pricing falls, and we will re-baseline it against live usage. Adani pays a fixed platform subscription; this AI cost is carried internally by Aerchain.
   </div>
 </section>
 
