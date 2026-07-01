@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Aerchain &times; Adani Group &mdash; Tokenization &amp; AI Operating-Cost Estimate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --background:#fafbfc; --foreground:hsl(220 15% 13%);
+  --primary:hsl(262 80% 55%); --primary-foreground:hsl(0 0% 100%);
+  --accent:hsl(275 85% 58%);
+  --success:hsl(152 68% 38%); --warning:hsl(38 92% 50%); --destructive:hsl(0 78% 58%);
+  --muted:hsl(225 14% 96%); --muted-foreground:hsl(220 9% 46%);
+  --card:hsl(0 0% 100%); --border:hsl(225 14% 90%); --ring:hsl(262 80% 55%);
+  --radius:14px; --radius-lg:14px; --radius-md:12px; --radius-sm:8px;
+  --gradient-primary:linear-gradient(135deg,hsl(262 80% 55%),hsl(275 85% 58%));
+  --gradient-premium:linear-gradient(135deg,hsl(262 80% 55%),hsl(275 85% 58%));
+  --bg-gradient-card:linear-gradient(160deg,hsl(0 0% 100%) 0%,hsl(240 20% 98.5%) 100%);
+  --shadow-glass:0 2px 8px rgba(124,58,237,.06),0 0 20px rgba(124,58,237,.04),0 1px 2px rgba(0,0,0,.03);
+  --shadow-elevated:0 8px 28px -4px rgba(124,58,237,.12),0 0 24px rgba(124,58,237,.06),0 4px 12px rgba(0,0,0,.03);
+  --shadow-glow-primary:0 0 24px hsl(262 80% 55% / .18),0 0 48px hsl(262 80% 55% / .06);
+  --shadow-premium:0 16px 48px -12px rgba(124,58,237,.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,sans-serif;background:var(--background);color:var(--foreground);font-size:14px;line-height:20px;letter-spacing:-.005em}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{transform:translateX(-20px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideInUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes scaleIn{from{transform:scale(0.95);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+@keyframes shine{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes fabBounce{0%,100%{box-shadow:var(--shadow-premium)}50%{box-shadow:0 0 50px rgba(124,58,237,.4)}}
+
+.wrap{max-width:1360px;margin:0 auto;padding:0 48px}
+
+/* HEADER — frosted glass */
+.hdr{position:sticky;top:0;z-index:200;height:64px;background:rgba(250,251,252,.85);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);border-bottom:1px solid hsl(225 14% 90%);animation:fadeIn 300ms ease-in}
+.hdr .wrap{height:100%;display:flex;align-items:center;justify-content:space-between}
+.hdr-logo{height:26px;width:auto;display:block}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.hdr-div{width:1px;height:18px;background:var(--border)}
+.hdr-date{font-size:12px;font-weight:500;color:var(--muted-foreground)}
+.hdr-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:hsl(262 80% 55% / .06);border:1px solid hsl(262 80% 55% / .16);border-radius:var(--radius-sm);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--primary)}
+.hdr-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}
+
+/* COVER */
+.cover{background:var(--gradient-primary);padding:68px 0 56px;position:relative;overflow:hidden;animation:fadeIn 400ms ease-in}
+.cov-orb1{position:absolute;top:-120px;right:-100px;width:480px;height:480px;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none}
+.cov-orb2{position:absolute;bottom:-60px;left:6%;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.cover-inner{position:relative;z-index:1}
+.cov-eye{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.48);margin-bottom:14px}
+.cov-h1{font-size:30px;font-weight:400;line-height:36px;letter-spacing:-.025em;color:#fff;margin-bottom:10px}
+.cov-h1 em{font-style:normal;font-weight:600;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.60) 35%,#fff 55%,rgba(255,255,255,.60) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 2.5s ease-in-out infinite}
+.cov-sub{font-size:16px;font-weight:400;line-height:24px;color:rgba(255,255,255,.62);margin-bottom:48px}
+.cov-meta{display:flex;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.14);padding-top:28px}
+.cov-mi{display:flex;flex-direction:column;gap:5px;padding-right:32px;margin-right:32px;border-right:1px solid rgba(255,255,255,.12)}
+.cov-mi:last-child{border-right:none;padding-right:0;margin-right:0}
+.cm-l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.40)}
+.cm-v{font-size:14px;font-weight:400;line-height:20px;color:rgba(255,255,255,.85)}
+
+/* MAIN */
+.main{padding:48px 0 96px}
+.sec{margin-bottom:56px}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:28px;animation:slideIn 400ms cubic-bezier(.4,0,.2,1) both}
+.sec-num{width:32px;height:32px;border-radius:var(--radius-sm);background:var(--gradient-primary);box-shadow:var(--shadow-glow-primary);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sec-title{font-size:24px;font-weight:400;line-height:32px;letter-spacing:-.015em}
+
+/* CARDS */
+.card{background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-glass);transition:box-shadow 200ms,border-color 200ms,transform 200ms}
+.card:hover{box-shadow:var(--shadow-elevated);border-color:hsl(262 80% 55% / .25);transform:translateY(-2px)}
+.card+.card{margin-top:16px}
+[style*="display:grid"]>.card+.card,.g2>.card+.card,.g3>.card+.card{margin-top:0}
+.card-lbl{font-size:11px;font-weight:700;line-height:16px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted-foreground);margin-bottom:18px}
+
+/* STAT CARDS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat{background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;height:120px;box-shadow:var(--shadow-glass);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:box-shadow 200ms,transform 200ms;animation:scaleIn 300ms cubic-bezier(.4,0,.2,1) both}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0}
+.stat.cp::before{background:var(--gradient-primary)}
+.stat.cp{box-shadow:var(--shadow-glass),0 0 16px hsl(262 80% 55% / .06)}
+.stat.cw::before{background:linear-gradient(135deg,hsl(217 88% 58%),hsl(200 85% 52%))}
+.stat.cw{box-shadow:var(--shadow-glass),0 0 16px hsl(217 88% 58% / .06)}
+.stat.ca::before{background:linear-gradient(135deg,hsl(275 85% 58%),hsl(290 80% 62%))}
+.stat.ca{box-shadow:var(--shadow-glass),0 0 16px hsl(275 85% 58% / .06)}
+.stat.cs::before{background:linear-gradient(135deg,hsl(152 68% 38%),hsl(165 60% 44%))}
+.stat.cs{box-shadow:var(--shadow-glass),0 0 16px hsl(152 68% 38% / .06)}
+.stat:hover{box-shadow:var(--shadow-elevated);transform:scale(1.02)}
+.stat-top{display:flex;align-items:center;gap:8px}
+.stat-lbl{font-size:12px;color:var(--muted-foreground)}
+.sv{font-size:24px;font-weight:700;line-height:32px;letter-spacing:-.02em}
+.sv.p{color:var(--primary)}.sv.s{color:var(--success)}.sv.w{color:var(--warning)}.sv.a{color:var(--accent)}
+.stat-hint{font-size:12px;color:var(--muted-foreground)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:5px;height:24px;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:500;white-space:nowrap}
+.b-primary{background:hsl(262 80% 55% / .10);color:hsl(262 70% 42%)}
+.b-pending{background:hsl(38 92% 50% / .10);color:hsl(38 72% 33%)}
+.b-muted{background:var(--muted);color:var(--muted-foreground)}
+.b-review{background:hsl(275 85% 58% / .10);color:hsl(275 65% 40%)}
+
+/* CALLOUT */
+.callout{border-radius:var(--radius-md);padding:16px 20px;border:1px solid;font-size:14px;line-height:20px;margin-bottom:20px}
+.co-p{background:hsl(262 80% 55% / .04);border-color:hsl(262 80% 55% / .16);border-left:4px solid var(--primary)}
+strong.hl{font-weight:600;color:var(--foreground)}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+/* KV TABLE */
+.kvt{width:100%;border-collapse:collapse;font-size:14px}
+.kvt tr{border-bottom:1px solid var(--border)}
+.kvt tr:last-child{border-bottom:none}
+.kvt td{padding:11px 0;vertical-align:top;line-height:20px}
+.kvt td:first-child{width:36%;font-size:12px;font-weight:500;color:var(--muted-foreground);padding-right:16px}
+.kvt td:last-child{font-weight:500}
+
+/* DATA TABLE */
+.dt{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-glass);font-size:14px}
+.dt thead tr{background:var(--muted);border-bottom:1px solid var(--border)}
+.dt th{padding:14px 16px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-foreground)}
+.dt th.r,.dt td.r{text-align:right}
+.dt td{padding:14px 16px;border-bottom:1px solid var(--border);line-height:20px;vertical-align:middle}
+.dt td.sm{font-size:12px;color:var(--muted-foreground)}
+.dt td.amt{text-align:right;font-weight:600}
+.dt td.ttl{font-weight:700;font-size:15px}
+.dt tbody tr{height:60px}
+.dt tbody tr:last-child td{border-bottom:none}
+.dt tbody tr:nth-child(even) td{background:hsl(240 20% 97% / .50)}
+.dt tbody tr:hover td{background:hsl(262 80% 97%);cursor:pointer}
+.dt-i{box-shadow:none;border:none}
+
+/* WAVE CARDS */
+.wcard{border-radius:var(--radius-md);padding:18px;border:1px solid;transition:box-shadow 200ms,transform 200ms;box-shadow:var(--shadow-glass)}
+.wcard:hover{transform:translateY(-2px);box-shadow:var(--shadow-elevated)}
+.wc-p{background:hsl(262 80% 55% / .04);border-color:hsl(262 80% 55% / .22);box-shadow:var(--shadow-glass),0 0 16px hsl(262 80% 55% / .06)}
+.wc-s{background:hsl(152 68% 38% / .04);border-color:hsl(152 68% 38% / .18)}
+.wc-m{background:var(--muted);border-color:var(--border);opacity:.80}
+.wl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;margin-bottom:8px}
+.wl-p{color:var(--primary)}.wl-s{color:var(--success)}.wl-m{color:var(--muted-foreground)}
+.wt{font-size:14px;font-weight:600;line-height:20px;margin-bottom:6px}
+.wd{font-size:12px;line-height:16px;color:var(--muted-foreground)}
+
+/* PRICING HERO */
+.ph{background:var(--gradient-premium);border-radius:var(--radius-lg);padding:40px 40px 32px;color:#fff;box-shadow:var(--shadow-premium);position:relative;overflow:hidden;margin-bottom:20px;animation:scaleIn 300ms cubic-bezier(.4,0,.2,1) both}
+.ph-orb1{position:absolute;top:-70px;right:-70px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.06)}
+.ph-orb2{position:absolute;bottom:-30px;left:-30px;width:160px;height:110px;border-radius:50%;background:rgba(255,255,255,.04)}
+.ph-eye{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.75);margin-bottom:14px}
+.ph-sub{font-size:14px;font-weight:400;color:rgba(255,255,255,.80);margin-bottom:32px}
+.ph-amts{display:flex;gap:40px;margin-bottom:28px;flex-wrap:wrap}
+.ph-val{font-size:36px;font-weight:500;letter-spacing:-.03em;line-height:1.1}
+.ph-lbl{font-size:12px;font-weight:400;color:rgba(255,255,255,.72);margin-top:8px;line-height:1.4}
+.ph-div{width:1px;align-self:stretch;background:rgba(255,255,255,.22)}
+.ph-tot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.22);padding-top:20px;flex-wrap:wrap;gap:12px}
+.ph-tl{font-size:13px;font-weight:500;color:rgba(255,255,255,.78);letter-spacing:.03em}
+.ph-tv{font-size:30px;font-weight:500;letter-spacing:-.02em}
+
+/* SEPARATOR */
+.sep{border:none;border-top:1px solid var(--border);margin:56px 0}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px 48px 48px;font-size:11px;line-height:18px;color:var(--muted-foreground)}
+.footer-logo{height:24px;margin-bottom:16px;opacity:.70}
+
+/* PIPELINE */
+.pipeline{display:flex;align-items:stretch;gap:0;padding:18px 20px;overflow-x:auto;scrollbar-width:thin}
+.ps{flex:1;min-width:160px;position:relative;padding:14px;display:flex;flex-direction:column;gap:6px}
+.ps::after{content:'→';position:absolute;right:-6px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--border);font-weight:300}
+.ps:last-child::after{display:none}
+.ps-num{width:24px;height:24px;border-radius:6px;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.ps-title{font-size:13px;font-weight:600;line-height:1.3}
+.ps-desc{font-size:11px;line-height:16px;color:var(--muted-foreground);flex:1}
+.ps-tag{display:inline-flex;align-items:center;padding:2px 8px;background:hsl(262 80% 55% / .06);border-radius:4px;font-size:10px;font-weight:600;color:var(--primary);letter-spacing:.02em;align-self:flex-start}
+
+/* CUSTOMER ROW */
+.cust-row{margin:20px 0 24px;padding:18px 20px;background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-glass)}
+.cust-lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.10em;color:var(--muted-foreground);margin-bottom:14px}
+.cust-pills{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.certs{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.cert{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:hsl(152 68% 38% / .06);border:1px solid hsl(152 68% 38% / .16);border-radius:6px;font-size:11px;font-weight:600;color:hsl(152 55% 30%)}
+
+/* ARCH DIAGRAM */
+.arch-diag{background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-glass);margin-bottom:16px}
+.arch-systems{display:flex;gap:4px;align-items:stretch}
+.arch-sys{flex:1;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);display:flex;flex-direction:column;transition:box-shadow 200ms;overflow:hidden;box-shadow:0 1px 4px rgba(124,58,237,.04),0 0 12px rgba(124,58,237,.03)}
+.arch-sys:hover{box-shadow:var(--shadow-elevated)}
+.arch-sys.main-sys{border-color:hsl(262 80% 55% / .35);box-shadow:var(--shadow-glow-primary)}
+.arch-head{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.arch-head.gradient{background:var(--gradient-primary)}
+.arch-hn{font-size:13px;font-weight:600}
+.arch-hn.w{color:#fff}
+.arch-hs{font-size:11px;color:var(--muted-foreground);line-height:14px}
+.arch-hs.w{color:rgba(255,255,255,.70)}
+.arch-body{padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:7px}
+.arch-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--muted);border-radius:var(--radius-sm);font-size:12px;color:var(--muted-foreground)}
+.arch-item.ac{background:hsl(262 80% 55% / .05)}
+.arch-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.arch-conn{width:90px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 4px}
+.arch-conn-line{width:100%;height:2px;background:linear-gradient(90deg,hsl(262 80% 55% / .25),var(--primary),hsl(262 80% 55% / .25));position:relative}
+.arch-conn-line::after{content:'▶';position:absolute;right:-5px;top:-7px;font-size:11px;color:var(--primary)}
+.arch-conn-badge{background:hsl(262 80% 55% / .08);border:1px solid hsl(262 80% 55% / .18);border-radius:4px;padding:3px 6px;font-size:9px;font-weight:600;color:var(--primary);text-align:center;white-space:nowrap}
+.arch-conn-lbl{font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-foreground);text-align:center;line-height:11px}
+
+/* CAPABILITY CHECK GRID */
+.cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cap-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:0 1px 4px rgba(124,58,237,.04),0 0 12px rgba(124,58,237,.03);transition:border-color 200ms,box-shadow 200ms}
+.cap-item:hover{border-color:hsl(262 80% 55% / .30);box-shadow:var(--shadow-glass)}
+.cap-ck{width:20px;height:20px;border-radius:50%;background:hsl(152 68% 38% / .10);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;color:hsl(152 60% 28%);font-weight:700}
+.cap-title{font-size:13px;font-weight:600;line-height:18px;margin-bottom:2px}
+.cap-desc{font-size:11px;line-height:15px;color:var(--muted-foreground)}
+
+/* GANTT */
+.gantt{background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-glass);margin-bottom:16px;overflow-x:auto}
+.g-inner{min-width:640px}
+.g-hdr{display:grid;grid-template-columns:150px repeat(28,1fr);gap:0;margin-bottom:4px}
+.g-lbl{font-size:12px;font-weight:600;color:var(--foreground);padding:4px 0;border-bottom:1px solid var(--border)}
+.g-wk{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--muted-foreground);text-align:center;padding:4px 0;border-bottom:1px solid var(--border)}
+.g-row{display:grid;grid-template-columns:150px repeat(28,1fr);gap:0;min-height:44px;align-items:center;border-bottom:1px solid var(--border)}
+.g-row:last-child{border-bottom:none}
+.g-rl{font-size:12px;font-weight:500;color:var(--foreground);padding:8px 12px 8px 0;line-height:15px}
+.g-cell{height:100%;display:flex;align-items:center;padding:4px 2px}
+.g-bar{height:26px;border-radius:6px;width:100%;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;animation:scaleIn 400ms cubic-bezier(.4,0,.2,1) both}
+.gb-purple{background:var(--gradient-primary)}
+.gb-blue{background:linear-gradient(90deg,hsl(217 88% 58%),hsl(228 82% 62%))}
+.gb-green{background:linear-gradient(90deg,hsl(152 68% 38%),hsl(165 60% 44%))}
+.gb-amber{background:linear-gradient(90deg,hsl(38 92% 50%),hsl(25 95% 53%))}
+.gb-violet{background:linear-gradient(90deg,hsl(275 85% 58%),hsl(290 80% 62%))}
+
+/* TEAM GRID */
+.team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.team-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);text-align:center;box-shadow:var(--shadow-glass);transition:border-color 200ms,box-shadow 200ms,transform 200ms;animation:scaleIn 300ms cubic-bezier(.4,0,.2,1) both}
+.team-card:hover{border-color:hsl(262 80% 55% / .30);box-shadow:var(--shadow-glow-primary);transform:translateY(-3px)}
+.team-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff}
+.team-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary);margin-bottom:2px}
+.team-name{font-size:13px;font-weight:600;line-height:18px}
+.team-desc{font-size:11px;line-height:14px;color:var(--muted-foreground)}
+
+/* BAR CHART */
+.barchart{padding:24px;background:var(--bg-gradient-card);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-glass)}
+.bc-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted-foreground);margin-bottom:20px}
+.bc-rows{display:flex;flex-direction:column;gap:10px}
+.bc-row{display:flex;align-items:center;gap:12px}
+.bc-rl{font-size:12px;font-weight:500;width:52px;text-align:right;color:var(--muted-foreground);flex-shrink:0}
+.bc-track{flex:1;background:var(--muted);border-radius:6px;height:32px;position:relative;overflow:hidden}
+.bc-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:700;color:#fff;animation:scaleIn 600ms cubic-bezier(.4,0,.2,1) both;position:relative}
+.bc-fill-impl{border-radius:0 6px 6px 0;position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;padding:0 8px;font-size:11px;font-weight:600;color:rgba(255,255,255,.85)}
+.bc-val{font-size:12px;font-weight:700;width:52px;flex-shrink:0;color:var(--foreground)}
+
+/* INCLUSION GRID */
+.incl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.incl-card{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-md);transition:border-color 200ms,box-shadow 200ms;animation:slideInUp 300ms cubic-bezier(.4,0,.2,1) both}
+.incl-card:hover{border-color:hsl(262 80% 55% / .30);box-shadow:var(--shadow-glass)}
+.incl-ico{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:16px}
+.ii-p{background:hsl(262 80% 55% / .08)}.ii-s{background:hsl(152 68% 38% / .08)}.ii-b{background:hsl(217 88% 58% / .08)}.ii-o{background:hsl(38 92% 50% / .08)}.ii-a{background:hsl(275 85% 58% / .08)}.ii-g{background:hsl(175 65% 41% / .08)}
+.incl-title{font-size:13px;font-weight:600;line-height:18px}
+.incl-desc{font-size:11px;line-height:15px;color:var(--muted-foreground);flex:1}
+.incl-chk{font-size:11px;font-weight:600;color:var(--success);display:flex;align-items:center;gap:4px}
+
+/* FAB */
+.fab{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:var(--gradient-primary);color:#fff;border:none;cursor:pointer;font-size:20px;box-shadow:var(--shadow-premium);z-index:300;display:flex;align-items:center;justify-content:center;animation:fabBounce 3s ease-in-out infinite;transition:transform 150ms}
+.fab:hover{transform:scale(1.08)}
+
+/* RESPONSIVE */
+@media(max-width:1023px){
+  .wrap{padding:0 32px}
+  .stats{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:repeat(3,1fr)}
+  .incl-grid{grid-template-columns:1fr 1fr}
+  .cover{padding:52px 0 44px}
+  .cov-h1{font-size:26px;line-height:32px}
+  .pipeline{flex-direction:column}
+  .ps::after{display:none}
+  .arch-systems{flex-direction:column}
+  .arch-conn{width:100%;height:36px;flex-direction:row}
+  .arch-conn-line{height:2px;width:100%}
+}
+@media(max-width:767px){
+  .wrap{padding:0 20px}
+  .hdr{height:56px}
+  .hdr-logo{height:20px}
+  .stats{grid-template-columns:1fr}
+  .g2,.g3{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .incl-grid{grid-template-columns:1fr}
+  .cap-grid{grid-template-columns:1fr}
+  .cover{padding:36px 0 32px}
+  .cov-h1{font-size:22px;line-height:28px}
+  .cov-sub{font-size:14px}
+  .cov-meta{flex-direction:column;gap:14px}
+  .cov-mi{border-right:none;padding-right:0;margin-right:0;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:14px}
+  .cov-mi:last-child{border-bottom:none;padding-bottom:0}
+  .ph-amts{flex-direction:column;gap:20px}
+  .ph-div{display:none}
+  .main{padding:32px 0 64px}
+}
+@media print{
+  .hdr{position:static}
+  .cover,.ph{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sec{page-break-inside:avoid}
+  .fab{display:none}
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+.sec-sub{font-size:14px;line-height:1.6;color:var(--muted-foreground);max-width:90ch;margin-bottom:20px}
+.muted{color:var(--muted-foreground)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:1023px){.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:767px){.g4{grid-template-columns:1fr}}
+.card-accent{position:relative;overflow:hidden}
+.card-accent::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.card-accent.cp::before{background:var(--gradient-primary)}
+.card-accent.cb::before{background:linear-gradient(135deg,hsl(217 88% 58%),hsl(200 85% 52%))}
+.card-accent.cg::before{background:linear-gradient(135deg,hsl(152 68% 38%),hsl(165 60% 44%))}
+.card-accent.ct::before{background:linear-gradient(135deg,hsl(174 65% 42%),hsl(188 70% 44%))}
+.card-accent.ca::before{background:linear-gradient(135deg,hsl(38 92% 50%),hsl(25 95% 53%))}
+.card-accent.cpk::before{background:linear-gradient(135deg,hsl(0 78% 58%),hsl(350 75% 55%))}
+.card-t{font-size:15px;font-weight:600;margin:2px 0 6px}
+.card-x{font-size:12px;line-height:1.55;color:var(--muted-foreground)}
+.card-x i{font-style:italic}
+.tier-pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.tier-pill.tail{background:hsl(217 88% 58%/.12);color:hsl(217 75% 42%)}
+.tier-pill.std{background:hsl(152 68% 38%/.12);color:hsl(152 60% 28%)}
+.tier-pill.tac{background:hsl(38 92% 50%/.16);color:hsl(38 80% 35%)}
+.tier-pill.cx{background:hsl(0 78% 58%/.10);color:hsl(0 65% 45%)}
+.eng{display:inline-block;padding:2px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.03em}
+.eng.deep{background:hsl(262 80% 55%/.12);color:hsl(262 70% 42%)}
+.eng.bal{background:hsl(217 88% 58%/.12);color:hsl(217 75% 42%)}
+.eng.fast{background:hsl(174 65% 42%/.16);color:hsl(174 55% 28%)}
+.inv-stage{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+.inv-stage::before{content:'';width:16px;height:2px;background:var(--gradient-primary);border-radius:2px}
+.cost{width:100%}
+.cost td.num,.cost th.num{text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;white-space:nowrap}
+.cost th.num{color:var(--muted-foreground)}
+.cost tr.total td{font-weight:800;background:hsl(262 80% 55%/.07)!important;border-top:2px solid hsl(262 80% 55%/.28);font-size:13.5px}
+.cost td.stage{font-weight:600}
+.hero-line{display:flex;gap:16px;align-items:flex-start;background:var(--bg-gradient-card);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--radius-md);padding:18px 20px;margin:16px 0;box-shadow:var(--shadow-glass)}
+.hero-line-icon{width:40px;height:40px;border-radius:10px;background:hsl(262 80% 55%/.08);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--primary);flex-shrink:0}
+.hero-line-lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-foreground);margin-bottom:4px}
+.hero-line-text{font-size:13.5px;line-height:1.6;color:var(--foreground)}
+.callout-ttl{font-weight:700;margin-bottom:6px;color:var(--foreground)}
+.callout.co-a{background:hsl(38 92% 50%/.05);border-color:hsl(38 92% 50%/.18);border-left:4px solid hsl(38 92% 50%)}
+.callout.co-b{background:hsl(217 88% 58%/.05);border-color:hsl(217 88% 58%/.18);border-left:4px solid hsl(217 88% 58%)}
+.callout.co-g{background:hsl(152 68% 38%/.05);border-color:hsl(152 68% 38%/.18);border-left:4px solid hsl(152 68% 38%)}
+.callout i{font-style:italic}
+.cap-grid.col2{grid-template-columns:1fr 1fr}
+@media(max-width:767px){.cap-grid.col2{grid-template-columns:1fr}}
+.cap-ck.violet{background:hsl(275 85% 58%/.12);color:hsl(275 60% 45%)}
+.cap-ck.info{background:hsl(217 88% 58%/.12);color:hsl(217 70% 42%)}
+.cap-ck.warn{background:hsl(38 92% 50%/.16);color:hsl(38 70% 35%)}
+.stat.cm::before{background:linear-gradient(135deg,hsl(0 78% 58%),hsl(350 75% 55%))}
+.sv.w{color:hsl(38 82% 42%)}
+h2.sec-title em{font-style:normal;font-weight:700;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+</style>
+
+</head>
+<body>
+<header class="hdr">
+  <div class="wrap">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTY4IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTY4IDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMTM0OTFfMTM1NTUpIj4KPHBhdGggZD0iTTMuNzk1MSAyNi45ODk1QzMuNjEzOTYgMjcuMzkzNyAzLjQzMjgyIDI3LjY2MTYgMy4yNTQgMjcuNzk1NkMzLjA3Mjg2IDI3LjkyOTUgMi44MDExNSAyNy45OTc3IDIuNDQxMTkgMjcuOTk3N0gwLjY3ODU2OUMwLjIyNTcyMSAyNy45OTc3IDAuMDAwNDU3NzY0IDI3Ljg1MiAwLjAwMDQ1Nzc2NCAyNy41NjA2QzAuMDAwNDU3NzY0IDI3LjQ0NzggMC4wNTYxOTMgMjcuMjU3NCAwLjE2OTk4NiAyNi45ODk1TDEwLjM2NzIgNS42ODAyMUMxMC43MDYzIDQuOTg2OTggMTAuOTU0NyA0LjUzMTA5IDExLjExMjcgNC4zMTk1OUMxMS4yNzA2IDQuMTA1NzUgMTEuNDYzMyA0IDExLjY4ODYgNEMxMS44OTMgNCAxMi4wNjcxIDQuMTA1NzUgMTIuMjEzNCA0LjMxOTU5QzEyLjM1OTcgNC41MzM0NCAxMi42MDM2IDQuOTg2OTggMTIuOTQyNiA1LjY4MDIxTDIzLjI0MiAyNi45ODk1QzIzLjM1NTggMjcuMjU3NCAyMy40MTE2IDI3LjQ1MDEgMjMuNDExNiAyNy41NjA2QzIzLjQxMTYgMjcuODUyIDIzLjE3NDcgMjcuOTk3NyAyMi43MDA5IDI3Ljk5NzdIMjAuODAzNkMyMC40NDEzIDI3Ljk5NzcgMjAuMTc2NiAyNy45Mjk1IDIwLjAwNzEgMjcuNzk1NkMxOS44Mzc1IDI3LjY2MTYgMTkuNjUxOCAyNy4zOTE0IDE5LjQ0NzQgMjYuOTg5NUwxMS42MjEyIDEwLjI1MDlMMy43OTUxIDI2Ljk4OTVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNNDAuNTIyMSAyNC44OTU3QzQwLjYzNTkgMjQuOTk5MSA0MC42OTE2IDI1LjE5ODkgNDAuNjkxNiAyNS40OTVWMjcuMjQzM0M0MC42OTE2IDI3LjU0MTggNDAuNjM1OSAyNy43NDE1IDQwLjUyMjEgMjcuODQyNkM0MC40MDgzIDI3Ljk0NiA0MC4yMTc5IDI3Ljk5NzcgMzkuOTQ2MiAyNy45OTc3SDI3LjEwNjJDMjYuODM0NSAyNy45OTc3IDI2LjY0NCAyNy45NDYgMjYuNTMwMiAyNy44NDI2QzI2LjQxNjUgMjcuNzM5MiAyNi4zNjA3IDI3LjUzOTQgMjYuMzYwNyAyNy4yNDMzVjQuNzU0MzNDMjYuMzYwNyA0LjQ1ODI0IDI2LjQxNjUgNC4yNTYxNCAyNi41MzAyIDQuMTU1MUMyNi42NDE3IDQuMDUxNyAyNi44MzQ1IDQgMjcuMTAzOSA0SDM5LjkxMTNDNDAuMTgzIDQgNDAuMzczNSA0LjA1MTcgNDAuNDg3MyA0LjE1NTFDNDAuNjAxMSA0LjI1ODQ5IDQwLjY1NjggNC40NTgyNCA0MC42NTY4IDQuNzU0MzNWNi41MDI2OUM0MC42NTY4IDYuODAxMTQgNDAuNjAxMSA3LjAwMDg4IDQwLjQ4NzMgNy4xMDE5M0M0MC4zNzM1IDcuMjA1MzMgNDAuMTgzIDcuMjU3MDMgMzkuOTExMyA3LjI1NzAzSDMwLjE1M0MyOS45OTUxIDcuMjU3MDMgMjkuODg4MyA3LjI4NTIzIDI5LjgzMDIgNy4zNDE2MkMyOS43NzQ1IDcuMzk4MDIgMjkuNzQ2NiA3LjQ5NjcyIDI5Ljc0NjYgNy42MzMwMlYxMy45MDc0QzI5Ljc0NjYgMTQuMDY3MiAyOS43NzQ1IDE0LjE3NTMgMjkuODMwMiAxNC4yMzRDMjkuODg2IDE0LjI5MDQgMjkuOTkyOCAxNC4zMTg2IDMwLjE1MyAxNC4zMTg2SDM4Ljc1OTVDMzkuMDMxMiAxNC4zMTg2IDM5LjIyMTYgMTQuMzcwMyAzOS4zMzU0IDE0LjQ3MzdDMzkuNDQ5MiAxNC41NzcxIDM5LjUwNDkgMTQuNzc2OSAzOS41MDQ5IDE1LjA3MjlWMTYuNzg2MUMzOS41MDQ5IDE3LjA2MSAzOS40NDkyIDE3LjI1MzcgMzkuMzM1NCAxNy4zNjg4QzM5LjIyMTYgMTcuNDg0IDM5LjAzMTIgMTcuNTQwNCAzOC43NTk1IDE3LjU0MDRIMzAuMTUzQzI5Ljk5NTEgMTcuNTQwNCAyOS44ODgzIDE3LjU2ODYgMjkuODMwMiAxNy42MjVDMjkuNzc0NSAxNy42ODE0IDI5Ljc0NjYgMTcuNzgwMSAyOS43NDY2IDE3LjkxNjRWMjQuMzYyM0MyOS43NDY2IDI0LjQ5ODYgMjkuNzc0NSAyNC41OTczIDI5LjgzMDIgMjQuNjUzN0MyOS44ODYgMjQuNzEwMSAyOS45OTI4IDI0LjczODMgMzAuMTUzIDI0LjczODNIMzkuOTQzOEM0MC4yMTU2IDI0LjczODMgNDAuNDA2IDI0Ljc5IDQwLjUxOTggMjQuODkzNEw0MC41MjIxIDI0Ljg5NTdaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNNDguNzE5OCAyNy44NDQ5QzQ4LjYwNiAyNy45NDgzIDQ4LjQxNTYgMjggNDguMTQzOSAyOEg0Ni4yNDY2QzQ1Ljk3NDggMjggNDUuNzg0NCAyNy45NDgzIDQ1LjY3MDYgMjcuODQ0OUM0NS41NTY4IDI3Ljc0MTUgNDUuNTAxMSAyNy41NDE4IDQ1LjUwMTEgMjcuMjQ1N1Y0Ljc1NDMzQzQ1LjUwMTEgNC40NTgyNCA0NS41NTY4IDQuMjU2MTQgNDUuNjcwNiA0LjE1NTFDNDUuNzg0NCA0LjA1MTcgNDUuOTc3MiA0IDQ2LjI0NjYgNEg1Mi43MTg4QzU5LjE1NjIgNCA2Mi4zNzQ5IDYuNDc5MTkgNjIuMzc0OSAxMS40Mzk5QzYyLjM3NDkgMTMuMDg0OSA2MS45Njg1IDE0LjQ0MDggNjEuMTU1NyAxNS41MDNDNjAuMzQyOSAxNi41NjUyIDU5LjIxMiAxNy4zNSA1Ny43Njc1IDE3Ljg1MDZMNjMuNTk0MSAyNi45NzA3QzYzLjc3NTMgMjcuMjIyMiA2My44NjU5IDI3LjQzODQgNjMuODY1OSAyNy42MjE3QzYzLjg2NTkgMjcuNzU4IDYzLjgwMzEgMjcuODU2NyA2My42ODAxIDI3LjkxMzFDNjMuNTU0NyAyNy45Njk1IDYzLjM2ODkgMjcuOTk3NyA2My4xMjA0IDI3Ljk5NzdINjEuMTIwOUM2MC43Mzc3IDI3Ljk5NzcgNjAuNDU0NCAyNy45NDEzIDYwLjI3MzMgMjcuODI2MUM2MC4wOTIxIDI3LjcxMSA1OS44Nzg1IDI3LjQ2MTkgNTkuNjMgMjcuMDcxOEw1My4zOTY5IDE3LjA2MUM1My4yNjIyIDE2Ljg3NzcgNTMuMTkyNiAxNi43MTc5IDUzLjE5MjYgMTYuNTgxNkM1My4xOTI2IDE2LjM5ODMgNTMuMzYyMSAxNi4yOTQ5IDUzLjcwMTEgMTYuMjczOEM1Ny4xMTI2IDE1LjkwOTUgNTguODE3MiAxNC4zNjU2IDU4LjgxNzIgMTEuNjQ0NEM1OC44MTcyIDEwLjA5MTEgNTguMjgwNyA4Ljk1MzY5IDU3LjIwNzggOC4yMzIyNUM1Ni4xMzQ5IDcuNTEzMTcgNTQuNTgxMyA3LjE1MTI4IDUyLjU0OTMgNy4xNTEyOEg0OS4yOTU3QzQ5LjEzNzggNy4xNTEyOCA0OS4wMzEgNy4xNzk0OCA0OC45NzI5IDcuMjM1ODhDNDguOTE3MiA3LjI5MjI3IDQ4Ljg4OTMgNy40MDI3MiA0OC44ODkzIDcuNTYyNTJWMjcuMjQxQzQ4Ljg4OTMgMjcuNTM5NCA0OC44MzM2IDI3LjczOTIgNDguNzE5OCAyNy44NDAyVjI3Ljg0NDlaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNODQuNTk5MSAyMi40NDcxQzg0Ljg0NzYgMjIuMjQ3MyA4NS4wNDA0IDIyLjE0ODYgODUuMTc1MSAyMi4xNDg2Qzg1LjI2NTYgMjIuMTQ4NiA4NS4zNTYyIDIyLjE4MTUgODUuNDQ2OCAyMi4yNDczQzg1LjUzNzQgMjIuMzEzMSA4NS42MTYzIDIyLjM5MDcgODUuNjgzNyAyMi40OEw4Ni42NjYgMjMuODFDODYuNzc5OCAyMy45NDQgODYuODM1NSAyNC4wOTkxIDg2LjgzNTUgMjQuMjc1M0M4Ni44MzU1IDI0LjM2NDYgODYuODAwNyAyNC40NTg2IDg2LjczMzMgMjQuNTU3M0M4Ni42NjYgMjQuNjU2IDg2LjU2MzggMjQuNzYxOCA4Ni40MjkxIDI0Ljg3MjJDODUuMjMwOCAyNS44Njg2IDgzLjg4MTUgMjYuNjM5NCA4Mi4zODEzIDI3LjE4MjJDODAuODc4OCAyNy43MjUxIDc5LjMwNDMgMjcuOTk3NyA3Ny42NTU1IDI3Ljk5NzdDNzUuNDQyMyAyNy45OTc3IDczLjQxNSAyNy40ODc3IDcxLjU3MzQgMjYuNDY3OEM2OS43MzE4IDI1LjQ0OCA2OC4yNzU3IDI0LjAzMDkgNjcuMjAyOCAyMi4yMTIxQzY2LjEyOTkgMjAuMzk1NiA2NS41OTM0IDE4LjM1NTggNjUuNTkzNCAxNi4wOTUyQzY1LjU5MzQgMTMuODM0NSA2Ni4xMjk5IDExLjc1MjUgNjcuMjAyOCA5LjkxMjQ3QzY4LjI3NTcgOC4wNzI0NiA2OS43NDM0IDYuNjI3MjQgNzEuNjA4MiA1LjU3NDQ2QzczLjQ3MDcgNC41MjYzOSA3NS41NTM4IDQgNzcuODU3NSA0Qzc5LjQ4MzEgNCA4MS4wMzY3IDQuMjc3MjkgODIuNTE2IDQuODMxODhDODMuOTk1MyA1LjM4NjQ3IDg1LjMxMjEgNi4xNDA4IDg2LjQ2NCA3LjA5MjUzQzg2LjY4OTIgNy4yNDc2MyA4Ni44MDMgNy40MTQ0NyA4Ni44MDMgNy41OTA3MkM4Ni44MDMgNy43NDU4MSA4Ni43MzU3IDcuOTIyMDYgODYuNTk4NiA4LjEyMTgxTDg1LjYxNjMgOS40MTg5OEM4NS40MzUyIDkuNjYzMzcgODUuMjU0IDkuNzg1NTcgODUuMDc1MiA5Ljc4NTU3Qzg0Ljk0MDUgOS43ODU1NyA4NC43NDc4IDkuNjk2MjcgODQuNDk5MyA5LjUyMDAyQzgzLjUyODYgOC43ODkxOSA4Mi40NzY2IDguMjEzNDUgODEuMzQ3OSA3Ljc5MDQ2QzgwLjIxOTMgNy4zNjk4MiA3OS4wMzI2IDcuMTU4MzMgNzcuNzkwMiA3LjE1ODMzQzc2LjE4NTUgNy4xNTgzMyA3NC43MjQ3IDcuNTM0MzIgNzMuNDAzMyA4LjI4ODY1QzcyLjA4MTkgOS4wNDI5OCA3MS4wMzY5IDEwLjA5NTggNzAuMjY4MiAxMS40NDdDNjkuNDk5NSAxMi43OTgyIDY5LjExNjQgMTQuMzI4IDY5LjExNjQgMTYuMDM0MUM2OS4xMTY0IDE3Ljc0MDEgNjkuNDk0OSAxOS4xNjg5IDcwLjI1MiAyMC41MjI1QzcxLjAwOSAyMS44NzM3IDcyLjA0NzEgMjIuOTMzNSA3My4zNjg1IDIzLjY5NzNDNzQuNjg5OSAyNC40NjEgNzYuMTY0NiAyNC44NDQgNzcuNzkwMiAyNC44NDRDODAuMzQyNCAyNC44NDQgODIuNjExMyAyNC4wNDc0IDg0LjU5OTEgMjIuNDUxOFYyMi40NDcxWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTEwOS40MDEgMjcuODQ0OUMxMDkuMjg4IDI3Ljk0ODMgMTA5LjA5NyAyOCAxMDguODI2IDI4SDEwNi45MjhDMTA2LjY1NyAyOCAxMDYuNDY2IDI3Ljk0ODMgMTA2LjM1MiAyNy44NDQ5QzEwNi4yMzggMjcuNzQxNSAxMDYuMTgzIDI3LjU0MTggMTA2LjE4MyAyNy4yNDU3VjE3LjY4MTRDMTA2LjE4MyAxNy41NDUxIDEwNi4xNTUgMTcuNDQ2NCAxMDYuMDk5IDE3LjM5QzEwNi4wNDMgMTcuMzMzNiAxMDUuOTM0IDE3LjMwNTQgMTA1Ljc3NiAxNy4zMDU0SDk0LjU2MkM5NC40MDQxIDE3LjMwNTQgOTQuMjk3MiAxNy4zMzM2IDk0LjIzOTIgMTcuMzlDOTQuMTgzNCAxNy40NDY0IDk0LjE1NTYgMTcuNTQ1MSA5NC4xNTU2IDE3LjY4MTRWMjcuMjQ1N0M5NC4xNTU2IDI3LjU0NDEgOTQuMDk5OCAyNy43NDM5IDkzLjk4NiAyNy44NDQ5QzkzLjg3MjIgMjcuOTQ4MyA5My42ODE4IDI4IDkzLjQxMDEgMjhIOTEuNTEyOEM5MS4yNDExIDI4IDkxLjA1MDcgMjcuOTQ4MyA5MC45MzY5IDI3Ljg0NDlDOTAuODIzMSAyNy43NDE1IDkwLjc2NzMgMjcuNTQxOCA5MC43NjczIDI3LjI0NTdWNC43NTQzM0M5MC43NjczIDQuNDU4MjQgOTAuODIzMSA0LjI1NjE0IDkwLjkzNjkgNC4xNTUxQzkxLjA0ODMgNC4wNTE3IDkxLjI0MTEgNCA5MS41MTA1IDRIOTMuNDA3OEM5My42Nzk1IDQgOTMuODcyMyA0LjA1MTcgOTMuOTgzNyA0LjE1NTFDOTQuMDk3NSA0LjI1ODQ5IDk0LjE1MzIgNC40NTgyNCA5NC4xNTMyIDQuNzU0MzNWMTMuNjY3N0M5NC4xNTMyIDEzLjgwNCA5NC4xODExIDEzLjkwNzQgOTQuMjM2OSAxMy45NzU1Qzk0LjI5MjYgMTQuMDQzNyA5NC4zOTk0IDE0LjA3ODkgOTQuNTU5NiAxNC4wNzg5SDEwNS43NzRDMTA1LjkzMiAxNC4wNzg5IDEwNi4wMzkgMTQuMDQzNyAxMDYuMDk3IDEzLjk3NTVDMTA2LjE1MyAxMy45MDc0IDEwNi4xOCAxMy44MDQgMTA2LjE4IDEzLjY2NzdWNC43NTQzM0MxMDYuMTggNC40NTgyNCAxMDYuMjM2IDQuMjU2MTQgMTA2LjM1IDQuMTU1MUMxMDYuNDY0IDQuMDUxNyAxMDYuNjU3IDQgMTA2LjkyOCA0SDEwOC44MjZDMTA5LjA5NSA0IDEwOS4yODggNC4wNTE3IDEwOS40MDEgNC4xNTUxQzEwOS41MTUgNC4yNTg0OSAxMDkuNTcxIDQuNDU4MjQgMTA5LjU3MSA0Ljc1NDMzVjI3LjI0NTdDMTA5LjU3MSAyNy41NDQxIDEwOS41MTUgMjcuNzQzOSAxMDkuNDAxIDI3Ljg0NDlaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMTY0LjI1MiA0LjE1MDRDMTY0LjM2NiA0LjA0OTM1IDE2NC41NTggNCAxNjQuODI4IDRIMTY2LjcyNUMxNjYuOTk3IDQgMTY3LjE4OSA0LjA0OTM1IDE2Ny4zMDEgNC4xNTA0QzE2Ny40MTUgNC4yNDkwOSAxNjcuNDcgNC40NDQxNCAxNjcuNDcgNC43MzMxOFYyNi45MDQ5QzE2Ny40NyAyNy42MzU4IDE2Ny4yNDUgMjguMDAyMyAxNjYuNzkyIDI4LjAwMjNDMTY2LjYxMSAyOC4wMDIzIDE2Ni40MjEgMjcuOTI5NSAxNjYuMjE2IDI3Ljc4NjJDMTY2LjAxMiAyNy42NDI4IDE2NS43MzEgMjcuMzcwMiAxNjUuMzY5IDI2Ljk3MDdMMTUxLjYxNCAxMS4wNDk4VjI2LjkwNDlDMTUxLjYxNCAyNy4xOTQgMTUxLjU1OCAyNy4zODY3IDE1MS40NDQgMjcuNDg3N0MxNTEuMzMgMjcuNTg2NCAxNTEuMTQgMjcuNjM4MSAxNTAuODY4IDI3LjYzODFIMTQ4Ljk3MUMxNDguNjk5IDI3LjYzODEgMTQ4LjUwOSAyNy41ODg4IDE0OC4zOTUgMjcuNDg3N0MxNDguMjgxIDI3LjM4OSAxNDguMjI2IDI3LjE5NCAxNDguMjI2IDI2LjkwNDlWNS4wOTc0MkMxNDguMjI2IDQuNzIxNDMgMTQ4LjI4MSA0LjQ0NDE0IDE0OC4zOTUgNC4yNjU1NEMxNDguNTA5IDQuMDg5MyAxNDguNjkgNCAxNDguOTM5IDRDMTQ5LjEyIDQgMTQ5LjMxIDQuMDcyODUgMTQ5LjUxNCA0LjIxNjJDMTQ5LjcxOSA0LjM1OTU0IDE0OS45ODggNC42MzIxNCAxNTAuMzI3IDUuMDMxNjNMMTY0LjA4MiAyMC45NTI1VjQuNzMwODNDMTY0LjA4MiA0LjQ0NDE0IDE2NC4xMzggNC4yNDkwOSAxNjQuMjUyIDQuMTQ4MDVWNC4xNTA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTE0My43MzIgMTguNzA4M0MxNDMuNzIgMTguNjUxOSAxNDMuNzA0IDE4LjQ5NDQgMTQzLjY5OSAxOC40MTkzQzE0My43MDQgMTguNDM1NyAxNDMuNzMgMTguNjc1NCAxNDMuNzMyIDE4LjcwODNaIiBmaWxsPSIjREM1RjQwIi8+CjxwYXRoIGQ9Ik0xNDEuNjEzIDExLjA4QzE0Mi42OTggMTAuOTYwMiAxNDMuNDgzIDkuOTczMiAxNDMuMzY0IDguODczNDJDMTQzLjI0NiA3Ljc3NiAxNDIuMjcgNi45ODE3MSAxNDEuMTg0IDcuMTAxNTZDMTQwLjA5OSA3LjIyMTQxIDEzOS4zMTQgOC4yMDgzOSAxMzkuNDMzIDkuMzA4MTZDMTM5LjU1MSAxMC40MDU2IDE0MC41MjYgMTEuMTk5OSAxNDEuNjEzIDExLjA4WiIgZmlsbD0iI0RDNUY0MCIvPgo8cGF0aCBkPSJNMTQzLjg1NyAyMC42MjU0QzE0My45NDMgMTYuMTY5OSAxNDIuMDkyIDEwLjc2NzQgMTM3LjI1MiAxMy44MzY0QzEzNi44NDYgMTMuOTk2MiAxMzYuNjE0IDEzLjkzOTggMTM2LjQgMTMuNjM0M0MxMzUuNzg5IDEyLjUxNTggMTM1LjMyIDExLjM3MTMgMTM0LjczOSAxMC4xOTY0QzEzMC4zNzEgLTEuMTc1MDEgMTI1LjM4MyA1LjMyNzI5IDEyMC4xMTQgMTIuMDU3NUMxMDguMzQ3IDI3LjQ0OTcgMTEzLjg5IDM0LjI2NjkgMTMyLjQzOCAyMC43NUMxMzMuMDg2IDIwLjI4NDcgMTM0LjM4NCAxOS4zMTE4IDEzNC44NTEgMTkuMjcxOUMxMzUuMzQzIDE5LjE5MiAxMzUuNTQ4IDE5LjU5NjIgMTM1LjkxOSAyMC40NDIxQzEzNi4yNzkgMjEuMzA5MyAxMzYuODc4IDIyLjUzODMgMTM3LjQyNiAyMy40MTQ4QzE0MC41OTIgMjkuNjMwNCAxNDQuMDk4IDI4LjE4OTkgMTQzLjg1OSAyMC42NTEzVjIwLjYyNTRIMTQzLjg1N1pNMTI5LjkwOSAxOC4zMDg0QzEyNy41NzUgMTkuNzg0MiAxMjUuMzYgMjEuNTkxMyAxMjIuNzk2IDIyLjY2OTlDMTIxLjY3OSAyMy4xNDIyIDEyMC4wNTEgMjIuNjIwNSAxMTkuNjQ5IDIxLjcwNjRDMTE5LjE5NCAyMC4yODk0IDEyMC44MjIgMTguMjAwMyAxMjEuNjIxIDE2LjcyOTJDMTIyLjU0NyAxNS4wNTM3IDEyMy43NzYgMTMuNTYzOCAxMjQuOTUzIDEyLjA0NThDMTI2LjA5NiAxMC41NDg5IDEyNy42NDcgOC4zMjgxNyAxMjkuNzk4IDkuMjk4N0MxMzEuNTIzIDEwLjI5MDQgMTMyLjIzMSAxMy4wMzI4IDEzMy4yMTggMTQuNjg3MUMxMzMuNjY0IDE1LjQwMzkgMTMzLjY1IDE1LjkxMTQgMTMyLjg3IDE2LjM0MzhDMTMxLjkyNSAxNi45NTI1IDEzMC45MDEgMTcuNjQ1NyAxMjkuOTI4IDE4LjI5OUwxMjkuOTA5IDE4LjMxMDdWMTguMzA4NFpNMTQyLjU1NiAyMS4yNDM1QzE0Mi41MDUgMjIuMDk2NSAxNDIuMzQ1IDI1LjMyMyAxNDEuMjcgMjMuNzg2MUMxNDAuMjcxIDIxLjg4NzQgMTM5LjE3NSAxOS41MjEgMTM4LjE5NyAxNy40OTc3QzEzNy44MTcgMTYuNDYzNyAxNDAuMTkyIDE2LjA0NTQgMTQwLjgxIDE2LjIyMTZDMTQyLjUzNSAxNi44NjU1IDE0Mi41OTYgMTkuNjE5NyAxNDIuNTU2IDIxLjIyOTRWMjEuMjQ1OFYyMS4yNDM1WiIgZmlsbD0iI0RDNUY0MCIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzEzNDkxXzEzNTU1Ij4KPHJlY3Qgd2lkdGg9IjE2OCIgaGVpZ2h0PSIzMiIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K" alt="Aerchain" class="hdr-logo">
+    <div class="hdr-right">
+      <span class="hdr-date">June 2026</span>
+      <div class="hdr-div"></div>
+      <div class="hdr-badge"><span class="hdr-dot"></span>Strictly Confidential</div>
+    </div>
+  </div>
+</header>
+<section class="cover">
+  <div class="cov-orb1"></div><div class="cov-orb2"></div>
+  <div class="wrap"><div class="cover-inner">
+    <p class="cov-eye">Tokenization &amp; AI Operating Cost &middot; June 2026 &nbsp;&middot;&nbsp; Aerchain &times; Adani Group</p>
+    <h1 class="cov-h1">What the AI Actually <em>Costs to Run</em><br>&mdash; every agent, every cycle, at group scale</h1>
+    <p class="cov-sub">A transparent, bottom-up estimate of the AI (token) cost to run Aerchain&rsquo;s autonomous procurement spine &mdash; from intake capture all the way to invoice match &mdash; across ~300,000 procurement cycles a year. Costed agent-by-agent, by deal complexity. A directional planning model, not a contractual quote.</p>
+    <div class="cov-meta">
+      <div class="cov-mi"><span class="cm-l">Annual volume modelled</span><span class="cm-v">~300,000 cycles / year</span></div>
+      <div class="cov-mi"><span class="cm-l">Distinct AI agents</span><span class="cm-v">40+ across intake &rarr; pay</span></div>
+      <div class="cov-mi"><span class="cm-l">Estimated AI cost</span><span class="cm-v">~$804K / year &middot; ~$67K / month</span></div>
+      <div class="cov-mi"><span class="cm-l">Blended per cycle</span><span class="cm-v">~$2.68 / procurement cycle</span></div>
+    </div>
+    <div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.62)">
+      <div>Prepared for <b style="color:#fff;font-weight:600">Adani Group</b> &mdash; IT &amp; Procurement &middot; companion to the Aerchain &times; Adani Commercial Proposal</div>
+      <div>Directional model at current AI pricing</div>
+    </div>
+  </div></div>
+</section>
+
+<main class="main"><div class="wrap">
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">1</div><h2 class="sec-title">How We Estimate This &mdash; and <em>What&rsquo;s in Scope</em></h2></div>
+  <p class="sec-sub">A fair question deserves a clear answer: &ldquo;how do I understand the costing?&rdquo; This is the honest, bottom-up answer &mdash; not a flat per-seat number, but the actual cost of the AI work each procurement cycle triggers. This is the <b>internal fixed cost</b> that sits underneath the Aerchain platform subscription.</p>
+  <div class="hero-line">
+    <div class="hero-line-icon">&#8721;</div>
+    <div class="hero-line-body">
+      <div class="hero-line-lbl">The model in one line</div>
+      <div class="hero-line-text">Cost = the <b>AI work</b> each agent performs, summed across every agent in a cycle, multiplied by <b>how complex</b> the cycle is, multiplied by <b>how many</b> cycles you run a year. Nothing else is in this number.</div>
+    </div>
+  </div>
+  <div class="g3">
+    <div class="card card-accent cp"><div class="card-lbl">What&rsquo;s counted</div><div class="card-t">AI processing only</div><div class="card-x">The direct cost of the AI engines (tokens) running every agent across the cycle, at current rates.</div></div>
+    <div class="card card-accent cb"><div class="card-lbl">What&rsquo;s NOT counted</div><div class="card-t">Platform &amp; infra are separate</div><div class="card-x">Hosting, database, search, document storage, and the Aerchain platform subscription are not in this figure. This isolates the <i>AI</i> line so it can be reasoned about on its own.</div></div>
+    <div class="card card-accent cg"><div class="card-lbl">Scope of the cycle</div><div class="card-t">Intake &rarr; award &rarr; pay</div><div class="card-x">The full autonomous spine: intake capture, RFx drafting, offer extraction, negotiation, evaluation, award &mdash; <b>and</b> the downstream invoice extraction &amp; match, plus the always-on assistant agents.</div></div>
+  </div>
+  <div class="callout co-a">
+    <div class="callout-ttl">&#9201; A transparency note that holds for this whole document</div>
+    These figures are based on <b>current AI pricing</b>. AI processing costs have trended <i>down</i> meaningfully year over year, but they can change in either direction, and the agent mix evolves as the product matures. Treat this as a directional planning model that we will re-baseline against live usage &mdash; not a fixed price.
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">2</div><h2 class="sec-title">Every AI Agent <em>in the Loop</em></h2></div>
+  <p class="sec-sub">A comprehensive map of the agents that run across a procurement cycle &mdash; 40+ distinct agents, grouped by stage. Aerchain runs a <b>combination of AI engines</b>, routed per task across three tiers, so each job uses exactly the capability it needs and no more.</p>
+  <div class="g3" style="margin-bottom:10px">
+    <div class="card card-accent cp"><div class="card-lbl"><span class="eng deep">Deep</span></div><div class="card-t">Frontier reasoning</div><div class="card-x">Reserved for the highest-stakes work &mdash; per-vendor technical &amp; commercial scoring, award scenarios, negotiation strategy. Used only where it changes the outcome.</div></div>
+    <div class="card card-accent cb"><div class="card-lbl"><span class="eng bal">Balanced</span></div><div class="card-t">The everyday workhorse</div><div class="card-x">Drafting, extraction and evaluation across most of the cycle &mdash; the best blend of quality and efficiency.</div></div>
+    <div class="card card-accent ct"><div class="card-lbl"><span class="eng fast">Fast</span></div><div class="card-t">High-throughput</div><div class="card-x">Lightweight engines for classification, ranking, routing and high-volume extraction &mdash; instant and economical.</div></div>
+  </div>
+  <p class="muted" style="font-size:12.5px;margin-bottom:6px">Right-sizing the engine to the task &mdash; <b>deep only where it matters</b> &mdash; is a core reason the cost-per-cycle stays low.</p>
+
+  <div class="inv-stage">Intake</div>
+  <table class="dt"><thead><tr><th style="width:28%">Agent</th><th>What it does</th><th style="width:13%">Engine</th></tr></thead><tbody><tr><td><b>Intake Extraction</b></td><td>Pulls structured lines out of quotes, requirement docs, emails and uploads</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Vendor Resolver</b></td><td>Identifies the issuing vendor from a document</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Enrichment</b></td><td>Normalises extracted lines against item / UOM / currency masters</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Matching</b></td><td>Finds catalog &amp; vendor candidates for each line</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Reranker</b></td><td>Re-ranks candidates by semantic similarity</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Routing</b></td><td>Picks the channel: PO &middot; catalog &middot; source &middot; negotiate &middot; buyer</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Commercial-Rules Judge</b></td><td>Applies the buyer&rsquo;s own rules to fine-tune routing</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Consolidation</b></td><td>Groups lines (vendor / category / location) for bundling</td><td><span class="eng fast">Fast</span></td></tr></tbody></table>
+
+  <div class="inv-stage">RFx &amp; sourcing</div>
+  <table class="dt"><thead><tr><th style="width:28%">Agent</th><th>What it does</th><th style="width:13%">Engine</th></tr></thead><tbody><tr><td><b>RFx Generator</b></td><td>Drafts the full RFx &mdash; SOW, T&amp;C, questionnaire, documents, vendor list</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>RFx Section Generators</b></td><td>Generate individual sections (terms, item table, criteria)</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Attachment Extractor</b></td><td>Reads text &amp; visuals from PDFs, images and documents</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Email Offer Extractor</b></td><td>Parses vendor offers from email / Excel / PDF into structured bids</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Vendor Follow-up</b></td><td>Chases vendors on a cadence until they respond</td><td><span class="eng fast">Fast</span></td></tr></tbody></table>
+
+  <div class="inv-stage">Evaluation &amp; analysis &mdash; technical + commercial scoring</div>
+  <table class="dt"><thead><tr><th style="width:28%">Agent</th><th>What it does</th><th style="width:13%">Engine</th></tr></thead><tbody><tr><td><b>Document / attachment analysis</b></td><td>Scores vendor documents for compliance &amp; findings</td><td><span class="eng deep">Deep</span></td></tr><tr><td><b>Company-profile analysis</b></td><td>Vendor strengths, weaknesses, risk read</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Questionnaire scoring</b></td><td>Scores each vendor&rsquo;s questionnaire responses</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Contract &amp; commercial-terms extraction</b></td><td>Pulls and normalises submitted terms per vendor</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Commercial normalization &amp; summary</b></td><td>Normalises prices &amp; terms onto a like-for-like grid</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Technical supplier recommendation</b></td><td>Synthesises a technical winner with rationale</td><td><span class="eng deep">Deep</span></td></tr><tr><td><b>Commercial recommendation</b></td><td>Synthesises a commercial winner with rationale</td><td><span class="eng deep">Deep</span></td></tr></tbody></table>
+  <p class="muted" style="font-size:12px;margin-top:8px">This stage alone runs <b>~15 AI passes per complex deal</b> &mdash; most of them per-vendor &mdash; which is why complex cycles cost what they do.</p>
+
+  <div class="inv-stage">Negotiation</div>
+  <table class="dt"><thead><tr><th style="width:28%">Agent</th><th>What it does</th><th style="width:13%">Engine</th></tr></thead><tbody><tr><td><b>Target / Counter Generator</b></td><td>Extracts targets and counter-offers; sets floor / ceiling</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Playbook Generator</b></td><td>Builds the strategy: discovery &rarr; benchmark &rarr; pressure &rarr; BAFO</td><td><span class="eng deep">Deep</span></td></tr><tr><td><b>Vendor-message Draft</b></td><td>Drafts each buyer-side negotiation message</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Chat Runner</b></td><td>Runs multi-turn vendor conversations through the rounds</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Market-Benchmark Agent</b></td><td>Searches the market for defensible benchmarks (round 2+)</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Log Summary</b></td><td>Summarises outcomes &amp; strategy effectiveness</td><td><span class="eng fast">Fast</span></td></tr></tbody></table>
+  <div class="callout co-b" style="margin-top:14px">
+    <div class="callout-ttl">A deliberate cost asymmetry &mdash; autonomy is highest where deals are simplest</div>
+    Tail and standard deals run negotiation <b>autonomously</b> (the agent drafts and sends every round). Tactical and complex deals are <b>buyer-led</b> &mdash; the AI assists, a human drives. So negotiation cost actually <i>peaks at standard</i> and tapers on complex, where the spend shifts into deep evaluation instead. This is built into the per-cycle numbers.
+  </div>
+
+  <div class="inv-stage">Award</div>
+  <table class="dt"><thead><tr><th style="width:28%">Agent</th><th>What it does</th><th style="width:13%">Engine</th></tr></thead><tbody><tr><td><b>Scenario Constraint-Check</b></td><td>Feasibility pre-check before scenarios are built</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Scenario Builder</b></td><td>Generates optimised award scenarios to compare</td><td><span class="eng deep">Deep</span></td></tr><tr><td><b>Scenario Verification</b></td><td>Validates generated scenarios against constraints</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Award Recommendation</b></td><td>Recommends the winner with rationale &amp; guardrail check</td><td><span class="eng deep">Deep</span></td></tr><tr><td><b>Variance / Decision Gate</b></td><td>Auto-award vs. send-to-buyer against thresholds</td><td><span class="eng fast">Fast</span></td></tr></tbody></table>
+
+  <div class="inv-stage">Downstream &mdash; extending the cycle to payment</div>
+  <table class="dt"><thead><tr><th style="width:28%">Agent</th><th>What it does</th><th style="width:13%">Engine</th></tr></thead><tbody><tr><td><b>Invoice Extraction &amp; Matching</b></td><td>Reads the invoice, 2-way / 3-way matches it against PO &amp; goods-receipt, flags exceptions</td><td><span class="eng bal">Balanced</span></td></tr></tbody></table>
+  <p class="muted" style="font-size:12px;margin-top:8px">Because invoices outnumber purchase orders, this agent runs on a slightly larger base (~1.2&times; per cycle), already reflected below.</p>
+
+  <div class="inv-stage">Always-on &mdash; the assistant agents</div>
+  <table class="dt"><thead><tr><th style="width:28%">Agent</th><th>What it does</th><th style="width:13%">Engine</th></tr></thead><tbody><tr><td><b>Workbench / Help Agent</b></td><td>Answers any question, anywhere &mdash; queue triage, &ldquo;what&rsquo;s stuck&rdquo;, how-to</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Analyst Agent (Aerchain Insights)</b></td><td>Read-only copilot on the RFx / analysis pages &mdash; compares bids, explains scores</td><td><span class="eng bal">Balanced</span></td></tr><tr><td><b>Draft-instructions Compiler</b></td><td>Turns rough buyer notes into clean agent instructions</td><td><span class="eng fast">Fast</span></td></tr><tr><td><b>Search Indexer</b></td><td>Indexes intake lines for semantic Q&amp;A</td><td><span class="eng fast">Fast</span></td></tr></tbody></table>
+  <p class="muted" style="font-size:12px;margin-top:8px">The assistant agents are <b>usage-driven</b>, not per-transaction. We amortise them at an assumed <b>~2 help questions + ~1.5 analyst questions per cycle</b>. Heavier adoption raises this line; lighter adoption lowers it.</p>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">3</div><h2 class="sec-title">The Four <em>Complexity Tiers</em></h2></div>
+  <p class="sec-sub">Every cycle runs essentially the same agents &mdash; what changes is <i>how much</i> each one has to do: line items, vendors, questionnaires, documents, negotiation rounds. We band cycles into four tiers.</p>
+  <div class="g4">
+    <div class="card card-accent cb"><div class="card-lbl"><span class="tier-pill tail">Tail</span></div><div class="card-t">Simple, high-volume</div><div class="card-x">1&ndash;3 lines, 2&ndash;3 vendors, no real negotiation, lowest-price award. Mostly MRO / operational / repeat buys. Runs fully autonomously on the fast tier.</div></div>
+    <div class="card card-accent cg"><div class="card-lbl"><span class="tier-pill std">Standard</span></div><div class="card-t">Routine sourced</div><div class="card-x">5&ndash;15 lines, 3&ndash;4 vendors, 1 negotiation round, light commercial evaluation. The autonomous-negotiation sweet spot.</div></div>
+    <div class="card card-accent ca"><div class="card-lbl"><span class="tier-pill tac">Tactical</span></div><div class="card-t">More moving parts</div><div class="card-x">15&ndash;40 lines, 5&ndash;6 vendors, 2 rounds, commercial + light technical evaluation. AI assists; a buyer drives the negotiation.</div></div>
+    <div class="card card-accent cpk"><div class="card-lbl"><span class="tier-pill cx">Complex</span></div><div class="card-t">Full techno-commercial</div><div class="card-x">40&ndash;100+ lines, 10&ndash;12 vendors, full technical + commercial scoring, multiple award scenarios. Human-led negotiation; AI is the analysis engine.</div></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">4</div><h2 class="sec-title">Cost Per Cycle &mdash; <em>by Stage and Tier</em></h2></div>
+  <p class="sec-sub">The AI cost of one complete intake-to-pay cycle, broken down by stage cluster. Figures are at current pricing, rounded.</p>
+  <table class="dt cost">
+    <thead><tr><th>Stage cluster</th><th class="num"><span class="tier-pill tail">Tail</span></th><th class="num"><span class="tier-pill std">Standard</span></th><th class="num"><span class="tier-pill tac">Tactical</span></th><th class="num"><span class="tier-pill cx">Complex</span></th></tr></thead>
+    <tbody>
+      <tr><td class="stage">Intake &mdash; capture, route &amp; consolidate</td><td class="num">$0.04</td><td class="num">$0.08</td><td class="num">$0.12</td><td class="num">$0.20</td></tr>
+      <tr><td class="stage">RFx generation</td><td class="num">$0.10</td><td class="num">$0.22</td><td class="num">$0.58</td><td class="num">$1.06</td></tr>
+      <tr><td class="stage">Offer extraction (email / PDF / Excel)</td><td class="num">$0.04</td><td class="num">$0.12</td><td class="num">$0.24</td><td class="num">$0.60</td></tr>
+      <tr><td class="stage">Sourcing &amp; vendor follow-up</td><td class="num">$0.02</td><td class="num">$0.04</td><td class="num">$0.06</td><td class="num">$0.12</td></tr>
+      <tr><td class="stage">Negotiation (playbook + target + rounds)</td><td class="num">$0.20</td><td class="num">$1.22</td><td class="num">$1.26</td><td class="num">$2.04</td></tr>
+      <tr><td class="stage">Evaluation &amp; analysis (technical + commercial)</td><td class="num">$0.12</td><td class="num">$0.36</td><td class="num">$0.60</td><td class="num">$5.20</td></tr>
+      <tr><td class="stage">Award (scenarios + recommendation)</td><td class="num">$0.14</td><td class="num">$0.48</td><td class="num">$0.90</td><td class="num">$1.70</td></tr>
+      <tr><td class="stage">Invoice extraction &amp; matching</td><td class="num">$0.08</td><td class="num">$0.16</td><td class="num">$0.24</td><td class="num">$0.50</td></tr>
+      <tr><td class="stage">Always-on assistants (help + analyst)</td><td class="num">$0.20</td><td class="num">$0.36</td><td class="num">$0.56</td><td class="num">$0.84</td></tr>
+      <tr class="total"><td>Total per cycle</td><td class="num">$0.94</td><td class="num">$3.04</td><td class="num">$4.56</td><td class="num">$12.26</td></tr>
+    </tbody>
+  </table>
+  <div class="callout co-p" style="margin-top:16px">
+    <div class="callout-ttl">Read the complex column</div>
+    A complex cycle costs ~13&times; a tail cycle &mdash; and ~42% of that is the <b>evaluation &amp; analysis</b> stage, where the AI scores every vendor&rsquo;s technical and commercial submission individually. That&rsquo;s the deepest, most defensible AI work in the platform, and it lands exactly where the procurement <i>value</i> is.
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">5</div><h2 class="sec-title">Adani at Scale &mdash; <em>~300,000 Cycles a Year</em></h2></div>
+  <p class="sec-sub">A group running ~300,000 procurement cycles annually has a heavily tail-weighted mix: a vast operational long tail, a small number of high-value strategic deals. Our working distribution:</p>
+  <table class="dt cost">
+    <thead><tr><th>Tier</th><th class="num">Share of volume</th><th class="num">Cycles / year</th><th class="num">Cost / cycle</th><th class="num">Annual AI cost</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tier-pill tail">Tail</span></td><td class="num">50%</td><td class="num">150,000</td><td class="num">$0.94</td><td class="num">$141,000</td></tr>
+      <tr><td><span class="tier-pill std">Standard</span></td><td class="num">30%</td><td class="num">90,000</td><td class="num">$3.04</td><td class="num">$273,600</td></tr>
+      <tr><td><span class="tier-pill tac">Tactical</span></td><td class="num">15%</td><td class="num">45,000</td><td class="num">$4.56</td><td class="num">$205,200</td></tr>
+      <tr><td><span class="tier-pill cx">Complex</span></td><td class="num">5%</td><td class="num">15,000</td><td class="num">$12.26</td><td class="num">$183,900</td></tr>
+      <tr class="total"><td>Total</td><td class="num">100%</td><td class="num">300,000</td><td class="num">$2.68</td><td class="num">$803,700</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">6</div><h2 class="sec-title">The <em>Headline Numbers</em></h2></div>
+  <p class="sec-sub">The estimated AI operating cost to run the full autonomous spine for a ~300,000-cycle-a-year group &mdash; the internal fixed cost that underpins the platform subscription.</p>
+  <div class="stats">
+    <div class="stat cp"><div class="stat-lbl">Estimated annual AI cost</div><div class="sv p">~$804K</div><div class="stat-hint">all agents &middot; intake &rarr; pay &middot; 300K cycles</div></div>
+    <div class="stat cs"><div class="stat-lbl">Per month</div><div class="sv s">~$67K</div><div class="stat-hint">&asymp; $66,975 / month</div></div>
+    <div class="stat ca"><div class="stat-lbl">Blended per cycle</div><div class="sv a">$2.68</div><div class="stat-hint">across the full tier mix</div></div>
+    <div class="stat cm"><div class="stat-lbl">Cheapest &rarr; costliest cycle</div><div class="sv w">$0.94&ndash;$12.26</div><div class="stat-hint">tail &rarr; complex</div></div>
+  </div>
+  <div class="callout co-g">
+    <div class="callout-ttl">&#10003; What this buys</div>
+    ~$804K of AI a year runs <b>300,000 complete sourcing-to-pay cycles</b> end to end &mdash; every intake captured, every RFx drafted, every offer extracted, every bid scored, every award recommended, every invoice matched, with an always-on assistant on every screen. That is roughly <b>$2.68 of AI per cycle</b> &mdash; a small fraction of the buyer-hours each cycle replaces.
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">7</div><h2 class="sec-title">What Actually <em>Drives the Cost</em></h2></div>
+  <div class="cap-grid col2">
+    <div class="cap-item"><div class="cap-ck violet">&#9670;</div><div><div class="cap-title">Complexity, not volume</div><div class="cap-desc">The 20% of cycles that are tactical or complex drive ~48% of the bill. The 50% that are tail drive ~18%. Cost concentrates where the value is.</div></div></div>
+    <div class="cap-item"><div class="cap-ck info">&#9670;</div><div><div class="cap-title">Evaluation is the single biggest line</div><div class="cap-desc">Per-vendor technical + commercial scoring on complex deals is the largest single cost &mdash; and the hardest work to do well.</div></div></div>
+    <div class="cap-item"><div class="cap-ck">&#9670;</div><div><div class="cap-title">The mix is the master dial</div><div class="cap-desc">Shift complex from 5% to 7% and the annual cost moves ~$36K. The single best way to tighten this estimate is to measure the real tier distribution.</div></div></div>
+    <div class="cap-item"><div class="cap-ck warn">&#9670;</div><div><div class="cap-title">Costs trend down, levers exist</div><div class="cap-desc">Batching the heavy evaluation work and routing simpler tasks to the fast tier keeps the cost efficient &mdash; before any provider price drops.</div></div></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-hd"><div class="sec-num">8</div><h2 class="sec-title">Assumptions &amp; <em>How This Changes Over Time</em></h2></div>
+  <table class="kvt">
+    <tr><td>Pricing basis</td><td>Current AI pricing. Heavy reasoning on the Deep tier; everyday drafting &amp; evaluation on Balanced; high-volume extraction &amp; ranking on Fast. Subject to change &mdash; historically downward.</td></tr>
+    <tr><td>Scope</td><td>AI processing only. Excludes platform subscription, hosting, database, search, and storage.</td></tr>
+    <tr><td>Volume</td><td>300,000 procurement cycles / year, group-wide.</td></tr>
+    <tr><td>Tier mix</td><td>50% tail &middot; 30% standard &middot; 15% tactical &middot; 5% complex (group-scale, tail-weighted). The biggest single sensitivity.</td></tr>
+    <tr><td>Assistant usage</td><td>~2 help + ~1.5 analyst questions per cycle, amortised. Scales with user adoption.</td></tr>
+    <tr><td>Invoice base</td><td>~1.2 invoices per cycle (partial deliveries / multiple invoices).</td></tr>
+    <tr><td>Negotiation autonomy</td><td>Autonomous on tail/standard; buyer-led (AI-assisted) on tactical/complex.</td></tr>
+    <tr><td>Commercial treatment</td><td>Carried as Aerchain&rsquo;s <b>internal fixed cost</b> within the platform subscription &mdash; not billed to Adani per token or per cycle.</td></tr>
+    <tr><td>Refinement</td><td>We recommend instrumenting one live cycle per tier to replace estimates with measured numbers as the deployment beds in.</td></tr>
+    <tr><td>Status</td><td>Directional planning model &mdash; not a contractual quote.</td></tr>
+  </table>
+  <div class="callout co-b" style="margin-top:16px">
+    <div class="callout-ttl">The single message</div>
+    Running Aerchain&rsquo;s full autonomous, intake-to-pay agent stack across <b>~300,000 cycles a year costs roughly $804K in AI</b> at today&rsquo;s pricing &mdash; about <b>$2.68 per cycle</b>. The number is dominated by the small share of complex, high-value deals, it falls as AI pricing falls, and we will re-baseline it against live usage. Adani pays a fixed platform subscription; this AI cost is carried internally by Aerchain.
+  </div>
+</section>
+
+</div></main>
+
+<hr class="sep">
+<footer class="footer">
+  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTY4IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTY4IDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMTM0OTFfMTM1NTUpIj4KPHBhdGggZD0iTTMuNzk1MSAyNi45ODk1QzMuNjEzOTYgMjcuMzkzNyAzLjQzMjgyIDI3LjY2MTYgMy4yNTQgMjcuNzk1NkMzLjA3Mjg2IDI3LjkyOTUgMi44MDExNSAyNy45OTc3IDIuNDQxMTkgMjcuOTk3N0gwLjY3ODU2OUMwLjIyNTcyMSAyNy45OTc3IDAuMDAwNDU3NzY0IDI3Ljg1MiAwLjAwMDQ1Nzc2NCAyNy41NjA2QzAuMDAwNDU3NzY0IDI3LjQ0NzggMC4wNTYxOTMgMjcuMjU3NCAwLjE2OTk4NiAyNi45ODk1TDEwLjM2NzIgNS42ODAyMUMxMC43MDYzIDQuOTg2OTggMTAuOTU0NyA0LjUzMTA5IDExLjExMjcgNC4zMTk1OUMxMS4yNzA2IDQuMTA1NzUgMTEuNDYzMyA0IDExLjY4ODYgNEMxMS44OTMgNCAxMi4wNjcxIDQuMTA1NzUgMTIuMjEzNCA0LjMxOTU5QzEyLjM1OTcgNC41MzM0NCAxMi42MDM2IDQuOTg2OTggMTIuOTQyNiA1LjY4MDIxTDIzLjI0MiAyNi45ODk1QzIzLjM1NTggMjcuMjU3NCAyMy40MTE2IDI3LjQ1MDEgMjMuNDExNiAyNy41NjA2QzIzLjQxMTYgMjcuODUyIDIzLjE3NDcgMjcuOTk3NyAyMi43MDA5IDI3Ljk5NzdIMjAuODAzNkMyMC40NDEzIDI3Ljk5NzcgMjAuMTc2NiAyNy45Mjk1IDIwLjAwNzEgMjcuNzk1NkMxOS44Mzc1IDI3LjY2MTYgMTkuNjUxOCAyNy4zOTE0IDE5LjQ0NzQgMjYuOTg5NUwxMS42MjEyIDEwLjI1MDlMMy43OTUxIDI2Ljk4OTVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNNDAuNTIyMSAyNC44OTU3QzQwLjYzNTkgMjQuOTk5MSA0MC42OTE2IDI1LjE5ODkgNDAuNjkxNiAyNS40OTVWMjcuMjQzM0M0MC42OTE2IDI3LjU0MTggNDAuNjM1OSAyNy43NDE1IDQwLjUyMjEgMjcuODQyNkM0MC40MDgzIDI3Ljk0NiA0MC4yMTc5IDI3Ljk5NzcgMzkuOTQ2MiAyNy45OTc3SDI3LjEwNjJDMjYuODM0NSAyNy45OTc3IDI2LjY0NCAyNy45NDYgMjYuNTMwMiAyNy44NDI2QzI2LjQxNjUgMjcuNzM5MiAyNi4zNjA3IDI3LjUzOTQgMjYuMzYwNyAyNy4yNDMzVjQuNzU0MzNDMjYuMzYwNyA0LjQ1ODI0IDI2LjQxNjUgNC4yNTYxNCAyNi41MzAyIDQuMTU1MUMyNi42NDE3IDQuMDUxNyAyNi44MzQ1IDQgMjcuMTAzOSA0SDM5LjkxMTNDNDAuMTgzIDQgNDAuMzczNSA0LjA1MTcgNDAuNDg3MyA0LjE1NTFDNDAuNjAxMSA0LjI1ODQ5IDQwLjY1NjggNC40NTgyNCA0MC42NTY4IDQuNzU0MzNWNi41MDI2OUM0MC42NTY4IDYuODAxMTQgNDAuNjAxMSA3LjAwMDg4IDQwLjQ4NzMgNy4xMDE5M0M0MC4zNzM1IDcuMjA1MzMgNDAuMTgzIDcuMjU3MDMgMzkuOTExMyA3LjI1NzAzSDMwLjE1M0MyOS45OTUxIDcuMjU3MDMgMjkuODg4MyA3LjI4NTIzIDI5LjgzMDIgNy4zNDE2MkMyOS43NzQ1IDcuMzk4MDIgMjkuNzQ2NiA3LjQ5NjcyIDI5Ljc0NjYgNy42MzMwMlYxMy45MDc0QzI5Ljc0NjYgMTQuMDY3MiAyOS43NzQ1IDE0LjE3NTMgMjkuODMwMiAxNC4yMzRDMjkuODg2IDE0LjI5MDQgMjkuOTkyOCAxNC4zMTg2IDMwLjE1MyAxNC4zMTg2SDM4Ljc1OTVDMzkuMDMxMiAxNC4zMTg2IDM5LjIyMTYgMTQuMzcwMyAzOS4zMzU0IDE0LjQ3MzdDMzkuNDQ5MiAxNC41NzcxIDM5LjUwNDkgMTQuNzc2OSAzOS41MDQ5IDE1LjA3MjlWMTYuNzg2MUMzOS41MDQ5IDE3LjA2MSAzOS40NDkyIDE3LjI1MzcgMzkuMzM1NCAxNy4zNjg4QzM5LjIyMTYgMTcuNDg0IDM5LjAzMTIgMTcuNTQwNCAzOC43NTk1IDE3LjU0MDRIMzAuMTUzQzI5Ljk5NTEgMTcuNTQwNCAyOS44ODgzIDE3LjU2ODYgMjkuODMwMiAxNy42MjVDMjkuNzc0NSAxNy42ODE0IDI5Ljc0NjYgMTcuNzgwMSAyOS43NDY2IDE3LjkxNjRWMjQuMzYyM0MyOS43NDY2IDI0LjQ5ODYgMjkuNzc0NSAyNC41OTczIDI5LjgzMDIgMjQuNjUzN0MyOS44ODYgMjQuNzEwMSAyOS45OTI4IDI0LjczODMgMzAuMTUzIDI0LjczODNIMzkuOTQzOEM0MC4yMTU2IDI0LjczODMgNDAuNDA2IDI0Ljc5IDQwLjUxOTggMjQuODkzNEw0MC41MjIxIDI0Ljg5NTdaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNNDguNzE5OCAyNy44NDQ5QzQ4LjYwNiAyNy45NDgzIDQ4LjQxNTYgMjggNDguMTQzOSAyOEg0Ni4yNDY2QzQ1Ljk3NDggMjggNDUuNzg0NCAyNy45NDgzIDQ1LjY3MDYgMjcuODQ0OUM0NS41NTY4IDI3Ljc0MTUgNDUuNTAxMSAyNy41NDE4IDQ1LjUwMTEgMjcuMjQ1N1Y0Ljc1NDMzQzQ1LjUwMTEgNC40NTgyNCA0NS41NTY4IDQuMjU2MTQgNDUuNjcwNiA0LjE1NTFDNDUuNzg0NCA0LjA1MTcgNDUuOTc3MiA0IDQ2LjI0NjYgNEg1Mi43MTg4QzU5LjE1NjIgNCA2Mi4zNzQ5IDYuNDc5MTkgNjIuMzc0OSAxMS40Mzk5QzYyLjM3NDkgMTMuMDg0OSA2MS45Njg1IDE0LjQ0MDggNjEuMTU1NyAxNS41MDNDNjAuMzQyOSAxNi41NjUyIDU5LjIxMiAxNy4zNSA1Ny43Njc1IDE3Ljg1MDZMNjMuNTk0MSAyNi45NzA3QzYzLjc3NTMgMjcuMjIyMiA2My44NjU5IDI3LjQzODQgNjMuODY1OSAyNy42MjE3QzYzLjg2NTkgMjcuNzU4IDYzLjgwMzEgMjcuODU2NyA2My42ODAxIDI3LjkxMzFDNjMuNTU0NyAyNy45Njk1IDYzLjM2ODkgMjcuOTk3NyA2My4xMjA0IDI3Ljk5NzdINjEuMTIwOUM2MC43Mzc3IDI3Ljk5NzcgNjAuNDU0NCAyNy45NDEzIDYwLjI3MzMgMjcuODI2MUM2MC4wOTIxIDI3LjcxMSA1OS44Nzg1IDI3LjQ2MTkgNTkuNjMgMjcuMDcxOEw1My4zOTY5IDE3LjA2MUM1My4yNjIyIDE2Ljg3NzcgNTMuMTkyNiAxNi43MTc5IDUzLjE5MjYgMTYuNTgxNkM1My4xOTI2IDE2LjM5ODMgNTMuMzYyMSAxNi4yOTQ5IDUzLjcwMTEgMTYuMjczOEM1Ny4xMTI2IDE1LjkwOTUgNTguODE3MiAxNC4zNjU2IDU4LjgxNzIgMTEuNjQ0NEM1OC44MTcyIDEwLjA5MTEgNTguMjgwNyA4Ljk1MzY5IDU3LjIwNzggOC4yMzIyNUM1Ni4xMzQ5IDcuNTEzMTcgNTQuNTgxMyA3LjE1MTI4IDUyLjU0OTMgNy4xNTEyOEg0OS4yOTU3QzQ5LjEzNzggNy4xNTEyOCA0OS4wMzEgNy4xNzk0OCA0OC45NzI5IDcuMjM1ODhDNDguOTE3MiA3LjI5MjI3IDQ4Ljg4OTMgNy40MDI3MiA0OC44ODkzIDcuNTYyNTJWMjcuMjQxQzQ4Ljg4OTMgMjcuNTM5NCA0OC44MzM2IDI3LjczOTIgNDguNzE5OCAyNy44NDAyVjI3Ljg0NDlaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNODQuNTk5MSAyMi40NDcxQzg0Ljg0NzYgMjIuMjQ3MyA4NS4wNDA0IDIyLjE0ODYgODUuMTc1MSAyMi4xNDg2Qzg1LjI2NTYgMjIuMTQ4NiA4NS4zNTYyIDIyLjE4MTUgODUuNDQ2OCAyMi4yNDczQzg1LjUzNzQgMjIuMzEzMSA4NS42MTYzIDIyLjM5MDcgODUuNjgzNyAyMi40OEw4Ni42NjYgMjMuODFDODYuNzc5OCAyMy45NDQgODYuODM1NSAyNC4wOTkxIDg2LjgzNTUgMjQuMjc1M0M4Ni44MzU1IDI0LjM2NDYgODYuODAwNyAyNC40NTg2IDg2LjczMzMgMjQuNTU3M0M4Ni42NjYgMjQuNjU2IDg2LjU2MzggMjQuNzYxOCA4Ni40MjkxIDI0Ljg3MjJDODUuMjMwOCAyNS44Njg2IDgzLjg4MTUgMjYuNjM5NCA4Mi4zODEzIDI3LjE4MjJDODAuODc4OCAyNy43MjUxIDc5LjMwNDMgMjcuOTk3NyA3Ny42NTU1IDI3Ljk5NzdDNzUuNDQyMyAyNy45OTc3IDczLjQxNSAyNy40ODc3IDcxLjU3MzQgMjYuNDY3OEM2OS43MzE4IDI1LjQ0OCA2OC4yNzU3IDI0LjAzMDkgNjcuMjAyOCAyMi4yMTIxQzY2LjEyOTkgMjAuMzk1NiA2NS41OTM0IDE4LjM1NTggNjUuNTkzNCAxNi4wOTUyQzY1LjU5MzQgMTMuODM0NSA2Ni4xMjk5IDExLjc1MjUgNjcuMjAyOCA5LjkxMjQ3QzY4LjI3NTcgOC4wNzI0NiA2OS43NDM0IDYuNjI3MjQgNzEuNjA4MiA1LjU3NDQ2QzczLjQ3MDcgNC41MjYzOSA3NS41NTM4IDQgNzcuODU3NSA0Qzc5LjQ4MzEgNCA4MS4wMzY3IDQuMjc3MjkgODIuNTE2IDQuODMxODhDODMuOTk1MyA1LjM4NjQ3IDg1LjMxMjEgNi4xNDA4IDg2LjQ2NCA3LjA5MjUzQzg2LjY4OTIgNy4yNDc2MyA4Ni44MDMgNy40MTQ0NyA4Ni44MDMgNy41OTA3MkM4Ni44MDMgNy43NDU4MSA4Ni43MzU3IDcuOTIyMDYgODYuNTk4NiA4LjEyMTgxTDg1LjYxNjMgOS40MTg5OEM4NS40MzUyIDkuNjYzMzcgODUuMjU0IDkuNzg1NTcgODUuMDc1MiA5Ljc4NTU3Qzg0Ljk0MDUgOS43ODU1NyA4NC43NDc4IDkuNjk2MjcgODQuNDk5MyA5LjUyMDAyQzgzLjUyODYgOC43ODkxOSA4Mi40NzY2IDguMjEzNDUgODEuMzQ3OSA3Ljc5MDQ2QzgwLjIxOTMgNy4zNjk4MiA3OS4wMzI2IDcuMTU4MzMgNzcuNzkwMiA3LjE1ODMzQzc2LjE4NTUgNy4xNTgzMyA3NC43MjQ3IDcuNTM0MzIgNzMuNDAzMyA4LjI4ODY1QzcyLjA4MTkgOS4wNDI5OCA3MS4wMzY5IDEwLjA5NTggNzAuMjY4MiAxMS40NDdDNjkuNDk5NSAxMi43OTgyIDY5LjExNjQgMTQuMzI4IDY5LjExNjQgMTYuMDM0MUM2OS4xMTY0IDE3Ljc0MDEgNjkuNDk0OSAxOS4xNjg5IDcwLjI1MiAyMC41MjI1QzcxLjAwOSAyMS44NzM3IDcyLjA0NzEgMjIuOTMzNSA3My4zNjg1IDIzLjY5NzNDNzQuNjg5OSAyNC40NjEgNzYuMTY0NiAyNC44NDQgNzcuNzkwMiAyNC44NDRDODAuMzQyNCAyNC44NDQgODIuNjExMyAyNC4wNDc0IDg0LjU5OTEgMjIuNDUxOFYyMi40NDcxWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTEwOS40MDEgMjcuODQ0OUMxMDkuMjg4IDI3Ljk0ODMgMTA5LjA5NyAyOCAxMDguODI2IDI4SDEwNi45MjhDMTA2LjY1NyAyOCAxMDYuNDY2IDI3Ljk0ODMgMTA2LjM1MiAyNy44NDQ5QzEwNi4yMzggMjcuNzQxNSAxMDYuMTgzIDI3LjU0MTggMTA2LjE4MyAyNy4yNDU3VjE3LjY4MTRDMTA2LjE4MyAxNy41NDUxIDEwNi4xNTUgMTcuNDQ2NCAxMDYuMDk5IDE3LjM5QzEwNi4wNDMgMTcuMzMzNiAxMDUuOTM0IDE3LjMwNTQgMTA1Ljc3NiAxNy4zMDU0SDk0LjU2MkM5NC40MDQxIDE3LjMwNTQgOTQuMjk3MiAxNy4zMzM2IDk0LjIzOTIgMTcuMzlDOTQuMTgzNCAxNy40NDY0IDk0LjE1NTYgMTcuNTQ1MSA5NC4xNTU2IDE3LjY4MTRWMjcuMjQ1N0M5NC4xNTU2IDI3LjU0NDEgOTQuMDk5OCAyNy43NDM5IDkzLjk4NiAyNy44NDQ5QzkzLjg3MjIgMjcuOTQ4MyA5My42ODE4IDI4IDkzLjQxMDEgMjhIOTEuNTEyOEM5MS4yNDExIDI4IDkxLjA1MDcgMjcuOTQ4MyA5MC45MzY5IDI3Ljg0NDlDOTAuODIzMSAyNy43NDE1IDkwLjc2NzMgMjcuNTQxOCA5MC43NjczIDI3LjI0NTdWNC43NTQzM0M5MC43NjczIDQuNDU4MjQgOTAuODIzMSA0LjI1NjE0IDkwLjkzNjkgNC4xNTUxQzkxLjA0ODMgNC4wNTE3IDkxLjI0MTEgNCA5MS41MTA1IDRIOTMuNDA3OEM5My42Nzk1IDQgOTMuODcyMyA0LjA1MTcgOTMuOTgzNyA0LjE1NTFDOTQuMDk3NSA0LjI1ODQ5IDk0LjE1MzIgNC40NTgyNCA5NC4xNTMyIDQuNzU0MzNWMTMuNjY3N0M5NC4xNTMyIDEzLjgwNCA5NC4xODExIDEzLjkwNzQgOTQuMjM2OSAxMy45NzU1Qzk0LjI5MjYgMTQuMDQzNyA5NC4zOTk0IDE0LjA3ODkgOTQuNTU5NiAxNC4wNzg5SDEwNS43NzRDMTA1LjkzMiAxNC4wNzg5IDEwNi4wMzkgMTQuMDQzNyAxMDYuMDk3IDEzLjk3NTVDMTA2LjE1MyAxMy45MDc0IDEwNi4xOCAxMy44MDQgMTA2LjE4IDEzLjY2NzdWNC43NTQzM0MxMDYuMTggNC40NTgyNCAxMDYuMjM2IDQuMjU2MTQgMTA2LjM1IDQuMTU1MUMxMDYuNDY0IDQuMDUxNyAxMDYuNjU3IDQgMTA2LjkyOCA0SDEwOC44MjZDMTA5LjA5NSA0IDEwOS4yODggNC4wNTE3IDEwOS40MDEgNC4xNTUxQzEwOS41MTUgNC4yNTg0OSAxMDkuNTcxIDQuNDU4MjQgMTA5LjU3MSA0Ljc1NDMzVjI3LjI0NTdDMTA5LjU3MSAyNy41NDQxIDEwOS41MTUgMjcuNzQzOSAxMDkuNDAxIDI3Ljg0NDlaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBkPSJNMTY0LjI1MiA0LjE1MDRDMTY0LjM2NiA0LjA0OTM1IDE2NC41NTggNCAxNjQuODI4IDRIMTY2LjcyNUMxNjYuOTk3IDQgMTY3LjE4OSA0LjA0OTM1IDE2Ny4zMDEgNC4xNTA0QzE2Ny40MTUgNC4yNDkwOSAxNjcuNDcgNC40NDQxNCAxNjcuNDcgNC43MzMxOFYyNi45MDQ5QzE2Ny40NyAyNy42MzU4IDE2Ny4yNDUgMjguMDAyMyAxNjYuNzkyIDI4LjAwMjNDMTY2LjYxMSAyOC4wMDIzIDE2Ni40MjEgMjcuOTI5NSAxNjYuMjE2IDI3Ljc4NjJDMTY2LjAxMiAyNy42NDI4IDE2NS43MzEgMjcuMzcwMiAxNjUuMzY5IDI2Ljk3MDdMMTUxLjYxNCAxMS4wNDk4VjI2LjkwNDlDMTUxLjYxNCAyNy4xOTQgMTUxLjU1OCAyNy4zODY3IDE1MS40NDQgMjcuNDg3N0MxNTEuMzMgMjcuNTg2NCAxNTEuMTQgMjcuNjM4MSAxNTAuODY4IDI3LjYzODFIMTQ4Ljk3MUMxNDguNjk5IDI3LjYzODEgMTQ4LjUwOSAyNy41ODg4IDE0OC4zOTUgMjcuNDg3N0MxNDguMjgxIDI3LjM4OSAxNDguMjI2IDI3LjE5NCAxNDguMjI2IDI2LjkwNDlWNS4wOTc0MkMxNDguMjI2IDQuNzIxNDMgMTQ4LjI4MSA0LjQ0NDE0IDE0OC4zOTUgNC4yNjU1NEMxNDguNTA5IDQuMDg5MyAxNDguNjkgNCAxNDguOTM5IDRDMTQ5LjEyIDQgMTQ5LjMxIDQuMDcyODUgMTQ5LjUxNCA0LjIxNjJDMTQ5LjcxOSA0LjM1OTU0IDE0OS45ODggNC42MzIxNCAxNTAuMzI3IDUuMDMxNjNMMTY0LjA4MiAyMC45NTI1VjQuNzMwODNDMTY0LjA4MiA0LjQ0NDE0IDE2NC4xMzggNC4yNDkwOSAxNjQuMjUyIDQuMTQ4MDVWNC4xNTA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggZD0iTTE0My43MzIgMTguNzA4M0MxNDMuNzIgMTguNjUxOSAxNDMuNzA0IDE4LjQ5NDQgMTQzLjY5OSAxOC40MTkzQzE0My43MDQgMTguNDM1NyAxNDMuNzMgMTguNjc1NCAxNDMuNzMyIDE4LjcwODNaIiBmaWxsPSIjREM1RjQwIi8+CjxwYXRoIGQ9Ik0xNDEuNjEzIDExLjA4QzE0Mi42OTggMTAuOTYwMiAxNDMuNDgzIDkuOTczMiAxNDMuMzY0IDguODczNDJDMTQzLjI0NiA3Ljc3NiAxNDIuMjcgNi45ODE3MSAxNDEuMTg0IDcuMTAxNTZDMTQwLjA5OSA3LjIyMTQxIDEzOS4zMTQgOC4yMDgzOSAxMzkuNDMzIDkuMzA4MTZDMTM5LjU1MSAxMC40MDU2IDE0MC41MjYgMTEuMTk5OSAxNDEuNjEzIDExLjA4WiIgZmlsbD0iI0RDNUY0MCIvPgo8cGF0aCBkPSJNMTQzLjg1NyAyMC42MjU0QzE0My45NDMgMTYuMTY5OSAxNDIuMDkyIDEwLjc2NzQgMTM3LjI1MiAxMy44MzY0QzEzNi44NDYgMTMuOTk2MiAxMzYuNjE0IDEzLjkzOTggMTM2LjQgMTMuNjM0M0MxMzUuNzg5IDEyLjUxNTggMTM1LjMyIDExLjM3MTMgMTM0LjczOSAxMC4xOTY0QzEzMC4zNzEgLTEuMTc1MDEgMTI1LjM4MyA1LjMyNzI5IDEyMC4xMTQgMTIuMDU3NUMxMDguMzQ3IDI3LjQ0OTcgMTEzLjg5IDM0LjI2NjkgMTMyLjQzOCAyMC43NUMxMzMuMDg2IDIwLjI4NDcgMTM0LjM4NCAxOS4zMTE4IDEzNC44NTEgMTkuMjcxOUMxMzUuMzQzIDE5LjE5MiAxMzUuNTQ4IDE5LjU5NjIgMTM1LjkxOSAyMC40NDIxQzEzNi4yNzkgMjEuMzA5MyAxMzYuODc4IDIyLjUzODMgMTM3LjQyNiAyMy40MTQ4QzE0MC41OTIgMjkuNjMwNCAxNDQuMDk4IDI4LjE4OTkgMTQzLjg1OSAyMC42NTEzVjIwLjYyNTRIMTQzLjg1N1pNMTI5LjkwOSAxOC4zMDg0QzEyNy41NzUgMTkuNzg0MiAxMjUuMzYgMjEuNTkxMyAxMjIuNzk2IDIyLjY2OTlDMTIxLjY3OSAyMy4xNDIyIDEyMC4wNTEgMjIuNjIwNSAxMTkuNjQ5IDIxLjcwNjRDMTE5LjE5NCAyMC4yODk0IDEyMC44MjIgMTguMjAwMyAxMjEuNjIxIDE2LjcyOTJDMTIyLjU0NyAxNS4wNTM3IDEyMy43NzYgMTMuNTYzOCAxMjQuOTUzIDEyLjA0NThDMTI2LjA5NiAxMC41NDg5IDEyNy42NDcgOC4zMjgxNyAxMjkuNzk4IDkuMjk4N0MxMzEuNTIzIDEwLjI5MDQgMTMyLjIzMSAxMy4wMzI4IDEzMy4yMTggMTQuNjg3MUMxMzMuNjY0IDE1LjQwMzkgMTMzLjY1IDE1LjkxMTQgMTMyLjg3IDE2LjM0MzhDMTMxLjkyNSAxNi45NTI1IDEzMC45MDEgMTcuNjQ1NyAxMjkuOTI4IDE4LjI5OUwxMjkuOTA5IDE4LjMxMDdWMTguMzA4NFpNMTQyLjU1NiAyMS4yNDM1QzE0Mi41MDUgMjIuMDk2NSAxNDIuMzQ1IDI1LjMyMyAxNDEuMjcgMjMuNzg2MUMxNDAuMjcxIDIxLjg4NzQgMTM5LjE3NSAxOS41MjEgMTM4LjE5NyAxNy40OTc3QzEzNy44MTcgMTYuNDYzNyAxNDAuMTkyIDE2LjA0NTQgMTQwLjgxIDE2LjIyMTZDMTQyLjUzNSAxNi44NjU1IDE0Mi41OTYgMTkuNjE5NyAxNDIuNTU2IDIxLjIyOTRWMjEuMjQ1OFYyMS4yNDM1WiIgZmlsbD0iI0RDNUY0MCIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzEzNDkxXzEzNTU1Ij4KPHJlY3Qgd2lkdGg9IjE2OCIgaGVpZ2h0PSIzMiIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K" alt="Aerchain" class="footer-logo">
+  <p>This document is confidential and intended solely for Adani Group. AI operating-cost figures are a directional planning model at current AI pricing (AI processing only) and are subject to change; they will be re-baselined against live usage.</p>
+  <p style="margin-top:8px;color:var(--border)">&copy; 2026 Aerchain &middot; Agillos E-Commerce Private Limited. All rights reserved.</p>
+</footer>
+</body></html>
