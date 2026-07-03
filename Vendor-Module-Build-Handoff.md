@@ -8,7 +8,7 @@ This file hands a fresh Claude Code session everything it needs to build the **V
 
 > You are building the **Vendor & Supplier Management module** for the Aerchain S2P ("source-to-pay") web application, scoped to the requirements Adani Group set out in their *Digital Transformation in Procurement Processes (Supplier & Sourcing Management)* RFP.
 >
-> **Repos:** work in `gkg-aerchain/aerchain-s2p-solution-map` (and/or `gkg-aerchain/aerchain-s2p` — confirm which is the live Next/React app). First, **study the existing codebase**: framework (Next.js/React?), the design-system / component library, routing, state management, data layer (API/mock), and how existing modules are structured. **Reuse existing components and patterns** — do not introduce a parallel design system.
+> **Repo:** build in **`gkg-aerchain/aerchain-s2p`** — the live S2P web application. Do **NOT** build in `aerchain-s2p-solution-map` (that is only the process/blueprint map, not the app). First, **study the existing codebase**: framework (Next.js/React?), the design-system / component library, routing, state management, data layer (API/mock), and how existing modules are structured. **Reuse existing components and patterns** — do not introduce a parallel design system.
 >
 > **Goal:** ship a comprehensive, genuinely usable Vendor Management module. Intuitive UI, **no over-complicated settings page**, no unintuitive flows. Prefer sensible defaults with light per-BU configuration over a wall of toggles. Where the backend isn't ready, use typed mock/seed data and a clean service layer so it swaps to real APIs later. Deliver as a PR (or a feature branch) with small, reviewable commits.
 >
@@ -80,4 +80,4 @@ Staged onboarding, dual entry (Aerchain-led via Supplier Invite API + auto Tradi
 
 ## Suggested first message to the fresh session
 
-> Clone `gkg-aerchain/aerchain-s2p-solution-map`. Read the attached PRD, blueprint, integration brief and demo screenshots. Map the existing stack and design system, then propose where the Vendor Management module plugs in and build slice 1 (data model + rules + mock service) first. [attach the files above]
+> Clone `gkg-aerchain/aerchain-s2p` (the live app — not the solution-map). Read the attached PRD, blueprint, integration brief and demo screenshots. Map the existing stack and design system, then propose where the Vendor Management module plugs in and build slice 1 (data model + rules + mock service) first. [attach the files above]
